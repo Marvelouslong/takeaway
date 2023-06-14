@@ -7,223 +7,241 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ include file="header.jsp"%>
-<div class="b-wrap">
-    <div class="page-tab">
+<style>
+    .background{
+        background-color: #eeeaea;
+        height: 100%;
+        display: flex;
+    }
+    .b-wrap{
+        width: 1320px;
+        height: 103px;
+        margin-top: 5px;
+        margin-left: 50px;
+        display: flex;
+        align-items: center;
+        background-color: #fbfbfb;
+    }
+    .b-wrap .con{
+        display: flex;
+    }
+    .b-wrap .con li{
+        cursor: pointer;
+        width: 66px;
+        height: 68px;
+        text-align: center;
+        font-size: 14px;
+        white-space: nowrap;
+        font-size: 14px;
+    }
+    .b-wrap .con li .con-img img{
+        width: 60px;
+        height: 55px;
+    }
+</style>
+<div class="background">
+    <div class="b-wrap">
         <ul class="con">
             <li><a href="#">
-                <div class="round">
-                    <i class="layui-icon layui-icon-home bilifont"></i>
+                <div class="con-img">
+                    <img src="../../img/美食.jpg" alt="mlm">
                 </div>
                 <span>美食</span>
             </a></li>
             <li>
                 <a href="https://t.bilibili.com/">
-                    <div class="round yel">
-                        <i class="layui-icon layui-icon-face-smile bilifonts"></i>
-                        <div class="dynamic-updata">
-                            <img src="./img/ass.png" alt="ass">
-                        </div>
+                    <div class="con-img">
+                        <img src="../../img/粥铺.webp" alt="mlm">
                     </div>
                     <span>包子粥铺</span>
                 </a>
             </li>
             <li>
                 <a href="https://www.bilibili.com/ranking">
-                    <div class="round bule">
-                        <i class="layui-icon layui-icon-align-left bilifontss"></i>
+                    <div class="con-img">
+                        <img src="../../img/鲜花.webp" alt="mlm">
                     </div>
                     <span>浪漫鲜花</span>
                 </a>
             </li>
             <li>
                 <a href="https://www.bilibili.com/v/channel/9222?tab=multiple">
-                    <div class="round channel">
-                        <i class="layui-icon layui-icon-face-smile bilifont"></i>
-                        <div class="dynamic-updata">
-                            <img src="./img/ass.png" alt="ass">
-                        </div>
+                    <div class="con-img">
+                        <img src="../../img/炸鸡.jpg" alt="mlm">
                     </div>
                     <span>炸鸡鸭脖</span>
                 </a>
             </li>
             <li>
                 <a href="https://www.bilibili.com/v/channel/9222?tab=multiple">
-                    <div class="round channel">
-                        <i class="layui-icon layui-icon-face-smile bilifont"></i>
-                        <div class="dynamic-updata">
-                            <img src="./img/ass.png" alt="ass">
-                        </div>
+                    <div class="con-img">
+                        <img src="../../img/米粉.jpg" alt="mlm">
                     </div>
                     <span>米粉馆</span>
                 </a>
             </li>
             <li>
                 <a href="https://www.bilibili.com/v/channel/9222?tab=multiple">
-                    <div class="round channel">
-                        <i class="layui-icon layui-icon-face-smile bilifont"></i>
-                        <div class="dynamic-updata">
-                            <img src="./img/ass.png" alt="ass">
-                        </div>
+                    <div class="con-img">
+                        <img src="../../img/蔬菜.webp" alt="mlm">
                     </div>
                     <span>蔬菜水果</span>
                 </a>
             </li>
             <li>
                 <a href="https://www.bilibili.com/v/channel/9222?tab=multiple">
-                    <div class="round channel">
-                        <i class="layui-icon layui-icon-face-smile bilifont"></i>
-                        <div class="dynamic-updata">
-                            <img src="./img/ass.png" alt="ass">
-                        </div>
+                    <div class="con-img">
+                        <img src="../../img/甜品.webp" alt="mlm">
                     </div>
                     <span>甜点饮品</span>
                 </a>
             </li>
             <li>
                 <a href="https://www.bilibili.com/v/channel/9222?tab=multiple">
-                    <div class="round channel">
-                        <i class="layui-icon layui-icon-face-smile bilifont"></i>
-                        <div class="dynamic-updata">
-                            <img src="./img/ass.png" alt="ass">
-                        </div>
+                    <div class="con-img">
+                        <img src="../../img/酒.webp" alt="mlm">
                     </div>
                     <span>买酒</span>
                 </a>
             </li>
             <li>
                 <a href="https://www.bilibili.com/v/channel/9222?tab=multiple">
-                    <div class="round channel">
-                        <i class="layui-icon layui-icon-face-smile bilifont"></i>
-                        <div class="dynamic-updata">
-                            <img src="./img/ass.png" alt="ass">
-                        </div>
+                    <div class="con-img">
+                        <img src="../../img/汤饭.jpg" alt="mlm">
                     </div>
                     <span>汤饭</span>
                 </a>
             </li>
             <li>
                 <a href="https://www.bilibili.com/v/channel/9222?tab=multiple">
-                    <div class="round channel">
-                        <i class="layui-icon layui-icon-face-smile bilifont"></i>
-                        <div class="dynamic-updata">
-                            <img src="./img/ass.png" alt="ass">
-                        </div>
+                    <div class="con-img">
+                        <img src="../../img/川湘菜.jpg" alt="mlm">
                     </div>
                     <span>川湘菜</span>
                 </a>
             </li>
             <li>
                 <a href="https://www.bilibili.com/v/channel/9222?tab=multiple">
-                    <div class="round channel">
-                        <i class="layui-icon layui-icon-face-smile bilifont"></i>
-                        <div class="dynamic-updata">
-                            <img src="./img/ass.png" alt="ass">
-                        </div>
+                    <div class="con-img">
+                        <img src="../../img/饺子.webp" alt="mlm">
                     </div>
                     <span>饺子馆</span>
                 </a>
             </li>
             <li>
                 <a href="https://www.bilibili.com/v/channel/9222?tab=multiple">
-                    <div class="round channel">
-                        <i class="layui-icon layui-icon-face-smile bilifont"></i>
-                        <div class="dynamic-updata">
-                            <img src="./img/ass.png" alt="ass">
-                        </div>
+                    <div class="con-img">
+                        <img src="../../img/汉堡.webp" alt="mlm">
                     </div>
                     <span>汉堡披萨</span>
                 </a>
             </li>
             <li>
                 <a href="https://www.bilibili.com/v/channel/9222?tab=multiple">
-                    <div class="round channel">
-                        <i class="layui-icon layui-icon-face-smile bilifont"></i>
-                        <div class="dynamic-updata">
-                            <img src="./img/ass.png" alt="ass">
-                        </div>
+                    <div class="con-img">
+                        <img src="../../img/面包.webp" alt="mlm">
                     </div>
                     <span>面包蛋糕</span>
                 </a>
             </li>
             <li>
                 <a href="https://www.bilibili.com/v/channel/9222?tab=multiple">
-                    <div class="round channel">
-                        <i class="layui-icon layui-icon-face-smile bilifont"></i>
-                        <div class="dynamic-updata">
-                            <img src="./img/ass.png" alt="ass">
-                        </div>
+                    <div class="con-img">
+                        <img src="../../img/龙虾.webp" alt="mlm">
                     </div>
                     <span>龙虾烧烤</span>
                 </a>
             </li>
             <li>
                 <a href="https://www.bilibili.com/v/channel/9222?tab=multiple">
-                    <div class="round channel">
-                        <i class="layui-icon layui-icon-face-smile bilifont"></i>
-                        <div class="dynamic-updata">
-                            <img src="./img/ass.png" alt="ass">
-                        </div>
+                    <div class="con-img">
+                        <img src="../../img/烤鱼.jpg" alt="mlm">
                     </div>
                     <span>火锅烤鱼</span>
                 </a>
             </li>
             <li>
                 <a href="https://www.bilibili.com/v/channel/9222?tab=multiple">
-                    <div class="round channel">
-                        <i class="layui-icon layui-icon-face-smile bilifont"></i>
-                        <div class="dynamic-updata">
-                            <img src="./img/ass.png" alt="ass">
-                        </div>
+                    <div class="con-img">
+                        <img src="../../img/汤面.webp" alt="mlm">
                     </div>
                     <span>暖胃汤面</span>
                 </a>
             </li>
             <li>
                 <a href="https://www.bilibili.com/v/channel/9222?tab=multiple">
-                    <div class="round channel">
-                        <i class="layui-icon layui-icon-face-smile bilifont"></i>
-                        <div class="dynamic-updata">
-                            <img src="./img/ass.png" alt="ass">
-                        </div>
+                    <div class="con-img">
+                        <img src="../../img/日韩.webp" alt="mlm">
                     </div>
                     <span>日韩料理</span>
                 </a>
             </li>
             <li>
                 <a href="https://www.bilibili.com/v/channel/9222?tab=multiple">
-                    <div class="round channel">
-                        <i class="layui-icon layui-icon-face-smile bilifont"></i>
-                        <div class="dynamic-updata">
-                            <img src="./img/ass.png" alt="ass">
-                        </div>
+                    <div class="con-img">
+                        <img src="../../img/轻食.jpeg" alt="mlm">
                     </div>
                     <span>低脂轻食</span>
                 </a>
             </li>
             <li>
                 <a href="https://www.bilibili.com/v/channel/9222?tab=multiple">
-                    <div class="round channel">
-                        <i class="layui-icon layui-icon-face-smile bilifont"></i>
-                        <div class="dynamic-updata">
-                            <img src="./img/ass.png" alt="ass">
-                        </div>
+                    <div class="con-img">
+                        <img src="../../img/简餐.webp" alt="mlm">
                     </div>
                     <span>快食简餐</span>
                 </a>
             </li>
             <li>
                 <a href="https://www.bilibili.com/v/channel/9222?tab=multiple">
-                    <div class="round channel">
-                        <i class="layui-icon layui-icon-face-smile bilifont"></i>
-                        <div class="dynamic-updata">
-                            <img src="./img/ass.png" alt="ass">
-                        </div>
+                    <div class="con-img">
+                        <img src="../../img/小吃.webp" alt="mlm">
                     </div>
                     <span>小吃馆</span>
                 </a>
             </li>
         </ul>
     </div>
-  </div>
+<%--    表单循环还未写完--%>
+    <div class="main">
+        <table class="table">
+           <c:forEach var="store" items="${storeList }" varStatus="status">
+                <tr>
+                    <td>
+                        <div>
+                        <div class="x_div1" style="display:inline-block" >
+                            <img class="x_img" src="../../img/店铺图片.jpg">${store.picture } <br>${store.storename }
+                        </div>
+                        <div class="x_div2" style="display:inline-block">
+                            主营：${user.main_category}<br><br>地址：${store.address}<br><br> 联系电话:${store.phone}<br>
+                        </div>
+                        </div>
+                    </td>
+                    <td>
+                        <div>
+                            <div class="x_div1" style="display:inline-block" >
+                                <img class="x_img" src="../../img/店铺图片.jpg">${store.picture } <br>${store.storename }
+                            </div>
+                            <div class="x_div2" style="display:inline-block">
+                                主营：${user.main_category}<br><br>地址：${store.address}<br><br> 联系电话:${store.phone}<br>
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        <div>
+                            <div class="x_div1" style="display:inline-block" >
+                                <img class="x_img" src="../../img/店铺图片.jpg">${store.picture } <br>${store.storename }
+                            </div>
+                            <div class="x_div2" style="display:inline-block">
+                                主营：${user.main_category}<br><br>地址：${store.address}<br><br> 联系电话:${store.phone}<br>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            </c:forEach>
+        </table>
+
+    </div>
+</div>
 </body>
 </html>
