@@ -1,4 +1,6 @@
 package controller;
 
-public class user {
+import javax.servlet.http.HttpServlet;
+
+public class user extends HttpServlet {
 }
