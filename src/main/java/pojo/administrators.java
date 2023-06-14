@@ -1,12 +1,10 @@
 package pojo;
 
-public class user {
+public class administrators {
     private int id;
     private String name;
-    private long phone;
+    private long account_number;
     private String password;
-    private String signature;
-    private String sex;
 
     public int getId() {
         return id;
@@ -24,12 +22,12 @@ public class user {
         this.name = name;
     }
 
-    public long getPhone() {
-        return phone;
+    public long getAccount_number() {
+        return account_number;
     }
 
-    public void setPhone(long phone) {
-        this.phone = phone;
+    public void setAccount_number(long account_number) {
+        this.account_number = account_number;
     }
 
     public String getPassword() {
@@ -40,31 +38,16 @@ public class user {
         this.password = password;
     }
 
-    public String getSignature() {
-        return signature;
-    }
-
-    public void setSignature(String signature) {
-        this.signature = signature;
-    }
-
-    public String getSex() {
-        return sex;
-    }
-
-    public void setSex(String sex) {
-        this.sex = sex;
+    public administrators() {
     }
 
     @Override
     public String toString() {
-        return "user{" +
+        return "administrators{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
-                ", phone=" + phone +
+                ", account_number=" + account_number +
                 ", password='" + password + '\'' +
-                ", signature='" + signature + '\'' +
-                ", sex='" + sex + '\'' +
                 '}';
     }
 }
