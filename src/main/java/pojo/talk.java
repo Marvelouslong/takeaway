@@ -5,7 +5,7 @@ import java.util.Arrays;
 public class talk {
     private int id;
     private  String context;
-    private boolean[] picture;
+    private byte[] picture;
     private int u_id;
 
     public int getId() {
@@ -24,11 +24,11 @@ public class talk {
         this.context = context;
     }
 
-    public boolean[] getPicture() {
+    public byte[] getPicture() {
         return picture;
     }
 
-    public void setPicture(boolean[] picture) {
+    public void setPicture(byte[] picture) {
         this.picture = picture;
     }
 
