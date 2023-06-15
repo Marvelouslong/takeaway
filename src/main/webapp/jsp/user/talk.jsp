@@ -9,12 +9,28 @@
 <%@ include file="header.jsp"%>
 <style>
     .main{
+        margin-top: 10px;
         display: flex;
+        width: 1320px;
+        background-color: #eeeaea;
+        margin-left: 50px;
     }
-.right{
-    width: 30%;
-    height: 60%;
-}
+    .left{
+        background-color: #ffffff;
+        display: flex;
+        width: 70%;
+    }
+    .right{
+        background-color: #ffffff;
+        margin-left: 10px;
+        width: 30%;
+        height: 60%;
+    }
+    .right textarea{
+        width: 300px;
+        height: 400px;
+        overflow-x:hidden;overflow-y:hidden
+    }
 </style>
 <div class="main">
     <div class="left">
@@ -24,7 +40,7 @@
                     <td>
                         <div>
                             <div class="x_div1" style="display:inline-block" >
-<%--                                <img class="x_img" src="../../img/店铺图片.jpg">${user.picture } <br>${user.storename }--%>
+                                <img class="x_img" src="../../img/店铺图片.jpg">${user.picture } <br>${user.storename }
                             </div>
                             <div class="x_div2" style="display:inline-block">
                                 ${talk.context}<br><br>${talk.picture}<br>
@@ -36,7 +52,8 @@
         </table>
     </div>
     <div class="right">
-        <textarea  rows="4" maxlength="150" placeholder="不超过150个字"/>
+        <h3>发布框：</h3>
+        <textarea  rows="4" maxlength="150" placeholder="不超过150个字"></textarea>
         <button type="submit">提交</button>
     </div>
 </div>
