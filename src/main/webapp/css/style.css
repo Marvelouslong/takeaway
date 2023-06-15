@@ -5,7 +5,7 @@
 
 /*登录页面*/
 .login_bg {
-    background: url("../img/外卖.webp");
+    background: url("../img/外卖.jpg");
     /*position: fixed;*/
     /*background-size: 100%;*/
 
@@ -89,7 +89,7 @@ input {
     margin-left: 70px;
 }
 
-/*/!*登录页登录和重置按钮*!/.providerView a是供应商管理页面下信息查看也得返回按钮的样式*/
+/*!*登录页登录和重置按钮*!*/
 input[type='submit'], input[type='reset'], .providerView a {
     width: 30%;
     cursor: pointer;
