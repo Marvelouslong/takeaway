@@ -23,11 +23,54 @@
 </div>
 <div class="div2">
     <span class="span1">添加菜品:</span>
-    <div>
-        <form>
-
+        <form action="/form/" method="post" class="smart-green" enctype="multipart/form-data">
+            <label>
+                <span>菜名 :</span>
+                <input type="text"  class="error" placeholder="请输入菜品名称"/>
+            </label>
+            <label>
+                <span>状态 :</span>
+                <select>
+                    <option value="t1">正在售卖</option>
+                    <option value="t2">已售空</option>
+                    <option value="t3">已下架</option>
+                </select>
+            </label>
+            <label>
+                <span>菜品类别:</span>
+                <input type="text"  class="error" placeholder="请输入菜品类别，如凉菜类"/>
+            </label>
+            <label>
+                <span>菜品描述 :</span>
+                <textarea  placeholder="请输入菜品相关信息"></textarea>
+            </label>
+            <label>
+                <span>添加菜品图片 :</span><br>
+                <img id="imagePreview" src="#" alt="图片预览">
+                <br>
+                <input type="file" id="fileInput">
+            </label>
+            <label>
+                <span> </span>
+                <input type="submit" class="button" value="提交"/>
+            </label>
         </form>
-    </div>
+
 </div>
+<script>
+    const fileInput = document.getElementById('fileInput');
+    const imagePreview = document.getElementById('imagePreview');
+
+    fileInput.addEventListener('change', function() {
+        const file = this.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.addEventListener('load', function() {
+                imagePreview.setAttribute('src', this.result);
+            });
+            reader.readAsDataURL(file);
+        }
+    });
+</script>
 </body>
 </html>
