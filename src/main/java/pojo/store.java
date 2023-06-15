@@ -1,5 +1,7 @@
 package pojo;
 
+import com.mysql.cj.jdbc.Blob;
+
 import java.util.Arrays;
 
 public class store {
@@ -8,13 +10,13 @@ public class store {
     private long con_telephone;
     private String shop_name;
     private String password;
-    private byte[] brand_authorization;
+    private Blob brand_authorization;
     private long bank_card;
-    private byte[] license;
-    private byte[] certificate_of_business;
+    private Blob license;
+    private Blob certificate_of_business;
     private  String legal_id_card;
     private String status;
-    private byte[] shop_picture;
+    private Blob shop_picture;
     private  String main_category;
     private String auxiliary_category;
     private int ad_id;
@@ -59,14 +61,6 @@ public class store {
         this.password = password;
     }
 
-    public byte[] getBrand_authorization() {
-        return brand_authorization;
-    }
-
-    public void setBrand_authorization(byte[] brand_authorization) {
-        this.brand_authorization = brand_authorization;
-    }
-
     public long getBank_card() {
         return bank_card;
     }
@@ -75,20 +69,32 @@ public class store {
         this.bank_card = bank_card;
     }
 
-    public byte[] getLicense() {
+    public Blob getBrand_authorization() {
+        return brand_authorization;
+    }
+
+    public void setBrand_authorization(Blob brand_authorization) {
+        this.brand_authorization = brand_authorization;
+    }
+
+    public Blob getLicense() {
         return license;
     }
 
-    public void setLicense(byte[] license) {
+    public void setLicense(Blob license) {
         this.license = license;
     }
 
-    public byte[] getCertificate_of_business() {
+    public Blob getCertificate_of_business() {
         return certificate_of_business;
     }
 
-    public void setCertificate_of_business(byte[] certificate_of_business) {
+    public void setCertificate_of_business(Blob certificate_of_business) {
         this.certificate_of_business = certificate_of_business;
+    }
+
+    public void setShop_picture(Blob shop_picture) {
+        this.shop_picture = shop_picture;
     }
 
     public String getLegal_id_card() {
@@ -105,14 +111,6 @@ public class store {
 
     public void setStatus(String status) {
         this.status = status;
-    }
-
-    public byte[] getShop_picture() {
-        return shop_picture;
-    }
-
-    public void setShop_picture(byte[] shop_picture) {
-        this.shop_picture = shop_picture;
     }
 
     public String getMain_category() {
@@ -147,13 +145,13 @@ public class store {
                 ", con_telephone=" + con_telephone +
                 ", shop_name='" + shop_name + '\'' +
                 ", password='" + password + '\'' +
-                ", brand_authorization=" + Arrays.toString(brand_authorization) +
+                ", brand_authorization=" + brand_authorization +
                 ", bank_card=" + bank_card +
-                ", license=" + Arrays.toString(license) +
-                ", certificate_of_business=" + Arrays.toString(certificate_of_business) +
+                ", license=" + license +
+                ", certificate_of_business=" + certificate_of_business +
                 ", legal_id_card='" + legal_id_card + '\'' +
                 ", status='" + status + '\'' +
-                ", shop_picture=" + Arrays.toString(shop_picture) +
+                ", shop_picture=" + shop_picture +
                 ", main_category='" + main_category + '\'' +
                 ", auxiliary_category='" + auxiliary_category + '\'' +
                 ", ad_id=" + ad_id +

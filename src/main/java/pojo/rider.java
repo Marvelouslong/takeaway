@@ -1,5 +1,7 @@
 package pojo;
 
+import com.mysql.cj.jdbc.Blob;
+
 import java.util.Arrays;
 
 public class rider {
@@ -7,7 +9,7 @@ public class rider {
     private long phone;
     private String name;
     private String id_card;
-    private byte[] driver_license;
+    private Blob driver_license;
     private long bank_card;
     private String work_city;
     private String status;
@@ -46,11 +48,11 @@ public class rider {
         this.id_card = id_card;
     }
 
-    public byte[] getDriver_license() {
+    public Blob getDriver_license() {
         return driver_license;
     }
 
-    public void setDriver_license(byte[] driver_license) {
+    public void setDriver_license(Blob driver_license) {
         this.driver_license = driver_license;
     }
 
@@ -101,7 +103,7 @@ public class rider {
                 ", phone=" + phone +
                 ", name='" + name + '\'' +
                 ", id_card='" + id_card + '\'' +
-                ", driver_license=" + Arrays.toString(driver_license) +
+                ", driver_license=" + driver_license +
                 ", bank_card=" + bank_card +
                 ", work_city='" + work_city + '\'' +
                 ", status='" + status + '\'' +

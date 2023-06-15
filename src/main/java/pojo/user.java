@@ -1,5 +1,9 @@
 package pojo;
 
+import com.mysql.cj.jdbc.Blob;
+
+import java.util.Base64;
+
 public class user {
     private int id;
     private String name;
@@ -7,6 +11,15 @@ public class user {
     private String password;
     private String signature;
     private String sex;
+    private Blob picture;
+
+    public Blob getPicture() {
+        return picture;
+    }
+
+    public void setPicture(Blob picture) {
+        this.picture = picture;
+    }
 
     public int getId() {
         return id;
@@ -65,6 +78,7 @@ public class user {
                 ", password='" + password + '\'' +
                 ", signature='" + signature + '\'' +
                 ", sex='" + sex + '\'' +
+                ", picture=" + picture +
                 '}';
     }
 }

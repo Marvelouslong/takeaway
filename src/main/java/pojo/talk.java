@@ -1,11 +1,13 @@
 package pojo;
 
+import com.mysql.cj.jdbc.Blob;
+
 import java.util.Arrays;
 
 public class talk {
     private int id;
-    private  String context;
-    private byte[] picture;
+    private String context;
+    private Blob picture;
     private int u_id;
 
     public int getId() {
@@ -24,11 +26,11 @@ public class talk {
         this.context = context;
     }
 
-    public byte[] getPicture() {
+    public Blob getPicture() {
         return picture;
     }
 
-    public void setPicture(byte[] picture) {
+    public void setPicture(Blob picture) {
         this.picture = picture;
     }
 
@@ -45,8 +47,9 @@ public class talk {
         return "talk{" +
                 "id=" + id +
                 ", context='" + context + '\'' +
-                ", picture=" + Arrays.toString(picture) +
+                ", picture=" + picture +
                 ", u_id=" + u_id +
                 '}';
     }
 }
+

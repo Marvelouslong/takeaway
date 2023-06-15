@@ -1,11 +1,13 @@
 package pojo;
 
+import com.mysql.cj.jdbc.Blob;
+
 import java.util.Arrays;
 
 public class dishes {
     private int id;
     private String name;
-    private byte[] picture;
+    private Blob picture;
     private String describe;
     private String status;
     private double price;
@@ -28,11 +30,11 @@ public class dishes {
         this.name = name;
     }
 
-    public byte[] getPicture() {
+    public Blob getPicture() {
         return picture;
     }
 
-    public void setPicture(byte[] picture) {
+    public void setPicture(Blob picture) {
         this.picture = picture;
     }
 
@@ -81,7 +83,7 @@ public class dishes {
         return "dishes{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
-                ", picture=" + Arrays.toString(picture) +
+                ", picture=" + picture +
                 ", describe='" + describe + '\'' +
                 ", status='" + status + '\'' +
                 ", price=" + price +
