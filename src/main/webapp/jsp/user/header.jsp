@@ -89,6 +89,7 @@
         margin: 25px 20px 10px 40px;
     }
     </style>
+
 </head>
 <body>
 <header class="nav">
@@ -96,16 +97,16 @@
     <div class="nav-link">
         <ul class="nav-link-ul">
             <li class="nav-link-item">
-                <a href="shouye">首页</a>
+                <a href="homepage.jsp">首页</a>
             </li>
             <li class="nav-link-item">
                 <a href="gouwuche">购物车</a>
             </li>
             <li class="nav-link-item">
-                <a href="taolunqu">讨论区</a>
+                <a href="talk.jsp">讨论区</a>
             </li>
             <li class="nav-link-item">
-                <a href="myinformation">我的信息</a>
+                <a href="user_information.jsp">我的信息</a>
             </li>
         </ul>
     </div>
@@ -126,4 +127,3 @@
         <p><span>下午好！</span><span style="color: #fff21b">${userSession.userName}</span> , 欢迎你！</p>
     </div>
 </header>
-
