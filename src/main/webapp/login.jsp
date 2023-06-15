@@ -2,7 +2,7 @@
 <html>
 <head>
   <title>美了么外卖送餐平台</title>
-  <link type="text/css" rel="stylesheet" href="../css/style.css">
+  <link type="text/css" rel="stylesheet" href="css/style.css">
   <script type="text/javascript">
   </script>
 </head>
