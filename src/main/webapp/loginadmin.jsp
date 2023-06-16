@@ -11,7 +11,7 @@
   <script type="text/javascript">
   </script>
 </head>
-<body class="login_bg">
+<body class="loginadmin_bg">
 <section >
   <header class="loginHeader" >
     <h1>美了么管理员登陆</h1>

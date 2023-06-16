@@ -9,6 +9,7 @@ public class store {
     private String address;
     private long con_telephone;
     private String shop_name;
+    private String con_name;
     private String password;
     private Blob brand_authorization;
     private long bank_card;
@@ -52,6 +53,9 @@ public class store {
     public void setShop_name(String shop_name) {
         this.shop_name = shop_name;
     }
+    public String getCon_name(){return con_name;}
+
+    public void setCon_name(String con_name) {this.con_name = con_name;}
 
     public String getPassword() {
         return password;

@@ -4,12 +4,6 @@
 }
 
 /*登录页面*/
-.loginadmin_bg {
-    background:url("../img/外卖.jpg");
-    style:"background-repeat:no-repeat";
-    background-attachment:fixed;
-    background-size:100% 100%;
-}
 .loginstore_bg {
     background:url("../img/商家登陆.jpg");
     style:"background-repeat:no-repeat";
@@ -30,7 +24,7 @@
 
 .loginHeader h1 {
     font-family: "宋体";
-    color: black;
+    color: white;
     /*text-shadow: 2px 2px #000;*/
 }
 
@@ -100,7 +94,7 @@ input[type='submit'], input[type='reset'], .providerView a {
     cursor: pointer;
     padding: 6px 18px;
     font-family: 'BebasNeueRegular', 'Arial Narrow', Arial, sans-serif;
-    color: black;
+    color: white;
     font-size: 18px;
     border: 1px solid #cbcaca;
     margin-bottom: 10px;

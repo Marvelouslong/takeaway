@@ -9,14 +9,22 @@
 
   <display-name>Archetype Created Web Application</display-name>
   <welcome-file-list>
-    <welcome-file>login.jsp</welcome-file>
+    <welcome-file>loginstore.jsp</welcome-file>
   </welcome-file-list>
   <servlet>
-    <servlet-name>LoginServlet</servlet-name>
-    <servlet-class>controller.loginServlet</servlet-class>
+    <servlet-name>loginadminServlet</servlet-name>
+    <servlet-class>controller.loginadminServlet</servlet-class>
   </servlet>
   <servlet-mapping>
-    <servlet-name>LoginServlet</servlet-name>
+    <servlet-name>loginadminServlet</servlet-name>
     <url-pattern>/login.do</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>loginstoreServlet</servlet-name>
+    <servlet-class>controller.loginstoreServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>loginstoreServlet</servlet-name>
+    <url-pattern>/loginstore.do</url-pattern>
   </servlet-mapping>
 </web-app>
