@@ -2,8 +2,6 @@ package pojo;
 
 import com.mysql.cj.jdbc.Blob;
 
-import java.util.Base64;
-
 public class user {
     private int id;
     private String name;

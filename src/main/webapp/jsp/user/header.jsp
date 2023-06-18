@@ -112,11 +112,13 @@
     </div>
     <div class="nav-search-box">
         <div class="nav-search">
-            <form id="nav_searchform">
-                <input type="text" autocomplete="off" accesskey="s" placeholder="搜索关键字"
-                       class="nav-search-keyword">
+            <form id="nav_searchform" action="/user">
+                <input name="method" value="query" class="input-text" type="hidden">
+                <input type="hidden" name="pageIndex" value="1"/>
+                <input type="text" autocomplete="off" accesskey="s" placeholder="搜索商家或菜品"
+                       class="nav-search-keyword" name="query">
                 <div class="nav-search-btn">
-                <button type="button" class="nav-search-submit">
+                <button type="submit" class="nav-search-submit">
                     <i class="layui-icon">&#xe615;</i>
                 </button>
                 </div>

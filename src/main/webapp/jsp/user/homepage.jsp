@@ -10,7 +10,9 @@
 <style>
     .background{
         height: 100%;
+        width: 100%;
         display: flex;
+        background-color: #eeeaea;
     }
     .b-wrap{
         width: 1320px;
@@ -37,8 +39,26 @@
         width: 60px;
         height: 55px;
     }
-    .table{
-
+    .container {
+        max-width: 1320px;
+        margin-top: 5px;
+        margin-left: 0px;
+        margin-right: 0px;
+    }
+    .stores {
+        display: flex;
+        flex-wrap: wrap;
+        margin: 20px 0;
+    }
+    .store {
+        width: 50%;
+        float: left;
+        box-shadow: 0 0 10px #f2faff;
+        background-color: #fbfbfb;
+        border-radius: 5px;
+        margin: 20px 0;
+        padding: 20px;
+        box-sizing: border-box;
     }
 </style>
 <div class="background">
@@ -204,57 +224,29 @@
             </li>
         </ul>
     </div>
-<%--    表单循环还未写完--%>
-    <div class="main">
-        <div class="m-table">
-            <table class="table">
-                <div class="container">
-                    <c:forEach items="${array}" var="item" varStatus="status">
-                        <div class="item">
-                            <p>${item.name}</p>
-                            <p>${item.description}</p>
-                        </div>
-                        <c:if test="${status.index % 2 == 1 or status.last}">
-                            <div style="clear:both;"></div>
-                        </c:if>
-                    </c:forEach>
-                </div>
-               <c:forEach var="store" items="${storeList }" varStatus="status">
-                    <tr>
-                        <td>
-                            <div>
-                            <div class="x_div1" style="display:inline-block" >
-    <%--                            <img class="x_img" src="../../img/店铺图片.jpg">${store.picture } <br>${store.storename }--%>
-                            </div>
-                            <div class="x_div2" style="display:inline-block">
-                                主营：${user.main_category}<br><br>地址：${store.address}<br><br> 联系电话:${store.phone}<br>
-                            </div>
-                            </div>
-                        </td>
-                    </tr>
+    <form action="user" method="get">
+        <input name="method" value="query" type="hidden">
+        <div class="container">
+            <div class="stores">
+                <c:forEach items="${storelist}" var="store" varStatus="status">
+                    <div class="store">
+<%--                        <img src="${store.picture}" alt="${store.name}">--%>
+                        ${store.name}
+                        ${store.address}
+                    </div>
+                    <c:if test="${status.index % 2 == 1 or status.last}">
+                        <div style="clear:both;"></div>
+                    </c:if>
                 </c:forEach>
-<%--                <form action="submit.php" method="post">--%>
-<%--                    <div class="container">--%>
-<%--                        <c:forEach items="${array}" var="item" varStatus="status">--%>
-<%--                            <c:if test="${status.index % 2 == 0}">--%>
-<%--                                <div class="row">--%>
-<%--                            </c:if>--%>
-<%--                            <div class="col-md-6">--%>
-<%--                                <p>${item.name}</p>--%>
-<%--                                <p>${item.description}</p>--%>
-<%--                                <input type="hidden" name="name${status.index}" value="${item.name}">--%>
-<%--                                <input type="hidden" name="description${status.index}" value="${item.description}">--%>
-<%--                                <button type="submit" class="btn btn-primary">提交</button>--%>
-<%--                            </div>--%>
-<%--                            <c:if test="${status.index % 2 == 1 or status.last}">--%>
-<%--                                </div>--%>
-<%--                            </c:if>--%>
-<%--                        </c:forEach>--%>
-<%--                    </div>--%>
-<%--                </form>--%>
-            </table>
+            </div>
         </div>
-    </div>
+    </form>
+    <input type="hidden" id="totalPageCount" value="${totalPageCount}"/>
+    <c:import url="//rollpage.jsp">
+        <c:param name="totalCount" value="${totalCount}"/>
+        <c:param name="currentPageNo" value="${currentPageNo}"/>
+        <c:param name="totalPageCount" value="${totalPageCount}"/>
+    </c:import>
 </div>
 </body>
 </html>
