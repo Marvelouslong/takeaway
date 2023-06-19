@@ -29,7 +29,7 @@
         }
         .nav-link-ul{
             position: relative;
-            margin: 25px 10px 10px 20px;
+            margin: 25px 10px 20px 20px;
             width: 400px;
         }
         .nav-link-item{
@@ -100,13 +100,13 @@
                 <a href="homepage.jsp">首页</a>
             </li>
             <li class="nav-link-item">
-                <a href="gouwuche">购物车</a>
+                <a href="shopcar.jsp">购物车</a>
             </li>
             <li class="nav-link-item">
                 <a href="talk.jsp">讨论区</a>
             </li>
             <li class="nav-link-item">
-                <a href="user_information.jsp">我的信息</a>
+                <a href="myinformation.jsp">我的信息</a>
             </li>
         </ul>
     </div>
