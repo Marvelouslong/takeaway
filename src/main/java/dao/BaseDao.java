@@ -42,7 +42,7 @@ public class BaseDao {
         Connection connection =null;
         try {
             Class.forName(driver);
-            connection=DriverManager.getConnection(,username,password);
+            connection=DriverManager.getConnection(url,username,password);
         }catch (Exception e){
             e.printStackTrace();
         }
