@@ -1,3 +1,5 @@
+
+
 <%--
   Created by IntelliJ IDEA.
   User: y1577
@@ -17,10 +19,10 @@
 
 <div class="div1">
     <img class="div1-img" src="../../img/店铺图片.jpg" alt="店铺图片">
-    <p class="p1">吃好你再来饭店</p>
-    <p>主营类型：$四川菜</p>
-    <p>辅营类型：$家常菜</p>
-    <p>商家简介：神佛无啊回复啊回复爱好分辨出位于巴登参悟i很多不擦五大湖大无法无法</p>
+    <p class="p1">${shopSession.shop_name}</p>
+    <p>主营类型：${shopSession.main_category}</p>
+    <p>辅营类型：${shopSession.auxiliary_category}</p>
+<%--    <p>商家简介：神佛无啊回复啊回复爱好分辨出位于巴登参悟i很多不擦五大湖大无法无法</p>--%>
 </div>
 <div class="div2">
     <span class="span1">店内已有菜品:</span>

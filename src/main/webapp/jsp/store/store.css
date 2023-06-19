@@ -141,22 +141,115 @@ p{
 .smart-green .button:hover {
     background-color: #80A24A;
 }
-.show {
-    background-color: white;
-    z-index: 5;
-    /*五层*/
-    display: block;
-    height:200px;
-    width: 100px;
-    border: 1px black;
-    margin: auto;
-}
-.hide {display: none;}
-.div3{display: none;}
+/*.show {*/
+/*    background-color: white;*/
+/*    !*z-index: 5;*!*/
+/*    !*五层*!*/
+/*    display: block;*/
+/*    height:200px;*/
+/*    width: 100px;*/
+/*    border: 1px black;*/
+/*    margin: auto;*/
+/*}*/
+/*.hide {display: none;*/
+/*    height:200px;*/
+/*    width: 100px;*/
+/*    border: 1px black;*/
+/*    margin: auto;}*/
+/*.div3{display: none;*/
+/*    height:200px;*/
+/*    width: 100px;*/
+/*    border: 1px black;*/
+/*    margin: auto;}*/
 .btn{
     border: 0;
     background-color: white;
 }
 .btn:hover{
  color: rgba(252,126,0,0.41);
+}
+
+/*.div3 {*/
+/*    height: 80%;*/
+/*    width: 30%;*/
+/*    left: 20%;*/
+/*    border:1px solid #dedede;*/
+/*    position: absolute;*/
+/*    padding: 10px;*/
+/*    top:40px;*/
+/*    display:inline-block*/
+/*}*/
+.div10{
+    height:80%;
+    width: 80%;
+    top:40px;
+    left: 10%;
+    border:1px solid #dedede;
+    padding: 10px;
+    position: absolute;
+    overflow-y:auto
+}
+.order_table{
+    margin-top: 15px;
+    width: 100%;
+    line-height:40px;
+}
+/*.div4 {*/
+/*    height: 80%;*/
+/*    width: auto;*/
+/*    left: 52%;*/
+/*    border:1px solid #dedede;*/
+/*    border-left:1px dashed black;*/
+/*    overflow-y:auto;*/
+/*    position: absolute;*/
+/*    top:40px;*/
+/*    padding: 10px;*/
+/*    display:inline-block;*/
+/*    text-align: center;*/
+/*}*/
+.div5{
+    height:20%;
+    position: absolute;
+    width: 95%;
+    background-image: linear-gradient(to bottom right, #ffffff, #fcd8a3);
+    left: 3%;
+    top:60px;
+    border-right-color:black;
+    box-shadow:0px 3px 3px #c8c8c8 ;
+    text-align: center;
+}
+
+.div6{
+    position: absolute;
+    height:68.5%;
+    width: 93.5%;
+    background-color: white;
+    left: 3%;
+    border-top-color:black;
+    box-shadow:0px 3px 3px #c8c8c8 ;
+    overflow-y:auto;
+    top:184px;
+    padding: 10px;
+    margin-top: 10px;
+}
+.div5_img{
+    width: 75px;
+    height: 75px;
+    border-radius:200px;
+    margin-top: 10px;
+}
+.btn2{
+    background-color: #ffffff;
+    border: 1px;
+    border-radius:200px;
+    right: 10px;
+    bottom: 3px;
+    padding: 3px;
+    width: 60px;
+    height: 30px;
+    position: absolute;
+    /*z-index: 2;*/
+}
+.btn2:hover{
+    background-color: rgb(185, 179, 172);
 }

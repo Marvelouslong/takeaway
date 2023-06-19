@@ -26,7 +26,7 @@
         <form action="/form/" method="post" class="smart-green" enctype="multipart/form-data">
             <label>
                 <span>菜名 :</span>
-                <input type="text"  class="error" placeholder="请输入菜品名称"/>
+                <input type="text"   placeholder="请输入菜品名称"/>
             </label>
             <label>
                 <span>状态 :</span>
@@ -38,7 +38,15 @@
             </label>
             <label>
                 <span>菜品类别:</span>
-                <input type="text"  class="error" placeholder="请输入菜品类别，如凉菜类"/>
+                <input type="text"   placeholder="请输入菜品类别，如凉菜类"/>
+            </label>
+            <label>
+                <span>菜品口味（最多五个，没有写无）:</span><br><br>
+                 <input type="text"   placeholder="请输入菜品口味"/>
+                <input type="text"   placeholder="请输入菜品口味"/>
+                <input type="text"   placeholder="请输入菜品口味"/>
+               <input type="text"   placeholder="请输入菜品口味"/>
+               <input type="text"   placeholder="请输入菜品口味"/>
             </label>
             <label>
                 <span>菜品描述 :</span>
