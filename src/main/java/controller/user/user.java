@@ -102,6 +102,6 @@ public class user extends HttpServlet {
             req.setAttribute("totalPageCount", totalPageCount);
             req.setAttribute("totalCount", totalCount);
             req.setAttribute("currentPageNo", currentPageNo);
-            req.getRequestDispatcher("homepage.jsp").forward(req, resp);
+            req.getRequestDispatcher("${pageContext.request.contextPath}/homepage.jsp").forward(req, resp);
         }
 }

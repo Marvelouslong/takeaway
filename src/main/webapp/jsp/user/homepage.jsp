@@ -24,6 +24,7 @@
         background-color: #fbfbfb;
     }
     .b-wrap .con{
+        list-style:none;
         display: flex;
     }
     .b-wrap .con li{
@@ -66,14 +67,14 @@
         <ul class="con">
             <li><a href="#">
                 <div class="con-img">
-                    <img src="../../img/美食.jpg" alt="mlm">
+                    <img src="${pageContext.request.contextPath}/img/美食.jpg" alt="mlm">
                 </div>
                 <span>美食</span>
             </a></li>
             <li>
                 <a href="https://t.bilibili.com/">
                     <div class="con-img">
-                        <img src="../../img/粥铺.webp" alt="mlm">
+                        <img src="${pageContext.request.contextPath}/img/粥铺.webp" alt="mlm">
                     </div>
                     <span>包子粥铺</span>
                 </a>
@@ -81,7 +82,7 @@
             <li>
                 <a href="https://www.bilibili.com/ranking">
                     <div class="con-img">
-                        <img src="../../img/鲜花.webp" alt="mlm">
+                        <img src="${pageContext.request.contextPath}/img/鲜花.webp" alt="mlm">
                     </div>
                     <span>浪漫鲜花</span>
                 </a>
@@ -89,7 +90,7 @@
             <li>
                 <a href="https://www.bilibili.com/v/channel/9222?tab=multiple">
                     <div class="con-img">
-                        <img src="../../img/炸鸡.jpg" alt="mlm">
+                        <img src="${pageContext.request.contextPath}/img/炸鸡.jpg" alt="mlm">
                     </div>
                     <span>炸鸡鸭脖</span>
                 </a>
@@ -97,7 +98,7 @@
             <li>
                 <a href="https://www.bilibili.com/v/channel/9222?tab=multiple">
                     <div class="con-img">
-                        <img src="../../img/米粉.jpg" alt="mlm">
+                        <img src="${pageContext.request.contextPath}/img/米粉.jpg" alt="mlm">
                     </div>
                     <span>米粉馆</span>
                 </a>
@@ -105,7 +106,7 @@
             <li>
                 <a href="https://www.bilibili.com/v/channel/9222?tab=multiple">
                     <div class="con-img">
-                        <img src="../../img/蔬菜.webp" alt="mlm">
+                        <img src="${pageContext.request.contextPath}/img/蔬菜.webp" alt="mlm">
                     </div>
                     <span>蔬菜水果</span>
                 </a>
@@ -113,7 +114,7 @@
             <li>
                 <a href="https://www.bilibili.com/v/channel/9222?tab=multiple">
                     <div class="con-img">
-                        <img src="../../img/甜品.webp" alt="mlm">
+                        <img src="${pageContext.request.contextPath}/img/甜品.webp" alt="mlm">
                     </div>
                     <span>甜点饮品</span>
                 </a>
@@ -121,7 +122,7 @@
             <li>
                 <a href="https://www.bilibili.com/v/channel/9222?tab=multiple">
                     <div class="con-img">
-                        <img src="../../img/酒.webp" alt="mlm">
+                        <img src="${pageContext.request.contextPath}/img/酒.webp" alt="mlm">
                     </div>
                     <span>买酒</span>
                 </a>
@@ -129,7 +130,7 @@
             <li>
                 <a href="https://www.bilibili.com/v/channel/9222?tab=multiple">
                     <div class="con-img">
-                        <img src="../../img/汤饭.jpg" alt="mlm">
+                        <img src="${pageContext.request.contextPath}/img/汤饭.jpg" alt="mlm">
                     </div>
                     <span>汤饭</span>
                 </a>
@@ -137,7 +138,7 @@
             <li>
                 <a href="https://www.bilibili.com/v/channel/9222?tab=multiple">
                     <div class="con-img">
-                        <img src="../../img/川湘菜.jpg" alt="mlm">
+                        <img src="${pageContext.request.contextPath}/img/川湘菜.jpg" alt="mlm">
                     </div>
                     <span>川湘菜</span>
                 </a>
@@ -145,7 +146,7 @@
             <li>
                 <a href="https://www.bilibili.com/v/channel/9222?tab=multiple">
                     <div class="con-img">
-                        <img src="../../img/饺子.webp" alt="mlm">
+                        <img src="${pageContext.request.contextPath}/img/饺子.webp" alt="mlm">
                     </div>
                     <span>饺子馆</span>
                 </a>
@@ -153,7 +154,7 @@
             <li>
                 <a href="https://www.bilibili.com/v/channel/9222?tab=multiple">
                     <div class="con-img">
-                        <img src="../../img/汉堡.webp" alt="mlm">
+                        <img src="${pageContext.request.contextPath}/img/汉堡.webp" alt="mlm">
                     </div>
                     <span>汉堡披萨</span>
                 </a>
@@ -161,7 +162,7 @@
             <li>
                 <a href="https://www.bilibili.com/v/channel/9222?tab=multiple">
                     <div class="con-img">
-                        <img src="../../img/面包.webp" alt="mlm">
+                        <img src="${pageContext.request.contextPath}/img/面包.webp" alt="mlm">
                     </div>
                     <span>面包蛋糕</span>
                 </a>
@@ -169,7 +170,7 @@
             <li>
                 <a href="https://www.bilibili.com/v/channel/9222?tab=multiple">
                     <div class="con-img">
-                        <img src="../../img/龙虾.webp" alt="mlm">
+                        <img src="${pageContext.request.contextPath}/img/龙虾.webp" alt="mlm">
                     </div>
                     <span>龙虾烧烤</span>
                 </a>
@@ -177,7 +178,7 @@
             <li>
                 <a href="https://www.bilibili.com/v/channel/9222?tab=multiple">
                     <div class="con-img">
-                        <img src="../../img/烤鱼.jpg" alt="mlm">
+                        <img src="${pageContext.request.contextPath}/img/烤鱼.jpg" alt="mlm">
                     </div>
                     <span>火锅烤鱼</span>
                 </a>
@@ -185,7 +186,7 @@
             <li>
                 <a href="https://www.bilibili.com/v/channel/9222?tab=multiple">
                     <div class="con-img">
-                        <img src="../../img/汤面.webp" alt="mlm">
+                        <img src="${pageContext.request.contextPath}/img/汤面.webp" alt="mlm">
                     </div>
                     <span>暖胃汤面</span>
                 </a>
@@ -193,7 +194,7 @@
             <li>
                 <a href="https://www.bilibili.com/v/channel/9222?tab=multiple">
                     <div class="con-img">
-                        <img src="../../img/日韩.webp" alt="mlm">
+                        <img src="${pageContext.request.contextPath}/img/日韩.webp" alt="mlm">
                     </div>
                     <span>日韩料理</span>
                 </a>
@@ -201,7 +202,7 @@
             <li>
                 <a href="https://www.bilibili.com/v/channel/9222?tab=multiple">
                     <div class="con-img">
-                        <img src="../../img/轻食.jpeg" alt="mlm">
+                        <img src="${pageContext.request.contextPath}/img/轻食.jpeg" alt="mlm">
                     </div>
                     <span>低脂轻食</span>
                 </a>
@@ -209,7 +210,7 @@
             <li>
                 <a href="https://www.bilibili.com/v/channel/9222?tab=multiple">
                     <div class="con-img">
-                        <img src="../../img/简餐.webp" alt="mlm">
+                        <img src="${pageContext.request.contextPath}/img/简餐.webp" alt="mlm">
                     </div>
                     <span>快食简餐</span>
                 </a>
@@ -217,7 +218,7 @@
             <li>
                 <a href="https://www.bilibili.com/v/channel/9222?tab=multiple">
                     <div class="con-img">
-                        <img src="../../img/小吃.webp" alt="mlm">
+                        <img src="${pageContext.request.contextPath}/img/小吃.webp" alt="mlm">
                     </div>
                     <span>小吃馆</span>
                 </a>

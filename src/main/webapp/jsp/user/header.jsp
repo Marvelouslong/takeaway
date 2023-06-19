@@ -12,8 +12,8 @@
 <head lang="en">
     <meta charset="UTF-8">
     <title>美了么外卖送餐平台</title>
-    <link rel="stylesheet" href="../../layui/css/layui.css">
-    <script src="../../layui/layui.js"></script>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/layui/css/layui.css">
+    <script src="${pageContext.request.contextPath}/layui/layui.js"></script>
     <style>
         .nav{
             display: flex;
@@ -93,7 +93,7 @@
 </head>
 <body>
 <header class="nav">
-    <img src="../../img/logo.jpg" class="nav-img">
+    <img src="${pageContext.request.contextPath}/img/logo.jpg" class="nav-img" alt="logo">
     <div class="nav-link">
         <ul class="nav-link-ul">
             <li class="nav-link-item">
@@ -112,7 +112,7 @@
     </div>
     <div class="nav-search-box">
         <div class="nav-search">
-            <form id="nav_searchform" action="/user">
+            <form id="nav_searchform" action="user">
                 <input name="method" value="query" class="input-text" type="hidden">
                 <input type="hidden" name="pageIndex" value="1"/>
                 <input type="text" autocomplete="off" accesskey="s" placeholder="搜索商家或菜品"
@@ -126,6 +126,6 @@
         </div>
     </div>
     <div class="nav-hello">
-        <p><span>下午好！</span><span style="color: #fff21b">${userSession.userName}</span> , 欢迎你！</p>
+        <p><span>下午好！</span><span style="color: #fff21b">${userSession.name}</span> , 欢迎你！</p>
     </div>
 </header>
