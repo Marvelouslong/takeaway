@@ -112,7 +112,7 @@
     </div>
     <div class="nav-search-box">
         <div class="nav-search">
-            <form id="nav_searchform" action="user">
+            <form id="nav_searchform" action="${pageContext.request.contextPath }/Userservlet" method="get">
                 <input name="method" value="query" class="input-text" type="hidden">
                 <input type="hidden" name="pageIndex" value="1"/>
                 <input type="text" autocomplete="off" accesskey="s" placeholder="搜索商家或菜品"

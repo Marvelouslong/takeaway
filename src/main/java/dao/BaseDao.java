@@ -41,8 +41,9 @@ public class BaseDao {
     public static Connection getConnection() {
         Connection connection =null;
         try {
-            Class.forName(driver);
-            connection=DriverManager.getConnection(url,username,password);
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            connection=DriverManager.getConnection("jdbc:mysql://localhost:3306/takeaway?useUnicode=true&characterEncoding=UTF8&useSSL=false&serverTimezone=Asia/Shanghai&rewriteBatchedStatements=true","root","12345678");
+            System.out.println("yes");
         }catch (Exception e){
             e.printStackTrace();
         }
@@ -116,4 +117,3 @@ public class BaseDao {
         return flag;
     }
 }
-

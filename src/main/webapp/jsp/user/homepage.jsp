@@ -12,7 +12,6 @@
         height: 100%;
         width: 100%;
         display: flex;
-        background-color: #eeeaea;
     }
     .b-wrap{
         width: 1320px;
@@ -21,7 +20,6 @@
         margin-left: 50px;
         display: flex;
         align-items: center;
-        background-color: #fbfbfb;
     }
     .b-wrap .con{
         list-style:none;
@@ -35,6 +33,7 @@
         font-size: 14px;
         white-space: nowrap;
         font-size: 14px;
+        margin-left: 60px;
     }
     .b-wrap .con li .con-img img{
         width: 60px;
@@ -225,8 +224,9 @@
             </li>
         </ul>
     </div>
-    <form action="user" method="get">
+    <form action="${pageContext.request.contextPath }/Userservlet" method="get">
         <input name="method" value="query" type="hidden">
+        <input type="hidden" name="pageIndex" value="1"/>
         <div class="container">
             <div class="stores">
                 <c:forEach items="${storelist}" var="store" varStatus="status">

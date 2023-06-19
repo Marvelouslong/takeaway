@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 
-@WebServlet("/user")
+@WebServlet("/Userservlet")
 public class user extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -70,7 +70,7 @@ public class user extends HttpServlet {
                 try {
                     currentPageNo = Integer.parseInt(pageIndex);
                 } catch (NumberFormatException e) {
-                    resp.sendRedirect("error.jsp");
+                    req.setAttribute("error", "error");
                 }
             }
 

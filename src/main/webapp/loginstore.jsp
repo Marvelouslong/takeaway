@@ -30,6 +30,7 @@
             <div class="subBtn">
                 <input style="background-color:transparent" type="submit" value="登录"/>
                 <input style="background-color:transparent" type="reset" value="重置"/>
+                <a href="jsp/user/homepage.jsp">ccccccccc</a>
             </div>
         </form>
     </section>
