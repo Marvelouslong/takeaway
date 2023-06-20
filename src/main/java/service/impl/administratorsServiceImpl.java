@@ -4,9 +4,11 @@ import dao.BaseDao;
 import dao.administratorsDao;
 import dao.impl.administratorsDaoImpl;
 import pojo.administrators;
+import pojo.store;
 import service.administratorsService;
 
 import java.sql.Connection;
+import java.util.List;
 
 public class administratorsServiceImpl implements administratorsService {
     private administratorsDaoImpl adminDao;

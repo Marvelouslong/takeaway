@@ -20,18 +20,29 @@ public class loginstoreServlet extends HttpServlet {
         storeService shopService = new storeServiceImpl();
         store shop = shopService.login(con_telephone, password);
         if (null != shop) {
-            if (!(shop.getCon_telephone()==con_telephone &&shop.getPassword().equals(password)&&shop.getStatus().equals("审核")))
-                shop = null;
+            if (shop.getCon_telephone() == con_telephone && shop.getPassword().equals(password) && shop.getStatus().equals("通过")) {
+                req.getSession().setAttribute(constant.STORE_SESSION, shop);
+                resp.sendRedirect("framestore.jsp");
+            }
+            else{
+                if (!(shop.getPassword().equals(password))) {
+                    req.setAttribute("error", "密码错误");
+                    req.getRequestDispatcher("loginstore.jsp").forward(req, resp);
+                }
+                if (shop.getStatus().equals("正在审核")) {
+                    req.setAttribute("error", "正在审核中，请耐心等待");
+                    req.getRequestDispatcher("loginstore.jsp").forward(req, resp);
+                }
+                if (shop.getStatus().equals("未通过")) {
+                    req.setAttribute("error", "审核未通过");
+                    req.getRequestDispatcher("loginstore.jsp").forward(req, resp);
+                }
+            }
         }
-        if (shop != null) {
-            req.getSession().setAttribute(constant.STORE_SESSION, shop);
-            resp.sendRedirect("framestore.jsp");
-        } else {
-            req.setAttribute("error", "账号或者密码错误或审核未通过");
-            req.getRequestDispatcher("loginstore.jsp").forward(req, resp);
+        else{req.setAttribute("error", "账号错误");
+                req.getRequestDispatcher("loginstore.jsp").forward(req, resp);}
+    }
+        public void doPost (HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+            doGet(req, resp);
         }
     }
-    public void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        doGet(req, resp);
-    }
-}

@@ -20,14 +20,14 @@ public class loginadminServlet extends HttpServlet {
         administratorsService adminService = new administratorsServiceImpl();
         administrators admin = adminService.login(account_number, password);
         if (null != admin) {
-            if (!(admin.getAccount_number()==account_number && admin.getPassword().equals(password)))
-                admin = null;
+            if (admin.getAccount_number()==account_number && admin.getPassword().equals(password))
+            { req.getSession().setAttribute(constant.ADMIN_SESSION, admin);
+                resp.sendRedirect("frameadmin.jsp");}
+            else{req.setAttribute("error", "密码错误");
+                req.getRequestDispatcher("loginadmin.jsp").forward(req, resp);}
         }
-        if (admin != null) {
-            req.getSession().setAttribute(constant.ADMIN_SESSION, admin);
-            resp.sendRedirect("frameadmin.jsp");
-        } else {
-            req.setAttribute("error", "账号或者密码错误");
+        else {
+            req.setAttribute("error", "账号错误");
             req.getRequestDispatcher("loginadmin.jsp").forward(req, resp);
         }
     }

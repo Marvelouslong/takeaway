@@ -4,6 +4,7 @@ import dao.BaseDao;
 import dao.administratorsDao;
 import pojo.administrators;
 
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -28,4 +29,5 @@ public class administratorsDaoImpl implements administratorsDao {
         }
         return admin;
     }
+
 }
