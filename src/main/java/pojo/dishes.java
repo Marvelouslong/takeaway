@@ -14,6 +14,9 @@ public class dishes {
     private String category;
     private int s_id;
 
+    public dishes(Integer id, String name, String describe, String status, Double price, String category) {
+    }
+
     public int getId() {
         return id;
     }

@@ -12,9 +12,9 @@
     }
 </style>
 <html>
-<head class="loginstore_bg">
+<head >
     <title>美了么外卖送餐平台</title>
-    <link type="text/css" rel="stylesheet" href="${pageContext.request.contextPath }/css/store.css">
+    <link type="text/css" rel="stylesheet" href="css/store.css">
     <script type="text/javascript">
     </script>
 </head>
@@ -37,7 +37,7 @@
             <div class="subBtn">
                 <input style="background-color:transparent" type="submit" value="登录"/>
                 <input style="background-color:transparent" type="reset" value="重置"/>
-                <a href="${pageContext.request.contextPath}/jsp/user/homepage.jsp">ccccccccccccc</a>
+                <a href="jsp/user/homepage.jsp">ccccccccc</a>
             </div>
         </form>
     </section>
