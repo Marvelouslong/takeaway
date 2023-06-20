@@ -96,7 +96,7 @@ public class store {
     public void setCertificate_of_business(Blob certificate_of_business) {
         this.certificate_of_business = certificate_of_business;
     }
-
+    public Blob getShop_picture(){return shop_picture;}
     public void setShop_picture(Blob shop_picture) {
         this.shop_picture = shop_picture;
     }
@@ -161,4 +161,24 @@ public class store {
                 ", ad_id=" + ad_id +
                 '}';
     }
+    public store(int id,String address, long con_telephone,String shop_name,String con_name,String password,Blob brand_authorization,long bank_card,Blob license,Blob certificate_of_business,String legal_id_card,String status,Blob shop_picture,String main_category,String auxiliary_category,int ad_id)
+    {
+        this.id = id;
+        this.address = address;
+        this.con_telephone = con_telephone;
+        this.shop_name = shop_name;
+        this.con_name = con_name;
+        this.bank_card = bank_card;
+        this.password=password;
+        this.brand_authorization = brand_authorization;
+        this.license = license;
+        this.certificate_of_business = certificate_of_business;
+        this.shop_picture = shop_picture;
+        this.legal_id_card = legal_id_card;
+        this.status = status;
+        this.main_category = main_category;
+        this.auxiliary_category = auxiliary_category;
+        this.ad_id = ad_id;
+    }
+    public store(){}
 }
