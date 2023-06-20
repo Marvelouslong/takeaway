@@ -12,7 +12,7 @@
     <session-timeout>30</session-timeout>
   </session-config>
   <welcome-file-list>
-    <welcome-file>loginadmin.jsp</welcome-file>
+    <welcome-file>loginuser.jsp</welcome-file>
   </welcome-file-list>
   <servlet>
     <servlet-name>loginadminServlet</servlet-name>
