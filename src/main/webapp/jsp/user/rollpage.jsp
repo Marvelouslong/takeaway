@@ -33,6 +33,57 @@
       }
     }
   </script>
+  <style>
+    .page-bar
+    {
+      position:relative;
+      margin-top:10px;
+    }
+    .page-num-ul li
+    {
+      float:left;
+      display: flex;
+    }
+    .page-num-ul li a
+    {
+      display:inline-block;
+      padding:3px 5px;
+      margin:0px 3px;
+      border:1px solid #b8b8b8;
+    }
+    .page-num-ul a:hover,.page-num-ul .thisclass
+    {
+      border:1px solid #c5063f;
+      background-color:#c5063f;
+      color:#FFF;
+      text-decoration:none;
+    }
+    .page-key
+    {
+      width:50px;
+    }
+    .page-btn
+    {
+      border:1px solid #b8b8b8;
+      background-color:#fff3f8;
+      display:inline-block;
+      width:52px;
+      height:25px;
+      line-height:25px;
+      font-weight:20px;
+    }
+    .page-go-form
+    {
+      position:absolute;
+      display:inline-block;
+      right:50px;
+      top:0px;
+    }
+    .page-go-form input,label,button
+    {
+      margin:0px 5px;
+    }
+  </style>
 </head>
 <body>
 <div class="page-bar">

@@ -11,13 +11,13 @@
     .background{
         height: 100%;
         width: 100%;
-        display: flex;
+        display: block;
     }
     .b-wrap{
         width: 1320px;
         height: 103px;
         margin-top: 5px;
-        margin-left: 50px;
+        margin-left: 10px;
         display: flex;
         align-items: center;
     }
@@ -33,7 +33,7 @@
         font-size: 14px;
         white-space: nowrap;
         font-size: 14px;
-        margin-left: 60px;
+        margin-left: 10px;
     }
     .b-wrap .con li .con-img img{
         width: 60px;
@@ -59,6 +59,10 @@
         margin: 20px 0;
         padding: 20px;
         box-sizing: border-box;
+    }
+    .page{
+        display: flex;
+        float: right;
     }
 </style>
 <div class="background">
@@ -145,14 +149,6 @@
             <li>
                 <a href="https://www.bilibili.com/v/channel/9222?tab=multiple">
                     <div class="con-img">
-                        <img src="${pageContext.request.contextPath}/img/饺子.webp" alt="mlm">
-                    </div>
-                    <span>饺子馆</span>
-                </a>
-            </li>
-            <li>
-                <a href="https://www.bilibili.com/v/channel/9222?tab=multiple">
-                    <div class="con-img">
                         <img src="${pageContext.request.contextPath}/img/汉堡.webp" alt="mlm">
                     </div>
                     <span>汉堡披萨</span>
@@ -224,30 +220,29 @@
             </li>
         </ul>
     </div>
-    <form action="${pageContext.request.contextPath }/Userservlet" method="get">
-        <input name="method" value="query" type="hidden">
-        <input type="hidden" name="pageIndex" value="1"/>
-        <div class="container">
-            <div class="stores">
-                <c:forEach items="${storelist}" var="store" varStatus="status">
-                    <div class="store">
+    <main class="container">
+        <div class="stores">
+            <c:forEach items="${storelist}" var="store" varStatus="status">
+                <div class="store">
 <%--                        <img src="${store.picture}" alt="${store.name}">--%>
-                        ${store.name}
-                        ${store.address}
-                    </div>
-                    <c:if test="${status.index % 2 == 1 or status.last}">
-                        <div style="clear:both;"></div>
-                    </c:if>
-                </c:forEach>
-            </div>
+                    <div
+                    ${store.shop_name}
+                    ${store.address}
+                </div>
+                <c:if test="${status.index % 2 == 1 or status.last}">
+                    <div style="clear:both;"></div>
+                </c:if>
+            </c:forEach>
         </div>
-    </form>
+    </main>
+    <footer class="page">
     <input type="hidden" id="totalPageCount" value="${totalPageCount}"/>
-    <c:import url="//rollpage.jsp">
+    <c:import url="rollpage.jsp">
         <c:param name="totalCount" value="${totalCount}"/>
         <c:param name="currentPageNo" value="${currentPageNo}"/>
         <c:param name="totalPageCount" value="${totalPageCount}"/>
     </c:import>
+    </footer>
 </div>
 </body>
 </html>

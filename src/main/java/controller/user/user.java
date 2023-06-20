@@ -13,7 +13,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
-
 @WebServlet("/Userservlet")
 public class user extends HttpServlet {
     @Override
@@ -102,6 +101,6 @@ public class user extends HttpServlet {
             req.setAttribute("totalPageCount", totalPageCount);
             req.setAttribute("totalCount", totalCount);
             req.setAttribute("currentPageNo", currentPageNo);
-            req.getRequestDispatcher("${pageContext.request.contextPath}/homepage.jsp").forward(req, resp);
+            req.getRequestDispatcher("/jsp/user/homepage.jsp").forward(req, resp);
         }
 }

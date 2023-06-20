@@ -122,7 +122,6 @@
                     <i class="layui-icon">&#xe615;</i>
                 </button>
                 </div>
-            </form>
         </div>
     </div>
     <div class="nav-hello">
