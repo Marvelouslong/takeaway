@@ -23,7 +23,7 @@ public class userloginServlet extends HttpServlet {
         if (null != visitor) {
             if (visitor.getPhone()==phone &&visitor.getPassword().equals(password))
             { req.getSession().setAttribute(Constants.USER_SESSION,visitor);
-                resp.sendRedirect("frameuser.jsp");}
+                resp.sendRedirect("Userservlet?method=query&query=null&pageIndex=1");}
             else{req.setAttribute("error", "密码错误");
                 req.getRequestDispatcher("loginuser.jsp").forward(req, resp);}
         }

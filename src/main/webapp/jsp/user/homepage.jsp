@@ -225,7 +225,6 @@
             <c:forEach items="${storelist}" var="store" varStatus="status">
                 <div class="store">
 <%--                        <img src="${store.picture}" alt="${store.name}">--%>
-                    <div
                     ${store.shop_name}
                     ${store.address}
                 </div>
@@ -236,12 +235,8 @@
         </div>
     </main>
     <footer class="page">
-    <input type="hidden" id="totalPageCount" value="${totalPageCount}"/>
-    <c:import url="rollpage.jsp">
-        <c:param name="totalCount" value="${totalCount}"/>
-        <c:param name="currentPageNo" value="${currentPageNo}"/>
-        <c:param name="totalPageCount" value="${totalPageCount}"/>
-    </c:import>
+        <input type="hidden" id="totalPageCount" value="${totalPageCount}"/>
+        <%@ include file="rollpage.jsp"%>
     </footer>
 </div>
 </body>
