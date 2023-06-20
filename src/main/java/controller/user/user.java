@@ -18,13 +18,19 @@ public class user extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String method = req.getParameter("method");
+        String query = req.getParameter("query");
+        if(query.equals("null")){
+            query="";
+        }
+        String pageIndex = req.getParameter("pageIndex");
         if
 //        (method != null && method.equals("add")) {
 //            //增加操作
 //            this.add(req, resp);
 //        }else if
         (method != null && method.equals("query")) {
-            this.query(req, resp);
+            this.query(req, resp,query,pageIndex);
+
         }
 //        else if (method != null && method.equals("getrolelist")) {
 //            this.getRoleList(req, resp);
@@ -52,9 +58,7 @@ public class user extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         super.doPost(req, resp);
     }
-    private void query(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
-            String query = req.getParameter("query");
-            String pageIndex = req.getParameter("pageIndex");
+    private void query(HttpServletRequest req, HttpServletResponse resp,String query,String pageIndex) throws IOException, ServletException {
             userservice userservice = new userserviceimpl();
 
             //设置页面容量

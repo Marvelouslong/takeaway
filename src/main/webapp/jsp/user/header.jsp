@@ -97,16 +97,16 @@
     <div class="nav-link">
         <ul class="nav-link-ul">
             <li class="nav-link-item">
-                <a href="homepage.jsp">首页</a>
+                <a href="<c:url value="/jsp/user/homepage.jsp"/>">首页</a>
             </li>
             <li class="nav-link-item">
-                <a href="shopcar.jsp">购物车</a>
+                <a href="<c:url value="/jsp/user/shopcar.jsp"/>">购物车</a>
             </li>
             <li class="nav-link-item">
-                <a href="talk.jsp">讨论区</a>
+                <a href="<c:url value="/jsp/user/talk.jsp"/>">讨论区</a>
             </li>
             <li class="nav-link-item">
-                <a href="myinformation.jsp">我的信息</a>
+                <a href="<c:url value="/jsp/user/myinformation.jsp"/>">我的信息</a>
             </li>
         </ul>
     </div>
@@ -128,4 +128,5 @@
     <div class="nav-hello">
         <p><span>下午好！</span><span style="color: #fff21b">${userSession.name}</span> , 欢迎你！</p>
     </div>
+
 </header>
