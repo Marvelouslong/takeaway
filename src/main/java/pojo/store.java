@@ -180,5 +180,5 @@ public class store {
         this.auxiliary_category = auxiliary_category;
         this.ad_id = ad_id;
     }
-    public store(){}
+    public store() {}
 }
