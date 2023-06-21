@@ -8,7 +8,7 @@ public class talk {
     private int id;
     private String context;
     private Blob picture;
-    private int u_id;
+    private user _u;
 
     public int getId() {
         return id;
@@ -34,12 +34,12 @@ public class talk {
         this.picture = picture;
     }
 
-    public int getU_id() {
-        return u_id;
+    public user get_u() {
+        return _u;
     }
 
-    public void setU_id(int u_id) {
-        this.u_id = u_id;
+    public void set_u(user _u) {
+        this._u = _u;
     }
 
     @Override
@@ -48,7 +48,7 @@ public class talk {
                 "id=" + id +
                 ", context='" + context + '\'' +
                 ", picture=" + picture +
-                ", u_id=" + u_id +
+                ", _u=" + _u +
                 '}';
     }
 }

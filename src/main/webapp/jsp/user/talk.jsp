@@ -34,26 +34,29 @@
 </style>
 <div class="main">
     <div class="left">
-        <table class="table">
-            <c:forEach var="user" items="${userList }" varStatus="status">
-                <tr>
-                    <td>
+            <table class="table">
+                <c:forEach var="talk" items="${talklist}" varStatus="status">
+                    <tr>
                         <div>
-                            <div class="x_div1" style="display:inline-block" >
-                                <img class="x_img" src="../../img/店铺图片.jpg">${user.picture } <br>${user.storename }
-                            </div>
+<%--                            <div class="x_div1" style="display:inline-block" >--%>
+<%--                                <img class="x_img" src="../../img/店铺图片.jpg">${user.picture } <br>${user.storename }--%>
+<%--                            </div>--%>
                             <div class="x_div2" style="display:inline-block">
-                                ${talk.context}<br><br>${talk.picture}<br>
+                                ${talk.context}<br><br>${talk._u.name}<br>
                             </div>
                         </div>
-                    </td>
-                </tr>
-            </c:forEach>
-        </table>
+                    </tr>
+                </c:forEach>
+            </table>
+        <div class="page">
+            <input type="hidden" id="totalPageCount" value="${totalPageCount}"/>
+            <%@ include file="rollpage.jsp"%>
+        </div>
     </div>
     <div class="right">
         <h3>发布框：</h3>
         <textarea  rows="4" maxlength="150" placeholder="不超过150个字"></textarea>
+
         <button type="submit">提交</button>
     </div>
 </div>

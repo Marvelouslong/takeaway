@@ -5,6 +5,8 @@ import com.mysql.cj.util.StringUtils;
 import dao.BaseDao;
 import dao.userdao;
 import pojo.store;
+import pojo.talk;
+import pojo.user;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -83,5 +85,28 @@ public class userdaoimpl implements userdao {
             BaseDao.closeResource(null, pstm, rs);
         }
         return storeList;
+    }
+
+    @Override
+    public List<talk> getstorelist(Connection connection) throws Exception {
+        PreparedStatement pstm = null;
+        ResultSet rs = null;
+        List<talk> talkList = new ArrayList<talk>();
+        if(connection != null){
+            String sql = "select t.context,t.picture,u.name from talk t,user u where t.u_id = u.id order by t.id DESC";
+            pstm = connection.prepareStatement(sql);
+            rs=pstm.executeQuery();
+            while(rs.next()){
+                user _user=new user();
+                _user.setName(rs.getString("name"));
+                talk _talk = new talk();
+                _talk.setContext(rs.getString("context"));
+                _talk.setPicture((Blob) rs.getBlob("picture"));
+                _talk.set_u(_user);
+                talkList.add(_talk);
+            }
+            BaseDao.closeResource(null, pstm, rs);
+        }
+        return talkList;
     }
 }

@@ -4,6 +4,7 @@ import dao.BaseDao;
 import dao.impl.userdaoimpl;
 import dao.userdao;
 import pojo.store;
+import pojo.talk;
 import service.userservice;
 
 import java.sql.Connection;
@@ -46,5 +47,22 @@ public class userserviceimpl implements userservice {
             BaseDao.closeResource(connection, null, null);
         }
         return count;
+    }
+
+    @Override
+    public List<talk> gettalklist() {
+        // TODO Auto-generated method stub
+        Connection connection = null;
+        List<talk> talklist = null;
+        try {
+            connection = BaseDao.getConnection();
+            talklist = Userdao.getstorelist(connection);
+        } catch (Exception e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }finally{
+            BaseDao.closeResource(connection, null, null);
+        }
+        return talklist;
     }
 }

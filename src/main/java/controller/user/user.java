@@ -1,6 +1,7 @@
 package controller.user;
 
 import pojo.store;
+import pojo.talk;
 import service.impl.userserviceimpl;
 import service.userservice;
 import util.Constants;
@@ -18,23 +19,19 @@ public class user extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String method = req.getParameter("method");
-        String query = req.getParameter("query");
-        if(query.equals("null")){
-            query="";
-        }
-        String pageIndex = req.getParameter("pageIndex");
-        if
-//        (method != null && method.equals("add")) {
-//            //增加操作
-//            this.add(req, resp);
-//        }else if
-        (method != null && method.equals("query")) {
+        if (method != null && method.equals("talkshow")) {
+            this.talkshow(req, resp);
+        }else if (method != null && method.equals("query")) {
+            String query = req.getParameter("query");
+            if(query.equals("null")){
+                query="";
+            }
+            String pageIndex = req.getParameter("pageIndex");
             this.query(req, resp,query,pageIndex);
-
+        }else if (method != null && method.equals("myinformation")) {
+            this.myinformation(req, resp);
         }
-//        else if (method != null && method.equals("getrolelist")) {
-//            this.getRoleList(req, resp);
-//        } else if (method != null && method.equals("ucexist")) {
+//        else if (method != null && method.equals("ucexist")) {
 //            this.userCodeExist(req, resp);
 //        } else if (method != null && method.equals("deluser")) {
 //            this.delUser(req, resp);
@@ -107,4 +104,14 @@ public class user extends HttpServlet {
             req.setAttribute("currentPageNo", currentPageNo);
             req.getRequestDispatcher("/jsp/user/homepage.jsp").forward(req, resp);
         }
+    private void talkshow(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        userservice userservice = new userserviceimpl();
+        List<talk> talklist = null;
+        talklist = userservice.gettalklist();
+        req.setAttribute("talklist", talklist);
+        req.getRequestDispatcher("/jsp/user/talk.jsp").forward(req, resp);
+    }
+    private void myinformation(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        req.getRequestDispatcher("/jsp/user/myinformation.jsp").forward(req, resp);
+    }
 }

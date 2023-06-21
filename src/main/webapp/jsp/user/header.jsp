@@ -97,16 +97,23 @@
     <div class="nav-link">
         <ul class="nav-link-ul">
             <li class="nav-link-item">
-                <a href="<c:url value="/jsp/user/homepage.jsp"/>">首页</a>
+                <a href="<c:url value="Userservlet">
+                    <c:param name="method" value="query"/>
+                    <c:param name="query" value="null"/>
+                    <c:param name="pageIndex" value="1"/>
+                    </c:url>">首页</a>
             </li>
             <li class="nav-link-item">
                 <a href="<c:url value="/jsp/user/shopcar.jsp"/>">购物车</a>
             </li>
             <li class="nav-link-item">
-                <a href="<c:url value="/jsp/user/talk.jsp"/>">讨论区</a>
+                <%-- 分页--%>
+                <a href="<c:url value="Userservlet"><c:param name="method" value="talkshow"/></c:url>">讨论区</a>
             </li>
             <li class="nav-link-item">
-                <a href="<c:url value="/jsp/user/myinformation.jsp"/>">我的信息</a>
+                <a href="<c:url value="Userservlet">
+                <c:param name="method" value="myinformation"/>
+                </c:url>">我的信息</a>
             </li>
         </ul>
     </div>
