@@ -15,6 +15,12 @@ public class dishes {
     private int s_id;
 
     public dishes(Integer id, String name, String describe, String status, Double price, String category) {
+        this.id=id;
+        this.name=name;
+        this.describe=describe;
+        this.price=price;
+        this.category=category;
+        this.status=status;
     }
 
     public int getId() {

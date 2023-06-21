@@ -1,24 +1,25 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java"  isELIgnored="false"%>
 <%@include file='where.jsp'%>
 <!DOCTYPE html>
 <html>
 <head>
-    <link href="store.css" rel="stylesheet">
+    <link href="<c:url value="/jsp/store/store.css"/>" rel="stylesheet">
     <title>Title</title>
 </head>
 <body>
 <div class="bj"></div>
 
 <div class="div1">
-    <img class="div1-img" src="../../img/店铺图片.jpg" alt="店铺图片">
+    <img class="div1-img" src="<c:url value="/img/店铺图片.jpg"/>" alt="店铺图片">
     <p class="p1">${shopSession.shop_name}</p>
     <p>主营类型：${shopSession.main_category}</p>
     <p>辅营类型：${shopSession.auxiliary_category}</p>
+    <p>店铺地址：${shopSession.address}</p>
 </div>
 <div class="div2">
     <span class="span1">店内已有菜品:</span>
-    <button class="add_button" onclick="window.location.href = 'dish_add.jsp'">添加新的菜品</button>
+    <button class="add_button" onclick="window.location.href='jsp/store/dish_add.jsp'">添加新的菜品</button>
     <table class="dish_table">
      <thead>
         <tr>
@@ -26,7 +27,7 @@
      </tr>
      </thead>
         <tbody>
-        <c:forEach items="${list}" var="dish">
+        <c:forEach items="${dishes_list}" var="dish" >
      <tr>
          <td>${dish.id}</td>
           <td>
