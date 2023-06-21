@@ -39,4 +39,28 @@ public class dishesDaoImpl implements dishesDao {
         }
         return list;
     }
+
+    @Override
+    public Integer add(dishes dishes) {
+        Connection connection = BaseDao.getConnection();
+        String sql = "insert into dishes(name,describe,status,price,category,picture,s_id) values(?,?,?,?,?,?,?) ";
+        PreparedStatement pstm = null;
+        Integer rs = null;
+        try {
+            pstm = connection.prepareStatement(sql);
+            pstm.setString(1, dishes.getName());
+            pstm.setString(2, dishes.getDescribe());
+            pstm.setString(3, dishes.getStatus());
+            pstm.setDouble(4, dishes.getPrice());
+            pstm.setString(5, dishes.getCategory());
+            pstm.setBytes(6, dishes.getPicture());
+            pstm.setInt(7,dishes.getS_id());
+            rs = pstm.executeUpdate();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        } finally {
+            BaseDao.closeResource(connection, pstm, null);
+        }
+        return rs;
     }
+}

@@ -13,4 +13,10 @@ public class dishesServiceImpl  implements dishesService {
         return this.dishesdao.list(s_id);
     }
 
+    @Override
+    public void add(dishes dishes) {
+        Integer add = this.dishesdao.add(dishes);
+        if(add !=1)throw new RuntimeException("添加失败");
+    }
+
 }

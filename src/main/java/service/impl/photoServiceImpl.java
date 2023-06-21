@@ -25,5 +25,10 @@ public class photoServiceImpl implements photoService {
             // 调用dao方法
             return bdi.querylicense(id);
         }
+    public byte[] picturedishes_picture(int id) {
+        // TODO Auto-generated method stub
+        // 调用dao方法
+        return bdi.picturedishes_picture(id);
+    }
 
 }

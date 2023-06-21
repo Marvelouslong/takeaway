@@ -11,7 +11,8 @@
 <div class="bj"></div>
 
 <div class="div1">
-    <img class="div1-img" src="<c:url value="/img/店铺图片.jpg"/>" alt="店铺图片">
+   <img  src="pictureshop_picture?id=${shopSession.id}" alt="image" style="height: 150px;width: 150px;border-radius:200px;margin-left: 65px;
+    margin-top: 10%;">
     <p class="p1">${shopSession.shop_name}</p>
     <p>主营类型：${shopSession.main_category}</p>
     <p>辅营类型：${shopSession.auxiliary_category}</p>
@@ -31,9 +32,8 @@
      <tr>
          <td>${dish.id}</td>
           <td>
-         <div><img  src="picture?id=${dish.id}"><br>
+         <img  src="picturedishes_picture?id=${dish.id}"><br>
           ${dish.name}
-         </div>
          </td>
          <td width="100px">${dish.describe}</td>
          <td >${dish.category}</td>

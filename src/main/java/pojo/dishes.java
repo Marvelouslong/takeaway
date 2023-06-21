@@ -5,6 +5,7 @@ import com.mysql.cj.jdbc.Blob;
 import java.util.Arrays;
 
 public class dishes {
+    private Integer s_id;
     private int id;
     private String name;
     private byte[] picture;
@@ -23,6 +24,18 @@ public class dishes {
         this.status=status;
     }
 
+    public dishes(String name,String describe,String status,Double price,String category,byte[] picture,Integer s_id){
+        this.name=name;
+        this.describe=describe;
+        this.status=status;
+        this.price=price;
+        this.category=category;
+        this.picture=picture;
+        this.s_id=s_id;
+    }
+
+
+
     public int getId() {
         return id;
     }
@@ -30,10 +43,15 @@ public class dishes {
     public void setId(int id) {
         this.id = id;
     }
-
-    public String getName() {
-        return name;
+    public int getS_id() {
+        return s_id;
     }
+
+    public void setS_id(int s_id) {
+        this.s_id = s_id;
+    }
+
+    public String getName() {return name;}
 
     public void setName(String name) {
         this.name = name;
@@ -84,6 +102,7 @@ public class dishes {
                 ", price=" + price +
                 ", category='" + category + '\'' +
                 ", _s=" + _s +
+                ", s_id=" + s_id +
                 '}';
     }
 

@@ -5,4 +5,6 @@ public interface photoService {
     public byte[] picturelicense(int id) throws Exception;
     public byte[] picturecertificate_of_business(int id) throws Exception;
     public byte[] pictureshop_picture(int id) throws Exception;
+    public byte[] picturedishes_picture(int id) throws Exception;
 }
+

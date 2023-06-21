@@ -5,4 +5,5 @@ public interface photoDao {
     public byte[] querylicense(int id)throws  Exception;
     public byte[] querycertificate_of_business(int id)throws  Exception;
     public byte[] queryshop_picture(int id)throws  Exception;
+    public byte[] picturedishes_picture(int id)throws  Exception;
 }

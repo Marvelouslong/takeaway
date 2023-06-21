@@ -88,4 +88,26 @@ public class photoDaoImpl implements photoDao {
         }
         return pictureshop_picture;
     }
+
+    public byte[] picturedishes_picture(int id) {
+        // TODO Auto-generated method stub
+        String sql = "select picture from dishes where id = ? ";
+        byte[] picturedishes_picture = null;
+        try{
+            conn = BaseDao.getConnection();
+            ps = conn.prepareStatement(sql);
+            ps.setInt(1, id);
+            rs = ps.executeQuery();
+            if(rs.next()){
+                picturedishes_picture = rs.getBytes(1);
+            }
+        }catch(Exception e){
+            e.printStackTrace();
+        }finally{
+            BaseDao.closeResource(null, ps, rs);
+        }
+        return picturedishes_picture;
+    }
+
+
 }
