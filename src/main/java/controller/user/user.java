@@ -34,7 +34,8 @@ public class user extends HttpServlet {
         }else if (method != null && method.equals("myinformation")) {
             this.myinformation(req, resp);
         }else if (method != null && method.equals("img")) {
-            this.img(req, resp);
+            String id = req.getParameter("id");
+            this.img(req, resp,id);
         }
 //        else if (method != null && method.equals("deluser")) {
 //            this.delUser(req, resp);
@@ -116,14 +117,11 @@ public class user extends HttpServlet {
     private void myinformation(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         req.getRequestDispatcher("/jsp/user/myinformation.jsp").forward(req, resp);
     }
-    private void img(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String type= req.getParameter("type");
-        String id = req.getParameter("id");
-        String table = req.getParameter("table");
+    private void img(HttpServletRequest req, HttpServletResponse resp,String id) throws ServletException, IOException {
         int id1= Integer.parseInt(id);
         userservice userservice = new userserviceimpl();
-        byte[] picturebrand_authorization = userservice.img(id1,type,table); //获得bookPicture
-        resp.setContentType("image/jpg");  //设置图片格式
+        byte[] picturebrand_authorization = userservice.img(id1);
+        resp.setContentType("image/jpeg");  //设置图片格式
         OutputStream out = resp.getOutputStream(); //打开输出流
         out.write(picturebrand_authorization);  //输出图片
         out.flush();	//输出

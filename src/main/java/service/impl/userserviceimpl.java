@@ -67,12 +67,12 @@ public class userserviceimpl implements userservice {
     }
 
     @Override
-    public byte[] img(int id,String type,String table) {
+    public byte[] img(int id) {
         Connection connection = null;
         byte[] picture=null;
         try {
             connection = BaseDao.getConnection();
-            picture=Userdao.img(connection,id,type,table);
+            picture=Userdao.img(connection,id);
         } catch (Exception e) {
             e.printStackTrace();
         }finally{

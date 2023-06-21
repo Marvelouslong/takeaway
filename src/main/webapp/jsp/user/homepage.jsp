@@ -1,4 +1,6 @@
-<%@ page import="util.Constants" %><%--
+<%@ page import="util.Constants" %>
+<%@ page import="java.util.Base64" %>
+<%@ page import="java.io.OutputStream" %><%--
   Created by IntelliJ IDEA.
   User: HAN
   Date: 2023/6/13
@@ -48,7 +50,8 @@
     .stores {
         display: flex;
         flex-wrap: wrap;
-        margin: 20px 0;
+        margin: 20px 200px;
+        background-color: #fbfbfb;
     }
     .store {
         width: 50%;
@@ -224,12 +227,8 @@
         <div class="stores">
             <c:forEach items="${storelist}" var="store" varStatus="status">
                 <div class="store">
-                    <%
-                        byte[] data = (${store.shop_picture}).getBytes(1, (int) blob.length());
-                        %>
-                    %>
-                    <img  src="picture?id=${store.id}">
-                ${store.shop_name}
+                    <img src="Userservlet?id=${store.id}&method=img">
+                    ${store.shop_name}
                     ${store.address}
                 </div>
                 <c:if test="${status.index % 2 == 1 or status.last}">
