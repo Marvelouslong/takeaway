@@ -22,7 +22,7 @@ public class loginstoreServlet extends HttpServlet {
         if (null != shop) {
             if (shop.getCon_telephone() == con_telephone && shop.getPassword().equals(password) && shop.getStatus().equals("通过")) {
                 req.getSession().setAttribute(constant.STORE_SESSION, shop);
-                resp.sendRedirect("framestore.jsp");
+                resp.sendRedirect("DISHES?method=list_dishes");
             }
             else{
                 if (!(shop.getPassword().equals(password))) {
