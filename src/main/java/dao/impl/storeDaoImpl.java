@@ -1,11 +1,10 @@
 package dao.impl;
 
 
-import com.mysql.cj.jdbc.Blob;
 import dao.BaseDao;
 import dao.storeDao;
 import pojo.store;
-import sun.jvm.hotspot.runtime.Bytes;
+
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
