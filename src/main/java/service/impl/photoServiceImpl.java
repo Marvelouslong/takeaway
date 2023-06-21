@@ -1,16 +1,29 @@
 package service.impl;
 
 import dao.impl.photoDaoImpl;
-import dao.impl.storeDaoImpl;
-import dao.photoDao;
 import service.photoService;
 
 public class photoServiceImpl implements photoService {
         private photoDaoImpl bdi = new photoDaoImpl();
-        public byte[] picture(int id) {
+        public byte[] picturebrand_authorization(int id) {
             // TODO Auto-generated method stub		
             //调用dao方法
-            return bdi.queryphoto(id);
+            return bdi.querybrand_authorization(id);
+        }
+        public byte[] picturelicense(int id) {
+             // TODO Auto-generated method stub
+             //调用dao方法
+           return bdi.querylicense(id);
+        }
+        public byte[] picturecertificate_of_business(int id) {
+            // TODO Auto-generated method stub
+            //调用dao方法
+           return bdi.querylicense(id);
+        }
+        public byte[] pictureshop_picture(int id) {
+            // TODO Auto-generated method stub
+            // 调用dao方法
+            return bdi.querylicense(id);
         }
 
-    }
+}
