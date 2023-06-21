@@ -7,8 +7,8 @@ import java.util.Arrays;
 public class evaluate {
     private int id;
     private String evaluate;
-    private Blob picture;
-    private int o_id;
+    private byte[] picture;
+    private order _o;
 
     public int getId() {
         return id;
@@ -26,20 +26,20 @@ public class evaluate {
         this.evaluate = evaluate;
     }
 
-    public Blob getPicture() {
+    public byte[] getPicture() {
         return picture;
     }
 
-    public void setPicture(Blob picture) {
+    public void setPicture(byte[] picture) {
         this.picture = picture;
     }
 
-    public int getO_id() {
-        return o_id;
+    public order get_o() {
+        return _o;
     }
 
-    public void setO_id(int o_id) {
-        this.o_id = o_id;
+    public void set_o(order _o) {
+        this._o = _o;
     }
 
     @Override
@@ -47,8 +47,8 @@ public class evaluate {
         return "evaluate{" +
                 "id=" + id +
                 ", evaluate='" + evaluate + '\'' +
-                ", picture=" + picture +
-                ", o_id=" + o_id +
+                ", picture=" + Arrays.toString(picture) +
+                ", _o=" + _o +
                 '}';
     }
 }

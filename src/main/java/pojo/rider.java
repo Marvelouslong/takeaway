@@ -9,7 +9,7 @@ public class rider {
     private long phone;
     private String name;
     private String id_card;
-    private Blob driver_license;
+    private byte[] driver_license;
     private long bank_card;
     private String work_city;
     private String status;
@@ -48,11 +48,11 @@ public class rider {
         this.id_card = id_card;
     }
 
-    public Blob getDriver_license() {
+    public byte[] getDriver_license() {
         return driver_license;
     }
 
-    public void setDriver_license(Blob driver_license) {
+    public void setDriver_license(byte[] driver_license) {
         this.driver_license = driver_license;
     }
 

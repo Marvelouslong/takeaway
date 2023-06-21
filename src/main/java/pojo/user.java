@@ -9,13 +9,13 @@ public class user {
     private String password;
     private String signature;
     private String sex;
-    private Blob picture;
+    private byte[] picture;
 
-    public Blob getPicture() {
+    public byte[] getPicture() {
         return picture;
     }
 
-    public void setPicture(Blob picture) {
+    public void setPicture(byte[] picture) {
         this.picture = picture;
     }
 

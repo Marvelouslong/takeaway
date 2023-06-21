@@ -4,7 +4,7 @@ public class shopcar {
     private int id;
     private double total_amount;
     private int total_number;
-    private int u_id;
+    private user _u;
 
     public int getId() {
         return id;
@@ -30,12 +30,12 @@ public class shopcar {
         this.total_number = total_number;
     }
 
-    public int getU_id() {
-        return u_id;
+    public user get_u() {
+        return _u;
     }
 
-    public void setU_id(int u_id) {
-        this.u_id = u_id;
+    public void set_u(user _u) {
+        this._u = _u;
     }
 
     @Override
@@ -44,7 +44,7 @@ public class shopcar {
                 "id=" + id +
                 ", total_amount=" + total_amount +
                 ", total_number=" + total_number +
-                ", u_id=" + u_id +
+                ", _u=" + _u +
                 '}';
     }
 }

@@ -7,12 +7,12 @@ import java.util.Arrays;
 public class dishes {
     private int id;
     private String name;
-    private Blob picture;
+    private byte[] picture;
     private String describe;
     private String status;
     private double price;
     private String category;
-    private int s_id;
+    private store _s;
 
     public dishes(Integer id, String name, String describe, String status, Double price, String category) {
         this.id=id;
@@ -39,13 +39,7 @@ public class dishes {
         this.name = name;
     }
 
-    public Blob getPicture() {
-        return picture;
-    }
 
-    public void setPicture(Blob picture) {
-        this.picture = picture;
-    }
 
     public String getDescribe() {
         return describe;
@@ -79,25 +73,33 @@ public class dishes {
         this.category = category;
     }
 
-    public int getS_id() {
-        return s_id;
-    }
-
-    public void setS_id(int s_id) {
-        this.s_id = s_id;
-    }
-
     @Override
     public String toString() {
         return "dishes{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
-                ", picture=" + picture +
+                ", picture=" + Arrays.toString(picture) +
                 ", describe='" + describe + '\'' +
                 ", status='" + status + '\'' +
                 ", price=" + price +
                 ", category='" + category + '\'' +
-                ", s_id=" + s_id +
+                ", _s=" + _s +
                 '}';
+    }
+
+    public byte[] getPicture() {
+        return picture;
+    }
+
+    public void setPicture(byte[] picture) {
+        this.picture = picture;
+    }
+
+    public store get_s() {
+        return _s;
+    }
+
+    public void set_s(store _s) {
+        this._s = _s;
     }
 }

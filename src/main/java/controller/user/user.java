@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.io.OutputStream;
 import java.util.List;
 @WebServlet("/Userservlet")
 public class user extends HttpServlet {
@@ -97,7 +98,6 @@ public class user extends HttpServlet {
             List<store> storelist = null;
             storelist = userservice.getstorelist(query, currentPageNo, pageSize);
             req.setAttribute("storelist", storelist);
-
             req.setAttribute("query", query);
             req.setAttribute("totalPageCount", totalPageCount);
             req.setAttribute("totalCount", totalCount);

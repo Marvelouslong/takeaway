@@ -7,7 +7,7 @@ import java.util.Arrays;
 public class talk {
     private int id;
     private String context;
-    private Blob picture;
+    private byte[] picture;
     private user _u;
 
     public int getId() {
@@ -26,11 +26,11 @@ public class talk {
         this.context = context;
     }
 
-    public Blob getPicture() {
+    public byte[] getPicture() {
         return picture;
     }
 
-    public void setPicture(Blob picture) {
+    public void setPicture(byte[] picture) {
         this.picture = picture;
     }
 

@@ -1,4 +1,4 @@
-<%--
+<%@ page import="util.Constants" %><%--
   Created by IntelliJ IDEA.
   User: HAN
   Date: 2023/6/13
@@ -224,8 +224,12 @@
         <div class="stores">
             <c:forEach items="${storelist}" var="store" varStatus="status">
                 <div class="store">
-<%--                        <img src="${store.picture}" alt="${store.name}">--%>
-                    ${store.shop_name}
+                    <%
+                        byte[] data = (${store.shop_picture}).getBytes(1, (int) blob.length());
+                        %>
+                    %>
+                    <img  src="picture?id=${store.id}">
+                ${store.shop_name}
                     ${store.address}
                 </div>
                 <c:if test="${status.index % 2 == 1 or status.last}">

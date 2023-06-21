@@ -10,9 +10,9 @@ public class order {
     private Timestamp checkout_time;
     private Timestamp order_time;
     private double money;
-    private int re_id;
-    private int r_id;
-    private int s_id;
+    private receiver _re;
+    private rider _r;
+    private store _s;
 
     public int getId() {
         return id;
@@ -70,28 +70,28 @@ public class order {
         this.money = money;
     }
 
-    public int getRe_id() {
-        return re_id;
+    public receiver get_re() {
+        return _re;
     }
 
-    public void setRe_id(int re_id) {
-        this.re_id = re_id;
+    public void set_re(receiver _re) {
+        this._re = _re;
     }
 
-    public int getR_id() {
-        return r_id;
+    public rider get_r() {
+        return _r;
     }
 
-    public void setR_id(int r_id) {
-        this.r_id = r_id;
+    public void set_r(rider _r) {
+        this._r = _r;
     }
 
-    public int getS_id() {
-        return s_id;
+    public store get_s() {
+        return _s;
     }
 
-    public void setS_id(int s_id) {
-        this.s_id = s_id;
+    public void set_s(store _s) {
+        this._s = _s;
     }
 
     @Override
@@ -104,9 +104,9 @@ public class order {
                 ", checkout_time=" + checkout_time +
                 ", order_time=" + order_time +
                 ", money=" + money +
-                ", re_id=" + re_id +
-                ", r_id=" + r_id +
-                ", s_id=" + s_id +
+                ", _re=" + _re +
+                ", _r=" + _r +
+                ", _s=" + _s +
                 '}';
     }
 }

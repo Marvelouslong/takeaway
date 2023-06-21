@@ -5,7 +5,7 @@ public class receiver {
     private String name;
     private  long phone;
     private String address;
-    private int u_id;
+    private user _u;
 
     public int getId() {
         return id;
@@ -39,12 +39,12 @@ public class receiver {
         this.address = address;
     }
 
-    public int getU_id() {
-        return u_id;
+    public user get_u() {
+        return _u;
     }
 
-    public void setU_id(int u_id) {
-        this.u_id = u_id;
+    public void set_u(user _u) {
+        this._u = _u;
     }
 
     @Override
@@ -54,7 +54,7 @@ public class receiver {
                 ", name='" + name + '\'' +
                 ", phone=" + phone +
                 ", address='" + address + '\'' +
-                ", u_id=" + u_id +
+                ", _u=" + _u +
                 '}';
     }
 }
