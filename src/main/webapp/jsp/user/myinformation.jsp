@@ -89,25 +89,51 @@
     font-size: 1.1rem;
   }
 </style>
+<%--<script src="js/jquery.min.js" type="text/javascript" charset="utf-8"></script>--%>
+<%--<script>--%>
+<%--  //当选着文件后内容被改变调用方法--%>
+<%--  $("#fileInput").change(function () {--%>
+<%--    var file = this.files[0];--%>
+<%--    if (window.FileReader) {--%>
+<%--      var reader = new FileReader();--%>
+<%--      reader.readAsDataURL(file);--%>
+<%--      reader.onloadend = function (e) {--%>
+<%--        $("#image").attr("src", e.target.result);--%>
+<%--      };--%>
+<%--    }--%>
+<%--  });--%>
+<%--</script>--%>
+<%--<script>--%>
+<%--  const form = document.querySelector('#upload-form');--%>
+<%--  const input = document.querySelector('#fileInput');--%>
+<%--  form.addEventListener('submit', (event) => {--%>
+<%--    event.preventDefault(); // 阻止表单提交--%>
+<%--    const file = input.files[0];--%>
+<%--    if (file) {--%>
+<%--      const formData = new FormData();--%>
+<%--      formData.append('image', file);--%>
+<%--      fetch('/Userservlet', {--%>
+<%--        method: 'GET',--%>
+<%--        body: formData,--%>
+<%--        headers: {--%>
+<%--          'Content-Type': 'multipart/form-data' // 设置请求头中的content type--%>
+<%--        }--%>
+<%--      }).then(response => {--%>
+<%--        return response.text();--%>
+<%--      }).then(result => {--%>
+<%--        const resultEl = document.getElementById('result');--%>
+<%--        resultEl.innerText = '上传成功，文件ID：' + result;--%>
+<%--      }).catch(error => {--%>
+<%--        console.error(error);--%>
+<%--      });--%>
+<%--    }--%>
+<%--  });--%>
+<%--</script>--%>
 <script>
-  const form = document.querySelector('#upload-form');
-  const input = document.querySelector('#fileInput');
-  form.addEventListener('submit', (event) => {
-    event.preventDefault(); // 阻止表单提交
-    const file = input.files[0];
-    if (file) {
-      const formData = new FormData();
-      formData.append('image', file);
-      fetch('/upload', {
-        method: 'GET',
-        body: formData
-        headers: {
-          'Content-Type': 'multipart/form-data' // 设置请求头中的content type
-        }
-      }).then(response => {
-        // 处理上传结果
-      });
-    }
+  const form = document.getElementById('upload-form');
+  const submitBtn = document.getElementById('submitBtn');
+  submitBtn.addEventListener('click', () => {
+    form.submit();
   });
 </script>
 <div id="content-outer">
@@ -121,10 +147,10 @@
             <div class="author-info__phone">${userSession.phone}</div>
             <div class="author-info__sex">${userSession.sex}</div>
             <div class="author-info__description">${userSession.signature}</div>
-            <form action="Userservlet" method="get" id="upload-form" enctype="multipart/form-data">
+            <form action="Userservlet" method="post" id="upload-form" enctype="multipart/form-data">
               <input type="hidden" name="method" value="change-user-img">
-              <input type="file" id="fileInput">
-              <button type="submit">上传</button>
+              <input type="file" id="fileInput" name="image" accept="image/png,image/jpg,image/jpeg,image/bmp"/>
+              <button type="submit" id="submitBtn">上传</button>
             </form>
           </div>
         </div>
@@ -133,7 +159,7 @@
     <article id="page">
       <div class="article-container">
         <h2>我的订单</h2>
-        <form action="user" method="get">
+        <form action="user" method="post">
           <input type="hidden" name="method" value="orderlist">
           <c:forEach items="${orderlist}" var="order" varStatus="status">
             ${order.s_name}

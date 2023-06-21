@@ -13,6 +13,7 @@
     <meta charset="UTF-8">
     <title>美了么外卖送餐平台</title>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/layui/css/layui.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/jquery-3.5.1/jquery-3.5.1.min.js"/>
     <script src="${pageContext.request.contextPath}/layui/layui.js"></script>
     <style>
         .nav{

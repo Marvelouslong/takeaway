@@ -1,8 +1,6 @@
 package controller.user;
 
-import org.apache.commons.fileupload.FileItem;
-import org.apache.commons.fileupload.disk.DiskFileItemFactory;
-import org.apache.commons.fileupload.servlet.ServletFileUpload;
+import org.apache.commons.fileupload.FileUploadException;
 import pojo.store;
 import pojo.talk;
 import service.impl.userserviceimpl;
@@ -17,16 +15,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.OutputStream;
-import java.sql.PreparedStatement;
+import java.io.*;
 import java.util.List;
 @WebServlet("/Userservlet")
-@MultipartConfig(location="D:/tmp", maxFileSize=1024, fileSizeThreshold=1024)
+@MultipartConfig
 public class user extends HttpServlet {
-    private static final long serialVersionUID = 1L;
-
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String method = req.getParameter("method");
@@ -47,9 +40,14 @@ public class user extends HttpServlet {
         } else if (method != null && method.equals("img1")) {
             String id = req.getParameter("id");
             this.img1(req, resp, id);
-        } else if (method != null && method.equals("change-user-img")) {
-            this.change_user_img(req, resp);
         }
+//        else if (method != null && method.equals("change-user-img")) {
+//            try {
+//                this.change_user_img(req, resp);
+//            } catch (FileUploadException e) {
+//                throw new RuntimeException(e);
+//            }
+//        }
 //        else if (method != null && method.equals("view")) {
 //            this.getUserById(req, resp, "userview.jsp");
 //        } else if (method != null && method.equals("modify")) {
@@ -61,14 +59,18 @@ public class user extends HttpServlet {
 //        } else if (method != null && method.equals("savepwd")) {
 //            this.updatePwd(req, resp);
 //        }
-        //实现复用~~~~~~
-        // 想添加新的增删改查，直接用if(method != "savepwd" && method != null);
-
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        super.doPost(req, resp);
+        String method = req.getParameter("method");
+        if (method != null && method.equals("change-user-img")) {
+            try {
+                this.change_user_img(req, resp);
+            } catch (FileUploadException e) {
+                throw new RuntimeException(e);
+            }
+        }
     }
 
     private void query(HttpServletRequest req, HttpServletResponse resp, String query, String pageIndex) throws IOException, ServletException {
@@ -154,31 +156,30 @@ public class user extends HttpServlet {
         out.close();  //关闭输出
     }
 
-    private void change_user_img(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        boolean isMultipart = ServletFileUpload.isMultipartContent(req);
-        if (isMultipart) {
-            DiskFileItemFactory factory = new DiskFileItemFactory();
-            ServletFileUpload upload = new ServletFileUpload(factory);
-            try {
-                List<FileItem> items = upload.parseRequest(req);
-                for (FileItem item : items) {
-                    if (!item.isFormField() && item.getName() != null && !item.getName().equals("")) {
-                        // 获取上传的文件的字节数组
-                        byte[] fileContent = item.get();
-                        // 将文件保存到数据库中
-                        Object attribute = req.getSession().getAttribute(Constants.USER_SESSION);
-                        int id = ((pojo.user) attribute).getId();
-                        int count = 0;
-                        // 插入图片数据到数据库中
-                        userservice userService = new userserviceimpl();
-                        count = userService.saveUserImage(id, fileContent);
-                        req.setAttribute("message", "上传成功");
-                    }
-                }
-            } catch (Exception e) {
-                req.setAttribute("message", "上传失败：");
-            }
+    private void change_user_img(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException, FileUploadException {
+        Part filePart = req.getPart("image"); // 通过 name 获取上传的文件
+        InputStream inputStream = filePart.getInputStream(); // 获取文件输入流
+        ByteArrayOutputStream output = new ByteArrayOutputStream();
+        byte[] buffer = new byte[4096];
+        int n = 0;
+        while (-1 != (n = inputStream.read(buffer))) {
+            output.write(buffer, 0, n);
         }
+        byte[] bytes = output.toByteArray();
+        output.flush();
+        output.close();
+        inputStream.close();
+        byte[] picture = bytes;
+
+        // 将文件保存到数据库中
+        Object attribute = req.getSession().getAttribute(Constants.USER_SESSION);
+        int id = ((pojo.user) attribute).getId();
+        int count = 0;
+        // 插入图片数据到数据库中
+        userservice userService = new userserviceimpl();
+        count = userService.saveUserImage(id, bytes);
+        if(count!=0)
+        req.setAttribute("message", "上传成功");
         req.getRequestDispatcher("/jsp/user/myinformation.jsp").forward(req, resp);
     }
 }

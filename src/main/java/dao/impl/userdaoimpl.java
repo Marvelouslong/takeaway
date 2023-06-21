@@ -159,8 +159,12 @@ public class userdaoimpl implements userdao {
         String sql = "update user set picture = ? where id = ?";
         int count=0;
         try{
-            Object[] params={imgdata,id};
-            count=BaseDao.execute(connection,pstm,sql,params);
+            Blob blob = (Blob) connection.createBlob();
+            blob.setBytes(1, imgdata);
+            pstm = connection.prepareStatement(sql);
+            pstm.setBlob(1,blob);
+            pstm.setInt(2, id);
+            count = pstm.executeUpdate();
         }catch(Exception e){
             e.printStackTrace();
         }finally{
