@@ -38,4 +38,18 @@
     <servlet-name>userloginServlet</servlet-name>
     <url-pattern>/loginuser.do</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <servlet-name>user</servlet-name>
+    <servlet-class>controller.user.user</servlet-class>
+    <multipart-config>
+      <location>/tmp</location>
+      <max-file-size>1024</max-file-size>
+      <max-request-size>1024</max-request-size>
+      <file-size-threshold>0</file-size-threshold>
+    </multipart-config>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>user</servlet-name>
+    <url-pattern>/jsp/user/Userservlet</url-pattern>
+  </servlet-mapping>
 </web-app>

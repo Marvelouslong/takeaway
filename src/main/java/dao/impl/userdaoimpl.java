@@ -118,7 +118,6 @@ public class userdaoimpl implements userdao {
         String sql = "select shop_picture from store where id = ? ";
         byte[] picture = null;
         try{
-            connection = BaseDao.getConnection();
             Object[] params={id};
             rs=BaseDao.execute(connection,pstm,rs,sql,params);
             if(rs.next()){
@@ -131,5 +130,42 @@ public class userdaoimpl implements userdao {
         }
 
         return picture;
+    }
+
+    @Override
+    public byte[] img1(Connection connection, int id) {
+        PreparedStatement pstm = null;
+        ResultSet rs = null;
+        String sql = "select picture from user where id = ? ";
+        byte[] picture = null;
+        try{
+            Object[] params={id};
+            rs=BaseDao.execute(connection,pstm,rs,sql,params);
+            if(rs.next()){
+                picture = rs.getBytes(1);
+            }
+        }catch(Exception e){
+            e.printStackTrace();
+        }finally{
+            BaseDao.closeResource(null, pstm, rs);
+        }
+
+        return picture;
+    }
+
+    @Override
+    public int saveUserImage(Connection connection, int id, byte[] imgdata) {
+        PreparedStatement pstm = null;
+        String sql = "update user set picture = ? where id = ?";
+        int count=0;
+        try{
+            Object[] params={imgdata,id};
+            count=BaseDao.execute(connection,pstm,sql,params);
+        }catch(Exception e){
+            e.printStackTrace();
+        }finally{
+            BaseDao.closeResource(null, pstm, null);
+        }
+        return count;
     }
 }

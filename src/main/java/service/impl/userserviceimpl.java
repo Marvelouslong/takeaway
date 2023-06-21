@@ -80,4 +80,34 @@ public class userserviceimpl implements userservice {
         }
         return picture;
     }
+
+    @Override
+    public byte[] img1(int id) {
+        Connection connection = null;
+        byte[] picture=null;
+        try {
+            connection = BaseDao.getConnection();
+            picture=Userdao.img1(connection,id);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }finally{
+            BaseDao.closeResource(connection, null, null);
+        }
+        return picture;
+    }
+
+    @Override
+    public int saveUserImage(int id, byte[] imgdata) {
+        Connection connection = null;
+        int count=0;
+        try {
+            connection = BaseDao.getConnection();
+            count=Userdao.saveUserImage(connection,id,imgdata);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }finally{
+            BaseDao.closeResource(connection, null, null);
+        }
+        return count;
+    }
 }

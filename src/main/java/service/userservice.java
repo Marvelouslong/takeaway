@@ -10,4 +10,6 @@ public interface userservice {
     public int getstoreCount(String query);
     public List<talk> gettalklist();
     public byte[] img(int id);
+    public byte[] img1(int id);
+    public int saveUserImage(int id,byte[]imgdata);
 }

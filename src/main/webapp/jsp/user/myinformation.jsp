@@ -84,27 +84,48 @@
     max-width: 100%;
     transition: all .2s;
   }
-  .avatar-img {
-    animation: avatar_turn_around 2s linear infinite;
-  }
   #aside_content .card-info .author-info__name {
     font-weight: 500;
     font-size: 1.1rem;
   }
 </style>
+<script>
+  const form = document.querySelector('#upload-form');
+  const input = document.querySelector('#fileInput');
+  form.addEventListener('submit', (event) => {
+    event.preventDefault(); // 阻止表单提交
+    const file = input.files[0];
+    if (file) {
+      const formData = new FormData();
+      formData.append('image', file);
+      fetch('/upload', {
+        method: 'GET',
+        body: formData
+        headers: {
+          'Content-Type': 'multipart/form-data' // 设置请求头中的content type
+        }
+      }).then(response => {
+        // 处理上传结果
+      });
+    }
+  });
+</script>
 <div id="content-outer">
   <div class="layout_page" id="content-inner">
     <div class="aside_content" id="aside_content">
       <div class="card-widget card-info">
         <div class="card-content">
           <div class="card-info-avatar is-center">
-            <img class="avatar-img"
-                 src="${pageContext.request.contextPath}/img/凯尔西.jpg"
-                 alt="头像">
+            <img class="avatar-img" src="Userservlet?id=${userSession.id}&method=img1" style="animation: avatar_turn_around 2s linear infinite;" alt="头像">
             <div class="author-info__name">${userSession.name}</div>
             <div class="author-info__phone">${userSession.phone}</div>
             <div class="author-info__sex">${userSession.sex}</div>
             <div class="author-info__description">${userSession.signature}</div>
+            <form action="Userservlet" method="get" id="upload-form" enctype="multipart/form-data">
+              <input type="hidden" name="method" value="change-user-img">
+              <input type="file" id="fileInput">
+              <button type="submit">上传</button>
+            </form>
           </div>
         </div>
       </div>

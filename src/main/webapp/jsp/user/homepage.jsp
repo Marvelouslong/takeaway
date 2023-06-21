@@ -227,8 +227,17 @@
         <div class="stores">
             <c:forEach items="${storelist}" var="store" varStatus="status">
                 <div class="store">
-                    <img src="Userservlet?id=${store.id}&method=img">
-                    ${store.shop_name}
+                    <img src="Userservlet?id=${store.id}&method=img"
+                         style="animation: avatar_turn_around 2s linear infinite;
+                         display: inline-block;
+                         padding: 5px;
+                         width: 120px;
+                         height: 120px;
+                         border-radius: 70px;
+                         vertical-align: top;
+                         transition: all .3s;"
+                         alt="img">
+                    ${store.shop_name}<br>
                     ${store.address}
                 </div>
                 <c:if test="${status.index % 2 == 1 or status.last}">
