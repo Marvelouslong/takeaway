@@ -112,18 +112,15 @@ public class userdaoimpl implements userdao {
     }
 
     @Override
-    public byte[] img(Connection connection,int id,String type,String table) {
+    public byte[] img(Connection connection,int id) {
         PreparedStatement pstm = null;
         ResultSet rs = null;
-        String sql = "select ? from ? where id = ? ";
+        String sql = "select shop_picture from store where id = ? ";
         byte[] picture = null;
         try{
             connection = BaseDao.getConnection();
-            pstm = connection.prepareStatement(sql);
-            pstm.setString(1, type);
-            pstm.setString(2, table);
-            pstm.setInt(3, id);
-            rs = pstm.executeQuery();
+            Object[] params={id};
+            rs=BaseDao.execute(connection,pstm,rs,sql,params);
             if(rs.next()){
                 picture = rs.getBytes(1);
             }
