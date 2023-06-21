@@ -1,3 +1,5 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <%--
   Created by IntelliJ IDEA.
   User: y1577
@@ -84,10 +86,10 @@
 <body>
     <div class="where">
         <ul>
-          <li><img  src="../../img/导航栏.png"></li>
-            <li><a href="#"> 首页 </a></li>
-            <li><a href="#"> 订单 </a></li>
-            <li><a href="#"> 我的信息 </a></li>
+          <li><img  src="<c:url value="/img/导航栏.png"/>"></li>
+            <li><a href="<c:url value="DISHES"/>"> 首页 </a></li>
+            <li><a href="<c:url value="/jsp/store/store_order.jsp"/>"> 订单 </a></li>
+            <li><a href="<c:url value="/jsp/store/store.jsp"/>"> 我的信息 </a></li>
         </ul>
     </div>
     <div class="welcome">欢迎您的登录</div>
