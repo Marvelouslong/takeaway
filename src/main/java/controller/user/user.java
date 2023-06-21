@@ -12,7 +12,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.List;
 @WebServlet("/Userservlet")
@@ -31,10 +33,10 @@ public class user extends HttpServlet {
             this.query(req, resp,query,pageIndex);
         }else if (method != null && method.equals("myinformation")) {
             this.myinformation(req, resp);
+        }else if (method != null && method.equals("img")) {
+            this.img(req, resp);
         }
-//        else if (method != null && method.equals("ucexist")) {
-//            this.userCodeExist(req, resp);
-//        } else if (method != null && method.equals("deluser")) {
+//        else if (method != null && method.equals("deluser")) {
 //            this.delUser(req, resp);
 //        } else if (method != null && method.equals("view")) {
 //            this.getUserById(req, resp, "userview.jsp");
@@ -113,5 +115,18 @@ public class user extends HttpServlet {
     }
     private void myinformation(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         req.getRequestDispatcher("/jsp/user/myinformation.jsp").forward(req, resp);
+    }
+    private void img(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        String type= req.getParameter("type");
+        String id = req.getParameter("id");
+        String table = req.getParameter("table");
+        int id1= Integer.parseInt(id);
+        userservice userservice = new userserviceimpl();
+        byte[] picturebrand_authorization = userservice.img(id1,type,table); //获得bookPicture
+        resp.setContentType("image/jpg");  //设置图片格式
+        OutputStream out = resp.getOutputStream(); //打开输出流
+        out.write(picturebrand_authorization);  //输出图片
+        out.flush();	//输出
+        out.close();  //关闭输出
     }
 }

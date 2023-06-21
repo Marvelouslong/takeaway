@@ -74,12 +74,13 @@ public class userdaoimpl implements userdao {
                 pstm.setObject(4,params[2]);
             }
             rs=pstm.executeQuery();
+
             while(rs.next()){
                 store _store = new store();
-//                _store.setId(rs.getInt("id"));
+                _store.setId(rs.getInt("id"));
                 _store.setAddress(rs.getString("address"));
                 _store.setShop_name(rs.getString("shop_name"));
-                _store.setShop_picture((Blob) rs.getBlob("Shop_picture"));
+                _store.setShop_picture(rs.getBytes("shop_picture"));
                 storeList.add(_store);
             }
             BaseDao.closeResource(null, pstm, rs);
@@ -101,12 +102,37 @@ public class userdaoimpl implements userdao {
                 _user.setName(rs.getString("name"));
                 talk _talk = new talk();
                 _talk.setContext(rs.getString("context"));
-                _talk.setPicture((Blob) rs.getBlob("picture"));
+                _talk.setPicture(rs.getBytes("picture"));
                 _talk.set_u(_user);
                 talkList.add(_talk);
             }
             BaseDao.closeResource(null, pstm, rs);
         }
         return talkList;
+    }
+
+    @Override
+    public byte[] img(Connection connection,int id,String type,String table) {
+        PreparedStatement pstm = null;
+        ResultSet rs = null;
+        String sql = "select ? from ? where id = ? ";
+        byte[] picture = null;
+        try{
+            connection = BaseDao.getConnection();
+            pstm = connection.prepareStatement(sql);
+            pstm.setString(1, type);
+            pstm.setString(2, table);
+            pstm.setInt(3, id);
+            rs = pstm.executeQuery();
+            if(rs.next()){
+                picture = rs.getBytes(1);
+            }
+        }catch(Exception e){
+            e.printStackTrace();
+        }finally{
+            BaseDao.closeResource(null, pstm, rs);
+        }
+
+        return picture;
     }
 }

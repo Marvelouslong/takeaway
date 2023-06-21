@@ -11,4 +11,5 @@ public interface userdao {
 
     public List<store> getstorelist(Connection connection, String query, int currentPageNo, int pageSize)throws Exception;
     public List<talk> getstorelist(Connection connection)throws Exception;
+    public byte[] img(Connection connection,int id,String type,String table);
 }

@@ -65,4 +65,19 @@ public class userserviceimpl implements userservice {
         }
         return talklist;
     }
+
+    @Override
+    public byte[] img(int id,String type,String table) {
+        Connection connection = null;
+        byte[] picture=null;
+        try {
+            connection = BaseDao.getConnection();
+            picture=Userdao.img(connection,id,type,table);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }finally{
+            BaseDao.closeResource(connection, null, null);
+        }
+        return picture;
+    }
 }
