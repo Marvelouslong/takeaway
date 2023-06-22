@@ -1,9 +1,7 @@
 package controller.user;
 
 import org.apache.commons.fileupload.FileUploadException;
-import pojo.order_dishes;
-import pojo.store;
-import pojo.talk;
+import pojo.*;
 import service.impl.userserviceimpl;
 import service.userservice;
 import util.Constants;
@@ -41,14 +39,14 @@ public class user extends HttpServlet {
         } else if (method != null && method.equals("img1")) {
             String id = req.getParameter("id");
             this.img1(req, resp, id);
+        }else if (method != null && method.equals("showdishes")) {
+            String id = req.getParameter("id");
+            int id1= Integer.parseInt(id);
+            this.showdishes(req, resp,id1);
+        }else if (method != null && method.equals("img2")) {
+            String id = req.getParameter("id");
+            this.img2(req, resp, id);
         }
-//        else if (method != null && method.equals("change-user-img")) {
-//            try {
-//                this.change_user_img(req, resp);
-//            } catch (FileUploadException e) {
-//                throw new RuntimeException(e);
-//            }
-//        }
 //        else if (method != null && method.equals("view")) {
 //            this.getUserById(req, resp, "userview.jsp");
 //        } else if (method != null && method.equals("modify")) {
@@ -135,7 +133,7 @@ public class user extends HttpServlet {
         Object attribute = req.getSession().getAttribute(Constants.USER_SESSION);
         int id = ((pojo.user) attribute).getId();
         userservice userservice = new userserviceimpl();
-        List<order_dishes> orderlist = null;
+        List<order> orderlist = null;
         orderlist = userservice.getorderlist(id);
         req.setAttribute("orderlist", orderlist);
         req.getRequestDispatcher("/jsp/user/myinformation.jsp").forward(req, resp);
@@ -144,10 +142,10 @@ public class user extends HttpServlet {
     private void img(HttpServletRequest req, HttpServletResponse resp, String id) throws IOException {
         int id1 = Integer.parseInt(id);
         userservice userservice = new userserviceimpl();
-        byte[] picturebrand_authorization = userservice.img(id1);
+        byte[] picture = userservice.img(id1);
         resp.setContentType("image/jpeg");  //设置图片格式
         OutputStream out = resp.getOutputStream(); //打开输出流
-        out.write(picturebrand_authorization);  //输出图片
+        out.write(picture);  //输出图片
         out.flush();    //输出
         out.close();  //关闭输出
     }
@@ -155,10 +153,10 @@ public class user extends HttpServlet {
     private void img1(HttpServletRequest req, HttpServletResponse resp, String id) throws ServletException, IOException {
         int id1 = Integer.parseInt(id);
         userservice userservice = new userserviceimpl();
-        byte[] picturebrand_authorization = userservice.img1(id1);
+        byte[] picture = userservice.img1(id1);
         resp.setContentType("image/jpeg");  //设置图片格式
         OutputStream out = resp.getOutputStream(); //打开输出流
-        out.write(picturebrand_authorization);  //输出图片
+        out.write(picture);  //输出图片
         out.flush();    //输出
         out.close();  //关闭输出
     }
@@ -189,5 +187,22 @@ public class user extends HttpServlet {
             req.setAttribute("message", "上传成功");
         }
         req.getRequestDispatcher("/jsp/user/myinformation.jsp").forward(req, resp);
+    }
+    private void showdishes(HttpServletRequest req, HttpServletResponse resp,int id) throws ServletException, IOException {
+        userservice userservice = new userserviceimpl();
+        List<dishes> dishlist = null;
+        dishlist = userservice.showdish(id);
+        req.setAttribute("dishlist", dishlist);
+        req.getRequestDispatcher("/jsp/user/myinformation.jsp").forward(req, resp);
+    }
+    private void img2(HttpServletRequest req, HttpServletResponse resp, String id) throws ServletException, IOException {
+        int id1 = Integer.parseInt(id);
+        userservice userservice = new userserviceimpl();
+        byte[] picture = userservice.img2(id1);
+        resp.setContentType("image/jpeg");  //设置图片格式
+        OutputStream out = resp.getOutputStream(); //打开输出流
+        out.write(picture);  //输出图片
+        out.flush();    //输出
+        out.close();  //关闭输出
     }
 }

@@ -1,8 +1,6 @@
 package dao;
 
-import pojo.order_dishes;
-import pojo.store;
-import pojo.talk;
+import pojo.*;
 
 import java.sql.Connection;
 import java.util.List;
@@ -15,5 +13,7 @@ public interface userdao {
     public byte[] img(Connection connection,int id);
     public byte[] img1(Connection connection,int id);
     public int saveUserImage(Connection connection,int id,byte[]imgdata);
-    public List<order_dishes> getorderlist(Connection connection,int id)throws Exception;
+    public List<order> getorderlist(Connection connection, int id)throws Exception;
+    public List<dishes> showdish(Connection connection, int id)throws Exception;
+    public byte[] img2(Connection connection,int id);
 }

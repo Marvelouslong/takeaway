@@ -1,9 +1,6 @@
 package service;
 
-import pojo.order;
-import pojo.order_dishes;
-import pojo.store;
-import pojo.talk;
+import pojo.*;
 
 import java.util.List;
 
@@ -14,5 +11,7 @@ public interface userservice {
     public byte[] img(int id);
     public byte[] img1(int id);
     public int saveUserImage(int id,byte[]imgdata);
-    public List<order_dishes> getorderlist(int id);
+    public List<order> getorderlist(int id);
+    public List<dishes> showdish(int id);
+    public byte[] img2(int id);
 }

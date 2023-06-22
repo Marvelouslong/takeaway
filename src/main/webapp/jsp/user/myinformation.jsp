@@ -88,19 +88,6 @@
     font-weight: 500;
     font-size: 1.1rem;
   }
-     /* 弹窗的样式，可自行调整样式 */
-   .popup {
-     position: fixed;
-     top: 50%;
-     left: 50%;
-     transform: translate(-50%, -50%);
-     padding: 20px;
-     background-color: #fff;
-     border: 2px solid #000;
-     border-radius: 10px;
-     box-shadow: 0px 0px 10px #000;
-     z-index: 9999;
-   }
 </style>
 <script>
   const form = document.getElementById('upload-form');
@@ -108,17 +95,6 @@
   submitBtn.addEventListener('click', () => {
     form.submit();
   });
-    // 点击按钮触发弹窗
-    function popupFunction() {
-    // 显示弹窗
-    document.getElementById("popup").style.display = "block";
-  }
-
-    // 点击弹窗上的关闭按钮触发关闭弹窗
-    function closePopup() {
-    // 隐藏弹窗
-    document.getElementById("popup").style.display = "none";
-  }
 </script>
 <div id="content-outer">
   <div class="layout_page" id="content-inner">
@@ -146,7 +122,7 @@
         <table>
           <c:forEach items="${orderlist}" var="order" varStatus="status">
             <tr>
-            <td> <img src="Userservlet?id=${order._o._s.id}&method=img"
+            <td> <img src="Userservlet?id=${order._s.id}&method=img"
                       style="animation: avatar_turn_around 2s linear infinite;
                          display: inline-block;
                          padding: 5px;
@@ -156,16 +132,17 @@
                          vertical-align: top;
                          transition: all .3s;"
                       alt="img"></td>
-            <td>骑手：${order._o._r.phone}<br>商家：${order._o._s.con_telephone}</td>
-            <td>订单状态：${order._o.status}<br>订单时间：${order._o.order_time}<br>订单金额：${order._o.money}</td>
+            <td style="padding-left: 40px;padding-top: 20px">骑手：${order._r.phone != 0 ? order._r.phone : '暂无人接单'}<br>商家：${order._s.con_telephone}</td>
+            <td style="padding-left: 40px;padding-top: 20px">订单状态：${order.status}<br>订单时间：${order.order_time}<br>订单金额：${order.money}</td>
+            <td style="padding-left: 40px;padding-top: 20px"><a class="vieworder" href="Userservlet?method=showdishes&id=${order.id}">查看详情</a></td>
+            <td style="padding-left: 20px;padding-top: 20px"><a class="vieworder" href="#">添加评论</a></td>
+            <td style="padding-left: 20px;padding-top: 20px"><a class="vieworder" href="#">再来一单</a></td>
             </tr>
-            <button onclick="popupFunction()">查看详情</button>
-            <div id="popup" class="popup" style="display: none;">
-              <h2>${order._o._s.shop_name}</h2>
-              <table>
-                <tr>
-                  <td> <img src="Userservlet?id=${order._o._s.id}&method=img"
-                            style="animation: avatar_turn_around 2s linear infinite;
+          </c:forEach>
+          <c:forEach items="${dishlist}" var="dish" varStatus="status">
+            <tr>
+              <td> <img src="Userservlet?id=${dish.id}&method=img2"
+                        style="animation: avatar_turn_around 2s linear infinite;
                          display: inline-block;
                          padding: 5px;
                          width: 50px;
@@ -173,42 +150,14 @@
                          border-radius: 70px;
                          vertical-align: top;
                          transition: all .3s;"
-                            alt="img"></td>
-                  <td>骑手：${order._o._r.phone}<br>商家：${order._s.con_telephone}</td>
-                  <td>订单状态：${order._o.status}<br>订单时间：${order._o.order_time}<br>订单金额：${order.money}</td>
-                </tr>
-                <tr><td>
-                  <c:forEach var="dish" items="${order._d}">
-                    <c:out value="${dish.name}" />
-                    <img src="Userservlet?id=${dish.id}&method=img"
-                         style="animation: avatar_turn_around 2s linear infinite;
-                         display: inline-block;
-                         padding: 5px;
-                         width: 120px;
-                         height: 120px;
-                         border-radius: 70px;
-                         vertical-align: top;
-                         transition: all .3s;"
-                         alt="img">
-                    <c:out value=", " escapeXml="false" />
-                  </c:forEach>
-                  </td>
-                  <td>接收人姓名：${order._re.name}<br>接收人电话：${order._re.phone}</td>
-                  <td>接收人地址：${order._re.address}</td>
-                </tr>
-                <tr><a class="vieworder" href="#">删除订单</a></tr>
-                <tr><a class="vieworder" href="#">修改订单信息</a></tr>
-                <tr><a class="vieworder" href="#">添加评论</a></tr>
-                <tr><a class="vieworder" href="#">再来一单</a></tr>
-              </table>
-              <button onclick="closePopup()">关闭</button>
-            </div>
-            <hr>
+                        alt="img"></td>
+              <td style="padding-left: 40px;padding-top: 20px">菜名：${dish.name}<br>价钱：${dish.price}</td>
+            </tr>
           </c:forEach>
         </table>
-      </div>
-    </article>
+       </div>
+      </article>
+    </div>
   </div>
-</div>
 </body>
 </html>

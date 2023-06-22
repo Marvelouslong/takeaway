@@ -172,20 +172,25 @@ public class userdaoimpl implements userdao {
     }
 
     @Override
-    public List<order_dishes> getorderlist(Connection connection,int id) throws Exception {
+    public List<order> getorderlist(Connection connection,int id) throws Exception {
         PreparedStatement pstm = null;
         ResultSet rs = null;
-        List<order_dishes> orderlist = new ArrayList<order_dishes>();
+        List<order> orderlist = new ArrayList<order>();
         if(connection != null){
-            String sql = "select o.status,o.money,o.order_time,s.id sid,s.con_telephone,s.shop_name,r.phone rphone,d.name dname,d.id did,re.name `rename`,re.phone rephone,re.address " +
-                    "from `order` o,dishes d,store s,user u,rider r,receiver re,`order-dishes` od " +
-                    "where o.u_id=u.id and o.s_id=s.id and o.r_id=r.id and o.re_id=re.id and d.id=od.d_id and o.id=od.o_id and u.id=? and re.u_id=u.id " +
-                    "order by o.id DESC";
+            String sql = "select o.id oid,o.status,o.money,o.order_time,s.id sid,s.con_telephone,s.shop_name,r.phone rphone,re.name `rename`,re.phone rephone,re.address " +
+                    "from `order` o " +
+                    "JOIN user u ON o.u_id = u.id " +
+                    "JOIN store s ON o.s_id = s.id " +
+                    "JOIN receiver re ON o.re_id = re.id " +
+                    "LEFT OUTER JOIN rider r ON o.r_id = r.id " +
+                    "where u.id=? " +
+                    "order by oid DESC";
             pstm = connection.prepareStatement(sql);
             pstm.setInt(1,id);
             rs=pstm.executeQuery();
             while(rs.next()){
                 order _order=new order();
+                _order.setId(rs.getInt("oid"));
                 _order.setStatus(rs.getString("status"));
                 _order.setMoney(rs.getDouble("money"));
                 _order.setOrder_time(rs.getDate("order_time"));
@@ -195,23 +200,65 @@ public class userdaoimpl implements userdao {
                 _store.setShop_name(rs.getString("shop_name"));
                 _order.set_s(_store);
                 rider _rider=new rider();
-                _rider.setPhone(rs.getLong("rphone"));
+                long rphone = rs.getLong("rphone");
+                if (rs.wasNull()) {
+                    rphone=0;
+                    _rider.setPhone(rphone);
+                } else {
+                    _rider.setPhone(rs.getLong("rphone"));
+                }
                 _order.set_r(_rider);
-                dishes _dishes=new dishes();
-                _dishes.setName("dname");
-                _dishes.setId(rs.getInt("did"));
                 receiver _receiver=new receiver();
                 _receiver.setName(rs.getString("rename"));
                 _receiver.setPhone(rs.getLong("rephone"));
                 _receiver.setAddress(rs.getString("address"));
                 _order.set_re(_receiver);
-                order_dishes _od=new order_dishes();
-                _od.set_d(_dishes);
-                _od.set_o(_order);
-                orderlist.add(_od);
+                orderlist.add(_order);
             }
             BaseDao.closeResource(null, pstm, rs);
         }
         return orderlist;
+    }
+
+    @Override
+    public List<dishes> showdish(Connection connection, int id) throws Exception {
+        PreparedStatement pstm = null;
+        ResultSet rs = null;
+        List<dishes> dishesList = new ArrayList<dishes>();
+        if(connection != null){
+            String sql = "select d.id,d.name,d.price from `order-dishes` od,dishes d where od.d_id=d.id and od.o_id=? order by d.id";
+            pstm.setInt(1,id);
+            pstm = connection.prepareStatement(sql);
+            rs=pstm.executeQuery();
+            while(rs.next()){
+                dishes _d=new dishes();
+                _d.setName(rs.getString("name"));
+                _d.setId(rs.getInt("id"));
+                _d.setPrice(rs.getDouble("price"));
+                dishesList.add(_d);
+            }
+            BaseDao.closeResource(null, pstm, rs);
+        }
+        return dishesList;
+    }
+    @Override
+    public byte[] img2(Connection connection, int id) {
+        PreparedStatement pstm = null;
+        ResultSet rs = null;
+        String sql = "select picture from dishes where id = ? ";
+        byte[] picture = null;
+        try{
+            Object[] params={id};
+            rs=BaseDao.execute(connection,pstm,rs,sql,params);
+            if(rs.next()){
+                picture = rs.getBytes(1);
+            }
+        }catch(Exception e){
+            e.printStackTrace();
+        }finally{
+            BaseDao.closeResource(null, pstm, rs);
+        }
+
+        return picture;
     }
 }
