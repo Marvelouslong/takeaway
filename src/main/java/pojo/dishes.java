@@ -1,7 +1,5 @@
 package pojo;
 
-import com.mysql.cj.jdbc.Blob;
-
 import java.util.Arrays;
 
 public class dishes {
@@ -15,7 +13,7 @@ public class dishes {
     private String category;
     private store _s;
 
-    public dishes(Integer id, String name, String describe, String status, Double price, String category) {
+    public dishes() {
         this.id=id;
         this.name=name;
         this.describe=describe;

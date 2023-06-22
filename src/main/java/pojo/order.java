@@ -1,18 +1,20 @@
 package pojo;
 
+import java.sql.Date;
 import java.sql.Timestamp;
 
 public class order {
     private int id;
-    private  String status;
+    private String status;
     private String payway;
     private String notes;
-    private Timestamp checkout_time;
-    private Timestamp order_time;
+    private Date checkout_time;
+    private Date order_time;
     private double money;
-    private receiver _re;
+    private user _u;
     private rider _r;
     private store _s;
+    private receiver _re;
 
     public int getId() {
         return id;
@@ -46,19 +48,19 @@ public class order {
         this.notes = notes;
     }
 
-    public Timestamp getCheckout_time() {
+    public Date getCheckout_time() {
         return checkout_time;
     }
 
-    public void setCheckout_time(Timestamp checkout_time) {
+    public void setCheckout_time(Date checkout_time) {
         this.checkout_time = checkout_time;
     }
 
-    public Timestamp getOrder_time() {
+    public Date getOrder_time() {
         return order_time;
     }
 
-    public void setOrder_time(Timestamp order_time) {
+    public void setOrder_time(Date order_time) {
         this.order_time = order_time;
     }
 
@@ -76,6 +78,14 @@ public class order {
 
     public void set_re(receiver _re) {
         this._re = _re;
+    }
+
+    public user get_u() {
+        return _u;
+    }
+
+    public void set_u(user _u) {
+        this._u = _u;
     }
 
     public rider get_r() {
@@ -104,9 +114,10 @@ public class order {
                 ", checkout_time=" + checkout_time +
                 ", order_time=" + order_time +
                 ", money=" + money +
-                ", _re=" + _re +
+                ", _u=" + _u +
                 ", _r=" + _r +
                 ", _s=" + _s +
+                ", _re=" + _re +
                 '}';
     }
 }

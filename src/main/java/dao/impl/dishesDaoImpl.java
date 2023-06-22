@@ -30,7 +30,7 @@ public class dishesDaoImpl implements dishesDao {
                 String status = rs.getString(5);
                 Double price= rs.getDouble(6);
                 String category = rs.getString(7);
-                list.add(new dishes(id,name, describe, status, price, category));
+                list.add(new dishes());
             }
         } catch (SQLException throwables) {
             throwables.printStackTrace();

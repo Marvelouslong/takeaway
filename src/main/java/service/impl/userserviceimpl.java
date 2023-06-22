@@ -3,6 +3,7 @@ package service.impl;
 import dao.BaseDao;
 import dao.impl.userdaoimpl;
 import dao.userdao;
+import pojo.order_dishes;
 import pojo.store;
 import pojo.talk;
 import service.userservice;
@@ -56,7 +57,7 @@ public class userserviceimpl implements userservice {
         List<talk> talklist = null;
         try {
             connection = BaseDao.getConnection();
-            talklist = Userdao.getstorelist(connection);
+            talklist = Userdao.gettalklist(connection);
         } catch (Exception e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
@@ -109,5 +110,22 @@ public class userserviceimpl implements userservice {
             BaseDao.closeResource(connection, null, null);
         }
         return count;
+    }
+
+    @Override
+    public List<order_dishes> getorderlist(int id) {
+        // TODO Auto-generated method stub
+        Connection connection = null;
+        List<order_dishes> orderlist = null;
+        try {
+            connection = BaseDao.getConnection();
+            orderlist = Userdao.getorderlist(connection,id);
+        } catch (Exception e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }finally{
+            BaseDao.closeResource(connection, null, null);
+        }
+        return orderlist;
     }
 }

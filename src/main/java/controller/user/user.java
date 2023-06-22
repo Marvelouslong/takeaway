@@ -1,6 +1,7 @@
 package controller.user;
 
 import org.apache.commons.fileupload.FileUploadException;
+import pojo.order_dishes;
 import pojo.store;
 import pojo.talk;
 import service.impl.userserviceimpl;
@@ -131,6 +132,12 @@ public class user extends HttpServlet {
     }
 
     private void myinformation(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        Object attribute = req.getSession().getAttribute(Constants.USER_SESSION);
+        int id = ((pojo.user) attribute).getId();
+        userservice userservice = new userserviceimpl();
+        List<order_dishes> orderlist = null;
+        orderlist = userservice.getorderlist(id);
+        req.setAttribute("orderlist", orderlist);
         req.getRequestDispatcher("/jsp/user/myinformation.jsp").forward(req, resp);
     }
 
@@ -178,8 +185,9 @@ public class user extends HttpServlet {
         // 插入图片数据到数据库中
         userservice userService = new userserviceimpl();
         count = userService.saveUserImage(id, bytes);
-        if(count!=0)
-        req.setAttribute("message", "上传成功");
+        if(count!=0) {
+            req.setAttribute("message", "上传成功");
+        }
         req.getRequestDispatcher("/jsp/user/myinformation.jsp").forward(req, resp);
     }
 }

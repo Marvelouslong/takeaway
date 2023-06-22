@@ -4,9 +4,7 @@ import com.mysql.cj.jdbc.Blob;
 import com.mysql.cj.util.StringUtils;
 import dao.BaseDao;
 import dao.userdao;
-import pojo.store;
-import pojo.talk;
-import pojo.user;
+import pojo.*;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -89,7 +87,7 @@ public class userdaoimpl implements userdao {
     }
 
     @Override
-    public List<talk> getstorelist(Connection connection) throws Exception {
+    public List<talk> gettalklist(Connection connection) throws Exception {
         PreparedStatement pstm = null;
         ResultSet rs = null;
         List<talk> talkList = new ArrayList<talk>();
@@ -171,5 +169,49 @@ public class userdaoimpl implements userdao {
             BaseDao.closeResource(null, pstm, null);
         }
         return count;
+    }
+
+    @Override
+    public List<order_dishes> getorderlist(Connection connection,int id) throws Exception {
+        PreparedStatement pstm = null;
+        ResultSet rs = null;
+        List<order_dishes> orderlist = new ArrayList<order_dishes>();
+        if(connection != null){
+            String sql = "select o.status,o.money,o.order_time,s.id sid,s.con_telephone,s.shop_name,r.phone rphone,d.name dname,d.id did,re.name `rename`,re.phone rephone,re.address " +
+                    "from `order` o,dishes d,store s,user u,rider r,receiver re,`order-dishes` od " +
+                    "where o.u_id=u.id and o.s_id=s.id and o.r_id=r.id and o.re_id=re.id and d.id=od.d_id and o.id=od.o_id and u.id=? and re.u_id=u.id " +
+                    "order by o.id DESC";
+            pstm = connection.prepareStatement(sql);
+            pstm.setInt(1,id);
+            rs=pstm.executeQuery();
+            while(rs.next()){
+                order _order=new order();
+                _order.setStatus(rs.getString("status"));
+                _order.setMoney(rs.getDouble("money"));
+                _order.setOrder_time(rs.getDate("order_time"));
+                store _store=new store();
+                _store.setId(rs.getInt("sid"));
+                _store.setCon_telephone(rs.getLong("con_telephone"));
+                _store.setShop_name(rs.getString("shop_name"));
+                _order.set_s(_store);
+                rider _rider=new rider();
+                _rider.setPhone(rs.getLong("rphone"));
+                _order.set_r(_rider);
+                dishes _dishes=new dishes();
+                _dishes.setName("dname");
+                _dishes.setId(rs.getInt("did"));
+                receiver _receiver=new receiver();
+                _receiver.setName(rs.getString("rename"));
+                _receiver.setPhone(rs.getLong("rephone"));
+                _receiver.setAddress(rs.getString("address"));
+                _order.set_re(_receiver);
+                order_dishes _od=new order_dishes();
+                _od.set_d(_dishes);
+                _od.set_o(_order);
+                orderlist.add(_od);
+            }
+            BaseDao.closeResource(null, pstm, rs);
+        }
+        return orderlist;
     }
 }

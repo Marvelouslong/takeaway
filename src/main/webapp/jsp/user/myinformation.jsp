@@ -88,53 +88,37 @@
     font-weight: 500;
     font-size: 1.1rem;
   }
+     /* 弹窗的样式，可自行调整样式 */
+   .popup {
+     position: fixed;
+     top: 50%;
+     left: 50%;
+     transform: translate(-50%, -50%);
+     padding: 20px;
+     background-color: #fff;
+     border: 2px solid #000;
+     border-radius: 10px;
+     box-shadow: 0px 0px 10px #000;
+     z-index: 9999;
+   }
 </style>
-<%--<script src="js/jquery.min.js" type="text/javascript" charset="utf-8"></script>--%>
-<%--<script>--%>
-<%--  //当选着文件后内容被改变调用方法--%>
-<%--  $("#fileInput").change(function () {--%>
-<%--    var file = this.files[0];--%>
-<%--    if (window.FileReader) {--%>
-<%--      var reader = new FileReader();--%>
-<%--      reader.readAsDataURL(file);--%>
-<%--      reader.onloadend = function (e) {--%>
-<%--        $("#image").attr("src", e.target.result);--%>
-<%--      };--%>
-<%--    }--%>
-<%--  });--%>
-<%--</script>--%>
-<%--<script>--%>
-<%--  const form = document.querySelector('#upload-form');--%>
-<%--  const input = document.querySelector('#fileInput');--%>
-<%--  form.addEventListener('submit', (event) => {--%>
-<%--    event.preventDefault(); // 阻止表单提交--%>
-<%--    const file = input.files[0];--%>
-<%--    if (file) {--%>
-<%--      const formData = new FormData();--%>
-<%--      formData.append('image', file);--%>
-<%--      fetch('/Userservlet', {--%>
-<%--        method: 'GET',--%>
-<%--        body: formData,--%>
-<%--        headers: {--%>
-<%--          'Content-Type': 'multipart/form-data' // 设置请求头中的content type--%>
-<%--        }--%>
-<%--      }).then(response => {--%>
-<%--        return response.text();--%>
-<%--      }).then(result => {--%>
-<%--        const resultEl = document.getElementById('result');--%>
-<%--        resultEl.innerText = '上传成功，文件ID：' + result;--%>
-<%--      }).catch(error => {--%>
-<%--        console.error(error);--%>
-<%--      });--%>
-<%--    }--%>
-<%--  });--%>
-<%--</script>--%>
 <script>
   const form = document.getElementById('upload-form');
   const submitBtn = document.getElementById('submitBtn');
   submitBtn.addEventListener('click', () => {
     form.submit();
   });
+    // 点击按钮触发弹窗
+    function popupFunction() {
+    // 显示弹窗
+    document.getElementById("popup").style.display = "block";
+  }
+
+    // 点击弹窗上的关闭按钮触发关闭弹窗
+    function closePopup() {
+    // 隐藏弹窗
+    document.getElementById("popup").style.display = "none";
+  }
 </script>
 <div id="content-outer">
   <div class="layout_page" id="content-inner">
@@ -159,17 +143,69 @@
     <article id="page">
       <div class="article-container">
         <h2>我的订单</h2>
-        <form action="user" method="post">
-          <input type="hidden" name="method" value="orderlist">
+        <table>
           <c:forEach items="${orderlist}" var="order" varStatus="status">
-            ${order.s_name}
-            ${order.r_phone}
-            ${order.status}
-            ${order.d_name}
-            ${order.money}
+            <tr>
+            <td> <img src="Userservlet?id=${order._o._s.id}&method=img"
+                      style="animation: avatar_turn_around 2s linear infinite;
+                         display: inline-block;
+                         padding: 5px;
+                         width: 50px;
+                         height: 50px;
+                         border-radius: 70px;
+                         vertical-align: top;
+                         transition: all .3s;"
+                      alt="img"></td>
+            <td>骑手：${order._o._r.phone}<br>商家：${order._o._s.con_telephone}</td>
+            <td>订单状态：${order._o.status}<br>订单时间：${order._o.order_time}<br>订单金额：${order._o.money}</td>
+            </tr>
+            <button onclick="popupFunction()">查看详情</button>
+            <div id="popup" class="popup" style="display: none;">
+              <h2>${order._o._s.shop_name}</h2>
+              <table>
+                <tr>
+                  <td> <img src="Userservlet?id=${order._o._s.id}&method=img"
+                            style="animation: avatar_turn_around 2s linear infinite;
+                         display: inline-block;
+                         padding: 5px;
+                         width: 50px;
+                         height: 50px;
+                         border-radius: 70px;
+                         vertical-align: top;
+                         transition: all .3s;"
+                            alt="img"></td>
+                  <td>骑手：${order._o._r.phone}<br>商家：${order._s.con_telephone}</td>
+                  <td>订单状态：${order._o.status}<br>订单时间：${order._o.order_time}<br>订单金额：${order.money}</td>
+                </tr>
+                <tr><td>
+                  <c:forEach var="dish" items="${order._d}">
+                    <c:out value="${dish.name}" />
+                    <img src="Userservlet?id=${dish.id}&method=img"
+                         style="animation: avatar_turn_around 2s linear infinite;
+                         display: inline-block;
+                         padding: 5px;
+                         width: 120px;
+                         height: 120px;
+                         border-radius: 70px;
+                         vertical-align: top;
+                         transition: all .3s;"
+                         alt="img">
+                    <c:out value=", " escapeXml="false" />
+                  </c:forEach>
+                  </td>
+                  <td>接收人姓名：${order._re.name}<br>接收人电话：${order._re.phone}</td>
+                  <td>接收人地址：${order._re.address}</td>
+                </tr>
+                <tr><a class="vieworder" href="#">删除订单</a></tr>
+                <tr><a class="vieworder" href="#">修改订单信息</a></tr>
+                <tr><a class="vieworder" href="#">添加评论</a></tr>
+                <tr><a class="vieworder" href="#">再来一单</a></tr>
+              </table>
+              <button onclick="closePopup()">关闭</button>
+            </div>
             <hr>
           </c:forEach>
-        </form>
+        </table>
       </div>
     </article>
   </div>
