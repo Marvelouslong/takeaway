@@ -1,20 +1,11 @@
 package controller.dishes;
 
-import org.apache.commons.fileupload.FileItem;
-import org.apache.commons.fileupload.FileUploadException;
-import org.apache.commons.fileupload.disk.DiskFileItemFactory;
-import org.apache.commons.fileupload.servlet.ServletFileUpload;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.multipart.MultipartFile;
+
 import pojo.dishes;
-import pojo.store;
-import pojo.taste;
 import service.dishesService;
 import service.impl.dishesServiceImpl;
 import service.impl.tasteServiceImpl;
-import service.impl.userserviceimpl;
 import service.tasteService;
-import service.userservice;
 import util.constant;
 
 import javax.servlet.ServletException;
@@ -59,7 +50,6 @@ public class dishesServlet extends HttpServlet {
                 String category = req.getParameter("category");
                 store = req.getSession().getAttribute(constant.STORE_SESSION);
                 s_id = ((pojo.store) store).getId();
-//                获取图片
                 Part filePart = req.getPart("image"); // 通过 name 获取上传的文件
                 InputStream inputStream = filePart.getInputStream(); // 获取文件输入流
                 ByteArrayOutputStream output = new ByteArrayOutputStream();
@@ -76,41 +66,8 @@ public class dishesServlet extends HttpServlet {
                 this.dishesservice.add(new dishes(name,describe,status,price,category,picture,s_id));
                 resp.sendRedirect("DISHES?method=list_dishes");
                 break;
+            case "dish_search":
+                break;
         }
     }
 }
-//
-//                boolean isMultipart = ServletFileUpload.isMultipartContent(req);
-//                if (isMultipart) {
-//                    DiskFileItemFactory factory = new DiskFileItemFactory();
-//                    ServletFileUpload upload = new ServletFileUpload(factory);
-//                    List<FileItem> items = null;
-//                    try {
-//                        items = upload.parseRequest(req);
-//                    } catch (FileUploadException e) {
-//                        throw new RuntimeException(e);
-//                    }
-//                    for (FileItem item : items) {
-//                            if (!item.isFormField() && item.getName() != null && !item.getName().equals("")) {
-//                                byte[] picture = item.get();
-//                                String name = req.getParameter("name");
-//                                String describe = req.getParameter("describe");
-//                                String status = req.getParameter("status");
-//                                double price = Double.parseDouble(req.getParameter("price"));
-//                                String category = req.getParameter("category");
-//                                store = req.getSession().getAttribute(constant.STORE_SESSION);
-//                                s_id = ((pojo.store) store).getId();
-//                                this.dishesservice.add(new dishes(name,describe,status,price,category,picture,s_id));
-//                            }
-//                        }
-//                    }
-//                resp.sendRedirect("DISHES?method=list_dishes");
-//                break;
-//                String name1 = req.getParameter("name1");
-//                String name2 = req.getParameter("name2");
-//                String name3 = req.getParameter("name3");
-//                String name4 = req.getParameter("name4");
-//                String name5 = req.getParameter("name5");
-//                Part filePart = req.getPart("picture");
-//                byte[] picture = filePart.getInputStream().readAllBytes();
-

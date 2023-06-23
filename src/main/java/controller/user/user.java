@@ -46,14 +46,15 @@ public class user extends HttpServlet {
         }else if (method != null && method.equals("img2")) {
             String id = req.getParameter("id");
             this.img2(req, resp, id);
+        }else if (method != null && method.equals("img3")) {
+            String id = req.getParameter("id");
+            this.img3(req, resp, id);
+        }else if (method != null && method.equals("showevaluate")) {
+            String id = req.getParameter("id");
+            int id1= Integer.parseInt(id);
+            this.showevaluate(req, resp,id1);
         }
-//        else if (method != null && method.equals("view")) {
-//            this.getUserById(req, resp, "userview.jsp");
-//        } else if (method != null && method.equals("modify")) {
-//            this.getUserById(req, resp, "usermodify.jsp");
-//        } else if (method != null && method.equals("modifyexe")) {
-//            this.modify(req, resp);
-//        } else if (method != null && method.equals("pwdmodify")) {
+//        else if (method != null && method.equals("pwdmodify")) {
 //            this.getPwdByUserId(req, resp);
 //        } else if (method != null && method.equals("savepwd")) {
 //            this.updatePwd(req, resp);
@@ -69,6 +70,10 @@ public class user extends HttpServlet {
             } catch (FileUploadException e) {
                 throw new RuntimeException(e);
             }
+        }else if (method != null && method.equals("addevaluate")) {
+            String id = req.getParameter("id");
+            int id1= Integer.parseInt(id);
+            this.addevaluate(req, resp,id1);
         }
     }
 
@@ -174,7 +179,6 @@ public class user extends HttpServlet {
         output.flush();
         output.close();
         inputStream.close();
-        byte[] picture = bytes;
 
         // 将文件保存到数据库中
         Object attribute = req.getSession().getAttribute(Constants.USER_SESSION);
@@ -184,9 +188,8 @@ public class user extends HttpServlet {
         userservice userService = new userserviceimpl();
         count = userService.saveUserImage(id, bytes);
         if(count!=0) {
-            req.setAttribute("message", "上传成功");
+            req.getRequestDispatcher("/jsp/user/myinformation.jsp").forward(req, resp);
         }
-        req.getRequestDispatcher("/jsp/user/myinformation.jsp").forward(req, resp);
     }
     private void showdishes(HttpServletRequest req, HttpServletResponse resp,int id) throws ServletException, IOException {
         userservice userservice = new userserviceimpl();
@@ -195,10 +198,56 @@ public class user extends HttpServlet {
         req.setAttribute("dishlist", dishlist);
         req.getRequestDispatcher("/jsp/user/myinformation.jsp").forward(req, resp);
     }
-    private void img2(HttpServletRequest req, HttpServletResponse resp, String id) throws ServletException, IOException {
+    private void img2(HttpServletRequest req, HttpServletResponse resp, String id) throws IOException {
         int id1 = Integer.parseInt(id);
         userservice userservice = new userserviceimpl();
         byte[] picture = userservice.img2(id1);
+        resp.setContentType("image/jpeg");  //设置图片格式
+        OutputStream out = resp.getOutputStream(); //打开输出流
+        out.write(picture);  //输出图片
+        out.flush();    //输出
+        out.close();  //关闭输出
+    }
+    private void showevaluate(HttpServletRequest req, HttpServletResponse resp,int id) throws ServletException, IOException {
+        userservice userservice = new userserviceimpl();
+        List<evaluate> evaluatelist = null;
+        evaluatelist = userservice.showevaluate(id);
+        req.setAttribute("evaluatelist", evaluatelist);
+        req.setAttribute("o_id",id);
+        req.getRequestDispatcher("/jsp/user/evaluate.jsp").forward(req, resp);
+    }
+    private void addevaluate(HttpServletRequest req, HttpServletResponse resp, int id) throws IOException, ServletException {
+        Part filePart = req.getPart("image"); // 通过 name 获取上传的文件
+        InputStream inputStream = filePart.getInputStream(); // 获取文件输入流
+        ByteArrayOutputStream output = new ByteArrayOutputStream();
+        byte[] buffer = new byte[4096];
+        int n = 0;
+        while (-1 != (n = inputStream.read(buffer))) {
+            output.write(buffer, 0, n);
+        }
+        byte[] bytes = output.toByteArray();
+        output.flush();
+        output.close();
+        inputStream.close();
+        byte[] picture = bytes;
+
+        userservice userservice = new userserviceimpl();
+        List<evaluate> evaluatelist = null;
+        int count=0;
+        int count1=0;
+        String evaluate=req.getParameter("evaluate");
+        count=userservice.getevaluateCount();
+        count+=1;
+        count1 = userservice.addevaluate(id,bytes,evaluate,count);
+        if(count1!=0) {
+            this.showevaluate(req,resp,id);
+            req.getRequestDispatcher("/jsp/user/evaluate.jsp").forward(req, resp);
+        }
+    }
+    private void img3(HttpServletRequest req, HttpServletResponse resp, String id) throws IOException {
+        int id1 = Integer.parseInt(id);
+        userservice userservice = new userserviceimpl();
+        byte[] picture = userservice.img3(id1);
         resp.setContentType("image/jpeg");  //设置图片格式
         OutputStream out = resp.getOutputStream(); //打开输出流
         out.write(picture);  //输出图片

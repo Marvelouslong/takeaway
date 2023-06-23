@@ -157,4 +157,68 @@ public class userserviceimpl implements userservice {
         }
         return picture;
     }
+
+    @Override
+    public int addevaluate(int id,byte[]imgdata,String evaluate,int count1) {
+        // TODO Auto-generated method stub
+        Connection connection = null;
+        int count=0;
+        try {
+            connection = BaseDao.getConnection();
+            count = Userdao.addevaluate(connection,id,imgdata,evaluate,count1);
+        } catch (Exception e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }finally{
+            BaseDao.closeResource(connection, null, null);
+        }
+        return count;
+    }
+
+    @Override
+    public byte[] img3(int id) {
+        Connection connection = null;
+        byte[] picture=null;
+        try {
+            connection = BaseDao.getConnection();
+            picture=Userdao.img3(connection,id);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }finally{
+            BaseDao.closeResource(connection, null, null);
+        }
+        return picture;
+    }
+
+    @Override
+    public List<evaluate> showevaluate(int id) {
+        // TODO Auto-generated method stub
+        Connection connection = null;
+        List<evaluate> evaluatelist = null;
+        try {
+            connection = BaseDao.getConnection();
+            evaluatelist = Userdao.showevaluate(connection,id);
+        } catch (Exception e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }finally{
+            BaseDao.closeResource(connection, null, null);
+        }
+        return evaluatelist;
+    }
+
+    @Override
+    public int getevaluateCount() {
+        Connection connection = null;
+        int count = 0;
+        try {
+            connection = BaseDao.getConnection();
+            count = Userdao.getevaluateCount(connection);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }finally{
+            BaseDao.closeResource(connection, null, null);
+        }
+        return count;
+    }
 }

@@ -16,7 +16,8 @@ public class dishes {
     private store _s;
 
 
-
+    public dishes() {
+    }
 
     public dishes(Integer id, String name, String describe, String status, Double price, String category) {
         this.id=id;
