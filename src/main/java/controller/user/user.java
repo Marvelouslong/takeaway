@@ -23,7 +23,8 @@ public class user extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String method = req.getParameter("method");
         if (method != null && method.equals("talkshow")) {
-            this.talkshow(req, resp);
+            String pageIndex = req.getParameter("pageIndex");
+            this.talkshow(req, resp,pageIndex);
         } else if (method != null && method.equals("query")) {
             String query = req.getParameter("query");
             if (query.equals("null")) {
@@ -53,12 +54,13 @@ public class user extends HttpServlet {
             String id = req.getParameter("id");
             int id1= Integer.parseInt(id);
             this.showevaluate(req, resp,id1);
+        }else if (method != null && method.equals("img4")) {
+            String id = req.getParameter("id");
+            this.img4(req, resp, id);
+        }else if (method != null && method.equals("img5")) {
+            String id = req.getParameter("id");
+            this.img5(req, resp, id);
         }
-//        else if (method != null && method.equals("pwdmodify")) {
-//            this.getPwdByUserId(req, resp);
-//        } else if (method != null && method.equals("savepwd")) {
-//            this.updatePwd(req, resp);
-//        }
     }
 
     @Override
@@ -74,6 +76,8 @@ public class user extends HttpServlet {
             String id = req.getParameter("id");
             int id1= Integer.parseInt(id);
             this.addevaluate(req, resp,id1);
+        }else if (method != null && method.equals("upload-talk")) {
+            this.upload_talk(req, resp);
         }
     }
 
@@ -126,11 +130,48 @@ public class user extends HttpServlet {
         req.getRequestDispatcher("/jsp/user/homepage.jsp").forward(req, resp);
     }
 
-    private void talkshow(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    private void talkshow(HttpServletRequest req, HttpServletResponse resp, String pageIndex) throws ServletException, IOException {
         userservice userservice = new userserviceimpl();
+        //设置页面容量
+        int pageSize = Constants.pageSize;
+        //当前页码
+        int currentPageNo = 1;
+
+        if (pageIndex != null) {
+            try {
+                currentPageNo = Integer.parseInt(pageIndex);
+            } catch (NumberFormatException e) {
+                req.setAttribute("error", "error");
+            }
+        }
+
+        //获取用户总数量
+        int totalCount = userservice.gettalkCount();
+        //总页数支持
+        PageSupport pages = new PageSupport();
+        //设置当前页码
+        pages.setCurrentPageNo(currentPageNo);
+        //设置页总大小
+        pages.setPageSize(pageSize);
+        //设置页总数量
+        pages.setTotalCount(totalCount);
+
+        //控制首页和尾页
+        int totalPageCount = pages.getTotalPageCount();
+
+        if (currentPageNo < 1) {  //显示第一页的东西
+            currentPageNo = 1;
+        } else if (currentPageNo > totalPageCount) {//当前页面大于最后一页，让它为最后一页就行
+            currentPageNo = totalPageCount;
+        }
+
+
         List<talk> talklist = null;
         talklist = userservice.gettalklist();
         req.setAttribute("talklist", talklist);
+        req.setAttribute("totalPageCount", totalPageCount);
+        req.setAttribute("totalCount", totalCount);
+        req.setAttribute("currentPageNo", currentPageNo);
         req.getRequestDispatcher("/jsp/user/talk.jsp").forward(req, resp);
     }
 
@@ -241,7 +282,6 @@ public class user extends HttpServlet {
         count1 = userservice.addevaluate(id,bytes,evaluate,count);
         if(count1!=0) {
             this.showevaluate(req,resp,id);
-            req.getRequestDispatcher("/jsp/user/evaluate.jsp").forward(req, resp);
         }
     }
     private void img3(HttpServletRequest req, HttpServletResponse resp, String id) throws IOException {
@@ -253,5 +293,55 @@ public class user extends HttpServlet {
         out.write(picture);  //输出图片
         out.flush();    //输出
         out.close();  //关闭输出
+    }
+    private void img4(HttpServletRequest req, HttpServletResponse resp, String id) throws IOException {
+        int id1 = Integer.parseInt(id);
+        userservice userservice = new userserviceimpl();
+        byte[] picture = userservice.img4(id1);
+        resp.setContentType("image/jpeg");  //设置图片格式
+        OutputStream out = resp.getOutputStream(); //打开输出流
+        out.write(picture);  //输出图片
+        out.flush();    //输出
+        out.close();  //关闭输出
+    }
+    private void img5(HttpServletRequest req, HttpServletResponse resp, String id) throws IOException {
+        int id1 = Integer.parseInt(id);
+        userservice userservice = new userserviceimpl();
+        byte[] picture = userservice.img5(id1);
+        resp.setContentType("image/jpeg");  //设置图片格式
+        OutputStream out = resp.getOutputStream(); //打开输出流
+        out.write(picture);  //输出图片
+        out.flush();    //输出
+        out.close();  //关闭输出
+    }
+    private void upload_talk(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException{
+        Part filePart = req.getPart("image"); // 通过 name 获取上传的文件
+        InputStream inputStream = filePart.getInputStream(); // 获取文件输入流
+        ByteArrayOutputStream output = new ByteArrayOutputStream();
+        byte[] buffer = new byte[4096];
+        int n = 0;
+        while (-1 != (n = inputStream.read(buffer))) {
+            output.write(buffer, 0, n);
+        }
+        byte[] bytes = output.toByteArray();
+        output.flush();
+        output.close();
+        inputStream.close();
+
+        // 将文件保存到数据库中
+        Object attribute = req.getSession().getAttribute(Constants.USER_SESSION);
+        int id = ((pojo.user) attribute).getId();
+        String context=req.getParameter("talkcontext");
+        int count = 0;
+        // 插入图片数据到数据库中
+        userservice userService = new userserviceimpl();
+        int count1=0;
+        count1=userService.gettalkCount();
+        count1+=1;
+        count = userService.savetalk(id, bytes,context,count1);
+        String pageIndex="1";
+        if(count!=0) {
+            this.talkshow(req,resp,pageIndex);
+        }
     }
 }

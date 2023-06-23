@@ -21,5 +21,8 @@ public interface userdao {
     public byte[] img3(Connection connection,int id) throws Exception;
     public List<evaluate> showevaluate(Connection connection, int id)throws Exception;
     public int getevaluateCount(Connection connection) throws Exception;
-
+    public byte[] img4(Connection connection,int id) throws Exception;
+    public byte[] img5(Connection connection,int id) throws Exception;
+    public int gettalkCount(Connection connection) throws Exception;
+    public int savetalk(Connection connection,int id,byte[] bytes,String context,int count1) throws SQLException;
 }

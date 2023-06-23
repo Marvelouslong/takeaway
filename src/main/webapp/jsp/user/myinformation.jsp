@@ -134,6 +134,7 @@
                       alt="img"></td>
             <td style="padding-left: 40px;padding-top: 20px">骑手：${order._r.phone != 0 ? order._r.phone : '暂无人接单'}<br>商家：${order._s.con_telephone}</td>
             <td style="padding-left: 40px;padding-top: 20px">订单状态：${order.status}<br>订单时间：${order.order_time}<br>订单金额：${order.money}</td>
+            <td style="padding-left: 40px;padding-top: 20px">接收人：${order._re.name}<br>接收人电话：${order._re.phone}<br>接收地址${order._re.address}</td>
             <td style="padding-left: 40px;padding-top: 20px"><a class="vieworder" href="Userservlet?method=showdishes&id=${order.id}">查看菜品</a></td>
             <td style="padding-left: 20px;padding-top: 20px"><a class="vieworder" href="Userservlet?method=showevaluate&id=${order.id}">添加评论</a></td>
             <td style="padding-left: 20px;padding-top: 20px"><a class="vieworder" href="#">再来一单</a></td>

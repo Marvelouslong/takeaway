@@ -108,8 +108,10 @@
                 <a href="<c:url value="/jsp/user/shopcar.jsp"/>">购物车</a>
             </li>
             <li class="nav-link-item">
-                <%-- 分页--%>
-                <a href="<c:url value="Userservlet"><c:param name="method" value="talkshow"/></c:url>">讨论区</a>
+                <a href="<c:url value="Userservlet">
+                        <c:param name="method" value="talkshow"/>
+                        <c:param name="pageIndex" value="1"/>
+                        </c:url>">讨论区</a>
             </li>
             <li class="nav-link-item">
                 <a href="<c:url value="Userservlet">

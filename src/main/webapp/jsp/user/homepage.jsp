@@ -63,10 +63,6 @@
         padding: 20px;
         box-sizing: border-box;
     }
-    .page{
-        display: flex;
-        float: right;
-    }
 </style>
 <div class="background">
     <div class="b-wrap">

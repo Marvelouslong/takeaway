@@ -93,15 +93,16 @@ public class userdaoimpl implements userdao {
         ResultSet rs = null;
         List<talk> talkList = new ArrayList<talk>();
         if(connection != null){
-            String sql = "select t.context,t.picture,u.name from talk t,user u where t.u_id = u.id order by t.id DESC";
+            String sql = "select t.id tid,t.context,u.name,u.id uid from talk t,user u where t.u_id = u.id order by t.id DESC";
             pstm = connection.prepareStatement(sql);
             rs=pstm.executeQuery();
             while(rs.next()){
                 user _user=new user();
                 _user.setName(rs.getString("name"));
+                _user.setId(rs.getInt("uid"));
                 talk _talk = new talk();
                 _talk.setContext(rs.getString("context"));
-                _talk.setPicture(rs.getBytes("picture"));
+                _talk.setId(rs.getInt("tid"));
                 _talk.set_u(_user);
                 talkList.add(_talk);
             }
@@ -306,5 +307,67 @@ public class userdaoimpl implements userdao {
             BaseDao.closeResource(null, pstm, rs);
         }
         return evaluateList;
+    }
+
+    @Override
+    public byte[] img4(Connection connection, int id) throws Exception {
+        PreparedStatement pstm = null;
+        ResultSet rs = null;
+        String sql = "select picture from user where id = ? ";
+        byte[] picture = null;
+        Object[] params={id};
+        rs=BaseDao.execute(connection,pstm,rs,sql,params);
+        if(rs.next()){
+            picture = rs.getBytes(1);
+        }
+        BaseDao.closeResource(null, pstm, rs);
+        return picture;
+    }
+
+    @Override
+    public byte[] img5(Connection connection, int id) throws Exception {
+        PreparedStatement pstm = null;
+        ResultSet rs = null;
+        String sql = "select picture from talk where id = ? ";
+        byte[] picture = null;
+        Object[] params={id};
+        rs=BaseDao.execute(connection,pstm,rs,sql,params);
+        if(rs.next()){
+            picture = rs.getBytes(1);
+        }
+        BaseDao.closeResource(null, pstm, rs);
+        return picture;
+    }
+
+    @Override
+    public int gettalkCount(Connection connection) throws Exception {
+        PreparedStatement pstm=null;
+        int count=0;
+        String sql="select count(id) as count from talk";
+        ResultSet rs=null;
+        pstm=connection.prepareStatement(sql);
+        rs = pstm.executeQuery();
+        if(rs.next()){
+            count = rs.getInt("count");
+        }
+        BaseDao.closeResource(null, pstm, rs);
+        return count;
+    }
+
+    @Override
+    public int savetalk(Connection connection, int id, byte[] bytes, String context, int count1) throws SQLException {
+        PreparedStatement pstm = null;
+        String sql = "insert into talk values (?,?,?,?)";
+        int count=0;
+        Blob blob = (Blob) connection.createBlob();
+        blob.setBytes(1, bytes);
+        pstm = connection.prepareStatement(sql);
+        pstm.setInt(1,count1);
+        pstm.setString(2, context);
+        pstm.setBlob(3,blob);
+        pstm.setInt(4,id);
+        count = pstm.executeUpdate();
+        BaseDao.closeResource(null, pstm, null);
+        return count;
     }
 }
