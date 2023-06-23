@@ -20,6 +20,10 @@
 </div>
 <div class="div2">
     <span class="span1">店内已有菜品:</span>
+   <div class="search"> <form method="post" action="<c:url value="/DISHES?method=dishes_search"/>">
+       <input  class="search_input" type="text" style="border: 0px" placeholder="请输入菜名" name="name">
+       <button class="search_button" type="submit" value="提交" style="border-right: 1px black">搜索</button>
+   </form></div>
     <button class="add_button" onclick="window.location.href='jsp/store/dish_add.jsp'">添加新的菜品</button>
     <table class="dish_table">
      <thead>
@@ -40,20 +44,36 @@
          <td>${dish.status}</td>
           <td>${dish.price}</td>
          <td>
-             <button type="button">删除</button>
-             <button type="button">编辑</button>
-             <a href="<c:url value="/TASTE?method=list&d_id=${dish.id}"/>">
-                 <button type="button">
-                     选择菜品口味
-                 </button>
-             </a>
+       <form action="<c:url value="/jsp/store/dish_updata.jsp"/>" method="post">
+        <input type="hidden" name="d_id" value="${dish.id}">
+           <button type="submit" value="编辑">编辑</button>
+        </form>
+    <form action="<c:url value="/DISHES?method=dishes_del"/>" method="post">
+        <input type="hidden" name="d_id" value="${dish.id}">
+        <button type="submit" value="删除">删除</button>
+    </form>
+
+    <form action="<c:url value="/TASTE?method=list&d_id=${dish.id}"/>" method="post">
+        <button type="submit" value=""> 选择菜品口味</button>
+    </form>
          </td>
      </tr>
       </c:forEach>
         </tbody>
     </table>
-
 </div>
-
 </body>
+<script>
+    var btn = document.getElementById("btn6");
+    var div = document.getElementById("div3");
+    btn.onclick = function () {
+        if(this.value === "隐藏"){
+            div.className = "hide";
+            btn.value = "显示"
+        }else{
+            div.className = "show";
+            btn.value = "隐藏"
+        }
+    }
+</script>
 </html>

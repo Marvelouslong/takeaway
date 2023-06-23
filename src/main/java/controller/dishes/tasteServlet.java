@@ -1,5 +1,6 @@
 package controller.dishes;
 
+import pojo.dishes;
 import pojo.taste;
 import service.impl.tasteServiceImpl;
 import service.tasteService;
@@ -32,6 +33,17 @@ public class tasteServlet extends HttpServlet {
                 d_id = Integer.valueOf(req.getParameter("d_id"));
                 String name = req.getParameter("name");
                 this.tasteservice.add(new taste(name, d_id));
+                req.getRequestDispatcher("/TASTE?method=list").forward(req, resp);
+                break;
+//            case "update":
+//                 name = req.getParameter("name");
+//                Integer id = Integer.valueOf(req.getParameter("id"));
+//                this.tasteservice.update(new taste(id,name));
+//                resp.sendRedirect("/TASTE?method=list");
+//                break;
+            case "del":
+                Integer id = Integer.valueOf(req.getParameter("id"));
+                this.tasteservice.del(id);
                 req.getRequestDispatcher("/TASTE?method=list").forward(req, resp);
                 break;
         }
