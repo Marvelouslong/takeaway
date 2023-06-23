@@ -52,7 +52,7 @@ public class userdaoimpl implements userdao {
             sql.append("select s.* from store s,dishes d where s.id = d.s_id");
             List<Object> list = new ArrayList<Object>();
             if(!StringUtils.isNullOrEmpty(query)){
-                sql.append(" and (s.shop_name like ? or d.name like ?)");
+                sql.append(" and (s.shop_name like ? or d.name like ? or s.main_category like ?)");
                 list.add("%"+query+"%");
             }
 
@@ -79,7 +79,8 @@ public class userdaoimpl implements userdao {
                 _store.setId(rs.getInt("id"));
                 _store.setAddress(rs.getString("address"));
                 _store.setShop_name(rs.getString("shop_name"));
-                _store.setShop_picture(rs.getBytes("shop_picture"));
+                _store.setMain_category(rs.getString("main_category"));
+                _store.setAuxiliary_category(rs.getString("auxiliary_category"));
                 storeList.add(_store);
             }
             BaseDao.closeResource(null, pstm, rs);

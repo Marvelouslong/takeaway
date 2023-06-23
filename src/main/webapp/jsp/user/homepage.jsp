@@ -67,14 +67,14 @@
 <div class="background">
     <div class="b-wrap">
         <ul class="con">
-            <li><a href="#">
+            <li><a href="Userservlet?method=query&query=null&pageIndex=1">
                 <div class="con-img">
                     <img src="${pageContext.request.contextPath}/img/美食.jpg" alt="mlm">
                 </div>
                 <span>美食</span>
             </a></li>
             <li>
-                <a href="https://t.bilibili.com/">
+                <a href="Userservlet?method=query&query='包子粥铺'&pageIndex=1">
                     <div class="con-img">
                         <img src="${pageContext.request.contextPath}/img/粥铺.webp" alt="mlm">
                     </div>
@@ -222,7 +222,7 @@
     <main class="container">
         <div class="stores">
             <c:forEach items="${storelist}" var="store" varStatus="status">
-                <div class="store">
+                <a class="store" href="store.jsp?storelist=${store}">
                     <img src="Userservlet?id=${store.id}&method=img"
                          style="animation: avatar_turn_around 2s linear infinite;
                          display: inline-block;
@@ -235,7 +235,7 @@
                          alt="img">
                     ${store.shop_name}<br>
                     ${store.address}
-                </div>
+                </a>
                 <c:if test="${status.index % 2 == 1 or status.last}">
                     <div style="clear:both;"></div>
                 </c:if>
