@@ -2,39 +2,34 @@ package dao.impl;
 
 import com.mysql.cj.jdbc.Blob;
 import dao.BaseDao;
-import dao.dishesDao;
+import dao.tasteDao;
 import pojo.dishes;
 import pojo.taste;
-import service.impl.tasteServiceImpl;
-import service.tasteService;
 
 import java.sql.Connection;
-
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class dishesDaoImpl implements dishesDao {
-    @Override
-    public List<dishes> list(Integer s_id) {
+public class tasteDaoImpl implements tasteDao {
+
+
+
+    public List<taste> list(Integer d_id) {
         Connection connection = BaseDao.getConnection();
-        String sql = "select * from dishes where  s_id = '"+s_id+"'";
+        String sql = "select * from taste where  d_id = '"+d_id+"'";
         PreparedStatement pstm = null;
         ResultSet rs = null;
-        List<dishes> list = new ArrayList<>();
+        List<taste> list = new ArrayList<>();
         try {
             pstm = connection.prepareStatement(sql);
             rs = pstm.executeQuery();
             while (rs.next()) {
                 Integer id = rs.getInt(1);
                 String name = rs.getString(2);
-                String describe = rs.getString(4);
-                String status = rs.getString(5);
-                Double price= rs.getDouble(6);
-                String category = rs.getString(7);
-                list.add(new dishes(id, name, describe, status, price, category));
+                list.add(new taste(id,name));
             }
         } catch (SQLException throwables) {
             throwables.printStackTrace();
@@ -44,23 +39,15 @@ public class dishesDaoImpl implements dishesDao {
         return list;
     }
 
-    @Override
-    public Integer add(dishes Dishes) {
+    public Integer add(taste taste) {
         Connection connection = BaseDao.getConnection();
-        String sql = "insert into dishes(name,`describe`,status,price,category,picture,s_id)values(?,?,?,?,?,?,?) ";
+        String sql = "insert into taste(name,d_id)values(?,?) ";
         PreparedStatement pstm = null;
         Integer rs = null;
         try {
-            Blob blob = (Blob) connection.createBlob();
-            blob.setBytes(1, Dishes.picture);
             pstm = connection.prepareStatement(sql);
-            pstm.setString(1, Dishes.getName());
-            pstm.setString(2, Dishes.getDescribe());
-            pstm.setString(3, Dishes.getStatus());
-            pstm.setDouble(4, Dishes.getPrice());
-            pstm.setString(5, Dishes.getCategory());
-            pstm.setBlob(6,blob);
-            pstm.setInt(7,   Dishes.getS_id());
+            pstm.setString(1, taste.getName());
+            pstm.setInt(2, taste.getD_id());
             rs = pstm.executeUpdate();
         } catch (SQLException throwables) {
             throwables.printStackTrace();

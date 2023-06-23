@@ -42,11 +42,18 @@
          <td>
              <button type="button">删除</button>
              <button type="button">编辑</button>
+             <a href="<c:url value="/TASTE?method=list&d_id=${dish.id}"/>">
+                 <button type="button">
+                     选择菜品口味
+                 </button>
+             </a>
          </td>
      </tr>
       </c:forEach>
         </tbody>
     </table>
+
 </div>
+
 </body>
 </html>

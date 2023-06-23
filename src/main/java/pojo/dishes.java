@@ -1,19 +1,24 @@
 package pojo;
 
+import com.mysql.cj.jdbc.Blob;
+
 import java.util.Arrays;
 
 public class dishes {
     private Integer s_id;
     private int id;
     private String name;
-    private byte[] picture;
+    public byte[] picture;
     private String describe;
     private String status;
     private double price;
     private String category;
     private store _s;
 
-    public dishes() {
+
+
+
+    public dishes(Integer id, String name, String describe, String status, Double price, String category) {
         this.id=id;
         this.name=name;
         this.describe=describe;
@@ -22,7 +27,7 @@ public class dishes {
         this.status=status;
     }
 
-    public dishes(String name,String describe,String status,Double price,String category,byte[] picture,Integer s_id){
+    public  dishes(String name,String describe,String status,Double price,String category,byte[] picture,Integer s_id){
         this.name=name;
         this.describe=describe;
         this.status=status;
@@ -30,8 +35,8 @@ public class dishes {
         this.category=category;
         this.picture=picture;
         this.s_id=s_id;
+//        this.id=id;
     }
-
 
 
     public int getId() {
@@ -119,4 +124,5 @@ public class dishes {
     public void set_s(store _s) {
         this._s = _s;
     }
+
 }

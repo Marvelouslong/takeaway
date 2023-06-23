@@ -14,8 +14,8 @@ public class dishesServiceImpl  implements dishesService {
     }
 
     @Override
-    public void add(dishes dishes) {
-        Integer add = this.dishesdao.add(dishes);
+    public void add(dishes Dishes) {
+        Integer add = this.dishesdao.add(Dishes);
         if(add !=1)throw new RuntimeException("添加失败");
     }
 

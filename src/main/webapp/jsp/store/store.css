@@ -145,26 +145,57 @@ p{
 .smart-green .button:hover {
     background-color: #80A24A;
 }
-/*.show {*/
-/*    background-color: white;*/
-/*    !*z-index: 5;*!*/
-/*    !*五层*!*/
-/*    display: block;*/
-/*    height:200px;*/
-/*    width: 100px;*/
-/*    border: 1px black;*/
-/*    margin: auto;*/
-/*}*/
-/*.hide {display: none;*/
-/*    height:200px;*/
-/*    width: 100px;*/
-/*    border: 1px black;*/
-/*    margin: auto;}*/
-/*.div3{display: none;*/
-/*    height:200px;*/
-/*    width: 100px;*/
-/*    border: 1px black;*/
-/*    margin: auto;}*/
+.show {
+    background-color: rgba(178, 173, 173, 0.38);
+    display: block;
+    height:300px;
+    width: 300px;
+    border: 1px black;
+    z-index: 3;
+     left:349px;
+    top: 100px;
+    position: absolute;
+}
+.hide{
+    display: none;
+    height:300px;
+    width: 300px;
+    border: 1px black;
+    margin: auto;
+}
+
+.div3{
+    display: none;
+    height:300px;
+    width: 300px;
+    border: 1px black;
+    margin: auto;
+}
+
+.taste_add{
+ width: 100%;
+ padding: 15px;
+}
+.taste_add .lable
+{
+    width: 80%;
+    height: 30%;
+}
+.taste_add .button {
+    background-color: rgba(252,216,163,0.41);
+    border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border: none;
+    padding: 10px 25px 10px 25px;
+    color: #FFF;
+    text-shadow: 1px 1px 1px #949494;
+}
+
+.taste_add .button:hover {
+    background-color: rgba(246,184,120,0.41);
+}
+
+
 .btn{
     border: 0;
     background-color: white;
@@ -173,16 +204,6 @@ p{
  color: rgba(252,126,0,0.41);
 }
 
-/*.div3 {*/
-/*    height: 80%;*/
-/*    width: 30%;*/
-/*    left: 20%;*/
-/*    border:1px solid #dedede;*/
-/*    position: absolute;*/
-/*    padding: 10px;*/
-/*    top:40px;*/
-/*    display:inline-block*/
-/*}*/
 .div10{
     height:80%;
     width: 80%;
@@ -198,19 +219,7 @@ p{
     width: 100%;
     line-height:40px;
 }
-/*.div4 {*/
-/*    height: 80%;*/
-/*    width: auto;*/
-/*    left: 52%;*/
-/*    border:1px solid #dedede;*/
-/*    border-left:1px dashed black;*/
-/*    overflow-y:auto;*/
-/*    position: absolute;*/
-/*    top:40px;*/
-/*    padding: 10px;*/
-/*    display:inline-block;*/
-/*    text-align: center;*/
-/*}*/
+
 .div5{
     height:20%;
     position: absolute;
