@@ -78,8 +78,8 @@ public class storeDaoImpl implements storeDao {
         int updateNum = 0;
         PreparedStatement pstm = null;
         if(null != connection){
-            String sql = "update store set status=? where legal_id_card = ? ";
-            Object[] params = {shop.getStatus(),shop.getLegal_id_card()};
+            String sql = "update store set status=? where id = ? ";
+            Object[] params = {shop.getStatus(),shop.getId()};
             updateNum = BaseDao.execute(connection,pstm, sql, params);
             BaseDao.closeResource(null, pstm, null);
         }

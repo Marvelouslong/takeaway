@@ -26,7 +26,8 @@
         <h2 class="leftH2"><span class="span1"></span>功能列表 <span></span></h2>
         <nav>
             <ul class="list">
-                <li ><a href="store">商家审核</a></li>
+                <li ><a href="store">审核商家</a></li>
+                <li ><a href="ridernews">审核骑手</a></li>
                 <li><a href="admin-out">退出</a></li>
             </ul>
         </nav>

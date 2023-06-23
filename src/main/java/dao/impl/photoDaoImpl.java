@@ -108,6 +108,24 @@ public class photoDaoImpl implements photoDao {
         }
         return picturedishes_picture;
     }
-
+    public byte[] querydriver_license(int id) {
+        // TODO Auto-generated method stub
+        String sql = "select driver_license from rider where id = ? ";
+        byte[] picturedriver_license = null;
+        try{
+            conn = BaseDao.getConnection();
+            ps = conn.prepareStatement(sql);
+            ps.setInt(1, id);
+            rs = ps.executeQuery();
+            if(rs.next()){
+                picturedriver_license = rs.getBytes(1);
+            }
+        }catch(Exception e){
+            e.printStackTrace();
+        }finally{
+            BaseDao.closeResource(null, ps, rs);
+        }
+        return picturedriver_license;
+    }
 
 }

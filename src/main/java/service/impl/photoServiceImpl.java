@@ -18,17 +18,21 @@ public class photoServiceImpl implements photoService {
         public byte[] picturecertificate_of_business(int id) {
             // TODO Auto-generated method stub
             //调用dao方法
-           return bdi.querylicense(id);
+           return bdi.querycertificate_of_business(id);
         }
         public byte[] pictureshop_picture(int id) {
             // TODO Auto-generated method stub
             // 调用dao方法
-            return bdi.querylicense(id);
+            return bdi.queryshop_picture(id);
         }
     public byte[] picturedishes_picture(int id) {
         // TODO Auto-generated method stub
         // 调用dao方法
         return bdi.picturedishes_picture(id);
     }
-
+       public byte[] picturedriver_license(int id) {
+           // TODO Auto-generated method stub
+           // 调用dao方法
+          return bdi.querydriver_license(id);
+       }
 }

@@ -5,7 +5,7 @@
         font-size: 14px;
     }
     .loginstore_bg {
-        background:url("img/商家登陆.jpg");
+        background:url("../img/外卖.jpg");
         style:"background-repeat:no-repeat";
         background-attachment:fixed;
         background-size:100% 100%;
@@ -14,14 +14,14 @@
 <html>
 <head >
     <title>美了么外卖送餐平台</title>
-    <link type="text/css" rel="stylesheet" href="css/store.css">
+    <link type="text/css" rel="stylesheet" href="../css/store.css">
     <script type="text/javascript">
     </script>
 </head>
 <body  class="loginstore_bg">
 <section >
     <header class="loginHeader" >
-        <h1>美了么商家登陆</h1>
+        <h1 style="color:#000;">美了么商家登录</h1>
     </header>
     <section class="loginCont">
         <form  action="${pageContext.request.contextPath }/loginstore.do"  name="actionForm" id="actionForm"  method="post" >
@@ -35,9 +35,9 @@
                 <input id="input" style="background-color:transparent" type="password" name="password" placeholder="请输入密码"  required/>
             </div>
             <div class="subBtn">
-                <input style="background-color:transparent" type="submit" value="登录"/>
-                <input style="background-color:transparent" type="reset" value="重置"/>
-                <a href="jsp/user/homepage.jsp">ccccccccc</a>
+                <input style="background-color:transparent;color: black" type="submit" value="登录"/>
+                <input style="background-color:transparent;color:#000;" type="reset" value="重置"/>
+                <a href="../jsp/user/homepage.jsp">ccccccccc</a>
             </div>
         </form>
     </section>

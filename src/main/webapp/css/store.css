@@ -24,7 +24,7 @@
 
 .loginHeader h1 {
     font-family: "宋体";
-    color: white;
+    color: black;
     /*text-shadow: 2px 2px #000;*/
 }
 
@@ -94,7 +94,7 @@ input[type='submit'], input[type='reset'], .providerView a {
     cursor: pointer;
     padding: 6px 18px;
     font-family: 'BebasNeueRegular', 'Arial Narrow', Arial, sans-serif;
-    color: white;
+    color: black;
     font-size: 18px;
     border: 1px solid #cbcaca;
     margin-bottom: 10px;

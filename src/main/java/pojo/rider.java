@@ -111,4 +111,18 @@ public class rider {
                 ", ad_id=" + ad_id +
                 '}';
     }
+    public rider(int id,long phone,String name,String id_card,byte[] driver_license,long bank_card,String work_city,String status,String password,int ad_id)
+    {
+        this.id=id;
+        this.phone=phone;
+        this.name=name;
+        this.id_card=id_card;
+        this.driver_license=driver_license;
+        this.bank_card=bank_card;
+        this.work_city=work_city;
+        this.status=status;
+        this.password=password;
+        this.ad_id=ad_id;
+    }
+    public  rider(){}
 }
