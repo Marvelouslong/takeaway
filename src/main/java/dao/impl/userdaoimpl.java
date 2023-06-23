@@ -9,6 +9,7 @@ import pojo.*;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -110,64 +111,47 @@ public class userdaoimpl implements userdao {
     }
 
     @Override
-    public byte[] img(Connection connection,int id) {
+    public byte[] img(Connection connection,int id) throws Exception {
         PreparedStatement pstm = null;
         ResultSet rs = null;
         String sql = "select shop_picture from store where id = ? ";
         byte[] picture = null;
-        try{
-            Object[] params={id};
-            rs=BaseDao.execute(connection,pstm,rs,sql,params);
-            if(rs.next()){
-                picture = rs.getBytes(1);
-            }
-        }catch(Exception e){
-            e.printStackTrace();
-        }finally{
-            BaseDao.closeResource(null, pstm, rs);
+        Object[] params={id};
+        rs=BaseDao.execute(connection,pstm,rs,sql,params);
+        if(rs.next()){
+            picture = rs.getBytes(1);
         }
-
+        BaseDao.closeResource(null, pstm, rs);
         return picture;
     }
 
     @Override
-    public byte[] img1(Connection connection, int id) {
+    public byte[] img1(Connection connection, int id) throws Exception {
         PreparedStatement pstm = null;
         ResultSet rs = null;
         String sql = "select picture from user where id = ? ";
         byte[] picture = null;
-        try{
-            Object[] params={id};
-            rs=BaseDao.execute(connection,pstm,rs,sql,params);
-            if(rs.next()){
-                picture = rs.getBytes(1);
-            }
-        }catch(Exception e){
-            e.printStackTrace();
-        }finally{
-            BaseDao.closeResource(null, pstm, rs);
+        Object[] params={id};
+        rs=BaseDao.execute(connection,pstm,rs,sql,params);
+        if(rs.next()){
+            picture = rs.getBytes(1);
         }
-
+        BaseDao.closeResource(null, pstm, rs);
         return picture;
     }
 
     @Override
-    public int saveUserImage(Connection connection, int id, byte[] imgdata) {
+    public int saveUserImage(Connection connection, int id, byte[] imgdata) throws SQLException {
         PreparedStatement pstm = null;
         String sql = "update user set picture = ? where id = ?";
         int count=0;
-        try{
-            Blob blob = (Blob) connection.createBlob();
-            blob.setBytes(1, imgdata);
-            pstm = connection.prepareStatement(sql);
-            pstm.setBlob(1,blob);
-            pstm.setInt(2, id);
-            count = pstm.executeUpdate();
-        }catch(Exception e){
-            e.printStackTrace();
-        }finally{
-            BaseDao.closeResource(null, pstm, null);
-        }
+        Blob blob = (Blob) connection.createBlob();
+        blob.setBytes(1, imgdata);
+        pstm = connection.prepareStatement(sql);
+        pstm.setBlob(1,blob);
+        pstm.setInt(2, id);
+        count = pstm.executeUpdate();
+        BaseDao.closeResource(null, pstm, null);
         return count;
     }
 
@@ -227,8 +211,8 @@ public class userdaoimpl implements userdao {
         List<dishes> dishesList = new ArrayList<dishes>();
         if(connection != null){
             String sql = "select d.id,d.name,d.price from `order-dishes` od,dishes d where od.d_id=d.id and od.o_id=? order by d.id";
-            pstm.setInt(1,id);
             pstm = connection.prepareStatement(sql);
+            pstm.setInt(1,id);
             rs=pstm.executeQuery();
             while(rs.next()){
                 dishes _d=new dishes();
@@ -242,23 +226,85 @@ public class userdaoimpl implements userdao {
         return dishesList;
     }
     @Override
-    public byte[] img2(Connection connection, int id) {
+    public byte[] img2(Connection connection, int id) throws Exception {
         PreparedStatement pstm = null;
         ResultSet rs = null;
         String sql = "select picture from dishes where id = ? ";
         byte[] picture = null;
-        try{
-            Object[] params={id};
-            rs=BaseDao.execute(connection,pstm,rs,sql,params);
-            if(rs.next()){
-                picture = rs.getBytes(1);
+        Object[] params={id};
+        rs=BaseDao.execute(connection,pstm,rs,sql,params);
+        if(rs.next()){
+            picture = rs.getBytes(1);
+        }
+        BaseDao.closeResource(null, pstm, rs);
+        return picture;
+    }
+
+    @Override
+    public int addevaluate(Connection connection, int id,byte[]imgdata,String evaluate,int count1) throws SQLException {
+        PreparedStatement pstm = null;
+        String sql = "insert into evaluate values (?,?,?,?)";
+        int count=0;
+        Blob blob = (Blob) connection.createBlob();
+        blob.setBytes(1, imgdata);
+        pstm = connection.prepareStatement(sql);
+        pstm.setInt(1,count1);
+        pstm.setBlob(2,blob);
+        pstm.setString(3, evaluate);
+        pstm.setInt(4,id);
+        count = pstm.executeUpdate();
+        BaseDao.closeResource(null, pstm, null);
+        return count;
+    }
+
+    @Override
+    public int getevaluateCount(Connection connection) throws Exception {
+        PreparedStatement pstm=null;
+        int count=0;
+        String sql="select count(id) as count from evaluate";
+        ResultSet rs=null;
+        pstm=connection.prepareStatement(sql);
+        rs = pstm.executeQuery();
+        if(rs.next()){
+            count = rs.getInt("count");
+        }
+        BaseDao.closeResource(null, pstm, rs);
+        return count;
+    }
+
+    @Override
+    public byte[] img3(Connection connection, int id) throws Exception {
+        PreparedStatement pstm = null;
+        ResultSet rs = null;
+        String sql = "select picture from evaluate where id = ? ";
+        byte[] picture = null;
+        Object[] params={id};
+        rs=BaseDao.execute(connection,pstm,rs,sql,params);
+        if(rs.next()){
+            picture = rs.getBytes(1);
+        }
+        BaseDao.closeResource(null, pstm, rs);
+        return picture;
+    }
+
+    @Override
+    public List<evaluate> showevaluate(Connection connection, int id) throws Exception {
+        PreparedStatement pstm = null;
+        ResultSet rs = null;
+        List<evaluate> evaluateList = new ArrayList<evaluate>();
+        if(connection != null){
+            String sql = "select id,evaluate from evaluate where o_id=? order by id DESC";
+            pstm = connection.prepareStatement(sql);
+            pstm.setInt(1,id);
+            rs=pstm.executeQuery();
+            while(rs.next()){
+                evaluate _d=new evaluate();
+                _d.setId(rs.getInt("id"));
+                _d.setEvaluate(rs.getString("evaluate"));
+                evaluateList.add(_d);
             }
-        }catch(Exception e){
-            e.printStackTrace();
-        }finally{
             BaseDao.closeResource(null, pstm, rs);
         }
-
-        return picture;
+        return evaluateList;
     }
 }

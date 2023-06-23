@@ -134,12 +134,19 @@
                       alt="img"></td>
             <td style="padding-left: 40px;padding-top: 20px">骑手：${order._r.phone != 0 ? order._r.phone : '暂无人接单'}<br>商家：${order._s.con_telephone}</td>
             <td style="padding-left: 40px;padding-top: 20px">订单状态：${order.status}<br>订单时间：${order.order_time}<br>订单金额：${order.money}</td>
-            <td style="padding-left: 40px;padding-top: 20px"><a class="vieworder" href="Userservlet?method=showdishes&id=${order.id}">查看详情</a></td>
-            <td style="padding-left: 20px;padding-top: 20px"><a class="vieworder" href="#">添加评论</a></td>
+            <td style="padding-left: 40px;padding-top: 20px"><a class="vieworder" href="Userservlet?method=showdishes&id=${order.id}">查看菜品</a></td>
+            <td style="padding-left: 20px;padding-top: 20px"><a class="vieworder" href="Userservlet?method=showevaluate&id=${order.id}">添加评论</a></td>
             <td style="padding-left: 20px;padding-top: 20px"><a class="vieworder" href="#">再来一单</a></td>
             </tr>
           </c:forEach>
+          <c:set var="isExecuted" value="false" />
           <c:forEach items="${dishlist}" var="dish" varStatus="status">
+            <c:if test="${not isExecuted}">
+              <a href="<c:url value="Userservlet">
+                <c:param name="method" value="myinformation"/>
+                </c:url>">返回订单</a>
+              <c:set var="isExecuted" value="true" />
+            </c:if>
             <tr>
               <td> <img src="Userservlet?id=${dish.id}&method=img2"
                         style="animation: avatar_turn_around 2s linear infinite;
@@ -153,7 +160,7 @@
                         alt="img"></td>
               <td style="padding-left: 40px;padding-top: 20px">菜名：${dish.name}<br>价钱：${dish.price}</td>
             </tr>
-          </c:forEach>
+           </c:forEach>
         </table>
        </div>
       </article>

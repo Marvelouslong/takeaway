@@ -14,4 +14,8 @@ public interface userservice {
     public List<order> getorderlist(int id);
     public List<dishes> showdish(int id);
     public byte[] img2(int id);
+    public int addevaluate(int id,byte[]imgdata,String evaluate,int count1);
+    public byte[] img3(int id);
+    public List<evaluate> showevaluate(int id);
+    public int getevaluateCount();
 }
