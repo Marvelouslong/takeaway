@@ -2,14 +2,12 @@ package pojo;
 
 import com.mysql.cj.jdbc.Blob;
 
-import java.util.Arrays;
-
 public class rider {
     private int id;
     private long phone;
     private String name;
     private String id_card;
-    private byte[] driver_license;
+    private Blob driver_license;
     private long bank_card;
     private String work_city;
     private String status;
@@ -48,11 +46,11 @@ public class rider {
         this.id_card = id_card;
     }
 
-    public byte[] getDriver_license() {
+    public Blob getDriver_license() {
         return driver_license;
     }
 
-    public void setDriver_license(byte[] driver_license) {
+    public void setDriver_license(Blob driver_license) {
         this.driver_license = driver_license;
     }
 
@@ -111,11 +109,11 @@ public class rider {
                 ", ad_id=" + ad_id +
                 '}';
     }
-    public rider(int id,long phone,String name,String id_card,byte[] driver_license,long bank_card,String work_city,String status,String password,int ad_id)
-    {
+
+    public rider(int id, long phone,String name,String id_card,Blob driver_license,long bank_card,String work_city,String status,String password,int ad_id){
         this.id=id;
-        this.phone=phone;
-        this.name=name;
+        this.phone = phone;
+        this.name = name;
         this.id_card=id_card;
         this.driver_license=driver_license;
         this.bank_card=bank_card;
@@ -124,5 +122,32 @@ public class rider {
         this.password=password;
         this.ad_id=ad_id;
     }
-    public  rider(){}
+    public rider(int id, long phone,String name,String id_card,Blob driver_license,long bank_card,String work_city,String status,String password){
+        this.id=id;
+        this.phone = phone;
+        this.name = name;
+        this.id_card=id_card;
+        this.driver_license=driver_license;
+        this.bank_card=bank_card;
+        this.work_city=work_city;
+        this.status=status;
+        this.password=password;
+    }
+    public rider(int id,int ad_id){
+        this.id = id;
+        this.ad_id = ad_id;
+    }
+    public rider(int id, long phone,String name,String id_card,Blob driver_license,long bank_card,String work_city,String password){
+        this.id=id;
+        this.phone = phone;
+        this.name = name;
+        this.id_card=id_card;
+        this.driver_license=driver_license;
+        this.bank_card=bank_card;
+        this.work_city=work_city;
+        this.password=password;
+    }
+
+
+
 }
