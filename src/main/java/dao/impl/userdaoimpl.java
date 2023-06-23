@@ -162,7 +162,7 @@ public class userdaoimpl implements userdao {
         ResultSet rs = null;
         List<order> orderlist = new ArrayList<order>();
         if(connection != null){
-            String sql = "select o.id oid,o.status,o.money,o.order_time,s.id sid,s.con_telephone,s.shop_name,r.phone rphone,re.name `rename`,re.phone rephone,re.address " +
+            String sql = "select o.id oid,o.status,o.money,o.order_time,s.id sid,s.con_telephone,s.shop_name,r.phone rphone,r.name rname,re.name `rename`,re.phone rephone,re.address " +
                     "from `order` o " +
                     "JOIN user u ON o.u_id = u.id " +
                     "JOIN store s ON o.s_id = s.id " +
@@ -185,6 +185,13 @@ public class userdaoimpl implements userdao {
                 _store.setShop_name(rs.getString("shop_name"));
                 _order.set_s(_store);
                 rider _rider=new rider();
+                String rname=rs.getString("rname");
+                if (rs.wasNull()) {
+                    rname=null;
+                    _rider.setName(rname);
+                } else {
+                    _rider.setName(rs.getString("rname"));
+                }
                 long rphone = rs.getLong("rphone");
                 if (rs.wasNull()) {
                     rphone=0;
