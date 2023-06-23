@@ -300,4 +300,19 @@ public class userserviceimpl implements userservice {
         }
         return storelist;
     }
+    public List<dishes> dishlist(int id) {
+        // TODO Auto-generated method stub
+        Connection connection = null;
+        List<dishes> dishlist = null;
+        try {
+            connection = BaseDao.getConnection();
+            dishlist = Userdao.dishlist(connection,id);
+        } catch (Exception e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }finally{
+            BaseDao.closeResource(connection, null, null);
+        }
+        return dishlist;
+    }
 }

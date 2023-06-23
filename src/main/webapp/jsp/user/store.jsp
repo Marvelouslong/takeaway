@@ -92,7 +92,7 @@
     </tr>
     </thead>
     <tbody>
-    <c:forEach items="${dishes_list}" var="dish" >
+    <c:forEach items="${dishlist}" var="dish" >
       <tr>
         <td>${dish.id}</td>
         <td>

@@ -23,4 +23,5 @@ public interface userservice {
     public int gettalkCount();
     public int savetalk(int id,byte[] bytes,String context,int count1);
     public List<store> storelist(int id);
+    public List<dishes> dishlist(int id);
 }

@@ -403,4 +403,28 @@ public class userdaoimpl implements userdao {
         }
         return storeList;
     }
+    @Override
+    public List<dishes> dishlist(Connection connection, int id) throws Exception {
+        PreparedStatement pstm = null;
+        ResultSet rs = null;
+        List<dishes> dishList = new ArrayList<dishes>();
+        if(connection != null){
+            String sql ="select * from dishes where s_id = ?";
+            pstm = connection.prepareStatement(sql);
+            pstm.setInt(1,id);
+            rs=pstm.executeQuery();
+            while(rs.next()){
+                dishes _d = new dishes();
+                _d.setId(rs.getInt("id"));
+                _d.setName(rs.getString("name"));
+                _d.setDescribe(rs.getString("describe"));
+                _d.setStatus(rs.getString("status"));
+                _d.setPrice(rs.getDouble("price"));
+                _d.setCategory(rs.getString("category"));
+                dishList.add(_d);
+            }
+            BaseDao.closeResource(null, pstm, rs);
+        }
+        return dishList;
+    }
 }

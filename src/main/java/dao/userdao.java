@@ -25,4 +25,5 @@ public interface userdao {
     public int gettalkCount(Connection connection) throws Exception;
     public int savetalk(Connection connection,int id,byte[] bytes,String context,int count1) throws SQLException;
     public List<store> storelist(Connection connection, int id)throws Exception;
+    public List<dishes> dishlist(Connection connection, int id)throws Exception;
 }

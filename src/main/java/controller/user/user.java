@@ -354,7 +354,10 @@ public class user extends HttpServlet {
         userservice userservice = new userserviceimpl();
         List<store> storelist = null;
         storelist = userservice.storelist(id1);
+        List<dishes> dishlist = null;
+        dishlist = userservice.dishlist(id1);
         req.setAttribute("storelist", storelist);
+        req.setAttribute("dishlist", dishlist);
         req.getRequestDispatcher("/jsp/user/store.jsp").forward(req, resp);
     }
 }
