@@ -8,7 +8,6 @@ import java.util.List;
 
 public interface userdao {
     public int getstoreCount(Connection connection, String query) throws Exception;
-
     public List<store> getstorelist(Connection connection, String query, int currentPageNo, int pageSize)throws Exception;
     public List<talk> gettalklist(Connection connection)throws Exception;
     public byte[] img(Connection connection,int id) throws Exception;
@@ -25,4 +24,5 @@ public interface userdao {
     public byte[] img5(Connection connection,int id) throws Exception;
     public int gettalkCount(Connection connection) throws Exception;
     public int savetalk(Connection connection,int id,byte[] bytes,String context,int count1) throws SQLException;
+    public List<store> storelist(Connection connection, int id)throws Exception;
 }

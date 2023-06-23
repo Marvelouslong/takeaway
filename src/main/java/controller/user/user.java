@@ -31,6 +31,7 @@ public class user extends HttpServlet {
                 query = "";
             }
             String pageIndex = req.getParameter("pageIndex");
+            System.out.println(query);
             this.query(req, resp, query, pageIndex);
         } else if (method != null && method.equals("myinformation")) {
             this.myinformation(req, resp);
@@ -60,6 +61,10 @@ public class user extends HttpServlet {
         }else if (method != null && method.equals("img5")) {
             String id = req.getParameter("id");
             this.img5(req, resp, id);
+        }
+        else if (method != null && method.equals("storelist")) {
+            String id = req.getParameter("id");
+            this.storelist(req, resp, id);
         }
     }
 
@@ -343,5 +348,13 @@ public class user extends HttpServlet {
         if(count!=0) {
             this.talkshow(req,resp,pageIndex);
         }
+    }
+    private void storelist(HttpServletRequest req, HttpServletResponse resp, String id) throws IOException, ServletException {
+        int id1 = Integer.parseInt(id);
+        userservice userservice = new userserviceimpl();
+        List<store> storelist = null;
+        storelist = userservice.storelist(id1);
+        req.setAttribute("storelist", storelist);
+        req.getRequestDispatcher("/jsp/user/store.jsp").forward(req, resp);
     }
 }

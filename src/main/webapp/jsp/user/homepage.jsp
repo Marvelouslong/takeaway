@@ -1,6 +1,4 @@
-<%@ page import="util.Constants" %>
-<%@ page import="java.util.Base64" %>
-<%@ page import="java.io.OutputStream" %><%--
+<%--
   Created by IntelliJ IDEA.
   User: HAN
   Date: 2023/6/13
@@ -44,8 +42,8 @@
     .container {
         max-width: 1320px;
         margin-top: 5px;
-        margin-left: 0px;
-        margin-right: 0px;
+        margin-left: 0;
+        margin-right: 0;
     }
     .stores {
         display: flex;
@@ -74,7 +72,11 @@
                 <span>美食</span>
             </a></li>
             <li>
-                <a href="Userservlet?method=query&query='包子粥铺'&pageIndex=1">
+                <a href="<c:url value="Userservlet">
+                    <c:param name="method" value="query"/>
+                    <c:param name="query" value="包子粥铺"/>
+                    <c:param name="pageIndex" value="1"/>
+                    </c:url>">
                     <div class="con-img">
                         <img src="${pageContext.request.contextPath}/img/粥铺.webp" alt="mlm">
                     </div>
@@ -82,7 +84,11 @@
                 </a>
             </li>
             <li>
-                <a href="https://www.bilibili.com/ranking">
+                <a href="<c:url value="Userservlet">
+                    <c:param name="method" value="query"/>
+                    <c:param name="query" value="浪漫鲜花"/>
+                    <c:param name="pageIndex" value="1"/>
+                    </c:url>">
                     <div class="con-img">
                         <img src="${pageContext.request.contextPath}/img/鲜花.webp" alt="mlm">
                     </div>
@@ -90,7 +96,11 @@
                 </a>
             </li>
             <li>
-                <a href="https://www.bilibili.com/v/channel/9222?tab=multiple">
+                <a href="<c:url value="Userservlet">
+                    <c:param name="method" value="query"/>
+                    <c:param name="query" value="炸鸡鸭脖"/>
+                    <c:param name="pageIndex" value="1"/>
+                    </c:url>">
                     <div class="con-img">
                         <img src="${pageContext.request.contextPath}/img/炸鸡.jpg" alt="mlm">
                     </div>
@@ -98,7 +108,11 @@
                 </a>
             </li>
             <li>
-                <a href="https://www.bilibili.com/v/channel/9222?tab=multiple">
+                <a href="<c:url value="Userservlet">
+                    <c:param name="method" value="query"/>
+                    <c:param name="query" value="米粉馆"/>
+                    <c:param name="pageIndex" value="1"/>
+                    </c:url>">
                     <div class="con-img">
                         <img src="${pageContext.request.contextPath}/img/米粉.jpg" alt="mlm">
                     </div>
@@ -106,7 +120,11 @@
                 </a>
             </li>
             <li>
-                <a href="https://www.bilibili.com/v/channel/9222?tab=multiple">
+                <a href="<c:url value="Userservlet">
+                    <c:param name="method" value="query"/>
+                    <c:param name="query" value="蔬菜水果"/>
+                    <c:param name="pageIndex" value="1"/>
+                    </c:url>">
                     <div class="con-img">
                         <img src="${pageContext.request.contextPath}/img/蔬菜.webp" alt="mlm">
                     </div>
@@ -114,7 +132,11 @@
                 </a>
             </li>
             <li>
-                <a href="https://www.bilibili.com/v/channel/9222?tab=multiple">
+                <a href="<c:url value="Userservlet">
+                    <c:param name="method" value="query"/>
+                    <c:param name="query" value="甜点饮品"/>
+                    <c:param name="pageIndex" value="1"/>
+                    </c:url>">
                     <div class="con-img">
                         <img src="${pageContext.request.contextPath}/img/甜品.webp" alt="mlm">
                     </div>
@@ -122,15 +144,23 @@
                 </a>
             </li>
             <li>
-                <a href="https://www.bilibili.com/v/channel/9222?tab=multiple">
+                <a href="<c:url value="Userservlet">
+                    <c:param name="method" value="query"/>
+                    <c:param name="query" value="酒水"/>
+                    <c:param name="pageIndex" value="1"/>
+                    </c:url>">
                     <div class="con-img">
                         <img src="${pageContext.request.contextPath}/img/酒.webp" alt="mlm">
                     </div>
-                    <span>买酒</span>
+                    <span>酒水</span>
                 </a>
             </li>
             <li>
-                <a href="https://www.bilibili.com/v/channel/9222?tab=multiple">
+                <a href="<c:url value="Userservlet">
+                    <c:param name="method" value="query"/>
+                    <c:param name="query" value="汤饭"/>
+                    <c:param name="pageIndex" value="1"/>
+                    </c:url>">
                     <div class="con-img">
                         <img src="${pageContext.request.contextPath}/img/汤饭.jpg" alt="mlm">
                     </div>
@@ -138,7 +168,11 @@
                 </a>
             </li>
             <li>
-                <a href="https://www.bilibili.com/v/channel/9222?tab=multiple">
+                <a href="<c:url value="Userservlet">
+                    <c:param name="method" value="query"/>
+                    <c:param name="query" value="川湘菜"/>
+                    <c:param name="pageIndex" value="1"/>
+                    </c:url>">
                     <div class="con-img">
                         <img src="${pageContext.request.contextPath}/img/川湘菜.jpg" alt="mlm">
                     </div>
@@ -146,7 +180,11 @@
                 </a>
             </li>
             <li>
-                <a href="https://www.bilibili.com/v/channel/9222?tab=multiple">
+                <a href="<c:url value="Userservlet">
+                    <c:param name="method" value="query"/>
+                    <c:param name="query" value="汉堡披萨"/>
+                    <c:param name="pageIndex" value="1"/>
+                    </c:url>">
                     <div class="con-img">
                         <img src="${pageContext.request.contextPath}/img/汉堡.webp" alt="mlm">
                     </div>
@@ -154,7 +192,11 @@
                 </a>
             </li>
             <li>
-                <a href="https://www.bilibili.com/v/channel/9222?tab=multiple">
+                <a href="<c:url value="Userservlet">
+                    <c:param name="method" value="query"/>
+                    <c:param name="query" value="面包蛋糕"/>
+                    <c:param name="pageIndex" value="1"/>
+                    </c:url>">
                     <div class="con-img">
                         <img src="${pageContext.request.contextPath}/img/面包.webp" alt="mlm">
                     </div>
@@ -162,7 +204,11 @@
                 </a>
             </li>
             <li>
-                <a href="https://www.bilibili.com/v/channel/9222?tab=multiple">
+                <a href="<c:url value="Userservlet">
+                    <c:param name="method" value="query"/>
+                    <c:param name="query" value="龙虾烧烤"/>
+                    <c:param name="pageIndex" value="1"/>
+                    </c:url>">
                     <div class="con-img">
                         <img src="${pageContext.request.contextPath}/img/龙虾.webp" alt="mlm">
                     </div>
@@ -170,7 +216,11 @@
                 </a>
             </li>
             <li>
-                <a href="https://www.bilibili.com/v/channel/9222?tab=multiple">
+                <a href="<c:url value="Userservlet">
+                    <c:param name="method" value="query"/>
+                    <c:param name="query" value="火锅烤鱼"/>
+                    <c:param name="pageIndex" value="1"/>
+                    </c:url>">
                     <div class="con-img">
                         <img src="${pageContext.request.contextPath}/img/烤鱼.jpg" alt="mlm">
                     </div>
@@ -178,7 +228,11 @@
                 </a>
             </li>
             <li>
-                <a href="https://www.bilibili.com/v/channel/9222?tab=multiple">
+                <a href="<c:url value="Userservlet">
+                    <c:param name="method" value="query"/>
+                    <c:param name="query" value="暖胃汤面"/>
+                    <c:param name="pageIndex" value="1"/>
+                    </c:url>">
                     <div class="con-img">
                         <img src="${pageContext.request.contextPath}/img/汤面.webp" alt="mlm">
                     </div>
@@ -186,7 +240,11 @@
                 </a>
             </li>
             <li>
-                <a href="https://www.bilibili.com/v/channel/9222?tab=multiple">
+                <a href="<c:url value="Userservlet">
+                    <c:param name="method" value="query"/>
+                    <c:param name="query" value="日韩料理"/>
+                    <c:param name="pageIndex" value="1"/>
+                    </c:url>">
                     <div class="con-img">
                         <img src="${pageContext.request.contextPath}/img/日韩.webp" alt="mlm">
                     </div>
@@ -194,7 +252,11 @@
                 </a>
             </li>
             <li>
-                <a href="https://www.bilibili.com/v/channel/9222?tab=multiple">
+                <a href="<c:url value="Userservlet">
+                    <c:param name="method" value="query"/>
+                    <c:param name="query" value="低脂轻食"/>
+                    <c:param name="pageIndex" value="1"/>
+                    </c:url>">
                     <div class="con-img">
                         <img src="${pageContext.request.contextPath}/img/轻食.jpeg" alt="mlm">
                     </div>
@@ -202,7 +264,11 @@
                 </a>
             </li>
             <li>
-                <a href="https://www.bilibili.com/v/channel/9222?tab=multiple">
+                <a href="<c:url value="Userservlet">
+                    <c:param name="method" value="query"/>
+                    <c:param name="query" value="快食简餐"/>
+                    <c:param name="pageIndex" value="1"/>
+                    </c:url>">
                     <div class="con-img">
                         <img src="${pageContext.request.contextPath}/img/简餐.webp" alt="mlm">
                     </div>
@@ -210,7 +276,11 @@
                 </a>
             </li>
             <li>
-                <a href="https://www.bilibili.com/v/channel/9222?tab=multiple">
+                <a href="<c:url value="Userservlet">
+                    <c:param name="method" value="query"/>
+                    <c:param name="query" value="小吃馆"/>
+                    <c:param name="pageIndex" value="1"/>
+                    </c:url>">
                     <div class="con-img">
                         <img src="${pageContext.request.contextPath}/img/小吃.webp" alt="mlm">
                     </div>
@@ -222,7 +292,7 @@
     <main class="container">
         <div class="stores">
             <c:forEach items="${storelist}" var="store" varStatus="status">
-                <a class="store" href="store.jsp?storelist=${store}">
+                <a class="store" href="Userservlet?method=storelist&id=${store.id}">
                     <img src="Userservlet?id=${store.id}&method=img"
                          style="animation: avatar_turn_around 2s linear infinite;
                          display: inline-block;

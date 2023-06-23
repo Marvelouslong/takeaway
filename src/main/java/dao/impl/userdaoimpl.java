@@ -69,8 +69,9 @@ public class userdaoimpl implements userdao {
             else {
                 pstm.setObject(1,params[0]);
                 pstm.setObject(2,params[0]);
-                pstm.setObject(3,params[1]);
-                pstm.setObject(4,params[2]);
+                pstm.setObject(3,params[0]);
+                pstm.setObject(4,params[1]);
+                pstm.setObject(5,params[2]);
             }
             rs=pstm.executeQuery();
 
@@ -377,5 +378,29 @@ public class userdaoimpl implements userdao {
         count = pstm.executeUpdate();
         BaseDao.closeResource(null, pstm, null);
         return count;
+    }
+
+    @Override
+    public List<store> storelist(Connection connection, int id) throws Exception {
+        PreparedStatement pstm = null;
+        ResultSet rs = null;
+        List<store> storeList = new ArrayList<store>();
+        if(connection != null){
+            String sql ="select * from store where id = ?";
+            pstm = connection.prepareStatement(sql);
+            pstm.setInt(1,id);
+            rs=pstm.executeQuery();
+            while(rs.next()){
+                store _store = new store();
+                _store.setId(rs.getInt("id"));
+                _store.setAddress(rs.getString("address"));
+                _store.setShop_name(rs.getString("shop_name"));
+                _store.setMain_category(rs.getString("main_category"));
+                _store.setAuxiliary_category(rs.getString("auxiliary_category"));
+                storeList.add(_store);
+            }
+            BaseDao.closeResource(null, pstm, rs);
+        }
+        return storeList;
     }
 }
