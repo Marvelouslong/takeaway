@@ -56,4 +56,35 @@ public class tasteDaoImpl implements tasteDao {
         }
         return rs;
     }
+    public Integer update(taste taste){
+        Connection connection = BaseDao.getConnection();
+        String sql = "update taste set `name` =? where id=?";
+        PreparedStatement pstm = null;
+        Integer rs = null;
+        try {
+            pstm.setString(1, taste.getName());
+            pstm.setInt(2,taste.getId());
+            rs= pstm.executeUpdate();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        } finally {
+            BaseDao.closeResource(null,pstm, null);
+        }
+        return rs;
+    }
+    public Integer del(Integer id){
+        Connection connection = BaseDao.getConnection();
+        String sql = "delete from taste where id ='"+id+"'";
+        PreparedStatement pstm = null;
+        Integer rs = null;
+        try {
+            pstm = connection.prepareStatement(sql);
+            rs = pstm.executeUpdate();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        } finally {
+            BaseDao.closeResource(null,pstm, null);
+        }
+        return rs;
+    }
 }

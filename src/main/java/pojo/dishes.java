@@ -38,6 +38,15 @@ public class dishes {
         this.s_id=s_id;
 //        this.id=id;
     }
+    public  dishes(Integer id,String name,String describe,String status,Double price,String category,byte[] picture){
+        this.name=name;
+        this.describe=describe;
+        this.status=status;
+        this.price=price;
+        this.category=category;
+        this.picture=picture;
+        this.id=id;
+    }
 
 
     public int getId() {

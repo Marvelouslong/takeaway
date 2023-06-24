@@ -30,8 +30,10 @@
       <tr>
         <td>${taste.name}</td>
         <td>
-          <button type="button">删除</button>
-          <button type="button">修改</button>
+          <form action="<c:url value="/TASTE?method=del"/>" method="post">
+            <input type="hidden" name="id" value="${taste.id}">
+            <button type="submit" value="删除">删除</button>
+          </form>
         </td>
       </tr>
     </c:forEach>

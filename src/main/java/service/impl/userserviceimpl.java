@@ -283,4 +283,36 @@ public class userserviceimpl implements userservice {
         }
         return count;
     }
+
+    @Override
+    public List<store> storelist(int id) {
+        // TODO Auto-generated method stub
+        Connection connection = null;
+        List<store> storelist = null;
+        try {
+            connection = BaseDao.getConnection();
+            storelist = Userdao.storelist(connection,id);
+        } catch (Exception e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }finally{
+            BaseDao.closeResource(connection, null, null);
+        }
+        return storelist;
+    }
+    public List<dishes> dishlist(int id) {
+        // TODO Auto-generated method stub
+        Connection connection = null;
+        List<dishes> dishlist = null;
+        try {
+            connection = BaseDao.getConnection();
+            dishlist = Userdao.dishlist(connection,id);
+        } catch (Exception e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }finally{
+            BaseDao.closeResource(connection, null, null);
+        }
+        return dishlist;
+    }
 }

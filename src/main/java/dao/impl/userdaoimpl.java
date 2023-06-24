@@ -52,7 +52,7 @@ public class userdaoimpl implements userdao {
             sql.append("select s.* from store s,dishes d where s.id = d.s_id");
             List<Object> list = new ArrayList<Object>();
             if(!StringUtils.isNullOrEmpty(query)){
-                sql.append(" and (s.shop_name like ? or d.name like ?)");
+                sql.append(" and (s.shop_name like ? or d.name like ? or s.main_category like ?)");
                 list.add("%"+query+"%");
             }
 
@@ -69,8 +69,9 @@ public class userdaoimpl implements userdao {
             else {
                 pstm.setObject(1,params[0]);
                 pstm.setObject(2,params[0]);
-                pstm.setObject(3,params[1]);
-                pstm.setObject(4,params[2]);
+                pstm.setObject(3,params[0]);
+                pstm.setObject(4,params[1]);
+                pstm.setObject(5,params[2]);
             }
             rs=pstm.executeQuery();
 
@@ -79,7 +80,8 @@ public class userdaoimpl implements userdao {
                 _store.setId(rs.getInt("id"));
                 _store.setAddress(rs.getString("address"));
                 _store.setShop_name(rs.getString("shop_name"));
-                _store.setShop_picture(rs.getBytes("shop_picture"));
+                _store.setMain_category(rs.getString("main_category"));
+                _store.setAuxiliary_category(rs.getString("auxiliary_category"));
                 storeList.add(_store);
             }
             BaseDao.closeResource(null, pstm, rs);
@@ -376,5 +378,53 @@ public class userdaoimpl implements userdao {
         count = pstm.executeUpdate();
         BaseDao.closeResource(null, pstm, null);
         return count;
+    }
+
+    @Override
+    public List<store> storelist(Connection connection, int id) throws Exception {
+        PreparedStatement pstm = null;
+        ResultSet rs = null;
+        List<store> storeList = new ArrayList<store>();
+        if(connection != null){
+            String sql ="select * from store where id = ?";
+            pstm = connection.prepareStatement(sql);
+            pstm.setInt(1,id);
+            rs=pstm.executeQuery();
+            while(rs.next()){
+                store _store = new store();
+                _store.setId(rs.getInt("id"));
+                _store.setAddress(rs.getString("address"));
+                _store.setShop_name(rs.getString("shop_name"));
+                _store.setMain_category(rs.getString("main_category"));
+                _store.setAuxiliary_category(rs.getString("auxiliary_category"));
+                storeList.add(_store);
+            }
+            BaseDao.closeResource(null, pstm, rs);
+        }
+        return storeList;
+    }
+    @Override
+    public List<dishes> dishlist(Connection connection, int id) throws Exception {
+        PreparedStatement pstm = null;
+        ResultSet rs = null;
+        List<dishes> dishList = new ArrayList<dishes>();
+        if(connection != null){
+            String sql ="select * from dishes where s_id = ?";
+            pstm = connection.prepareStatement(sql);
+            pstm.setInt(1,id);
+            rs=pstm.executeQuery();
+            while(rs.next()){
+                dishes _d = new dishes();
+                _d.setId(rs.getInt("id"));
+                _d.setName(rs.getString("name"));
+                _d.setDescribe(rs.getString("describe"));
+                _d.setStatus(rs.getString("status"));
+                _d.setPrice(rs.getDouble("price"));
+                _d.setCategory(rs.getString("category"));
+                dishList.add(_d);
+            }
+            BaseDao.closeResource(null, pstm, rs);
+        }
+        return dishList;
     }
 }
