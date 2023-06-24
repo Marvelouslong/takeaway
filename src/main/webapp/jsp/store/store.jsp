@@ -99,15 +99,18 @@
       <div class="card-widget card-info">
         <div class="card-content">
           <div class="card-info-avatar is-center">
-            <img class="avatar-img"
-                 src="${pageContext.request.contextPath}/img/凯尔西.jpg"
-                 alt="头像">
-            <div class="author-info__name">$userSession.name</div>
-            <div class="author-info__phone">联系人电话</div>
-            <div class="author-info__sex">联系人姓名</div>
-            <div class="author-info__description">地址</div>
-            <div class="author-info__name">$主营</div>
-            <div class="author-info__name">$辅营</div>
+            <img  src="pictureshop_picture?id=${shopSession.id}" alt="image" style="height: 150px;width: 150px;border-radius:200px;margin-left: 65px;
+    margin-top: 10%;">
+            <div class="author-info__name">商店姓名${shopSession.shop_name}</div>
+            <div class="author-info__phone">联系人电话:${shopSession.con_telephone}</div>
+            <div class="author-info__sex">联系人姓名:${shopSession.con_name}</div>
+            <div class="author-info__description">地址:${shopSession.address}</div>
+            <div class="author-info__name">$主营:${shopSession.main_category}</div>
+            <div class="author-info__name">$辅营:${shopSession.auxiliary_category}</div>
+            <div class="author-info__name">$登陆密码:${shopSession.password}</div>
+            <div class="author-info__name">$银行卡号:${shopSession.bank_card}</div>
+            <div class="author-info__name">$法定联系人身份证件:${shopSession.legal_id_card}</div>
+            <div class="author-info__name">$店铺审核状态:${shopSession.status}</div>
           </div>
         </div>
       </div>
@@ -115,17 +118,11 @@
     <article id="page">
       <div class="article-container">
         <h2>我的信息</h2>
-        <form action="user" method="get">
-          <input type="hidden" name="method" value="orderlist">
-          <c:forEach items="${orderlist}" var="order" varStatus="status">
-            ${order.s_name}
-            ${order.r_phone}
-            ${order.status}
-            ${order.d_name}
-            ${order.money}
-            <hr>
-          </c:forEach>
-        </form>
+        <div>商店xxx${shopSession.brand_authorization} </div>
+        <div>商店xxx${shopSession.license} </div>
+        <div>商店xxx${shopSession.certificate_of_business} </div>
+        <div>商店xxx${shopSession.shop_picture} </div>
+
       </div>
     </article>
   </div>

@@ -5,6 +5,7 @@
   Time: 1:22
   To change this template use File | Settings | File Templates.
 --%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@include file='where.jsp'%>
 <html>
@@ -15,14 +16,14 @@
 <body>
 <div class="bj"></div>
 <div class="div1">
-    <img class="div1-img" src="../../img/店铺图片.jpg" alt="店铺图片">
-    <p class="p1">吃好你再来饭店</p>
-    <p>主营类型：$四川菜</p>
-    <p>辅营类型：$家常菜</p>
-    <p>商家简介：神佛无啊回复啊回复爱好分辨出位于巴登参悟i很多不擦五大湖大无法无法</p>
+    <img class="div1-img" src="${shopSession.shop_picture}" alt="店铺图片">
+    <p class="p1">${shopSession.shop_name}</p>
+    <p>主营类型：${shopSession.main_category}</p>
+    <p>辅营类型：${shopSession.auxiliary_category}</p>
+    <p>店铺地址：${shopSession.address}</p>
 </div>
 <div class="div2">
-    <button class="btn" onclick="window.location.href = 'store_order.jsp'"><<  返回界面</button>
+    <button class="btn" onclick="window.location.href = '/jsp/store/store_order.jsp'"><<  返回界面</button>
     <div class="div10">
     <div class="div8">
         <span>订单序号 :$序号</span>      <span style="float: right">付款方式:$微信支付</span> <br> <br>

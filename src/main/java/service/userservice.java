@@ -18,4 +18,10 @@ public interface userservice {
     public byte[] img3(int id);
     public List<evaluate> showevaluate(int id);
     public int getevaluateCount();
+    public byte[] img4(int id);
+    public byte[] img5(int id);
+    public int gettalkCount();
+    public int savetalk(int id,byte[] bytes,String context,int count1);
+    public List<store> storelist(int id);
+    public List<dishes> dishlist(int id);
 }

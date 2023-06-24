@@ -52,7 +52,7 @@ public class userdaoimpl implements userdao {
             sql.append("select s.* from store s,dishes d where s.id = d.s_id");
             List<Object> list = new ArrayList<Object>();
             if(!StringUtils.isNullOrEmpty(query)){
-                sql.append(" and (s.shop_name like ? or d.name like ?)");
+                sql.append(" and (s.shop_name like ? or d.name like ? or s.main_category like ?)");
                 list.add("%"+query+"%");
             }
 
@@ -69,8 +69,9 @@ public class userdaoimpl implements userdao {
             else {
                 pstm.setObject(1,params[0]);
                 pstm.setObject(2,params[0]);
-                pstm.setObject(3,params[1]);
-                pstm.setObject(4,params[2]);
+                pstm.setObject(3,params[0]);
+                pstm.setObject(4,params[1]);
+                pstm.setObject(5,params[2]);
             }
             rs=pstm.executeQuery();
 
@@ -79,7 +80,8 @@ public class userdaoimpl implements userdao {
                 _store.setId(rs.getInt("id"));
                 _store.setAddress(rs.getString("address"));
                 _store.setShop_name(rs.getString("shop_name"));
-                _store.setShop_picture(rs.getBytes("shop_picture"));
+                _store.setMain_category(rs.getString("main_category"));
+                _store.setAuxiliary_category(rs.getString("auxiliary_category"));
                 storeList.add(_store);
             }
             BaseDao.closeResource(null, pstm, rs);
@@ -93,15 +95,16 @@ public class userdaoimpl implements userdao {
         ResultSet rs = null;
         List<talk> talkList = new ArrayList<talk>();
         if(connection != null){
-            String sql = "select t.context,t.picture,u.name from talk t,user u where t.u_id = u.id order by t.id DESC";
+            String sql = "select t.id tid,t.context,u.name,u.id uid from talk t,user u where t.u_id = u.id order by t.id DESC";
             pstm = connection.prepareStatement(sql);
             rs=pstm.executeQuery();
             while(rs.next()){
                 user _user=new user();
                 _user.setName(rs.getString("name"));
+                _user.setId(rs.getInt("uid"));
                 talk _talk = new talk();
                 _talk.setContext(rs.getString("context"));
-                _talk.setPicture(rs.getBytes("picture"));
+                _talk.setId(rs.getInt("tid"));
                 _talk.set_u(_user);
                 talkList.add(_talk);
             }
@@ -161,7 +164,7 @@ public class userdaoimpl implements userdao {
         ResultSet rs = null;
         List<order> orderlist = new ArrayList<order>();
         if(connection != null){
-            String sql = "select o.id oid,o.status,o.money,o.order_time,s.id sid,s.con_telephone,s.shop_name,r.phone rphone,re.name `rename`,re.phone rephone,re.address " +
+            String sql = "select o.id oid,o.status,o.money,o.order_time,s.id sid,s.con_telephone,s.shop_name,r.phone rphone,r.name rname,re.name `rename`,re.phone rephone,re.address " +
                     "from `order` o " +
                     "JOIN user u ON o.u_id = u.id " +
                     "JOIN store s ON o.s_id = s.id " +
@@ -184,6 +187,13 @@ public class userdaoimpl implements userdao {
                 _store.setShop_name(rs.getString("shop_name"));
                 _order.set_s(_store);
                 rider _rider=new rider();
+                String rname=rs.getString("rname");
+                if (rs.wasNull()) {
+                    rname=null;
+                    _rider.setName(rname);
+                } else {
+                    _rider.setName(rs.getString("rname"));
+                }
                 long rphone = rs.getLong("rphone");
                 if (rs.wasNull()) {
                     rphone=0;
@@ -306,5 +316,115 @@ public class userdaoimpl implements userdao {
             BaseDao.closeResource(null, pstm, rs);
         }
         return evaluateList;
+    }
+
+    @Override
+    public byte[] img4(Connection connection, int id) throws Exception {
+        PreparedStatement pstm = null;
+        ResultSet rs = null;
+        String sql = "select picture from user where id = ? ";
+        byte[] picture = null;
+        Object[] params={id};
+        rs=BaseDao.execute(connection,pstm,rs,sql,params);
+        if(rs.next()){
+            picture = rs.getBytes(1);
+        }
+        BaseDao.closeResource(null, pstm, rs);
+        return picture;
+    }
+
+    @Override
+    public byte[] img5(Connection connection, int id) throws Exception {
+        PreparedStatement pstm = null;
+        ResultSet rs = null;
+        String sql = "select picture from talk where id = ? ";
+        byte[] picture = null;
+        Object[] params={id};
+        rs=BaseDao.execute(connection,pstm,rs,sql,params);
+        if(rs.next()){
+            picture = rs.getBytes(1);
+        }
+        BaseDao.closeResource(null, pstm, rs);
+        return picture;
+    }
+
+    @Override
+    public int gettalkCount(Connection connection) throws Exception {
+        PreparedStatement pstm=null;
+        int count=0;
+        String sql="select count(id) as count from talk";
+        ResultSet rs=null;
+        pstm=connection.prepareStatement(sql);
+        rs = pstm.executeQuery();
+        if(rs.next()){
+            count = rs.getInt("count");
+        }
+        BaseDao.closeResource(null, pstm, rs);
+        return count;
+    }
+
+    @Override
+    public int savetalk(Connection connection, int id, byte[] bytes, String context, int count1) throws SQLException {
+        PreparedStatement pstm = null;
+        String sql = "insert into talk values (?,?,?,?)";
+        int count=0;
+        Blob blob = (Blob) connection.createBlob();
+        blob.setBytes(1, bytes);
+        pstm = connection.prepareStatement(sql);
+        pstm.setInt(1,count1);
+        pstm.setString(2, context);
+        pstm.setBlob(3,blob);
+        pstm.setInt(4,id);
+        count = pstm.executeUpdate();
+        BaseDao.closeResource(null, pstm, null);
+        return count;
+    }
+
+    @Override
+    public List<store> storelist(Connection connection, int id) throws Exception {
+        PreparedStatement pstm = null;
+        ResultSet rs = null;
+        List<store> storeList = new ArrayList<store>();
+        if(connection != null){
+            String sql ="select * from store where id = ?";
+            pstm = connection.prepareStatement(sql);
+            pstm.setInt(1,id);
+            rs=pstm.executeQuery();
+            while(rs.next()){
+                store _store = new store();
+                _store.setId(rs.getInt("id"));
+                _store.setAddress(rs.getString("address"));
+                _store.setShop_name(rs.getString("shop_name"));
+                _store.setMain_category(rs.getString("main_category"));
+                _store.setAuxiliary_category(rs.getString("auxiliary_category"));
+                storeList.add(_store);
+            }
+            BaseDao.closeResource(null, pstm, rs);
+        }
+        return storeList;
+    }
+    @Override
+    public List<dishes> dishlist(Connection connection, int id) throws Exception {
+        PreparedStatement pstm = null;
+        ResultSet rs = null;
+        List<dishes> dishList = new ArrayList<dishes>();
+        if(connection != null){
+            String sql ="select * from dishes where s_id = ?";
+            pstm = connection.prepareStatement(sql);
+            pstm.setInt(1,id);
+            rs=pstm.executeQuery();
+            while(rs.next()){
+                dishes _d = new dishes();
+                _d.setId(rs.getInt("id"));
+                _d.setName(rs.getString("name"));
+                _d.setDescribe(rs.getString("describe"));
+                _d.setStatus(rs.getString("status"));
+                _d.setPrice(rs.getDouble("price"));
+                _d.setCategory(rs.getString("category"));
+                dishList.add(_d);
+            }
+            BaseDao.closeResource(null, pstm, rs);
+        }
+        return dishList;
     }
 }

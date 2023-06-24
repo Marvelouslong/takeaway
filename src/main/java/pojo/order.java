@@ -15,6 +15,21 @@ public class order {
     private rider _r;
     private store _s;
     private receiver _re;
+//public order(Integer id,String status,String payway,String notes,Date checkout_time,Date order_time,Double money,user _u,rider _r,receiver _re)
+//{
+//    this.id=id;
+//    this.status=status;
+//    this.payway=payway;
+//    this.notes=notes;
+//    this.checkout_time = checkout_time;
+//    this.order_time=order_time;
+//    this.money=money;
+//    this._r = _r;
+//    this._u = _u;
+//    this._re= _re;
+//}
+
+public order(){};
 
     public int getId() {
         return id;

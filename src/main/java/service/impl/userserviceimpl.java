@@ -221,4 +221,98 @@ public class userserviceimpl implements userservice {
         }
         return count;
     }
+
+    @Override
+    public byte[] img4(int id) {
+        Connection connection = null;
+        byte[] picture=null;
+        try {
+            connection = BaseDao.getConnection();
+            picture=Userdao.img4(connection,id);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }finally{
+            BaseDao.closeResource(connection, null, null);
+        }
+        return picture;
+    }
+
+    @Override
+    public byte[] img5(int id) {
+        Connection connection = null;
+        byte[] picture=null;
+        try {
+            connection = BaseDao.getConnection();
+            picture=Userdao.img5(connection,id);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }finally{
+            BaseDao.closeResource(connection, null, null);
+        }
+        return picture;
+    }
+
+    @Override
+    public int gettalkCount() {
+        Connection connection = null;
+        int count = 0;
+        try {
+            connection = BaseDao.getConnection();
+            count = Userdao.gettalkCount(connection);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }finally{
+            BaseDao.closeResource(connection, null, null);
+        }
+        return count;
+    }
+
+    @Override
+    public int savetalk(int id,byte[] bytes,String context,int count1) {
+        // TODO Auto-generated method stub
+        Connection connection = null;
+        int count=0;
+        try {
+            connection = BaseDao.getConnection();
+            count = Userdao.savetalk(connection,id,bytes,context,count1);
+        } catch (Exception e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }finally{
+            BaseDao.closeResource(connection, null, null);
+        }
+        return count;
+    }
+
+    @Override
+    public List<store> storelist(int id) {
+        // TODO Auto-generated method stub
+        Connection connection = null;
+        List<store> storelist = null;
+        try {
+            connection = BaseDao.getConnection();
+            storelist = Userdao.storelist(connection,id);
+        } catch (Exception e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }finally{
+            BaseDao.closeResource(connection, null, null);
+        }
+        return storelist;
+    }
+    public List<dishes> dishlist(int id) {
+        // TODO Auto-generated method stub
+        Connection connection = null;
+        List<dishes> dishlist = null;
+        try {
+            connection = BaseDao.getConnection();
+            dishlist = Userdao.dishlist(connection,id);
+        } catch (Exception e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }finally{
+            BaseDao.closeResource(connection, null, null);
+        }
+        return dishlist;
+    }
 }
