@@ -123,6 +123,8 @@
   </c:forEach>
   <c:forEach items="${shopcarlist}" var="shopcar" varStatus="status">
     <form action="Userservlet" method="post" id="upload-form">
+      <input type="hidden" name="method" value="shopcarlist">
+      <input type="hidden" name="pageIndex" value="1">
       <table>
       </table>
       <button type="submit" id="submitBtn">上传</button>
@@ -154,7 +156,7 @@
     </tr>
     </thead>
     <tbody>
-    <c:forEach items="${dishlist}" var="dish" >
+    <c:forEach items="${dishlist}" var="dish" varStatus="status">
       <tr>
         <td>${dish.id}</td>
         <td>
@@ -166,53 +168,9 @@
         <td>${dish.status}</td>
         <td>${dish.price}</td>
         <td>
-          <a href="Userservlet?method">加入购物车</a>
-          <a href="<c:url value="/TASTE?method=list&d_id=${dish.id}"/>">
-            <button type="button">
-              选择菜品口味
-            </button>
-          </a>
+          <a href="Userservlet?method=uptaste&id=${dish.id}">加入购物车</a>
         </td>
       </tr>
-<%--    <button id="btn6" value="隐藏" class="add_button">添加新口味</button>--%>
-<%--    <div class="div3" id="div3">--%>
-<%--      <form method="post" action="<c:url value="/TASTE?method=add"/>" class="taste_add">--%>
-<%--        <h4>添加口味信息</h4>--%>
-<%--        <br>--%>
-<%--        <br>--%>
-<%--        <br>--%>
-<%--        <label>--%>
-<%--          <span>菜品序号 :</span>--%>
-<%--          <input type="text" name="d_id"  placeholder="请输入菜品序号">--%>
-<%--        </label>--%>
-<%--        <br>--%>
-<%--        <br>--%>
-<%--        <label>--%>
-<%--          <span>口&ensp;&ensp;&ensp;味 :</span>--%>
-<%--          <input type="text" name="name"  placeholder="请输入口味名称">--%>
-<%--        </label>--%>
-<%--        <br>--%>
-<%--        <br>--%>
-<%--        <label>--%>
-<%--          <input type="submit" class="button" value="提交"/>--%>
-<%--          <input type="submit" class="button" value="取消"/>--%>
-<%--        </label>--%>
-<%--      </form>--%>
-<%--    </div>--%>
-<%--</div>--%>
-<%--  <script>--%>
-<%--    var btn = document.getElementById("btn6");--%>
-<%--    var div = document.getElementById("div3");--%>
-<%--    btn.onclick = function () {--%>
-<%--      if(this.value === "隐藏"){--%>
-<%--        div.className = "hide";--%>
-<%--        btn.value = "显示"--%>
-<%--      }else{--%>
-<%--        div.className = "show";--%>
-<%--        btn.value = "隐藏"--%>
-<%--      }--%>
-<%--    }--%>
-<%--  </script>--%>
     </c:forEach>
     </tbody>
   </table>
