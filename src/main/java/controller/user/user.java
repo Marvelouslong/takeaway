@@ -172,7 +172,7 @@ public class user extends HttpServlet {
 
 
         List<talk> talklist = null;
-        talklist = userservice.gettalklist();
+        talklist = userservice.gettalklist(currentPageNo,pageSize);
         req.setAttribute("talklist", talklist);
         req.setAttribute("totalPageCount", totalPageCount);
         req.setAttribute("totalCount", totalCount);

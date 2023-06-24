@@ -90,13 +90,16 @@ public class userdaoimpl implements userdao {
     }
 
     @Override
-    public List<talk> gettalklist(Connection connection) throws Exception {
+    public List<talk> gettalklist(Connection connection,int currentPageNo, int pageSize) throws Exception {
         PreparedStatement pstm = null;
         ResultSet rs = null;
         List<talk> talkList = new ArrayList<talk>();
         if(connection != null){
-            String sql = "select t.id tid,t.context,u.name,u.id uid from talk t,user u where t.u_id = u.id order by t.id DESC";
+            String sql = "select t.id tid,t.context,u.name,u.id uid from talk t,user u where t.u_id = u.id order by t.id DESC limit ?,?";
             pstm = connection.prepareStatement(sql);
+            currentPageNo = (currentPageNo-1)*pageSize;
+            pstm.setInt(1,currentPageNo);
+            pstm.setObject(2,pageSize);
             rs=pstm.executeQuery();
             while(rs.next()){
                 user _user=new user();

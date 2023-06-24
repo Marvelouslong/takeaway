@@ -7,6 +7,7 @@ import pojo.*;
 import service.userservice;
 
 import java.sql.Connection;
+import java.sql.SQLException;
 import java.util.List;
 
 public class userserviceimpl implements userservice {
@@ -49,13 +50,13 @@ public class userserviceimpl implements userservice {
     }
 
     @Override
-    public List<talk> gettalklist() {
+    public List<talk> gettalklist(int currentPageNo, int pageSize) {
         // TODO Auto-generated method stub
         Connection connection = null;
         List<talk> talklist = null;
         try {
             connection = BaseDao.getConnection();
-            talklist = Userdao.gettalklist(connection);
+            talklist = Userdao.gettalklist(connection,currentPageNo,pageSize);
         } catch (Exception e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
@@ -165,10 +166,17 @@ public class userserviceimpl implements userservice {
         int count=0;
         try {
             connection = BaseDao.getConnection();
+            connection.setAutoCommit(false);//开启JDBC事务管理
             count = Userdao.addevaluate(connection,id,imgdata,evaluate,count1);
+            connection.commit();
         } catch (Exception e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
+            try {
+                connection.rollback();
+            } catch (SQLException e1) {
+                // TODO Auto-generated catch block
+                e1.printStackTrace();
+            }
         }finally{
             BaseDao.closeResource(connection, null, null);
         }
@@ -274,10 +282,17 @@ public class userserviceimpl implements userservice {
         int count=0;
         try {
             connection = BaseDao.getConnection();
+            connection.setAutoCommit(false);//开启JDBC事务管理
             count = Userdao.savetalk(connection,id,bytes,context,count1);
+            connection.commit();
         } catch (Exception e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
+            try {
+                connection.rollback();
+            } catch (SQLException e1) {
+                // TODO Auto-generated catch block
+                e1.printStackTrace();
+            }
         }finally{
             BaseDao.closeResource(connection, null, null);
         }
