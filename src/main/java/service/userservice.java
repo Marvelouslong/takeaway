@@ -10,7 +10,7 @@ public interface userservice {
     public List<talk> gettalklist(int currentPageNo, int pageSize);
     public byte[] img(int id);
     public byte[] img1(int id);
-    public int saveUserImage(int id,byte[]imgdata);
+    public int saveUserImage(int id,byte[]imgdata,String name, Long phone1,String sex, String signature, String password);
     public List<order> getorderlist(int id);
     public List<dishes> showdish(int id);
     public byte[] img2(int id);
@@ -24,4 +24,9 @@ public interface userservice {
     public int savetalk(int id,byte[] bytes,String context,int count1);
     public List<store> storelist(int id);
     public List<dishes> dishlist(int id);
+    public List<taste> tastelist(int id);
+    public List<receiver> getreceiverlist(int id);
+    public int changeostatus(int id);
+    public int change_receiver(int id,String name,Long phone,String address);
+    public int addre(int id);
 }

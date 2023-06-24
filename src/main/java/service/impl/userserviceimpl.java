@@ -97,12 +97,12 @@ public class userserviceimpl implements userservice {
     }
 
     @Override
-    public int saveUserImage(int id, byte[] imgdata) {
+    public int saveUserImage(int id, byte[] imgdata,String name, Long phone1,String sex, String signature, String password) {
         Connection connection = null;
         int count=0;
         try {
             connection = BaseDao.getConnection();
-            count=Userdao.saveUserImage(connection,id,imgdata);
+            count=Userdao.saveUserImage(connection,id,imgdata,name,phone1,sex,signature,password);
         } catch (Exception e) {
             e.printStackTrace();
         }finally{
@@ -329,5 +329,72 @@ public class userserviceimpl implements userservice {
             BaseDao.closeResource(connection, null, null);
         }
         return dishlist;
+    }
+    public List<taste> tastelist(int id) {
+        // TODO Auto-generated method stub
+        Connection connection = null;
+        List<taste> tastelist = null;
+        try {
+            connection = BaseDao.getConnection();
+            tastelist = Userdao.tastelist(connection,id);
+        } catch (Exception e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }finally{
+            BaseDao.closeResource(connection, null, null);
+        }
+        return tastelist;
+    }
+
+    @Override
+    public List<receiver> getreceiverlist(int id) {
+        // TODO Auto-generated method stub
+        Connection connection = null;
+        List<receiver> receiverlist = null;
+        try {
+            connection = BaseDao.getConnection();
+            receiverlist = Userdao.getreceiverlist(connection,id);
+        } catch (Exception e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }finally{
+            BaseDao.closeResource(connection, null, null);
+        }
+        return receiverlist;
+    }
+
+    @Override
+    public int changeostatus(int id) {
+        Connection connection = null;
+        int count=0;
+        try {
+            connection = BaseDao.getConnection();
+            count = Userdao.changeostatus(connection,id);
+        } catch (Exception e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }finally{
+            BaseDao.closeResource(connection, null, null);
+        }
+        return count;
+    }
+    public int change_receiver(int id,String name,Long phone,String address) {
+        Connection connection = null;
+        int count=0;
+        try {
+            connection = BaseDao.getConnection();
+            count = Userdao.change_receiver(connection,id,name,phone,address);
+        } catch (Exception e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }finally{
+            BaseDao.closeResource(connection, null, null);
+        }
+        return count;
+    }
+
+    @Override
+    public int addre(int id) {
+        return 0;
     }
 }
