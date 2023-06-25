@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
 import java.io.*;
+import java.util.Arrays;
 import java.util.List;
 @WebServlet("/Userservlet")
 @MultipartConfig
@@ -61,10 +62,27 @@ public class user extends HttpServlet {
         }else if (method != null && method.equals("img5")) {
             String id = req.getParameter("id");
             this.img5(req, resp, id);
-        }
-        else if (method != null && method.equals("storelist")) {
+        }else if (method != null && method.equals("storelist")) {
             String id = req.getParameter("id");
             this.storelist(req, resp, id);
+        }else if (method != null && method.equals("shopcarlist")) {
+            String id = req.getParameter("id");
+            this.storelist(req, resp, id);
+        }else if (method != null && method.equals("uptaste")) {
+            String id = req.getParameter("id");
+            this.uptaste(req, resp, id);
+        }else if (method != null && method.equals("jump")) {
+            this.jump(req, resp);
+        }else if (method != null && method.equals("change_receiver")) {
+            this.change_receiver(req, resp);
+        }else if (method != null && method.equals("changeostatus")) {
+            String id=req.getParameter("id");
+            int id1= Integer.parseInt(id);
+            this.changeostatus(req, resp,id1);
+        }else if (method != null && method.equals("addre")) {
+            String id=req.getParameter("id");
+            int id1= Integer.parseInt(id);
+            this.addre(req, resp,id1);
         }
     }
 
@@ -172,7 +190,7 @@ public class user extends HttpServlet {
 
 
         List<talk> talklist = null;
-        talklist = userservice.gettalklist();
+        talklist = userservice.gettalklist(currentPageNo,pageSize);
         req.setAttribute("talklist", talklist);
         req.setAttribute("totalPageCount", totalPageCount);
         req.setAttribute("totalCount", totalCount);
@@ -186,7 +204,11 @@ public class user extends HttpServlet {
         userservice userservice = new userserviceimpl();
         List<order> orderlist = null;
         orderlist = userservice.getorderlist(id);
+        List<receiver> receiverlist = null;
+        int id1= ((pojo.user) (req.getSession().getAttribute(Constants.USER_SESSION))).getId();
+        receiverlist = userservice.getreceiverlist(id1);
         req.setAttribute("orderlist", orderlist);
+        req.setAttribute("receiverlist", receiverlist);
         req.getRequestDispatcher("/jsp/user/myinformation.jsp").forward(req, resp);
     }
 
@@ -201,7 +223,7 @@ public class user extends HttpServlet {
         out.close();  //关闭输出
     }
 
-    private void img1(HttpServletRequest req, HttpServletResponse resp, String id) throws ServletException, IOException {
+    private void img1(HttpServletRequest req, HttpServletResponse resp, String id) throws IOException {
         int id1 = Integer.parseInt(id);
         userservice userservice = new userserviceimpl();
         byte[] picture = userservice.img1(id1);
@@ -229,12 +251,45 @@ public class user extends HttpServlet {
         // 将文件保存到数据库中
         Object attribute = req.getSession().getAttribute(Constants.USER_SESSION);
         int id = ((pojo.user) attribute).getId();
+        String bpassword=((pojo.user)attribute).getPassword();
         int count = 0;
         // 插入图片数据到数据库中
         userservice userService = new userserviceimpl();
-        count = userService.saveUserImage(id, bytes);
-        if(count!=0) {
-            req.getRequestDispatcher("/jsp/user/myinformation.jsp").forward(req, resp);
+        String name=req.getParameter("name");
+        String phone=req.getParameter("phone");
+        Long phone1= Long.valueOf(phone);
+        String sex=req.getParameter("sex");
+        String signature=req.getParameter("signature");
+        String password=req.getParameter("password");
+        String newpassword=req.getParameter("newpassword");
+        if(password!=null){
+            boolean flag=false;
+            flag=password.equals(bpassword);
+            if(flag==false){
+                req.setAttribute(Constants.SYS_MESSAGE, "旧密码错误请重新输入");
+                req.getRequestDispatcher("/jsp/user/updateuser.jsp").forward(req, resp);
+            }else{
+                if(newpassword==null){
+                    req.setAttribute(Constants.SYS_MESSAGE, "新密码为空请重新输入");
+                    req.getRequestDispatcher("/jsp/user/updateuser.jsp").forward(req, resp);
+                }else {
+                    count = userService.saveUserImage(id, bytes,name,phone1,sex,signature,newpassword);
+                    pojo.user visitor=new pojo.user();
+                    visitor.setId(id);
+                    visitor.setPassword(newpassword);
+                    visitor.setName(name);
+                    visitor.setPhone(phone1);
+                    visitor.setSex(sex);
+                    visitor.setSignature(signature);
+                    if(count!=0) {
+                        req.getSession().setAttribute(Constants.USER_SESSION,visitor);
+                        this.myinformation(req, resp);
+                    }
+                }
+            }
+        }else{
+            req.setAttribute(Constants.SYS_MESSAGE, "旧密码为空请重新输入");
+            req.getRequestDispatcher("/jsp/user/updateuser.jsp").forward(req, resp);
         }
     }
     private void showdishes(HttpServletRequest req, HttpServletResponse resp,int id) throws ServletException, IOException {
@@ -359,5 +414,64 @@ public class user extends HttpServlet {
         req.setAttribute("storelist", storelist);
         req.setAttribute("dishlist", dishlist);
         req.getRequestDispatcher("/jsp/user/store.jsp").forward(req, resp);
+    }
+    private void uptaste(HttpServletRequest req, HttpServletResponse resp, String id) throws ServletException, IOException{
+        userservice userservice = new userserviceimpl();
+        int id1= Integer.parseInt(id);
+        List<taste> tastelist = null;
+//        List<List<taste>> twolist = new ArrayList<List<taste>>();
+//        for(dishes dish : dishlist){
+//            twolist.add(tastelist);
+//        }
+//        req.setAttribute("twolist", twolist);
+        tastelist = userservice.tastelist(id1);
+        if(tastelist.size()!=0){
+            req.getRequestDispatcher("/jsp/user/store.jsp").forward(req, resp);
+        }else{
+            this.upshop(req,resp,id1);
+        }
+    }
+    private void upshop(HttpServletRequest req, HttpServletResponse resp, int id) throws ServletException, IOException{
+        userservice userservice = new userserviceimpl();
+//        List<List<taste>> twolist = new ArrayList<List<taste>>();
+//        List<taste> tastelist = null;
+//        for(dishes dish : dishlist){
+//        tastelist = userservice.tastelist(id1);
+//            twolist.add(tastelist);
+//        }
+//        req.setAttribute("twolist", twolist);
+    }
+    private void jump(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        req.getRequestDispatcher("/jsp/user/updateuser.jsp").forward(req, resp);
+    }
+    private void change_receiver(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        String receiverId = req.getParameter("submitBtn");
+        int id= Integer.parseInt(receiverId);
+        userservice userservice = new userserviceimpl();
+        int count=0;
+        String[] name = req.getParameterValues("name");
+        String[] phone = req.getParameterValues("phone");
+        String[] address = req.getParameterValues("address");
+        long phone1 = Long.parseLong(phone[id]);
+        count= userservice.change_receiver(id,name[id],phone1,address[id]);
+        if(count!=0){
+            this.myinformation(req, resp);
+        }
+    }
+    private void changeostatus(HttpServletRequest req, HttpServletResponse resp,int id) throws ServletException, IOException {
+        userservice userservice = new userserviceimpl();
+        int count=0;
+        count= userservice.changeostatus(id);
+        if(count!=0){
+            this.myinformation(req, resp);
+        }
+    }
+    private void addre(HttpServletRequest req, HttpServletResponse resp,int id) throws ServletException, IOException {
+        userservice userservice = new userserviceimpl();
+        int count=0;
+        count= userservice.addre(id);
+        if(count!=0){
+            this.myinformation(req, resp);
+        }
     }
 }

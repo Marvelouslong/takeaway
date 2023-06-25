@@ -7,6 +7,7 @@ public class shopcar_dishes {
     private shopcar _shopcar;
     private Date time;
     private int number;
+    private String taste;
 
     @Override
     public String toString() {
@@ -15,6 +16,7 @@ public class shopcar_dishes {
                 ", _shopcar=" + _shopcar +
                 ", time=" + time +
                 ", number=" + number +
+                ", taste='" + taste + '\'' +
                 '}';
     }
 
@@ -48,5 +50,13 @@ public class shopcar_dishes {
 
     public void set_d(dishes _d) {
         this._d = _d;
+    }
+
+    public String getTaste() {
+        return taste;
+    }
+
+    public void setTaste(String taste) {
+        this.taste = taste;
     }
 }

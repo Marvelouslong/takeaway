@@ -112,6 +112,9 @@
 </script>
 <div class="main">
     <div class="left">
+        <form action="Userservlet" method="get">
+            <input type="hidden" name="method" value="talkshow">
+            <input type="hidden" name="pageIndex" value="1">
         <table class="table">
             <c:forEach var="talk" items="${talklist}" varStatus="status">
                 <tr>
@@ -146,6 +149,7 @@
                 <br>
             </c:forEach>
         </table>
+        </form>
     </div>
     <div class="right">
         <form action="Userservlet" method="post" id="upload-form" enctype="multipart/form-data">
