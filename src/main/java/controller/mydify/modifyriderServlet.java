@@ -1,4 +1,4 @@
-package controller;
+package controller.mydify;
 
 import pojo.rider;
 import service.impl.modifyriderServiceImpl;
@@ -43,7 +43,7 @@ public class modifyriderServlet extends HttpServlet {
         if (flag) {
             resp.sendRedirect("ridernews");
         } else {
-            req.getRequestDispatcher("ridernews.jsp").forward(req, resp);
+            req.getRequestDispatcher("/news/ridernews.jsp").forward(req, resp);
         }
     }
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

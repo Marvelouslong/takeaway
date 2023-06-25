@@ -5,10 +5,7 @@ import java.io.IOException;
 
 //中文过滤防止出现乱码
 public class CharacterEncodingFilter implements Filter{
-    public void init(FilterConfig filterConfig)throws ServletException{
-
-    }
-
+    public void init(FilterConfig filterConfig)throws ServletException{}
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
             throws IOException, ServletException {
         request.setCharacterEncoding("UTF-8");

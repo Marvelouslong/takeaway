@@ -3,13 +3,13 @@
     padding: 0;
 }
 
-/*!*登录页面*!*/
-/*.loginstore_bg {*/
-/*    background:url("/img/商家登陆.jpg");*/
-/*    style:"background-repeat:no-repeat";*/
-/*    background-attachment:fixed;*/
-/*    background-size:100% 100%;*/
-/*}*/
+/*登录页面*/
+.loginstore_bg {
+    background:url("/img/商家登陆.jpg");
+    style:"background-repeat:no-repeat";
+    background-attachment:fixed;
+    background-size:100% 100%;
+}
 .logo{
     width: 124px;
     height: 74px;

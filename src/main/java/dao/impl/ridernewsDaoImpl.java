@@ -1,7 +1,8 @@
 package dao.impl;
 
+import dao.ridernewsDao;
 import pojo.rider;
-import pojo.store;
+
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -9,7 +10,7 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ridernewsDaoImpl {
+public class ridernewsDaoImpl implements ridernewsDao {
     public List<rider> getriderList(Connection connection) throws  Exception{
     String sql = "select * from rider";
     PreparedStatement pstm;

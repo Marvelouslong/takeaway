@@ -1,4 +1,4 @@
-package controller;
+package controller.news;
 
 import pojo.store;
 import service.impl.storeServiceImpl;
@@ -20,7 +20,7 @@ public class storeServlet extends HttpServlet {
         List<store> storeList=null;
         storeList = storeService.getstoreList();
         req.setAttribute("storeList",storeList);
-        req.getRequestDispatcher("storenews.jsp").forward(req,resp);
+        req.getRequestDispatcher("/news/storenews.jsp").forward(req,resp);
     }
     public void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         doGet(req, resp);

@@ -1,4 +1,4 @@
-package controller;
+package controller.mydify;
 
 import pojo.store;
 import service.impl.storeServiceImpl;
@@ -43,7 +43,7 @@ public class modifystatusServlet extends HttpServlet {
         if (flag) {
             resp.sendRedirect("store");
         } else {
-            req.getRequestDispatcher("storenews.jsp").forward(req, resp);
+            req.getRequestDispatcher("/news/storenews.jsp").forward(req, resp);
         }
     }
 

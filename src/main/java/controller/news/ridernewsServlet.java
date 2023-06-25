@@ -1,4 +1,4 @@
-package controller;
+package controller.news;
 
 import pojo.rider;
 import service.impl.ridernewsServiceImpl;
@@ -20,7 +20,7 @@ public class ridernewsServlet extends HttpServlet {
         List<rider> ridernewsList=null;
         ridernewsList = ridernewsservice.getriderList();
         req.setAttribute("ridernewsList",ridernewsList);
-        req.getRequestDispatcher("ridernews.jsp").forward(req,resp);
+        req.getRequestDispatcher("/news/ridernews.jsp").forward(req,resp);
     }
     public void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         doGet(req, resp);
