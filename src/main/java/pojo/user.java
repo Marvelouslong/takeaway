@@ -91,4 +91,7 @@ public class user {
     public byte[] picture() {
         return picture;
     }
+
+    public user() {
+    }
 }
