@@ -79,4 +79,16 @@ public class user {
                 ", picture=" + picture +
                 '}';
     }
+    public user(String name,long phone,String password,String signature,String sex,byte[] picture){
+        this.name=name;
+        this.phone=phone;
+        this.password=password;
+        this.signature=signature;
+        this.sex=sex;
+        this.picture=picture;
+    }
+
+    public byte[] picture() {
+        return picture;
+    }
 }

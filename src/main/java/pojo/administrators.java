@@ -38,7 +38,10 @@ public class administrators {
         this.password = password;
     }
 
-    public administrators() {
+    public administrators(String name,long account_number,String password) {
+        this.name=name;
+        this.account_number=account_number;
+        this.password=password;
     }
 
     @Override
