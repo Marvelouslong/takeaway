@@ -184,5 +184,57 @@ public class store {
         this.auxiliary_category = auxiliary_category;
         this.ad_id = ad_id;
     }
+    public store(String address, long con_telephone,String shop_name,String con_name,String password,long bank_card,String legal_id_card,String main_category,String auxiliary_category,String status,byte[] brand_authorization,byte[] license,byte[] certificate_of_business,byte[] shop_picture)
+    {
+        this.address = address;
+        this.con_telephone = con_telephone;
+        this.shop_name = shop_name;
+        this.con_name = con_name;
+        this.password=password;
+        this.bank_card = bank_card;
+        this.brand_authorization = brand_authorization;
+        this.license = license;
+        this.certificate_of_business = certificate_of_business;
+        this.shop_picture = shop_picture;
+        this.legal_id_card = legal_id_card;
+        this.status = status;
+        this.main_category = main_category;
+        this.auxiliary_category = auxiliary_category;
+    }
+    public store(int id,String address, long con_telephone,String shop_name,String con_name,String password,byte[] brand_authorization,long bank_card,byte[] license,byte[] certificate_of_business,String legal_id_card,String status,byte[] shop_picture,String main_category,String auxiliary_category)
+    {
+        this.id = id;
+        this.address = address;
+        this.con_telephone = con_telephone;
+        this.shop_name = shop_name;
+        this.con_name = con_name;
+        this.bank_card = bank_card;
+        this.password=password;
+        this.brand_authorization = brand_authorization;
+        this.license = license;
+        this.certificate_of_business = certificate_of_business;
+        this.shop_picture = shop_picture;
+        this.legal_id_card = legal_id_card;
+        this.status = status;
+        this.main_category = main_category;
+        this.auxiliary_category = auxiliary_category;
+
+    }
     public store() {}
+
+    public byte[] brand_authorization() {
+        return brand_authorization;
+    }
+
+    public byte[] license() {
+        return  license;
+    }
+
+    public byte[] certificate_of_business() {
+        return  certificate_of_business;
+    }
+
+    public byte[] shop_picture() {
+        return  shop_picture;
+    }
 }
