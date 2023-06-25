@@ -46,5 +46,9 @@
     </form>
   </section>
 </section>
+<p><a href="storeregister.jsp">未注册？商家注册</a></p>
+<p><a href="riderregister.jsp">未注册？骑手注册</a></p>
+<p><a href="userregister.jsp">未注册？用户注册</a></p>
+<p><a href="adminregister.jsp">未注册？管理员注册</a></p>
 </body>
 </html>
