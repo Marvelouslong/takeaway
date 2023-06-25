@@ -107,11 +107,28 @@
             <div class="author-info__phone">${userSession.phone}</div>
             <div class="author-info__sex">${userSession.sex}</div>
             <div class="author-info__description">${userSession.signature}</div>
-            <form action="Userservlet" method="post" id="upload-form" enctype="multipart/form-data">
-              <input type="hidden" name="method" value="change-user-img">
-              <input type="file" id="fileInput" name="image" accept="image/png,image/jpg,image/jpeg,image/bmp"/>
-              <button type="submit" id="submitBtn">上传</button>
+            <br>            <br>
+            <a href="Userservlet?method=jump">修改个人信息</a>
+            <br>            <br>
+            <form id="upload-form" action="Userservlet" method="get">
+              <input type="hidden" name="method" value="change_receiver">
+              <c:forEach var="re" items="${receiverlist}" varStatus="status">
+                序号：<input type="text" value="${re.id}" name="id" readonly>
+                <br>
+                  接收人：
+                      <input type="text" name="name${status.index}" value="${re.name}">
+                    <br>
+                    电话：<input type="text" name="phone${status.index}" value="${re.phone}">
+                <br>
+                    地址：
+                <input type="text" name="address${status.index}" value="${re.address}">
+                <br>
+                <br>
+                <button type="submit" id="submitBtn" name="submitBtn" value="${re.id}">修改</button>
+                <br>
+              </c:forEach>
             </form>
+            <a href="Userservlet?method=addre?id=${userSession.id}">zneg</a>
           </div>
         </div>
       </div>
@@ -132,13 +149,14 @@
                          vertical-align: top;
                          transition: all .3s;"
                       alt="img"></td>
-            <td style="padding-left: 40px;padding-top: 20px">骑手：${order._r.name != null ? order._r.name : '暂无人接单'}<br>骑手电话：${order._r.phone != 0 ? order._r.phone : '暂无人接单'}</td>
-            <td style="padding-left: 40px;padding-top: 20px">商家：${order._s.shop_name}<br>商家电话：${order._s.con_telephone}</td>
-            <td style="padding-left: 40px;padding-top: 20px">订单状态：${order.status}<br>订单时间：${order.order_time}<br>订单金额：${order.money}</td>
-            <td style="padding-left: 40px;padding-top: 20px">接收人：${order._re.name}<br>接收人电话：${order._re.phone}<br>接收地址${order._re.address}</td>
-            <td style="padding-left: 40px;padding-top: 20px"><a class="vieworder" href="Userservlet?method=showdishes&id=${order.id}">查看菜品</a></td>
-            <td style="padding-left: 20px;padding-top: 20px"><a class="vieworder" href="Userservlet?method=showevaluate&id=${order.id}">添加评论</a></td>
-            <td style="padding-left: 20px;padding-top: 20px"><a class="vieworder" href="Userservlet?method=query&query=${order._s.shop_name}&pageIndex=1">再来一单</a></td>
+            <td style="padding-left: 30px;padding-top: 20px">骑手：${order._r.name != null ? order._r.name : '暂无人接单'}<br>骑手电话：${order._r.phone != 0 ? order._r.phone : '暂无人接单'}</td>
+            <td style="padding-left: 30px;padding-top: 20px">商家：${order._s.shop_name}<br>商家电话：${order._s.con_telephone}</td>
+            <td style="padding-left: 30px;padding-top: 20px">订单状态：${order.status}<br>订单时间：${order.order_time}<br>订单金额：${order.money}</td>
+            <td style="padding-left: 30px;padding-top: 20px">接收人：${order._re.name}<br>接收人电话：${order._re.phone}<br>接收地址${order._re.address}</td>
+            <td style="padding-left: 30px;padding-top: 20px"><a class="vieworder" href="Userservlet?method=showdishes&id=${order.id}">查看菜品</a></td>
+            <td style="padding-left: 10px;padding-top: 20px"><a class="vieworder" href="Userservlet?method=showevaluate&id=${order.id}">添加评论</a></td>
+            <td style="padding-left: 10px;padding-top: 20px"><a class="vieworder" href="Userservlet?method=query&query=${order._s.shop_name}&pageIndex=1">再来一单</a></td>
+            <td style="padding-left: 10px;padding-top: 20px"><c:if test="${order.status eq '已接单'}"><a href="Userservlet?method=changeostatus&id=${order.id}">确认收货</a></c:if></td>
             </tr>
           </c:forEach>
           <c:set var="isExecuted" value="false" />

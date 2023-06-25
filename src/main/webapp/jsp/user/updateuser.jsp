@@ -1,8 +1,8 @@
 <%--
   Created by IntelliJ IDEA.
   User: HAN
-  Date: 2023/6/23
-  Time: 18:19
+  Date: 2023/6/24
+  Time: 22:31
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -89,19 +89,6 @@
         font-size: 1.1rem;
     }
 </style>
-<script>
-    const form = document.getElementById('upload-form');
-    const submitBtn = document.getElementById('submitBtn');
-    submitBtn.addEventListener('click', () => {
-        form.submit();
-    });
-
-    const form1 = document.getElementById('load-form');
-    const submitBtn1 = document.getElementById('submitBtn1');
-    submitBtn1.addEventListener('click', () => {
-        form1.submit();
-    });
-</script>
 <div id="content-outer">
     <div class="layout_page" id="content-inner">
         <div class="aside_content" id="aside_content">
@@ -119,35 +106,38 @@
         </div>
         <article id="page">
             <div class="article-container">
-                <table>
-                    <tr>
-                        <a href="<c:url value="Userservlet">
-                              <c:param name="method" value="myinformation"/>
-                              </c:url>">返回订单</a>
-                    </tr>
-                    <c:forEach items="${evaluatelist}" var="evaluate" varStatus="status">
-                        <tr>
-                            <td style="padding-left: 40px;padding-top: 20px">评论：${evaluate.evaluate}</td>
-                            <td> <img src="Userservlet?id=${evaluate.id}&method=img3"
-                                      style="animation: avatar_turn_around 2s linear infinite;
-                       display: inline-block;
-                       padding: 5px;
-                       width: 50px;
-                       height: 50px;
-                       border-radius: 70px;
-                       vertical-align: top;
-                       transition: all .3s;"
-                                      alt="img"></td>
-                        </tr>
-                    </c:forEach>
-                </table>
-                <form action="Userservlet" method="post" id="load-form" enctype="multipart/form-data">
-                    <h3>添加评论</h3>
-                    <input type="hidden" name="method" value="addevaluate">
-                    <input type="hidden" name="id" value="${o_id}">
-                    <input type="text" maxlength="200" placeholder="不超过两百个字" name="evaluate">
-                    <input type="file" name="image" accept="image/png,image/jpg,image/jpeg,image/bmp"/>
-                    <button type="submit" id="submitBtn1">提交</button>
+                <a href="<c:url value="Userservlet">
+                <c:param name="method" value="myinformation"/>
+                </c:url>">返回</a>
+                <h2>修改个人信息</h2>
+                <form action="Userservlet" method="post" id="upload-form" enctype="multipart/form-data">
+                    <input type="hidden" name="method" value="change-user-img">
+                    <h3>更换头像</h3>
+                    <input type="file" id="fileInput" name="image" accept="image/png,image/jpg,image/jpeg,image/bmp"/>
+                    <h3>名字：</h3>
+                    <input type="text" name="name" value="${userSession.name}">
+                    <br>
+                    <h3>手机号：</h3>
+                    <input type="text" name="phone" id="searchInput" value="${userSession.phone}">
+                    <span id="phoneNumberValidation"></span>
+                    <br>
+                    <h3>性别：</h3>
+                    <br>
+                    <input type="radio" name="sex" value="男"> 男
+                    <input type="radio" name="sex" value="女"> 女
+                    <input type="radio" name="sex" value="机器人"> 机器人
+                    <br>
+                    <h3>个性签名：</h3>
+                    <br>
+                    <input type="text" name="signature" maxlength="100" placeholder="不超过100个字" value="${userSession.signature}">
+                    <h3>更改密码：</h3>
+                    <br>
+                    <h4>原密码：</h4>
+                    <input type="text" maxlength="15" name="password">
+                    <div class="info">${message}</div>
+                    <h4>新密码:</h4>
+                    <input type="text" maxlength="15" name="newpassword">
+                    <input type="submit" id="submitBtn">
                 </form>
             </div>
         </article>

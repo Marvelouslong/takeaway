@@ -90,13 +90,16 @@ public class userdaoimpl implements userdao {
     }
 
     @Override
-    public List<talk> gettalklist(Connection connection) throws Exception {
+    public List<talk> gettalklist(Connection connection,int currentPageNo, int pageSize) throws Exception {
         PreparedStatement pstm = null;
         ResultSet rs = null;
         List<talk> talkList = new ArrayList<talk>();
         if(connection != null){
-            String sql = "select t.id tid,t.context,u.name,u.id uid from talk t,user u where t.u_id = u.id order by t.id DESC";
+            String sql = "select t.id tid,t.context,u.name,u.id uid from talk t,user u where t.u_id = u.id order by t.id DESC limit ?,?";
             pstm = connection.prepareStatement(sql);
+            currentPageNo = (currentPageNo-1)*pageSize;
+            pstm.setInt(1,currentPageNo);
+            pstm.setObject(2,pageSize);
             rs=pstm.executeQuery();
             while(rs.next()){
                 user _user=new user();
@@ -144,15 +147,20 @@ public class userdaoimpl implements userdao {
     }
 
     @Override
-    public int saveUserImage(Connection connection, int id, byte[] imgdata) throws SQLException {
+    public int saveUserImage(Connection connection, int id, byte[] imgdata,String name, Long phone1,String sex, String signature, String password) throws SQLException {
         PreparedStatement pstm = null;
-        String sql = "update user set picture = ? where id = ?";
+        String sql = "update user set picture = ?,name=?,sex=?,signature=?,phone=?,password=? where id = ?";
         int count=0;
         Blob blob = (Blob) connection.createBlob();
         blob.setBytes(1, imgdata);
         pstm = connection.prepareStatement(sql);
         pstm.setBlob(1,blob);
-        pstm.setInt(2, id);
+        pstm.setString(2,name);
+        pstm.setString(3,sex);
+        pstm.setString(4,signature);
+        pstm.setLong(5,phone1);
+        pstm.setString(6,password);
+        pstm.setInt(7, id);
         count = pstm.executeUpdate();
         BaseDao.closeResource(null, pstm, null);
         return count;
@@ -426,5 +434,77 @@ public class userdaoimpl implements userdao {
             BaseDao.closeResource(null, pstm, rs);
         }
         return dishList;
+    }
+    public List<taste> tastelist(Connection connection, int id) throws Exception {
+        PreparedStatement pstm = null;
+        ResultSet rs = null;
+        List<taste> tasteList = new ArrayList<taste>();
+        if(connection != null){
+            String sql ="select * from taste where d_id = ?";
+            pstm = connection.prepareStatement(sql);
+            pstm.setInt(1,id);
+            rs=pstm.executeQuery();
+            while(rs.next()){
+                taste _t=new taste();
+                _t.setId(rs.getInt("id"));
+                _t.setName(rs.getString("name"));
+                _t.setD_id(rs.getInt("d_id"));
+                tasteList.add(_t);
+            }
+            BaseDao.closeResource(null, pstm, rs);
+        }
+        return tasteList;
+    }
+
+    @Override
+    public List<receiver> getreceiverlist(Connection connection, int id) throws Exception {
+        PreparedStatement pstm = null;
+        ResultSet rs = null;
+        List<receiver> receiverList = new ArrayList<receiver>();
+        if(connection != null){
+            String sql = "select * from receiver where u_id=?";
+            pstm = connection.prepareStatement(sql);
+            pstm.setInt(1,id);
+            rs=pstm.executeQuery();
+            while(rs.next()){
+                receiver _re=new receiver();
+                _re.setId(rs.getInt("id"));
+                _re.setName(rs.getString("name"));
+                _re.setAddress(rs.getString("address"));
+                _re.setPhone(rs.getLong("phone"));
+                receiverList.add(_re);
+            }
+            BaseDao.closeResource(null, pstm, rs);
+        }
+        return receiverList;
+    }
+
+    @Override
+    public int changeostatus(Connection connection, int id) throws Exception {
+        PreparedStatement pstm = null;
+        int count=0;
+        if(connection != null){
+            String sql ="update `order` set status = '已完成' where id = ?";
+            pstm = connection.prepareStatement(sql);
+            pstm.setInt(1,id);
+            count=pstm.executeUpdate();
+            BaseDao.closeResource(null, pstm, null);
+        }
+        return count;
+    }
+    public int change_receiver(Connection connection, int id,String name,Long phone,String address) throws Exception {
+        PreparedStatement pstm = null;
+        int count=0;
+        if(connection != null){
+            String sql ="update receiver set name=?,phone=?,address=? where id = ?";
+            pstm = connection.prepareStatement(sql);
+            pstm.setString(1,name);
+            pstm.setLong(2,phone);
+            pstm.setString(3,address);
+            pstm.setInt(4,id);
+            count=pstm.executeUpdate();
+            BaseDao.closeResource(null, pstm, null);
+        }
+        return count;
     }
 }

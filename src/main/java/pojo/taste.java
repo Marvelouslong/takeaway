@@ -37,6 +37,9 @@ public class taste {
         this.name = name;
     }
 
+    public taste() {
+    }
+
     @Override
     public String toString() {
         return "taste{" +
