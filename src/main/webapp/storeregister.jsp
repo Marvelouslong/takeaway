@@ -1,3 +1,4 @@
+<%--<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>--%>
 <%--
   Created by IntelliJ IDEA.
   User: liangsicheng
@@ -47,7 +48,7 @@
   <div id="napp" class="susu">
     <h1>商家注册页面</h1>
     <div class="ruirui">
-      <form  action="storeregisterServlet" method="post" name="form0" onclick="return check()">
+      <form  action="storeregister" method="post" name="form0" onclick="return check()">
         <p>&nbsp;商家名称&nbsp;:<input type="text" name="shop_name" id="shop_name" placeholder="请输入商家名称"></p>
         <p>&nbsp;地址&nbsp;&nbsp;&nbsp; :<input type="text" name="address" id="address" placeholder="请输入商家地址"></p>
         <p>&nbsp;联系人电话 :<input type="text" name="con_telephone" id="con_telephone" placeholder="请输入联系人电话号码"></p>
@@ -141,52 +142,52 @@
 </div>
 
 
+    <script>
+    function check() {
+    let shop_name = document.getElementById("shop_name").value;
+    let address = document.getElementById("address").value;
+    let con_telephone = document.getElementById("con_telephone").value;
+    let password = document.getElementById("password").value;
+    let main_category = document.getElementById("main_category").value;
+    let auxiliary_category = document.getElementById("auxiliary_category").value;
+    if (shop_name == null || shop_name.trim() === "") {
+    alert("商家名称不能为空!");
+    document.getElementById("tip").innerHTML = "商家名称不能为空!";
+    return false;
+    }
+    if (address == null || address.trim() === "") {
+    alert("商家地址不能为空!");
+    document.getElementById("tip").innerHTML = "商家地址不能为空!!";
+    return false;
+    }
+
+    if (con_telephone == null || con_telephone.trim() === "") {
+    alert("电话号码不能为空!");
+    document.getElementById("tip").innerHTML = "电话号码不能为空!";
+    return false;
+    }
+    if (main_category == null || main_category.trim() === "") {
+    alert("主营品类不能为空!");
+    document.getElementById("tip").innerHTML = "主营品类不能为空!";
+    return false;
+    }
+    if (auxiliary_category == null || auxiliary_category.trim() === "") {
+    alert("辅营品类不能为空!");
+    document.getElementById("tip").innerHTML = "辅营品类不能为空!";
+    return false;
+    }
+    if (password == null || password.trim() === "") {
+    alert("密码不能为空!");
+    document.getElementById("tip").innerHTML = "密码不能为空!";
+    return false;
+    }
+    if (check(shop_name)&&check(address)&&check(con_telephone)&&check(main_category)&&check(auxiliary_category)&&check(password)){
+    alert("注册成功");
+    document.getElementById("tip").innerHTML="注册成功!";
+    return ture;
+    }
+    }
+    </script>
 </body>
 </html>
 
-<script>
-  function check() {
-      let shop_name = document.getElementById("shop_name").value;
-      let address = document.getElementById("address").value;
-      let con_telephone = document.getElementById("con_telephone").value;
-      let password = document.getElementById("password").value;
-      let main_category = document.getElementById("main_category").value;
-      let auxiliary_category = document.getElementById("auxiliary_category").value;
-      if (shop_name == null || shop_name.trim() == "") {
-          alert("商家名称不能为空!");
-          document.getElementById("tip").innerHTML = "商家名称不能为空!";
-          return false;
-      }
-      if (address == null || address.trim() == "") {
-          alert("商家地址不能为空!");
-          document.getElementById("tip").innerHTML = "商家地址不能为空!!";
-          return false;
-      }
-
-      if (con_telephone == null || con_telephone.trim() == "") {
-          alert("电话号码不能为空!");
-          document.getElementById("tip").innerHTML = "电话号码不能为空!";
-          return false;
-      }
-      if (main_category == null || main_category.trim() == "") {
-          alert("主营品类不能为空!");
-          document.getElementById("tip").innerHTML = "主营品类不能为空!";
-          return false;
-      }
-      if (auxiliary_category == null || auxiliary_category.trim() == "") {
-          alert("辅营品类不能为空!");
-          document.getElementById("tip").innerHTML = "辅营品类不能为空!";
-          return false;
-      }
-      if (password == null || password.trim() == "") {
-          alert("密码不能为空!");
-          document.getElementById("tip").innerHTML = "密码不能为空!";
-          return false;
-      }
-      if (check(shop_name)&&check(address)&&check(con_telephone)&&check(main_category)&&check(auxiliary_category)&&check(password)){
-          alert("注册成功");
-          document.getElementById("tip").innerHTML="注册成功!";
-          return ture;
-      }
-  }
-</script>

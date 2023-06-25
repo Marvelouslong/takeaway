@@ -2,9 +2,6 @@ package controller;
 
 import pojo.dishes;
 import pojo.user;
-import service.dishesService;
-import service.impl.dishesServiceImpl;
-import service.impl.tasteServiceImpl;
 import service.impl.userregisterServiceImpl;
 import service.tasteService;
 import service.userregisterService;
@@ -19,7 +16,7 @@ import javax.servlet.http.Part;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-@WebServlet("/userregisterServlet")
+@WebServlet("/userregister")
 public class userregisterServlet extends HttpServlet {
     private userregisterService userregisterservice = new userregisterServiceImpl();
 
@@ -30,7 +27,7 @@ public class userregisterServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         req.setCharacterEncoding("UTF-8");
         String name = req.getParameter("name");
-        long phone=req.getDateHeader("phone");
+        long phone= Long.parseLong(req.getParameter("phone"));
         String password=req.getParameter("password");
         String signature=req.getParameter("signature");
         String sex=req.getParameter("sex");

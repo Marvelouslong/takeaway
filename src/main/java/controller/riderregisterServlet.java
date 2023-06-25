@@ -20,7 +20,7 @@ import java.io.PrintWriter;
 import java.sql.Connection;
 import java.util.Objects;
 
-@WebServlet("/riderregisterServlet")
+@WebServlet("/riderregister")
 public class riderregisterServlet extends HttpServlet {
     private riderregisterService riderregisterservice=new riderregisterServiceImpl();
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -29,9 +29,9 @@ public class riderregisterServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req,HttpServletResponse resp) throws ServletException,IOException {
         req.setCharacterEncoding("UTF-8");
         String name = req.getParameter("name");
-        long phone = req.getDateHeader("phone");
+        long phone = Long.parseLong(req.getParameter("phone"));
         String id_card = req.getParameter("id_card");
-        long bank_card = req.getDateHeader("bank_card");
+        long bank_card = Long.parseLong(req.getParameter("bank_card"));
         String work_city = req.getParameter("work_city");
         String password = req.getParameter("password");
         String status = ("正在审核");
@@ -48,9 +48,9 @@ public class riderregisterServlet extends HttpServlet {
         output.flush();
         output.close();
         inputStream.close();
-        byte[] driver_license = bytes;
+        byte[] driver_license=bytes;
         this.riderregisterservice.add(new rider(name,phone,id_card,bank_card,work_city,password,status,driver_license));
-        req.getRequestDispatcher("/loginrider.jsp").forward(req, resp);
+        req.getRequestDispatcher("/loginstore.jsp").forward(req, resp);
     }
 
 

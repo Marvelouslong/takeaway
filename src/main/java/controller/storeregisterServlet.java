@@ -18,7 +18,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
-@WebServlet("/storeregisterServlet")
+@WebServlet("/storeregister")
 public class storeregisterServlet extends HttpServlet {
     private storeregisterService storeregisterservice=new storeregisterServiceImpl();
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -27,11 +27,11 @@ public class storeregisterServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req,HttpServletResponse resp) throws ServletException,IOException {
         req.setCharacterEncoding("UTF-8");
         String address = req.getParameter("address");
-        long con_telephone = req.getDateHeader("con_telephone");
+        long con_telephone = Long.parseLong(req.getParameter("con_telephone"));
         String shop_name=req.getParameter("shop_name");
         String con_name=req.getParameter("con_name");
         String password = req.getParameter("password");
-        long bank_card=req.getDateHeader("bank_card");
+        long bank_card= Long.parseLong(req.getParameter("bank_card"));
         String legal_id_card=req.getParameter("legal_id_card");
         String main_category=req.getParameter("main_category");
         String auxiliary_category=req.getParameter("auxiliary_category");

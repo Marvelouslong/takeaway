@@ -48,7 +48,7 @@
   <div id="napp" class="susu">
     <h1>用户注册</h1>
     <div class="ruirui">
-      <form  active="userregisterServlet" method="post" name="form0" onclick="return check()">
+      <form  action="${pageContext.request.contextPath}/userregister" method="post" name="form0" onclick="return check()">
         <p>&nbsp;用户名&nbsp;:<input type="text" name="name" id="name" placeholder="请输入用户名"></p>
         <p>&nbsp;手机号&nbsp;&nbsp;&nbsp; :<input type="text" name="phone" id="phone" placeholder="请输入手机号"></p>
         <p>&nbsp;个性签名 :<input type="text" name="signature" id="signature" placeholder="请输入个性签名"></p>
