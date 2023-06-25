@@ -53,4 +53,7 @@ public class administrators {
                 ", password='" + password + '\'' +
                 '}';
     }
+
+    public administrators() {
+    }
 }
