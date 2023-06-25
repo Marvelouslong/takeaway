@@ -4,8 +4,6 @@ import pojo.administrators;
 import pojo.user;
 import service.adminregisterService;
 import service.impl.adminregisterServiceImpl;
-import service.impl.userregisterServiceImpl;
-import service.userregisterService;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;

@@ -113,7 +113,7 @@
             <form id="upload-form" action="Userservlet" method="get">
               <input type="hidden" name="method" value="change_receiver">
               <c:forEach var="re" items="${receiverlist}" varStatus="status">
-                序号：<input type="text" value="${re.id}" name="id" readonly>
+                序号：<input type="text" value="${status.index}" name="id" readonly>
                 <br>
                   接收人：
                       <input type="text" name="name${status.index}" value="${re.name}">

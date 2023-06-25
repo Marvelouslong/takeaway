@@ -24,7 +24,7 @@ public class loginriderDaoImpl  implements loginriderDao {
                 Rider.setPhone(rs.getLong("phone"));
                 Rider.setName(rs.getString("name"));
                 Rider.setId_card(rs.getString("id_card"));
-                Rider.setDriver_license(rs.getBytes("driver_license"));
+//                Rider.setDriver_license(rs.getBytes("driver_license"));
                 Rider.setBank_card(rs.getLong("bank_card"));
                 Rider.setWork_city(rs.getString("work_city"));
                 Rider.setStatus(rs.getString("status"));
