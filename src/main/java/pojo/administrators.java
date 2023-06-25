@@ -43,7 +43,11 @@ public class administrators {
         this.account_number=account_number;
         this.password=password;
     }
-
+    public administrators(String name,Long account_number,String password) {
+        this.name = name;
+        this.password = password;
+        this.account_number=account_number;
+    }
     @Override
     public String toString() {
         return "administrators{" +

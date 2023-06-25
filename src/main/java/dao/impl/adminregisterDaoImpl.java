@@ -14,7 +14,7 @@ public class adminregisterDaoImpl implements adminregisterDao {
     @Override
     public Integer add(administrators Administrators) {
         Connection connection = BaseDao.getConnection();
-        String sql = "insert into administrators('name',account_number,password) values(?,?,?) ";
+        String sql = "insert into administrators(`name`,account_number,`password`) values(?,?,?) ";
         PreparedStatement pstm = null;
         Integer rs = null;
         try {
