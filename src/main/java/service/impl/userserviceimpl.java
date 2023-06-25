@@ -394,7 +394,34 @@ public class userserviceimpl implements userservice {
     }
 
     @Override
-    public int addre(int id) {
-        return 0;
+    public int addre(int count,String name,long phone,String address,int id) {
+        Connection connection = null;
+        int count1=0;
+        try {
+            connection = BaseDao.getConnection();
+            count+=1;
+            count1 = Userdao.addre(connection,count,name,phone,address,id);
+        } catch (Exception e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }finally{
+            BaseDao.closeResource(connection, null, null);
+        }
+        return count;
+    }
+
+    @Override
+    public int getreceiverCount() {
+        Connection connection = null;
+        int count = 0;
+        try {
+            connection = BaseDao.getConnection();
+            count = Userdao.getreceiverCount(connection);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }finally{
+            BaseDao.closeResource(connection, null, null);
+        }
+        return count;
     }
 }

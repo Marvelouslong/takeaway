@@ -86,16 +86,28 @@
   }
   #aside_content .card-info .author-info__name {
     font-weight: 500;
-    font-size: 1.1rem;
+    font-size: 1.1rem;}
+
+  .div3{
+    display: none;
+
+  }
+  .show {
+    background-color: #fbfbfb;
+    display: block;
+    height:300px;
+    width: 300px;
+    padding-left: 20px;
+    border: 1px black;
+    z-index: 3;
+    left:500px;
+    top: 100px;
+    position: absolute;
+  }
+  .hide{
+    display: none;
   }
 </style>
-<script>
-  const form = document.getElementById('upload-form');
-  const submitBtn = document.getElementById('submitBtn');
-  submitBtn.addEventListener('click', () => {
-    form.submit();
-  });
-</script>
 <div id="content-outer">
   <div class="layout_page" id="content-inner">
     <div class="aside_content" id="aside_content">
@@ -107,28 +119,30 @@
             <div class="author-info__phone">${userSession.phone}</div>
             <div class="author-info__sex">${userSession.sex}</div>
             <div class="author-info__description">${userSession.signature}</div>
-            <br>            <br>
+            <br>
             <a href="Userservlet?method=jump">修改个人信息</a>
             <br>            <br>
             <form id="upload-form" action="Userservlet" method="get">
               <input type="hidden" name="method" value="change_receiver">
               <c:forEach var="re" items="${receiverlist}" varStatus="status">
-                序号：<input type="text" value="${status.index}" name="id" readonly>
+                序号：${status.index+1}
                 <br>
                   接收人：
-                      <input type="text" name="name${status.index}" value="${re.name}">
+                      <input type="text" name="name[${status.index}]" value="${re.name}">
                     <br>
-                    电话：<input type="text" name="phone${status.index}" value="${re.phone}">
+                    电话：<input type="text" name="phone[${status.index}]" value="${re.phone}">
                 <br>
                     地址：
-                <input type="text" name="address${status.index}" value="${re.address}">
+                <input type="text" name="address[${status.index}]" value="${re.address}">
                 <br>
                 <br>
-                <button type="submit" id="submitBtn" name="submitBtn" value="${re.id}">修改</button>
+                <input type="hidden" name="id[${status.index}]" value="${re.id}">
+                <button type="submit" id="submitBtn" name="submitBtn" value="${status.index}">修改</button>
                 <br>
               </c:forEach>
             </form>
-            <a href="Userservlet?method=addre?id=${userSession.id}">zneg</a>
+<%--            <a href="Userservlet?method=addre&id=${userSession.id}"></a>--%>
+            <button  id="btn6" value="隐藏">增加接收人</button>
           </div>
         </div>
       </div>
@@ -186,5 +200,45 @@
       </article>
     </div>
   </div>
+<div class="div3" id="div3">
+  <form method="get" action="Userservlet">
+    <input type="hidden" name="method" value="addre">
+    <h4>添加接收人姓名：</h4>
+    <br>
+    <input type="text" name="name">
+    <br>
+    <h4>添加接收人电话：</h4>
+    <br>
+    <input type="text" name="phone">
+    <br>
+    <h4>添加接收地址：</h4>
+    <br>
+    <input type="text" name="address">
+    <br>
+    <label>
+      <input type="submit" class="button" name="mm" value="提交"/>
+      <input type="submit" class="button" name="mm" value="取消"/>
+    </label>
+  </form>
+</div>
 </body>
 </html>
+<script>
+  const form = document.getElementById('upload-form');
+  const submitBtn = document.getElementById('submitBtn');
+  submitBtn.addEventListener('click', () => {
+    form.submit();
+  });
+
+  var btn = document.getElementById("btn6");
+  var div = document.getElementById("div3");
+  btn.onclick = function () {
+    if(this.value === "隐藏"){
+      div.className = "hide";
+      btn.value = "显示"
+    }else{
+      div.className = "show";
+      btn.value = "隐藏"
+    }
+  }
+</script>

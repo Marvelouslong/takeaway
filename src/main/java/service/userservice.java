@@ -28,5 +28,6 @@ public interface userservice {
     public List<receiver> getreceiverlist(int id);
     public int changeostatus(int id);
     public int change_receiver(int id,String name,Long phone,String address);
-    public int addre(int id);
+    public int addre(int count,String name,long phone,String address,int id);
+    public int getreceiverCount();
 }

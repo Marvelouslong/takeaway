@@ -507,4 +507,37 @@ public class userdaoimpl implements userdao {
         }
         return count;
     }
+
+    @Override
+    public int getreceiverCount(Connection connection) throws Exception {
+        PreparedStatement pstm=null;
+        int count=0;
+        String sql="select count(id) as count from receiver";
+        ResultSet rs=null;
+        pstm=connection.prepareStatement(sql);
+        rs = pstm.executeQuery();
+        if(rs.next()){
+            count = rs.getInt("count");
+        }
+        BaseDao.closeResource(null, pstm, rs);
+        return count;
+    }
+
+    @Override
+    public int addre(Connection connection, int count, String name, Long phone, String address, int id) throws Exception {
+        PreparedStatement pstm = null;
+        int count1=0;
+        if(connection != null){
+            String sql ="insert into receiver values (?,?,?,?,?)";
+            pstm = connection.prepareStatement(sql);
+            pstm.setInt(1,count);
+            pstm.setString(2,name);
+            pstm.setLong(3,phone);
+            pstm.setString(4,address);
+            pstm.setInt(5,id);
+            count1=pstm.executeUpdate();
+            BaseDao.closeResource(null, pstm, null);
+        }
+        return count1;
+    }
 }

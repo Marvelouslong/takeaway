@@ -80,9 +80,7 @@ public class user extends HttpServlet {
             int id1= Integer.parseInt(id);
             this.changeostatus(req, resp,id1);
         }else if (method != null && method.equals("addre")) {
-            String id=req.getParameter("id");
-            int id1= Integer.parseInt(id);
-            this.addre(req, resp,id1);
+            this.addre(req, resp);
         }
     }
 
@@ -445,15 +443,15 @@ public class user extends HttpServlet {
         req.getRequestDispatcher("/jsp/user/updateuser.jsp").forward(req, resp);
     }
     private void change_receiver(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String receiverId = req.getParameter("submitBtn");
-        int id= Integer.parseInt(receiverId);
+        String index1 = req.getParameter("submitBtn");
+        int index= Integer.parseInt(index1);
+        int id = Integer.parseInt(req.getParameter("id[" + index + "]"));
         userservice userservice = new userserviceimpl();
         int count=0;
-        String[] name = req.getParameterValues("name");
-        String[] phone = req.getParameterValues("phone");
-        String[] address = req.getParameterValues("address");
-        long phone1 = Long.parseLong(phone[id]);
-        count= userservice.change_receiver(id,name[id],phone1,address[id]);
+        long phone = Long.parseLong(req.getParameter("phone[" + index + "]"));
+        String name=req.getParameter("name[" + index + "]");
+        String address=req.getParameter("address[" + index + "]");
+        count= userservice.change_receiver(id,name,phone,address);
         if(count!=0){
             this.myinformation(req, resp);
         }
@@ -466,12 +464,22 @@ public class user extends HttpServlet {
             this.myinformation(req, resp);
         }
     }
-    private void addre(HttpServletRequest req, HttpServletResponse resp,int id) throws ServletException, IOException {
+    private void addre(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         userservice userservice = new userserviceimpl();
-        int count=0;
-        count= userservice.addre(id);
-        if(count!=0){
-            this.myinformation(req, resp);
-        }
+        String mm=req.getParameter("mm");
+        if(mm.equals("提交")) {
+            String name=req.getParameter("name");
+            long phone=Long.parseLong(req.getParameter("phone"));
+            String address=req.getParameter("address");
+            Object attribute = req.getSession().getAttribute(Constants.USER_SESSION);
+            int id = ((pojo.user) attribute).getId();
+            int count = 0;
+            int count1 = 0;
+            count = userservice.getreceiverCount();
+            count1 = userservice.addre(count,name,phone,address,id);
+            if (count != 0) {
+                this.myinformation(req, resp);
+            }
+        }else{this.myinformation(req,resp);}
     }
 }

@@ -30,4 +30,6 @@ public interface userdao {
     public List<receiver> getreceiverlist(Connection connection, int id)throws Exception;
     public int changeostatus(Connection connection,int id) throws Exception;
     public int change_receiver(Connection connection,int id,String name,Long phone,String address) throws Exception;
+    public int getreceiverCount(Connection connection) throws Exception;
+    public int addre(Connection connection,int count,String name,Long phone,String address,int id) throws Exception;
 }
