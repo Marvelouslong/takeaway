@@ -1,3 +1,5 @@
+
+
 <%--
   Created by IntelliJ IDEA.
   User: liangsicheng
@@ -48,11 +50,11 @@
   <div id="napp" class="susu">
     <h1>管理员注册</h1>
     <div class="ruirui">
-      <form  active="#" method="get" name="form0" onclick="return check()">
+      <form   method="post" name="form0" onclick="return check()" action="${pageContext.request.contextPath}/adminregister">
         <p>&nbsp;管理员姓名&nbsp;:<input type="text" name="name" id="name" placeholder="请输入姓名"></p>
-        <p>&nbsp;账号&nbsp;&nbsp;&nbsp; :<input type="text" name="account" id="account" placeholder="请输入账号"></p>
+        <p>&nbsp;账号&nbsp;&nbsp;&nbsp; :<input type="text" name="account_number" id="account_number" placeholder="请输入账号"></p>
         <p>&nbsp;密码 :<input type="text" name="password" id="password" placeholder="请输入密码"></p>
-        <p>&nbsp;&nbsp;<input class="h" type="submit" value="注册"></p>
+        <button type="submit" value="注册">注册</button>
         <span style="color: #FD482C;font-size: 15px" id="tip">${tip}  </span>
       </form>
     </div>
@@ -66,24 +68,24 @@
 <script>
   function check() {
     let name = document.getElementById("name").value;
-    let account = document.getElementById("account").value;
+    let account_number = document.getElementById("account_number").value;
     let password = document.getElementById("password").value;
-    if (name == null || name.trim() == "") {
+    if (name == null || name.trim() === "") {
       alert("姓名不能为空!");
       document.getElementById("tip").innerHTML = "姓名不能为空!";
       return false;
     }
-    if (account == null || account.trim() == "") {
+    if (account_number == null || account_number.trim() === "") {
       alert("账号不能为空!");
       document.getElementById("tip").innerHTML = "账号不能为空!!";
       return false;
     }
-    if (password == null || password.trim() == "") {
+    if (password == null || password.trim() === "") {
       alert("密码不能为空!");
       document.getElementById("tip").innerHTML = "密码不能为空!";
       return false;
     }
-    if (check(name)&&check(account)&&check(name)&&check(password)){
+    if (check(name)&&check(account_number)&&check(password)){
       alert("注册成功");
       document.getElementById("tip").innerHTML="注册成功!";
       return ture;
