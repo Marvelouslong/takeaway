@@ -2,8 +2,7 @@ package service.impl;
 
 import dao.adminregisterDao;
 import dao.impl.adminregisterDaoImpl;
-import dao.impl.userregisterDaoImpl;
-import dao.userregisterDao;
+
 import pojo.administrators;
 import pojo.user;
 import service.adminregisterService;

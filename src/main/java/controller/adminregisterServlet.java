@@ -4,9 +4,6 @@ import pojo.administrators;
 import pojo.user;
 import service.adminregisterService;
 import service.impl.adminregisterServiceImpl;
-import service.impl.userregisterServiceImpl;
-import service.userregisterService;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -27,10 +24,10 @@ public class adminregisterServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         req.setCharacterEncoding("UTF-8");
         String name = req.getParameter("name");
-        long account_number=req.getDateHeader("account_number");
+        long account_number= Long.parseLong(req.getParameter("account_number"));
         String password=req.getParameter("password");
         this.adminregisterservice.add(new administrators(name,account_number,password));
-        resp.sendRedirect("/login/loginadmin.jsp");
+        req.getRequestDispatcher("/login/loginadmin.jsp").forward(req, resp);
     }
 }
 
