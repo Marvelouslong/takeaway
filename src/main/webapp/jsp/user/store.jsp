@@ -160,7 +160,15 @@
       <tr>
         <td>${dish.id}</td>
         <td>
-          <img  src="picturedishes_picture?id=${dish.id}">
+          <img  src="picturedishes_picture?id=${dish.id}" style="animation: avatar_turn_around 2s linear infinite;
+                         display: inline-block;
+                         padding: 5px;
+                         width: 50px;
+                         height: 50px;
+                         border-radius: 70px;
+                         vertical-align: top;
+                         transition: all .3s;"
+                alt="img">
             ${dish.name}
         </td>
         <td width="100px">${dish.describe}</td>
@@ -172,6 +180,17 @@
         </td>
       </tr>
     </c:forEach>
+    <form action="Userservlet" method="get">
+      <c:forEach items="${tastelist}" var="taste" varStatus="status">
+        <input type="hidden" name="method" value="upshop">
+        <tr>
+          <input type="radio" name="taste" value="${taste.name}">${taste.name} </tr>
+        <tr>
+          <input type="hidden" name="id" value="${dishid}">
+      </tr>
+      </c:forEach>
+      <input type="submit" class="button" name="mm" value="加入购物车"/>
+    </form>
     </tbody>
   </table>
 </div>

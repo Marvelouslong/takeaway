@@ -30,4 +30,7 @@ public interface userservice {
     public int change_receiver(int id,String name,Long phone,String address);
     public int addre(int count,String name,long phone,String address,int id);
     public int getreceiverCount();
+    public int upshop(int id,int id1,String taste);
+    public int getstoreid(int id);
+
 }

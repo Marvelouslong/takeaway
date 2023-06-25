@@ -424,4 +424,34 @@ public class userserviceimpl implements userservice {
         }
         return count;
     }
+
+    @Override
+    public int upshop(int id, int id1,String taste) {
+        Connection connection = null;
+        int count = 0;
+        try {
+            connection = BaseDao.getConnection();
+            count = Userdao.upshop(connection,id,id1,taste);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }finally{
+            BaseDao.closeResource(connection, null, null);
+        }
+        return count;
+    }
+
+    @Override
+    public int getstoreid(int id) {
+        Connection connection = null;
+        int count = 0;
+        try {
+            connection = BaseDao.getConnection();
+            count = Userdao.getstoreid(connection,id);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }finally{
+            BaseDao.closeResource(connection, null, null);
+        }
+        return count;
+    }
 }

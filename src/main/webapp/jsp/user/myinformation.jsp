@@ -141,7 +141,6 @@
                 <br>
               </c:forEach>
             </form>
-<%--            <a href="Userservlet?method=addre&id=${userSession.id}"></a>--%>
             <button  id="btn6" value="隐藏">增加接收人</button>
           </div>
         </div>

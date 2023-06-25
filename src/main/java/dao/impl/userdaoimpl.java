@@ -6,10 +6,7 @@ import dao.BaseDao;
 import dao.userdao;
 import pojo.*;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,7 +18,7 @@ public class userdaoimpl implements userdao {
         int count = 0;
         if(connection != null){
             StringBuffer sql = new StringBuffer();
-            sql.append("select count(s.id) as count from store s,dishes d where s.id = d.s_id");
+            sql.append("select count(distinct s.id) as count from store s,dishes d where s.id = d.s_id");
             List<Object> list = new ArrayList<Object>();
             if(!StringUtils.isNullOrEmpty(query)){
                 sql.append(" and (s.shop_name like ? or d.name like ?)");
@@ -49,7 +46,7 @@ public class userdaoimpl implements userdao {
         List<store> storeList = new ArrayList<store>();
         if(connection != null){
             StringBuffer sql = new StringBuffer();
-            sql.append("select s.* from store s,dishes d where s.id = d.s_id");
+            sql.append("select distinct s.* from store s,dishes d where s.id = d.s_id");
             List<Object> list = new ArrayList<Object>();
             if(!StringUtils.isNullOrEmpty(query)){
                 sql.append(" and (s.shop_name like ? or d.name like ? or s.main_category like ?)");
@@ -540,4 +537,41 @@ public class userdaoimpl implements userdao {
         }
         return count1;
     }
+
+    @Override
+    public int upshop(Connection connection, int id, int id1,String taste) throws Exception {
+        PreparedStatement pstm = null;
+        int count=0;
+        if(connection != null){
+            String sql =" INSERT INTO `shopcar-dishes` (`d_id`, `shopcar_id`, `time`, `number`, `taste`) " +
+                    "VALUES (?, ?, NOW(), 1, ?) " +
+                    "ON DUPLICATE KEY UPDATE `number` = `number` + 1";
+            pstm = connection.prepareStatement(sql);
+            pstm.setInt(1,id);
+            pstm.setInt(2,id1);
+            pstm.setString(3,taste);
+            count=pstm.executeUpdate();
+            BaseDao.closeResource(null, pstm, null);
+        }
+        return count;
+    }
+
+    @Override
+    public int getstoreid(Connection connection, int id) throws Exception {
+        PreparedStatement pstm = null;
+        int count=0;
+        ResultSet rs=null;
+        if(connection != null){
+            String sql ="select s_id from dishes where id=?";
+            pstm = connection.prepareStatement(sql);
+            pstm.setInt(1,id);
+            rs=pstm.executeQuery();
+            if(rs.next()){
+                count=rs.getInt("s_id");
+            }
+            BaseDao.closeResource(null, pstm, rs);
+        }
+        return count;
+    }
 }
+

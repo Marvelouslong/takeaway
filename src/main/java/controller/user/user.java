@@ -64,10 +64,12 @@ public class user extends HttpServlet {
             this.img5(req, resp, id);
         }else if (method != null && method.equals("storelist")) {
             String id = req.getParameter("id");
-            this.storelist(req, resp, id);
+            int id1 = Integer.parseInt(id);
+            this.storelist(req, resp, id1);
         }else if (method != null && method.equals("shopcarlist")) {
             String id = req.getParameter("id");
-            this.storelist(req, resp, id);
+            int id1= Integer.parseInt(id);
+            this.shopcarlist(req, resp, id1);
         }else if (method != null && method.equals("uptaste")) {
             String id = req.getParameter("id");
             this.uptaste(req, resp, id);
@@ -81,6 +83,11 @@ public class user extends HttpServlet {
             this.changeostatus(req, resp,id1);
         }else if (method != null && method.equals("addre")) {
             this.addre(req, resp);
+        }else if (method != null && method.equals("upshop")) {
+            String taste=req.getParameter("taste");
+            String id1=req.getParameter("id");
+            int id= Integer.parseInt(id1);
+            this.upshop(req, resp,id,taste);
         }
     }
 
@@ -402,13 +409,12 @@ public class user extends HttpServlet {
             this.talkshow(req,resp,pageIndex);
         }
     }
-    private void storelist(HttpServletRequest req, HttpServletResponse resp, String id) throws IOException, ServletException {
-        int id1 = Integer.parseInt(id);
+    private void storelist(HttpServletRequest req, HttpServletResponse resp, int id) throws IOException, ServletException {
         userservice userservice = new userserviceimpl();
         List<store> storelist = null;
-        storelist = userservice.storelist(id1);
+        storelist = userservice.storelist(id);
         List<dishes> dishlist = null;
-        dishlist = userservice.dishlist(id1);
+        dishlist = userservice.dishlist(id);
         req.setAttribute("storelist", storelist);
         req.setAttribute("dishlist", dishlist);
         req.getRequestDispatcher("/jsp/user/store.jsp").forward(req, resp);
@@ -416,28 +422,30 @@ public class user extends HttpServlet {
     private void uptaste(HttpServletRequest req, HttpServletResponse resp, String id) throws ServletException, IOException{
         userservice userservice = new userserviceimpl();
         int id1= Integer.parseInt(id);
+        int id2=0;
         List<taste> tastelist = null;
-//        List<List<taste>> twolist = new ArrayList<List<taste>>();
-//        for(dishes dish : dishlist){
-//            twolist.add(tastelist);
-//        }
-//        req.setAttribute("twolist", twolist);
         tastelist = userservice.tastelist(id1);
         if(tastelist.size()!=0){
-            req.getRequestDispatcher("/jsp/user/store.jsp").forward(req, resp);
+            req.setAttribute("tastelist", tastelist);
+            req.setAttribute("dishid", id1);
+            id2= userservice.getstoreid(id1);
+            this.storelist(req,resp,id2);
         }else{
-            this.upshop(req,resp,id1);
+            String taste="null";
+            this.upshop(req,resp,id1,taste);
         }
     }
-    private void upshop(HttpServletRequest req, HttpServletResponse resp, int id) throws ServletException, IOException{
+    private void upshop(HttpServletRequest req, HttpServletResponse resp, int id,String taste) throws ServletException, IOException{
         userservice userservice = new userserviceimpl();
-//        List<List<taste>> twolist = new ArrayList<List<taste>>();
-//        List<taste> tastelist = null;
-//        for(dishes dish : dishlist){
-//        tastelist = userservice.tastelist(id1);
-//            twolist.add(tastelist);
-//        }
-//        req.setAttribute("twolist", twolist);
+        Object attribute = req.getSession().getAttribute(Constants.USER_SESSION);
+        int id1 = ((pojo.user) attribute).getId();
+        int count=0;
+        count=userservice.upshop(id,id1,taste);
+        if(count!=0) {
+            int id2 = 0;
+            id2 = userservice.getstoreid(id);
+            this.storelist(req, resp, id2);
+        }
     }
     private void jump(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         req.getRequestDispatcher("/jsp/user/updateuser.jsp").forward(req, resp);
@@ -481,5 +489,8 @@ public class user extends HttpServlet {
                 this.myinformation(req, resp);
             }
         }else{this.myinformation(req,resp);}
+    }
+    private void shopcarlist(HttpServletRequest req, HttpServletResponse resp,int id){
+
     }
 }
