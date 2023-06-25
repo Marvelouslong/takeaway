@@ -24,7 +24,7 @@
   </welcome-file-list>
   <servlet>
     <servlet-name>loginadminServlet</servlet-name>
-    <servlet-class>controller.loginadminServlet</servlet-class>
+    <servlet-class>controller.login.loginadminServlet</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>loginadminServlet</servlet-name>
@@ -32,7 +32,7 @@
   </servlet-mapping>
   <servlet>
     <servlet-name>loginstoreServlet</servlet-name>
-    <servlet-class>controller.loginstoreServlet</servlet-class>
+    <servlet-class>controller.login.loginstoreServlet</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>loginstoreServlet</servlet-name>
@@ -40,7 +40,7 @@
   </servlet-mapping>
   <servlet>
     <servlet-name>userloginServlet</servlet-name>
-    <servlet-class>controller.userloginServlet</servlet-class>
+    <servlet-class>controller.login.userloginServlet</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>userloginServlet</servlet-name>
