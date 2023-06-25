@@ -1,4 +1,4 @@
-package controller;
+package controller.login;
 
 import util.constant;
 
@@ -12,7 +12,7 @@ import java.io.IOException;
 public class loginoutadminServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         req.getSession().removeAttribute(constant.ADMIN_SESSION);
-        resp.sendRedirect(req.getContextPath()+"/loginadmin.jsp");//管理员返回登录页面
+        resp.sendRedirect(req.getContextPath()+"/logincollection.jsp");//管理员返回登录页面
     }
 
     @Override

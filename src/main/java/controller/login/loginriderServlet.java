@@ -1,7 +1,9 @@
-package controller;
+package controller.login;
 
+import pojo.order;
 import pojo.rider;
 import service.impl.loginriderServiceImpl;
+import service.impl.newsorderServiceImpl;
 import service.loginriderService;
 import util.constant;
 
@@ -11,6 +13,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.List;
 
 @WebServlet("/loginrider")
 public class loginriderServlet extends HttpServlet {
@@ -24,7 +27,12 @@ public class loginriderServlet extends HttpServlet {
         if (null != Rider) {
             if (Rider.getPhone() == phone && Rider.getPassword().equals(password) && Rider.getStatus().equals("通过")) {
                 req.getSession().setAttribute(constant.RIDER_SESSION, Rider);
-                resp.sendRedirect("frameadmin.jsp");
+                System.out.println(phone);
+                newsorderServiceImpl orderService = new newsorderServiceImpl();
+                List<order> orderList=null;
+                orderList = orderService.getorderlist(phone);
+                req.setAttribute("orderList",orderList);
+                req.getRequestDispatcher("/news/ordernews.jsp").forward(req,resp);
             }
             else{
                 if (!(Rider.getPassword().equals(password))) {
