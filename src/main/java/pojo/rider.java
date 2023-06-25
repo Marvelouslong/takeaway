@@ -13,11 +13,7 @@ public class rider {
     private int ad_id;
 
     public rider() {
-
     }
-
-
-
     public int getId() {
         return id;
     }
