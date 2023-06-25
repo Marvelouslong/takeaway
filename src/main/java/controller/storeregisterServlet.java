@@ -1,10 +1,11 @@
 package controller;
 
-import com.mysql.cj.jdbc.Blob;
-import pojo.dishes;
 import pojo.rider;
+import pojo.store;
 import service.impl.riderregisterServiceImpl;
+import service.impl.storeregisterServiceImpl;
 import service.riderregisterService;
+import service.storeregisterService;
 import util.constant;
 
 import javax.servlet.ServletException;
@@ -16,24 +17,24 @@ import javax.servlet.http.Part;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.PrintWriter;
-import java.sql.Connection;
-import java.util.Objects;
 
-@WebServlet("/riderregisterServlet")
-public class riderregisterServlet extends HttpServlet {
-    private riderregisterService riderregisterservice=new riderregisterServiceImpl();
+@WebServlet("/storeregisterServlet")
+public class storeregisterServlet extends HttpServlet {
+    private storeregisterService storeregisterservice=new storeregisterServiceImpl();
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         this.doPost(req,resp);
     }
     protected void doPost(HttpServletRequest req,HttpServletResponse resp) throws ServletException,IOException {
         req.setCharacterEncoding("UTF-8");
-        String name = req.getParameter("name");
-        long phone = req.getDateHeader("phone");
-        String id_card = req.getParameter("id_card");
-        long bank_card = req.getDateHeader("bank_card");
-        String work_city = req.getParameter("work_city");
+        String address = req.getParameter("address");
+        long con_telephone = req.getDateHeader("con_telephone");
+        String shop_name=req.getParameter("shop_name");
+        String con_name=req.getParameter("con_name");
         String password = req.getParameter("password");
+        long bank_card=req.getDateHeader("bank_card");
+        String legal_id_card=req.getParameter("legal_id_card");
+        String main_category=req.getParameter("main_category");
+        String auxiliary_category=req.getParameter("auxiliary_category");
         String status = ("正在审核");
 //                获取图片
         Part filePart = req.getPart("image"); // 通过 name 获取上传的文件
@@ -48,10 +49,14 @@ public class riderregisterServlet extends HttpServlet {
         output.flush();
         output.close();
         inputStream.close();
-        byte[] driver_license = bytes;
-        this.riderregisterservice.add(new rider(name,phone,id_card,bank_card,work_city,password,status,driver_license));
-        req.getRequestDispatcher("/loginrider.jsp").forward(req, resp);
+        byte[] brand_authorization = bytes;
+        byte[] license=bytes;
+        byte[] certificate_of_business=bytes;
+        byte[] shop_picture=bytes;
+        this.storeregisterservice.add(new store(address,con_telephone,shop_name,con_name,password,bank_card,legal_id_card,main_category,auxiliary_category,status,brand_authorization,license,certificate_of_business,shop_picture));
+        req.getRequestDispatcher("/loginstore.jsp").forward(req, resp);
+
+        }
     }
 
 
-}

@@ -9,7 +9,7 @@
 <html lang="en">
 <head>
   <%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
-  <title>商家注册页面</title>
+  <title>用户注册页面</title>
   <style>
     #app{
       background-image: url(https://img-qn-2.51miz.com/preview/video/00/00/12/17/V-121759-83916990.jpg);
@@ -48,13 +48,13 @@
   <div id="napp" class="susu">
     <h1>用户注册</h1>
     <div class="ruirui">
-      <form  active="#" method="get" name="form0" onclick="return check()">
+      <form  active="userregisterServlet" method="post" name="form0" onclick="return check()">
         <p>&nbsp;用户名&nbsp;:<input type="text" name="name" id="name" placeholder="请输入用户名"></p>
-        <p>&nbsp;手机号&nbsp;&nbsp;&nbsp; :<input type="text" name="telephone" id="telephone" placeholder="请输入手机号"></p>
-        <p>&nbsp;个性签名 :<input type="text" name="sign" id="sign" placeholder="请输入个性签名"></p>
+        <p>&nbsp;手机号&nbsp;&nbsp;&nbsp; :<input type="text" name="phone" id="phone" placeholder="请输入手机号"></p>
+        <p>&nbsp;个性签名 :<input type="text" name="signature" id="signature" placeholder="请输入个性签名"></p>
         <p>&nbsp;性别 :<input type="text" name="sex" id="sex" placeholder="请输入性别"></p>
         <p>&nbsp;密码&nbsp;:<input type="text" name="password" id="password" placeholder="请输入密码"></p>
-        <p>&nbsp;头像:<form method="post" action="${ctx}/upimg" id="form1"
+        <p>&nbsp;头像:<form method="post" action="${ctx}/upimg" name="picture" id="picture"
                               enctype="multipart/form-data" class="contact-form">
           <div>
 							<span> <label> 单张照片* </label>
@@ -68,7 +68,7 @@
            </span>
           </div>
         </form>
-        <p>&nbsp;&nbsp;<input class="h" type="submit" value="注册"></p>
+        <button type="submit" value="注册">注册</button>
         <span style="color: #FD482C;font-size: 15px" id="tip">${tip}  </span>
       </form>
     </div>
@@ -82,8 +82,8 @@
 <script>
   function check() {
     let name = document.getElementById("name").value;
-    let telephone = document.getElementById("telephone").value;
-    let sign = document.getElementById("sign").value;
+    let phone = document.getElementById("phone").value;
+    let signature = document.getElementById("signature").value;
     let sex = document.getElementById("sex").value;
     let password = document.getElementById("password").value;
     if (name == null || name.trim() == "") {
@@ -91,12 +91,12 @@
       document.getElementById("tip").innerHTML = "用户名不能为空!";
       return false;
     }
-    if (telephone == null || telephone.trim() == "") {
+    if (phone == null || phone.trim() == "") {
       alert("手机号不能为空!");
       document.getElementById("tip").innerHTML = "手机号不能为空!!";
       return false;
     }
-    if (sign == null || sign.trim() == "") {
+    if (signature == null || signature.trim() == "") {
       alert("个性签名不能为空!");
       document.getElementById("tip").innerHTML = "个性签名不能为空!";
       return false;
@@ -111,7 +111,7 @@
       document.getElementById("tip").innerHTML = "密码不能为空!";
       return false;
     }
-    if (check(name)&&check(telephone)&&check(sign)&&check(sex)&&check(password)){
+    if (check(name)&&check(phone)&&check(signature)&&check(sex)&&check(password)){
       alert("注册成功");
       document.getElementById("tip").innerHTML="注册成功!";
       return ture;

@@ -22,7 +22,7 @@
     }
     .susu.ruirui input{
       width: 220px;
-      height: 30px;
+      height: 50px;
       margin: 8px 0px;
       border-radius: 15px;
     }
@@ -30,6 +30,7 @@
     #napp{
       border: #e2f6ba 3px solid;
       width:600px;
+      height:800px;
       margin-left: 500px;
       margin-top: 10px;
       color: #0C0C0C;
@@ -47,12 +48,14 @@
   <div id="napp" class="susu">
     <h1>骑手注册</h1>
     <div class="ruirui">
-      <from  active="#" method="get" name="form0" onclick="return check()">
+      <from  action="/riderregisterServlet" method="post" name="form0" onclick="return check()">
         <p>&nbsp;骑手姓名&nbsp;:<input type="text" name="name" id="name" placeholder="请输入姓名"></p>
-        <p>&nbsp;工作城市&nbsp; :<input type="text" name="city" id="city" placeholder="请输入工作城市"></p>
-        <p>&nbsp;手机号 :<input type="text" name="telephone" id="telephone" placeholder="请输入手机号"></p>
-        <p>&nbsp;密码&nbsp;&nbsp;&nbsp;:<input type="password" name="pw" id="password" placeholder="请输入登录密码"></p>
-        <p>&nbsp;驾驶证&nbsp;:<form method="post" action="${ctx}/upimg" id="form1"
+        <p>&nbsp;工作城市&nbsp; :<input type="text" name="work_city" id="work_city" placeholder="请输入工作城市"></p>
+        <p>&nbsp;手机号 :<input type="text" name="phone" id="phone" placeholder="请输入手机号"></p>
+        <p>&nbsp;密码&nbsp;&nbsp;&nbsp;:<input type="password" name="password" id="password" placeholder="请输入登录密码"></p>
+        <p>&nbsp;身份证号&nbsp;&nbsp;&nbsp;:<input type="text" name="id_card" id="id_card" placeholder="请输入身份证号"></p>
+        <p>&nbsp;银行卡号&nbsp;&nbsp;&nbsp;:<input type="text" name="bank_card" id="bank_card" placeholder="请输入银行卡号"></p>
+        <p>&nbsp;驾驶证&nbsp;:<form method="post" action="${ctx}/upimg" name="driver_license" id="driver_license"
                                        enctype="multipart/form-data" class="contact-form">
         <div>
 							<span> <label> 单张照片* </label>
@@ -66,36 +69,8 @@
            </span>
         </div>
       </form>
-        <p>&nbsp;身份证&nbsp;:<form method="post" action="${ctx}/upimg" id="form2"
-                                       enctype="multipart/form-data" class="contact-form">
-        <div>
-							<span> <label> 单张照片* </label>
-							</span>
-          <span>
-                                <input name="src" type="file" class="textbox"
-                                       required="required" accept="image/*">
-							</span>
-          <span>
-               <input type="submit" value="提交" name="tijiao">
-           </span>
-        </div>
-      </form>
-        <p>&nbsp;银行卡&nbsp;:<form method="post" action="${ctx}/upimg" id="form3"
-                                      enctype="multipart/form-data" class="contact-form">
-        <div>
-							<span> <label> 单张照片* </label>
-							</span>
-          <span>
-                                <input name="src" type="file" class="textbox"
-                                       required="required" accept="image/*">
-							</span>
-          <span>
-               <input type="submit" value="提交" name="tijiao">
-           </span>
-        </div>
-      </form>
-        <p>&nbsp;&nbsp;&nbsp;<input class="h" type="submit" value="注册">
-        <span style="color: #FD482C;font-size: 15px" id="tip">${tip}  </span>
+          <button type="submit" value="注册">注册</button>
+          <span style="color: #FD482C;font-size: 15px" id="tip">${tip}  </span>
       </from>
     </div>
   </div>
@@ -106,20 +81,22 @@
 <script>
   function check() {
     let name = document.getElementById("name").value;
-    let city = document.getElementById("city").value;
-    let telephone = document.getElementById("telephone").value;
+    let work_city = document.getElementById("work_city").value;
+    let phone = document.getElementById("phone").value;
     let password = document.getElementById("password").value;
+    let id_card = document.getElementById("id_card").value;
+    let bank_card = document.getElementById("bank_card").value;
     if (name == null || name.trim() == "") {
       alert("骑手姓名不能为空!");
       document.getElementById("tip").innerHTML = "骑手姓名不能为空!";
       return false;
     }
-    if (city == null || city.trim() == "") {
+    if (work_city == null || work_city.trim() == "") {
       alert("工作城市不能为空!")
       document.getElementById("tip").innerHTML = "工作城市不能为空!!";
       return false;
     }
-    if (telephone == null || telephone.trim() == "") {
+    if (phone == null || phone.trim() == "") {
       alert("电话号码不能为空!")
       document.getElementById("tip").innerHTML = "电话号码不能为空!";
       return false;
@@ -129,7 +106,17 @@
       document.getElementById("tip").innerHTML = "密码不能为空!";
       return false;
     }
-      if (check(name)&&check(city)&&check(telephone)&&check(password)){
+    if (id_card == null || id_card.trim() == "") {
+        alert("身份证号不能为空!")
+        document.getElementById("tip").innerHTML = "身份证号不能为空!";
+        return false;
+      }
+    if (bank_card == null || bank_card.trim() == "") {
+        alert("银行卡号不能为空!")
+        document.getElementById("tip").innerHTML = "银行卡号不能为空!";
+        return false;
+      }
+    if (check(name)&&check(work_city)&&check(phone)&&check(password)&&check(id_card)&&check(bank_card)){
           alert("注册成功");
           document.getElementById("tip").innerHTML="注册成功!";
           return ture;

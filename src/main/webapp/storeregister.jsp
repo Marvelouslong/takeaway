@@ -45,17 +45,16 @@
 <body>
 <div id="app">
   <div id="napp" class="susu">
-    <h1>商家注册</h1>
+    <h1>商家注册页面</h1>
     <div class="ruirui">
-      <form  active="#" method="get" name="form0" onclick="return check()">
-        <p>&nbsp;商家名称&nbsp;:<input type="text" name="aname" id="aname" placeholder="请输入商家名称"></p>
+      <form  action="storeregisterServlet" method="post" name="form0" onclick="return check()">
+        <p>&nbsp;商家名称&nbsp;:<input type="text" name="shop_name" id="shop_name" placeholder="请输入商家名称"></p>
         <p>&nbsp;地址&nbsp;&nbsp;&nbsp; :<input type="text" name="address" id="address" placeholder="请输入商家地址"></p>
-        <p>&nbsp;联系人姓名 :<input type="text" name="name" id="name" placeholder="请输入联系人姓名"></p>
-        <p>&nbsp;联系人电话 :<input type="text" name="telephone" id="telephone" placeholder="请输入联系人电话号码"></p>
-        <p>&nbsp;主营品类&nbsp;:<input type="text" name="zhuying" id="zhuying" placeholder="请输入主营品类"></p>
-        <p>&nbsp;辅营品类&nbsp;:<input type="text" name="fuying" id="fuying" placeholder="请输入辅营品类"></p>
+        <p>&nbsp;联系人电话 :<input type="text" name="con_telephone" id="con_telephone" placeholder="请输入联系人电话号码"></p>
+        <p>&nbsp;主营品类&nbsp;:<input type="text" name="main_category" id="main_category" placeholder="请输入主营品类"></p>
+        <p>&nbsp;辅营品类&nbsp;:<input type="text" name="auxiliary_category" id="auxiliary_category" placeholder="请输入辅营品类"></p>
         <p>&nbsp;密码&nbsp;&nbsp;&nbsp;:<input type="password" name="password" id="password" placeholder="请输入登录密码"></p>
-        <p>&nbsp;营业执照&nbsp;:<form method="post" action="${ctx}/upimg" id="form1"
+        <p>&nbsp;营业执照&nbsp;:<form method="post" action="${ctx}/upimg" name="license" id="license"
                                       enctype="multipart/form-data" class="contact-form">
         <div>
 							<span> <label> 单张照片* </label>
@@ -69,7 +68,7 @@
            </span>
         </div>
       </form>
-        <p>&nbsp;营业许可证:<form method="post" action="${ctx}/upimg" id="form2"
+        <p>&nbsp;营业许可证:<form method="post" action="${ctx}/upimg" name="certificate_of_business" id="certificate_of_business"
                                   enctype="multipart/form-data" class="contact-form">
         <div>
 							<span> <label> 单张照片* </label>
@@ -82,7 +81,7 @@
 							</span>
         </div>
       </form>
-        <p>&nbsp;公司银行卡:<form method="post" action="${ctx}/upimg" id="form3"
+        <p>&nbsp;公司银行卡:<form method="post" action="${ctx}/upimg" name="bank_card" id="bank_card"
                                   enctype="multipart/form-data" class="contact-form">
         <div>
 							<span> <label> 单张照片* </label>
@@ -95,7 +94,7 @@
 							</span>
         </div>
       </form>
-        <p>&nbsp;商标授权书:<form method="post" action="${ctx}/upimg" id="form4"
+        <p>&nbsp;商标授权书:<form method="post" action="${ctx}/upimg" name="brand_authorization" id="brand_authorization"
                                   enctype="multipart/form-data" class="contact-form">
         <div>
 							<span> <label> 单张照片* </label>
@@ -108,7 +107,7 @@
 							</span>
         </div>
       </form>
-        <p>&nbsp;法人身份证:<form method="post" action="${ctx}/upimg" id="form5"
+        <p>&nbsp;法人身份证:<form method="post" action="${ctx}/upimg" name="legal_id_card" id="legal_id_card"
                                   enctype="multipart/form-data" class="contact-form">
         <div>
 							<span> <label> 单张照片* </label>
@@ -121,7 +120,7 @@
 							</span>
         </div>
       </form>
-        <p>&nbsp;实体店铺图:<form method="post" action="${ctx}/upimg" id="form6"
+        <p>&nbsp;实体店铺图:<form method="post" action="${ctx}/upimg" name="shop_picture" id="shop_picture"
                                   enctype="multipart/form-data" class="contact-form">
         <div>
 							<span> <label> 单张照片* </label>
@@ -134,7 +133,7 @@
 							</span>
         </div>
       </form>
-        <p>&nbsp;&nbsp;<input class="h" type="submit" value="注册"></p>
+          <button type="submit" value="注册">注册</button>
         <span style="color: #FD482C;font-size: 15px" id="tip">${tip}  </span>
       </form>
     </div>
@@ -147,14 +146,13 @@
 
 <script>
   function check() {
-      let aname = document.getElementById("aname").value;
+      let shop_name = document.getElementById("shop_name").value;
       let address = document.getElementById("address").value;
-      let name = document.getElementById("name").value;
-      let telephone = document.getElementById("telephone").value;
+      let con_telephone = document.getElementById("con_telephone").value;
       let password = document.getElementById("password").value;
-      let zhuying = document.getElementById("zhuying").value;
-      let fuying = document.getElementById("fuying").value;
-      if (aname == null || aname.trim() == "") {
+      let main_category = document.getElementById("main_category").value;
+      let auxiliary_category = document.getElementById("auxiliary_category").value;
+      if (shop_name == null || shop_name.trim() == "") {
           alert("商家名称不能为空!");
           document.getElementById("tip").innerHTML = "商家名称不能为空!";
           return false;
@@ -164,22 +162,18 @@
           document.getElementById("tip").innerHTML = "商家地址不能为空!!";
           return false;
       }
-      if (name == null || name.trim() == "") {
-          alert("联系人姓名不能为空!");
-          document.getElementById("tip").innerHTML = "联系人姓名不能为空!";
-          return false;
-      }
-      if (telephone == null || telephone.trim() == "") {
+
+      if (con_telephone == null || con_telephone.trim() == "") {
           alert("电话号码不能为空!");
           document.getElementById("tip").innerHTML = "电话号码不能为空!";
           return false;
       }
-      if (zhuying == null || zhuying.trim() == "") {
+      if (main_category == null || main_category.trim() == "") {
           alert("主营品类不能为空!");
           document.getElementById("tip").innerHTML = "主营品类不能为空!";
           return false;
       }
-      if (fuying == null || fuying.trim() == "") {
+      if (auxiliary_category == null || auxiliary_category.trim() == "") {
           alert("辅营品类不能为空!");
           document.getElementById("tip").innerHTML = "辅营品类不能为空!";
           return false;
@@ -189,7 +183,7 @@
           document.getElementById("tip").innerHTML = "密码不能为空!";
           return false;
       }
-      if (check(aname)&&check(address)&&check(name)&&check(telephone)&&check(zhuying)&&check(fuying)&&check(password)){
+      if (check(shop_name)&&check(address)&&check(con_telephone)&&check(main_category)&&check(auxiliary_category)&&check(password)){
           alert("注册成功");
           document.getElementById("tip").innerHTML="注册成功!";
           return ture;
