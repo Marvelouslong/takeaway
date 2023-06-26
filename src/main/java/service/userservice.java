@@ -32,5 +32,6 @@ public interface userservice {
     public int getreceiverCount();
     public int upshop(int id,int id1,String taste);
     public int getstoreid(int id);
-
+    public int delevaluate(int id);
+    public List<shopcar_dishes> carlist(int id,int id1);
 }

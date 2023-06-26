@@ -34,4 +34,6 @@ public interface userdao {
     public int addre(Connection connection,int count,String name,Long phone,String address,int id) throws Exception;
     public int upshop(Connection connection,int id,int id1,String taste) throws Exception;
     public int getstoreid(Connection connection,int id) throws Exception;
+    public int delevaluate(Connection connection,int id) throws Exception;
+    public List<shopcar_dishes> carlist(Connection connection, int id,int id1)throws Exception;
 }

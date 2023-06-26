@@ -454,4 +454,34 @@ public class userserviceimpl implements userservice {
         }
         return count;
     }
+
+    @Override
+    public int delevaluate(int id) {
+        Connection connection = null;
+        int count = 0;
+        try {
+            connection = BaseDao.getConnection();
+            count = Userdao.delevaluate(connection,id);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }finally{
+            BaseDao.closeResource(connection, null, null);
+        }
+        return count;
+    }
+
+    @Override
+    public List<shopcar_dishes> carlist(int id, int id1) {
+        Connection connection = null;
+        List<shopcar_dishes> carlist=null;
+        try {
+            connection = BaseDao.getConnection();
+            carlist = Userdao.carlist(connection,id,id1);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }finally{
+            BaseDao.closeResource(connection, null, null);
+        }
+        return carlist;
+    }
 }

@@ -8,6 +8,7 @@ import pojo.*;
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class userdaoimpl implements userdao {
@@ -481,7 +482,7 @@ public class userdaoimpl implements userdao {
         PreparedStatement pstm = null;
         int count=0;
         if(connection != null){
-            String sql ="update `order` set status = '已完成' where id = ?";
+            String sql ="update `order` set status = '已完成' checkout_time=NOW() where id = ?";
             pstm = connection.prepareStatement(sql);
             pstm.setInt(1,id);
             count=pstm.executeUpdate();
@@ -542,6 +543,7 @@ public class userdaoimpl implements userdao {
     public int upshop(Connection connection, int id, int id1,String taste) throws Exception {
         PreparedStatement pstm = null;
         int count=0;
+        int count1=0;
         if(connection != null){
             String sql =" INSERT INTO `shopcar-dishes` (`d_id`, `shopcar_id`, `time`, `number`, `taste`) " +
                     "VALUES (?, ?, NOW(), 1, ?) " +
@@ -551,11 +553,54 @@ public class userdaoimpl implements userdao {
             pstm.setInt(2,id1);
             pstm.setString(3,taste);
             count=pstm.executeUpdate();
+        }
+        count1=this.addshopcar(connection,id,id1);
+        if(count1!=0) {
             BaseDao.closeResource(null, pstm, null);
         }
         return count;
     }
-
+    private int addshopcar(Connection connection, int id, int id1) throws SQLException {
+            int count=0;
+            PreparedStatement pstm1 = null;
+            PreparedStatement pstm2 = null;
+            PreparedStatement pstm3 = null;
+            ResultSet rs1=null;
+            ResultSet rs2=null;
+            double sum=0;
+            int number1=0;
+            if(connection != null){
+                String sql1 ="select s_id from dishes where id=?";
+                String sql2 ="select d.price,sd.number from dishes d,`shopcar-dishes` sd where d.s_id=? and d.id=sd.d_id and sd.shopcar_id=?";
+                String sql3 ="update shopcar set total_amount = ?,total_number=? where id = ?";
+                pstm1 = connection.prepareStatement(sql1);
+                pstm1.setInt(1,id);
+                rs1=pstm1.executeQuery();
+                if (rs1.next()) { // 移动 rs1 游标到第一条记录之后
+                    int s_id= rs1.getInt("s_id");
+                    pstm2 = connection.prepareStatement(sql2);
+                    pstm2.setInt(1,s_id);
+                    pstm2.setInt(2,id1);
+                    rs2=pstm2.executeQuery();
+                    while(rs2.next()){
+                        double price=rs2.getDouble("price");
+                        int number=rs2.getInt("number");
+                        double a=price*number;
+                        sum+=a;
+                        number1+=number;
+                    }
+                    pstm3 = connection.prepareStatement(sql3);
+                    pstm3.setDouble(1,sum);
+                    pstm3.setInt(2, number1);
+                    pstm3.setInt(3, id1);
+                    count=pstm3.executeUpdate();
+                }
+            }
+            BaseDao.closeResource(null, pstm1, rs1);
+            BaseDao.closeResource(null, pstm2, rs2);
+            BaseDao.closeResource(null, pstm3, null);
+            return count;
+    }
     @Override
     public int getstoreid(Connection connection, int id) throws Exception {
         PreparedStatement pstm = null;
@@ -572,6 +617,53 @@ public class userdaoimpl implements userdao {
             BaseDao.closeResource(null, pstm, rs);
         }
         return count;
+    }
+
+    @Override
+    public int delevaluate(Connection connection, int id) throws Exception {
+        PreparedStatement pstm = null;
+        int count=0;
+        if(connection != null){
+            String sql ="delete from evaluate where id =?";
+            pstm = connection.prepareStatement(sql);
+            pstm.setInt(1,id);
+            count=pstm.executeUpdate();
+            BaseDao.closeResource(null, pstm, null);
+        }
+        return count;
+    }
+
+    @Override
+    public List<shopcar_dishes> carlist(Connection connection, int id, int id1) throws Exception {
+        PreparedStatement pstm = null;
+        ResultSet rs = null;
+        List<shopcar_dishes> carlist = new ArrayList<shopcar_dishes>();
+        if(connection != null){
+            String sql = "select d.id did,d.name,sd.taste,sd.number,d.price,car.total_amount,car.total_number " +
+                    "from `shopcar-dishes` sd,shopcar car,dishes d " +
+                    "where sd.shopcar_id=car.id and sd.d_id=d.id and car.id=? and d.s_id=?";
+            pstm = connection.prepareStatement(sql);
+            pstm.setInt(1,id1);
+            pstm.setInt(2,id);
+            rs=pstm.executeQuery();
+            while(rs.next()){
+                shopcar_dishes _sd=new shopcar_dishes();
+                _sd.setTaste(rs.getString("taste"));
+                _sd.setNumber(rs.getInt("number"));
+                dishes _d=new dishes();
+                _d.setId(rs.getInt("did"));
+                _d.setName(rs.getString("name"));
+                _d.setPrice(rs.getDouble("price"));
+                _sd.set_d(_d);
+                shopcar _car=new shopcar();
+                _car.setTotal_amount(rs.getDouble("total_amount"));
+                _car.setTotal_number(rs.getInt("total_number"));
+                _sd.set_shopcar(_car);
+                carlist.add(_sd);
+            }
+            BaseDao.closeResource(null, pstm, rs);
+        }
+        return carlist;
     }
 }
 

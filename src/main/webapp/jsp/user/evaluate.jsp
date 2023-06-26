@@ -138,6 +138,7 @@
                        vertical-align: top;
                        transition: all .3s;"
                                       alt="img"></td>
+                            <td><a href="Userservlet?method=delevaluate&id=${evaluate.id}&oid=${o_id}">删除</a></td>
                         </tr>
                     </c:forEach>
                 </table>

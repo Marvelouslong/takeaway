@@ -67,9 +67,7 @@ public class user extends HttpServlet {
             int id1 = Integer.parseInt(id);
             this.storelist(req, resp, id1);
         }else if (method != null && method.equals("shopcarlist")) {
-            String id = req.getParameter("id");
-            int id1= Integer.parseInt(id);
-            this.shopcarlist(req, resp, id1);
+            this.shopcarlist(req, resp);
         }else if (method != null && method.equals("uptaste")) {
             String id = req.getParameter("id");
             this.uptaste(req, resp, id);
@@ -88,6 +86,12 @@ public class user extends HttpServlet {
             String id1=req.getParameter("id");
             int id= Integer.parseInt(id1);
             this.upshop(req, resp,id,taste);
+        }else if (method != null && method.equals("delevaluate")) {
+            String id=req.getParameter("id");
+            int id1= Integer.parseInt(id);
+            this.delevaluate(req, resp,id1);
+        }else if (method != null && method.equals("order")) {
+            this.order(req, resp);
         }
     }
 
@@ -415,8 +419,14 @@ public class user extends HttpServlet {
         storelist = userservice.storelist(id);
         List<dishes> dishlist = null;
         dishlist = userservice.dishlist(id);
+        List<shopcar_dishes> carlist = null;
+        Object attribute = req.getSession().getAttribute(Constants.USER_SESSION);
+        int id1 = ((pojo.user) attribute).getId();
+        carlist = userservice.carlist(id,id1);
         req.setAttribute("storelist", storelist);
         req.setAttribute("dishlist", dishlist);
+        req.setAttribute("shopcarlist", carlist);
+        req.setAttribute("sid", id);
         req.getRequestDispatcher("/jsp/user/store.jsp").forward(req, resp);
     }
     private void uptaste(HttpServletRequest req, HttpServletResponse resp, String id) throws ServletException, IOException{
@@ -490,7 +500,24 @@ public class user extends HttpServlet {
             }
         }else{this.myinformation(req,resp);}
     }
-    private void shopcarlist(HttpServletRequest req, HttpServletResponse resp,int id){
+    private void shopcarlist(HttpServletRequest req, HttpServletResponse resp){
+        Object attribute = req.getSession().getAttribute(Constants.USER_SESSION);
+        int id = ((pojo.user) attribute).getId();
+        String sid=req.getParameter("sid");
+        userservice userservice = new userserviceimpl();
+
+    }
+    private void delevaluate(HttpServletRequest req, HttpServletResponse resp,int id) throws ServletException, IOException {
+        userservice userservice = new userserviceimpl();
+        String oid=req.getParameter("oid");
+        int oid1= Integer.parseInt(oid);
+        int count=0;
+        count= userservice.delevaluate(id);
+        if(count!=0){
+            this.showevaluate(req, resp,oid1);
+        }
+    }
+    private void order(HttpServletRequest req, HttpServletResponse resp){
 
     }
 }
