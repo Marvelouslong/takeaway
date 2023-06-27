@@ -129,6 +129,7 @@
         </tr>
       </c:forEach>
     </table>
+    <input type="hidden" name="sid" value="${sid}">
     <input type="submit" class="button" name="mm" value="下单"/>
     <input type="submit" class="button" name="mm" value="清空购物车"/>
   </form>

@@ -517,7 +517,24 @@ public class user extends HttpServlet {
             this.showevaluate(req, resp,oid1);
         }
     }
-    private void order(HttpServletRequest req, HttpServletResponse resp){
-
+    private void order(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        userservice userservice = new userserviceimpl();
+        String mm=req.getParameter("mm");
+        String sid1=req.getParameter("sid");
+        int sid= Integer.parseInt(sid1);
+        if(mm.equals("下单")) {
+            String name=req.getParameter("name");
+            long phone=Long.parseLong(req.getParameter("phone"));
+            String address=req.getParameter("address");
+            Object attribute = req.getSession().getAttribute(Constants.USER_SESSION);
+            int id = ((pojo.user) attribute).getId();
+            int count = 0;
+            int count1 = 0;
+            count = userservice.getreceiverCount();
+            count1 = userservice.addre(count,name,phone,address,id);
+            if (count != 0) {
+                this.myinformation(req, resp);
+            }
+        }else{this.storelist(req,resp,sid);}
     }
 }
