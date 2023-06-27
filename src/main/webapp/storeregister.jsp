@@ -124,6 +124,7 @@
         <p>&nbsp;商家名称&nbsp;:<input type="text" name="shop_name" id="shop_name" placeholder="请输入商家名称"></p>
         <p>&nbsp;地址&nbsp;&nbsp;&nbsp; :<input type="text" name="address" id="address" placeholder="请输入商家地址"></p>
         <p>&nbsp;公司银行卡&nbsp;&nbsp;&nbsp; :<input type="text" name="bank_card" id="bank_card" placeholder="请输入公司银行卡号"></p>
+        <p>&nbsp;联系人姓名&nbsp;&nbsp;&nbsp; :<input type="text" name="con_name" id="con_name" placeholder="请输入联系人姓名"></p>
         <p>&nbsp;法人身份证&nbsp;&nbsp;&nbsp; :<input type="text" name="legal_id_card" id="legal_id_card" placeholder="请输入法人身份证号"></p>
         <p>&nbsp;联系人电话 :<input type="text" name="con_telephone" id="con_telephone" placeholder="请输入联系人电话号码"></p>
         <p>&nbsp;主营品类&nbsp;:<input type="text" name="main_category" id="main_category" placeholder="请输入主营品类"></p>
@@ -170,6 +171,7 @@
     function check() {
     let shop_name = document.getElementById("shop_name").value;
     let address = document.getElementById("address").value;
+    let con_name = document.getElementById("con_name").value;
     let con_telephone = document.getElementById("con_telephone").value;
     let password = document.getElementById("password").value;
     let main_category = document.getElementById("main_category").value;
@@ -180,9 +182,14 @@
     return false;
     }
     if (address == null || address.trim() === "") {
-    alert("商家地址不能为空!");
-    document.getElementById("tip").innerHTML = "商家地址不能为空!!";
-    return false;
+        alert("商家地址不能为空!");
+        document.getElementById("tip").innerHTML = "商家地址不能为空!!";
+        return false;
+    }
+    if (con_name == null || con_name.trim() === "") {
+        alert("联系人姓名不能为空!");
+        document.getElementById("tip").innerHTML = "联系人姓名不能为空!";
+        return false;
     }
 
     if (con_telephone == null || con_telephone.trim() === "") {
