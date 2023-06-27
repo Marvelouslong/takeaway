@@ -499,4 +499,19 @@ public class userserviceimpl implements userservice {
         }
         return count;
     }
+
+    @Override
+    public List<shopcar_dishes> shopcarlist(int id1) {
+        Connection connection = null;
+        List<shopcar_dishes> carlist=null;
+        try {
+            connection = BaseDao.getConnection();
+            carlist = Userdao.shopcarlist(connection,id1);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }finally{
+            BaseDao.closeResource(connection, null, null);
+        }
+        return carlist;
+    }
 }

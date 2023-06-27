@@ -37,4 +37,5 @@ public interface userdao {
     public int delevaluate(Connection connection,int id) throws Exception;
     public List<shopcar_dishes> carlist(Connection connection, int id,int id1)throws Exception;
     public int delshop(Connection connection,int sid,int id) throws Exception;
+    public List<shopcar_dishes> shopcarlist(Connection connection, int id1)throws Exception;
 }

@@ -673,5 +673,39 @@ public class userdaoimpl implements userdao {
         }
         return count;
     }
+
+    @Override
+    public List<shopcar_dishes> shopcarlist(Connection connection, int id1) throws Exception {
+        PreparedStatement pstm = null;
+        ResultSet rs = null;
+        List<shopcar_dishes> carlist = new ArrayList<shopcar_dishes>();
+        if(connection != null){
+            String sql = "select s.shop_name,d.id did,d.name,d.s_id,car.total_amount,car.total_number " +
+                    "from `shopcar-dishes` sd,shopcar car,dishes d,store s " +
+                    "where sd.shopcar_id=car.id and sd.d_id=d.id and car.id=? and s.id=d.s_id " +
+                    "order by d.s_id";
+            pstm = connection.prepareStatement(sql);
+            pstm.setInt(1,id1);
+            rs=pstm.executeQuery();
+            while(rs.next()){
+                store _store=new store();
+                _store.setShop_name(rs.getString("shop_name"));
+                shopcar_dishes _sd=new shopcar_dishes();
+                dishes _d=new dishes();
+                _d.setId(rs.getInt("did"));
+                _d.setName(rs.getString("name"));
+                _d.setS_id(rs.getInt("s_id"));
+                _d.set_s(_store);
+                _sd.set_d(_d);
+                shopcar _car=new shopcar();
+                _car.setTotal_amount(rs.getDouble("total_amount"));
+                _car.setTotal_number(rs.getInt("total_number"));
+                _sd.set_shopcar(_car);
+                carlist.add(_sd);
+            }
+            BaseDao.closeResource(null, pstm, rs);
+        }
+        return carlist;
+    }
 }
 

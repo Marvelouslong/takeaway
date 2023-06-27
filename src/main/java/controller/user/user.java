@@ -507,13 +507,11 @@ public class user extends HttpServlet {
     private void shopcarlist(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         Object attribute = req.getSession().getAttribute(Constants.USER_SESSION);
         int id = ((pojo.user) attribute).getId();
-        String sid=req.getParameter("sid");
         userservice userservice = new userserviceimpl();
         List<shopcar_dishes> shopcar = null;
-        int id1 = ((pojo.user) (req.getSession().getAttribute(Constants.USER_SESSION))).getId();
-        shopcar = userservice.carlist(id,id1);
+        shopcar = userservice.shopcarlist(id);
         req.setAttribute("shopcar", shopcar);
-        req.getRequestDispatcher("/jsp/user/store.jsp").forward(req, resp);
+        req.getRequestDispatcher("/jsp/user/shopcar.jsp").forward(req, resp);
     }
     private void delevaluate(HttpServletRequest req, HttpServletResponse resp,int id) throws ServletException, IOException {
         userservice userservice = new userserviceimpl();
