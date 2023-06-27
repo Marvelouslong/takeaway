@@ -92,6 +92,10 @@ public class user extends HttpServlet {
             this.delevaluate(req, resp,id1);
         }else if (method != null && method.equals("order")) {
             this.order(req, resp);
+        }else if (method != null && method.equals("jump1")) {
+            this.jump1(req, resp);
+        }else if (method != null && method.equals("jump2")) {
+            this.jump2(req, resp);
         }
     }
 
@@ -500,12 +504,16 @@ public class user extends HttpServlet {
             }
         }else{this.myinformation(req,resp);}
     }
-    private void shopcarlist(HttpServletRequest req, HttpServletResponse resp){
+    private void shopcarlist(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         Object attribute = req.getSession().getAttribute(Constants.USER_SESSION);
         int id = ((pojo.user) attribute).getId();
         String sid=req.getParameter("sid");
         userservice userservice = new userserviceimpl();
-
+        List<shopcar_dishes> shopcar = null;
+        int id1 = ((pojo.user) (req.getSession().getAttribute(Constants.USER_SESSION))).getId();
+        shopcar = userservice.carlist(id,id1);
+        req.setAttribute("shopcar", shopcar);
+        req.getRequestDispatcher("/jsp/user/store.jsp").forward(req, resp);
     }
     private void delevaluate(HttpServletRequest req, HttpServletResponse resp,int id) throws ServletException, IOException {
         userservice userservice = new userserviceimpl();
@@ -530,11 +538,30 @@ public class user extends HttpServlet {
             int id = ((pojo.user) attribute).getId();
             int count = 0;
             int count1 = 0;
+            int count2=0;
             count = userservice.getreceiverCount();
             count1 = userservice.addre(count,name,phone,address,id);
             if (count != 0) {
-                this.myinformation(req, resp);
+                count2 = userservice.addre(count,name,phone,address,id);
+                this.order(req, resp);
             }
-        }else{this.storelist(req,resp,sid);}
+        }else{
+            this.storelist(req,resp,sid);
+        }
+    }
+    private void jump1(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        req.getRequestDispatcher("/jsp/user/order.jsp").forward(req, resp);
+    }
+    private void jump2(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        String id=req.getParameter("id");
+        int sid= Integer.parseInt(id);
+        int count=0;
+        userservice userservice = new userserviceimpl();
+        Object attribute = req.getSession().getAttribute(Constants.USER_SESSION);
+        int id1 = ((pojo.user) attribute).getId();
+        count=userservice.delshop(sid,id1);
+        if(count!=0) {
+            this.storelist(req, resp, sid);
+        }
     }
 }

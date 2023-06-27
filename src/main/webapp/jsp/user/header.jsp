@@ -106,7 +106,9 @@
                     </c:url>">首页</a>
             </li>
             <li class="nav-link-item">
-                <a href="<c:url value="/jsp/user/shopcar.jsp"/>">购物车</a>
+                <a href="<c:url value="Userservlet">
+                        <c:param name="method" value="shopcarlist"/>
+                        </c:url>">购物车</a>
             </li>
             <li class="nav-link-item">
                 <a href="<c:url value="Userservlet">

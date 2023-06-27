@@ -34,4 +34,5 @@ public interface userservice {
     public int getstoreid(int id);
     public int delevaluate(int id);
     public List<shopcar_dishes> carlist(int id,int id1);
+    public int delshop(int sid,int id);
 }

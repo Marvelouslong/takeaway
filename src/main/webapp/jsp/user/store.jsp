@@ -81,13 +81,6 @@
     border-bottom: 1px solid rgba(190, 182, 182, 0.38);
   }
 </style>
-<%--<script>--%>
-<%--  const form = document.getElementById('upload-form');--%>
-<%--  const submitBtn = document.getElementById('submitBtn');--%>
-<%--  submitBtn.addEventListener('click', () => {--%>
-<%--    form.submit();--%>
-<%--  });--%>
-<%--</script>--%>
 <div class="bj">
 <div class="div1">
   <c:forEach items="${storelist}" var="store" varStatus="status">
@@ -99,14 +92,10 @@
     <p>店铺地址：${store.address}</p>
   </c:forEach>
   <h4>购物车:</h4>
-  <form action="Userservlet" method="post" id="upload-form">
-    <input type="hidden" name="method" value="order">
-    <table>
-      <c:set var="isExecuted" value="false" />
+    <table class="table">
       <c:forEach items="${shopcarlist}" var="shopcar" varStatus="status">
         <tr>
-          <td></td>
-          <td><img  src="picturedishes_picture?id=${dish.id}" style="animation: avatar_turn_around 2s linear infinite;
+          <td><img  src="picturedishes_picture?id=${shopcar._d.id}" style="animation: avatar_turn_around 2s linear infinite;
                              display: inline-block;
                              padding: 5px;
                              width: 25px;
@@ -120,19 +109,11 @@
           <td>${shopcar.taste}</td>
           <td>${shopcar.number}</td>
         </tr>
-        <tr>
-          <c:if test="${not isExecuted}">
-            <td>总数量：${shopcar._shopcar.total_number}</td>
-            <td>总金额：${shopcar._shopcar.total_amount}</td>
-            <c:set var="isExecuted" value="true" />
-          </c:if>
-        </tr>
       </c:forEach>
     </table>
     <input type="hidden" name="sid" value="${sid}">
-    <input type="submit" class="button" name="mm" value="下单"/>
-    <input type="submit" class="button" name="mm" value="清空购物车"/>
-  </form>
+    <a href="Userservlet?method=jump1">下单</a>
+    <a href="Userservlet?method=jump2&id=${sid}">清空购物车</a>
 </div>
 <div class="div2">
   <span class="span1">店内已有菜品:</span>

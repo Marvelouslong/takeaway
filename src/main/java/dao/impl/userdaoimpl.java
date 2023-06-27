@@ -554,51 +554,40 @@ public class userdaoimpl implements userdao {
             pstm.setString(3,taste);
             count=pstm.executeUpdate();
         }
-        count1=this.addshopcar(connection,id,id1);
+        count1=this.addshopcar(connection,id1);
         if(count1!=0) {
             BaseDao.closeResource(null, pstm, null);
         }
         return count;
     }
-    private int addshopcar(Connection connection, int id, int id1) throws SQLException {
+    private int addshopcar(Connection connection, int id1) throws SQLException {
             int count=0;
             PreparedStatement pstm1 = null;
             PreparedStatement pstm2 = null;
-            PreparedStatement pstm3 = null;
             ResultSet rs1=null;
-            ResultSet rs2=null;
             double sum=0;
             int number1=0;
             if(connection != null){
-                String sql1 ="select s_id from dishes where id=?";
-                String sql2 ="select d.price,sd.number from dishes d,`shopcar-dishes` sd where d.s_id=? and d.id=sd.d_id and sd.shopcar_id=?";
-                String sql3 ="update shopcar set total_amount = ?,total_number=? where id = ?";
+                String sql1 ="select d.price,sd.number from dishes d,`shopcar-dishes` sd where d.id=sd.d_id and sd.shopcar_id=?";
+                String sql2 ="update shopcar set total_amount = ?,total_number=? where id = ?";
                 pstm1 = connection.prepareStatement(sql1);
-                pstm1.setInt(1,id);
+                pstm1.setInt(1,id1);
                 rs1=pstm1.executeQuery();
-                if (rs1.next()) { // 移动 rs1 游标到第一条记录之后
-                    int s_id= rs1.getInt("s_id");
-                    pstm2 = connection.prepareStatement(sql2);
-                    pstm2.setInt(1,s_id);
-                    pstm2.setInt(2,id1);
-                    rs2=pstm2.executeQuery();
-                    while(rs2.next()){
-                        double price=rs2.getDouble("price");
-                        int number=rs2.getInt("number");
-                        double a=price*number;
-                        sum+=a;
-                        number1+=number;
-                    }
-                    pstm3 = connection.prepareStatement(sql3);
-                    pstm3.setDouble(1,sum);
-                    pstm3.setInt(2, number1);
-                    pstm3.setInt(3, id1);
-                    count=pstm3.executeUpdate();
+                while(rs1.next()){
+                    double price=rs1.getDouble("price");
+                    int number=rs1.getInt("number");
+                    double a=price*number;
+                    sum+=a;
+                    number1+=number;
                 }
+                pstm2 = connection.prepareStatement(sql2);
+                pstm2.setDouble(1,sum);
+                pstm2.setInt(2, number1);
+                pstm2.setInt(3, id1);
+                count=pstm2.executeUpdate();
             }
             BaseDao.closeResource(null, pstm1, rs1);
-            BaseDao.closeResource(null, pstm2, rs2);
-            BaseDao.closeResource(null, pstm3, null);
+            BaseDao.closeResource(null, pstm2, null);
             return count;
     }
     @Override
@@ -664,6 +653,25 @@ public class userdaoimpl implements userdao {
             BaseDao.closeResource(null, pstm, rs);
         }
         return carlist;
+    }
+
+    @Override
+    public int delshop(Connection connection, int sid, int id) throws Exception {
+        PreparedStatement pstm = null;
+        int count=0;
+        int count1=0;
+        if(connection != null){
+            String sql ="delete sd from dishes d,`shopcar-dishes` sd where d.id=sd.d_id and sd.shopcar_id=? and d.s_id=?";
+            pstm = connection.prepareStatement(sql);
+            pstm.setInt(1,id);
+            pstm.setInt(2,sid);
+            count=pstm.executeUpdate();
+            count1=this.addshopcar(connection,id);
+            if(count1!=0) {
+                BaseDao.closeResource(null, pstm, null);
+            }
+        }
+        return count;
     }
 }
 

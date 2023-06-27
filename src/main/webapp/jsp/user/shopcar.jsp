@@ -9,7 +9,8 @@
 <%@ include file="header.jsp"%>
 <main class="shopcars">
   <table class="table">
-    <c:forEach var="shopcar" items="${shopcarlist}" varStatus="status">
+    <c:set var="isExecuted" value="false" />
+    <c:forEach var="shopcar" items="${shopcar}" varStatus="status">
       <tr>
         <div>
           <img  src="picture?id=${shopcar.id}">
@@ -17,6 +18,13 @@
               ${talk.context}<br><br>${talk._u.name}<br>
           </div>
         </div>
+      </tr>
+      <tr>
+        <c:if test="${not isExecuted}">
+          <td>总数量：${shopcar._shopcar.total_number}</td>
+          <td>总金额：${shopcar._shopcar.total_amount}</td>
+          <c:set var="isExecuted" value="true" />
+        </c:if>
       </tr>
     </c:forEach>
   </table>
