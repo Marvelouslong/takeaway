@@ -52,7 +52,7 @@ public class riderregisterServlet extends HttpServlet {
         inputStream.close();
         byte[] driver_license=bytes;
         this.riderregisterservice.add(new rider(name,phone,id_card,bank_card,work_city,password,status,driver_license));
-        req.getRequestDispatcher("/loginstore.jsp").forward(req, resp);
+        req.getRequestDispatcher("/loginrider.jsp").forward(req, resp);
     }
 
 

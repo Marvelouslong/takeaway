@@ -3,8 +3,8 @@
 <%@include file='where.jsp'%>
 <html>
 <head>
-  <title>商家订单信息</title>
-  <link href="store.css" rel="stylesheet">
+  <title>商家评论信息</title>
+    <link href="<c:url value="/jsp/store/store.css"/>" rel="stylesheet">
 </head>
 <body>
 <div class="bj"></div>
@@ -19,9 +19,31 @@
 <div class="div2">
   <span class="span1">评论信息:</span>
   <table class="dish_table">
-    <tr>
-      <th>序号</th><th>内容</th><th>时间</th>
-    </tr>
+<%--    <tr>--%>
+<%--      <th>序号</th><th>内容</th><th>时间</th>--%>
+<%--    </tr>--%>
+    <c:forEach items="${list}" var="eva" varStatus="status" >
+      <tr>
+        <td>订单编号：${eva._o.id}</td>
+        <td>用户姓名：${eva._o._u.name}<br>
+            联系电话：${eva._o._u.phone}</td>
+        <td style="width: 500px">${eva.evaluate}<br>
+            <div style="font-size: small;color: #9F9F9F">谢谢啊亲${eva.shop_evaluate}</div>
+        </td>
+
+        <td>
+            <form action="<c:url value="/EVA?method=update"/>" method="post">
+                <input type="hidden" name="id" value="${eva.id}">
+                <button type="submit">回复</button>
+            </form>
+            <form action="<c:url value="/EVA?method=del"/>" method="post">
+                <input type="hidden" name="id" value="${eva.id}">
+                <button type="submit">删除评论</button>
+            </form>
+            <span style="color: #9F9F9F;float: right;font-size: small"> ${eva._o.checkout_time}</span>
+        </td>
+          </tr>
+    </c:forEach>
   </table>
 
 </div>

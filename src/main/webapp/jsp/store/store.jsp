@@ -105,12 +105,13 @@
             <div class="author-info__phone">联系人电话:${shopSession.con_telephone}</div>
             <div class="author-info__sex">联系人姓名:${shopSession.con_name}</div>
             <div class="author-info__description">地址:${shopSession.address}</div>
-            <div class="author-info__name">$主营:${shopSession.main_category}</div>
-            <div class="author-info__name">$辅营:${shopSession.auxiliary_category}</div>
-            <div class="author-info__name">$登陆密码:${shopSession.password}</div>
-            <div class="author-info__name">$银行卡号:${shopSession.bank_card}</div>
-            <div class="author-info__name">$法定联系人身份证件:${shopSession.legal_id_card}</div>
-            <div class="author-info__name">$店铺审核状态:${shopSession.status}</div>
+            <div class="author-info__name">主营:${shopSession.main_category}</div>
+            <div class="author-info__name">辅营:${shopSession.auxiliary_category}</div>
+            <div class="author-info__name">登陆密码:${shopSession.password}</div>
+            <div class="author-info__name">银行卡号:${shopSession.bank_card}</div>
+            <div class="author-info__name">法定联系人身份证件:${shopSession.legal_id_card}</div>
+            <div class="author-info__name">店铺审核状态:${shopSession.status}</div>
+
           </div>
         </div>
       </div>

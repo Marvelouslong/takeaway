@@ -8,6 +8,7 @@ public class evaluate {
     private int id;
     private String evaluate;
     private byte[] picture;
+    private String shop_evaluate;
     private order _o;
 
     public int getId() {
@@ -50,5 +51,13 @@ public class evaluate {
                 ", picture=" + Arrays.toString(picture) +
                 ", _o=" + _o +
                 '}';
+    }
+
+    public String getShop_evaluate() {
+        return shop_evaluate;
+    }
+
+    public void setShop_evaluate(String shop_evaluate) {
+        this.shop_evaluate = shop_evaluate;
     }
 }

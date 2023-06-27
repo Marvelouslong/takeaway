@@ -15,7 +15,7 @@ public class userregisterDaoImpl implements userregisterDao {
     @Override
     public Integer add(user User) {
         Connection connection = BaseDao.getConnection();
-        String sql = "insert into user(name,phone,password,signature,sex,picture) values(id,?,?,?,?,?,?) ";
+        String sql = "insert into `user`(`name`,phone,`password`,signature,sex,picture) values(?,?,?,?,?,?) ";
         PreparedStatement pstm = null;
         Integer rs = null;
         try {

@@ -30,6 +30,26 @@ public class orderServlet extends HttpServlet {
                 req.setAttribute("order_list", this.orderservice.list(s_id));
                 req.getRequestDispatcher("/jsp/store/store_order.jsp").forward(req, resp);
                 break;
+            case "list3":
+                store = req.getSession().getAttribute(constant.STORE_SESSION);
+                 s_id = ((pojo.store) store).getId();
+                req.setAttribute("order_list", this.orderservice.list3(s_id));
+                req.getRequestDispatcher("/jsp/store/store_order.jsp").forward(req, resp);
+                break;
+            case "list4":
+                 store = req.getSession().getAttribute(constant.STORE_SESSION);
+                 s_id = ((pojo.store) store).getId();
+                req.setAttribute("order_list", this.orderservice.list4(s_id));
+                req.getRequestDispatcher("/jsp/store/store_order.jsp").forward(req, resp);
+                break;
+            case "update":
+                break;
+            case "list2":
+                 Integer id= Integer.valueOf(req.getParameter("id"));
+                req.setAttribute("order", this.orderservice.list1(id));
+                req.setAttribute("dish",this.orderservice.list2(id));
+                req.getRequestDispatcher("/jsp/store/order.jsp").forward(req, resp);
+                break;
         }
     }
 }

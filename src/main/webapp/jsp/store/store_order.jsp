@@ -24,23 +24,45 @@
     <p>店铺地址：${shopSession.address}</p>
   </div>
 <div class="div2">
-  <span class="span1">订单信息:</span>
+  <span class="span1">已接单订单信息:</span>
+  <form  class="display: inline;" action="<c:url value="/ORDER?method=list"/>" method="post">
+    <input type="hidden" name="id">
+    <button  type="submit">查看已接单的订单</button>
+  </form>
+  <form  class="display: inline;" action="<c:url value="/ORDER?method=list3"/>" method="post">
+    <input type="hidden" name="id">
+    <button  type="submit">查看正在配送的订单</button>
+  </form>
+  <form class="display: inline;" action="<c:url value="/ORDER?method=list4"/>" method="post">
+    <input type="hidden" name="id">
+    <button  type="submit">查看已完成的订单</button>
+  </form>
   <table class="dish_table">
     <thead>
     <tr>
-      <th>序号</th><th>用户姓名</th><th>用户联系电话</th><th>备注</th><th>状态</th><th>详情</th>
+      <th>序号</th><th>用户姓名</th><th>用户联系电话</th><th>备注</th><th>状态</th><th>操作</th><th>详情</th>
     </tr>
     </thead>
     <tbody>
       <c:forEach items="${order_list}" var="order" varStatus="status" >
     <tr>
         <td>${order.id}</td>
-        <td>${order._u.name}</td>
+        <td>${order._u.name}</t${order.id}d>
       <td>${order._u.phone}</td>
       <td>${order.notes}</td>
       <td>${order.status}</td>
       <td>
-        <button class="btn" onclick="window.location.href = 'order.jsp'">查看订单详情</button>
+      <form action="<c:url value="/ORDER?method=update"/>" method="post">
+        <input type="hidden" name="id" value="${order.id}">
+        <button  type="submit">骑手已取走</button>
+      </form>
+
+    </td>
+      <td>
+        <form action="<c:url value="/ORDER?method=list2"/>" method="post">
+          <input type="hidden" name="id" value="${order.id}">
+          <button  class="btn" type="submit" value="查看订单">查看订单详情</button>
+        </form>
       </td>
     </tr>
       </c:forEach>

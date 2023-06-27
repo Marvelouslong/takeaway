@@ -12,7 +12,7 @@ public class riderregisterDaoImpl implements riderregisterDao {
     @Override
     public Integer add(rider Rider) {
         Connection connection = BaseDao.getConnection();
-        String sql = "insert into rider(phone,name,id_card,driver_license,bank_card,work_city,status,password,ad_id) values(?,?,?,?,?,?,?,?,?) ";
+        String sql = "insert into rider(phone,`name`,id_card,bank_card,work_city,`status`,driver_license,`password`) values(?,?,?,?,?,?,?,?) ";
         PreparedStatement pstm = null;
         Integer rs = null;
         try {
@@ -27,7 +27,6 @@ public class riderregisterDaoImpl implements riderregisterDao {
             pstm.setString(6,Rider.getStatus());
             pstm.setBlob(7,blob);
             pstm.setString(8,Rider.getPassword());
-            pstm.setInt(9,Rider.getAd_id());
             rs = pstm.executeUpdate();
         } catch (SQLException throwables) {
             throwables.printStackTrace();
