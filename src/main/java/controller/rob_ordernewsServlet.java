@@ -12,32 +12,22 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 import service.rob_ordernewsService;
+import util.constant;
 
 @WebServlet("/rob_ordernews")
 public class rob_ordernewsServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)throws ServletException, IOException {
+        Object rider = req.getSession().getAttribute(constant.RIDER_SESSION);
+        long phone = ((pojo.rider) rider).getPhone();
+        pojo.rider Rider = new rider();
+        Rider.setPhone(phone);
+        //        Integer id = Integer.valueOf(req.getParameter("d_id"));
+//        long phone = Long.parseLong(req.getParameter("phone"));
         rob_ordernewsServiceImpl roborderService = new rob_ordernewsServiceImpl();
         List<order> rob_orderlist=null;
-        rob_orderlist = roborderService.getorderlist();
+        rob_orderlist = roborderService.getorderlist(phone);
         req.setAttribute("rob_orderlist",rob_orderlist);
         req.getRequestDispatcher("rob_ordernews.jsp").forward(req,resp);
-//        //增加骑手订单
-//        //需要拿到前端传递进来的参数
-//        long phone= Long.parseLong(req.getParameter("phone"));
-//        //创建一个对象接收这些参数
-//        rider Rider= new rider();
-//        Rider.setPhone(phone);
-//
-//        //调用service层
-//        Boolean flag = roborderService.modify(Rider);
-//
-//        //判断是否修改成功来决定跳转到哪个页面
-//        if (flag) {
-//            resp.sendRedirect("loginrider.jsp");
-//        }
-//        else {
-//            req.getRequestDispatcher("o.jsp").forward(req, resp);
-//        }
     }
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         doGet(req, resp);

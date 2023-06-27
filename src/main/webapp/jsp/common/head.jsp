@@ -14,7 +14,7 @@
     <header class="publicHeader">
         <h1>审核</h1>
         <div class="publicHeaderR">
-            <p><span>您好！</span><span style="color: #fff21b"> ${adminSession.name}</span>  欢迎你！</p>
+            <p><span>您好！</span><span style="color: #b6afaf"> ${adminSession.name}</span>  欢迎你！</p>
             <a href="admin-out">退出</a>
         </div>
     </header>

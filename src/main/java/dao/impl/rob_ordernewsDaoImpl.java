@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class rob_ordernewsDaoImpl implements rob_ordernewsDao {
-    public List<order> getorderlist(Connection connection) throws Exception {
+    public List<order> getorderlist(Connection connection,long phone) throws Exception {
         PreparedStatement pstm = null;
         ResultSet rs = null;
         List<order> rob_orderlist = new ArrayList<order>();
@@ -25,10 +25,10 @@ public class rob_ordernewsDaoImpl implements rob_ordernewsDao {
                     "JOIN store s ON o.s_id = s.id " +
                     "JOIN receiver re ON o.re_id = re.id " +
                     "LEFT OUTER JOIN rider r ON o.r_id = r.id " +
-                    "where o.r_id is null";
+                    "where  re.address LIKE CONCAT('%', (SELECT GROUP_CONCAT(work_city) from rider r  WHERE r.phone=?), '%') and o.r_id is null";
 
             pstm = connection.prepareStatement(sql);
-//            pstm.setLong(1,phone);
+            pstm.setLong(1,phone);
             rs=pstm.executeQuery();
             while(rs.next()){
                 order _order=new order();
@@ -39,7 +39,6 @@ public class rob_ordernewsDaoImpl implements rob_ordernewsDao {
                 _order.setPayway(rs.getString("payway"));
                 _order.setNotes(rs.getString("notes"));
                 store _store=new store();
-//                _store.setId(rs.getInt("sid"));
                 _store.setCon_telephone(rs.getLong("con_telephone"));
                 _store.setShop_name(rs.getString("shop_name"));
                 _store.setAddress(rs.getString("saddress"));
@@ -71,23 +70,11 @@ public class rob_ordernewsDaoImpl implements rob_ordernewsDao {
         }
         return rob_orderlist;
     }
-    //抢单
-    public  int modify(Connection connection, rider Rider) throws Exception{
-        PreparedStatement pstm=null;
-        int updateNum=0;
-        if(connection!=null) {
-            String sql ="update `order` set r_id=(select id from rider where phone=?),status='已接单 where r_id is null ";
-            Object[] params = {Rider.getPhone()};
-            updateNum = BaseDao.execute(connection, pstm, sql, params);
-            BaseDao.closeResource(null,pstm,null);
-        }
-        return updateNum;
-    }
     public int rob(Connection connection, rider Rider ,order Order) throws Exception{
         PreparedStatement pstm=null;
         int updateNum=0;
         if(connection!=null) {
-            String sql ="update `order` o set r_id=(select id from rider  where id=?),status='已接单'  where o.id=? ";
+            String sql ="update `order` o set r_id=(select id from rider  where id=?),status='正在配送'  where o.id=? ";
             Object[] params = {Rider.getId(),Order.getId()};
             updateNum = BaseDao.execute(connection, pstm, sql, params);
             BaseDao.closeResource(null,pstm,null);

@@ -25,7 +25,7 @@ public class newsorderDaoImpl implements newsorderDao {
                     "JOIN store s ON o.s_id = s.id " +
                     "JOIN receiver re ON o.re_id = re.id " +
                     "LEFT OUTER JOIN rider r ON o.r_id = r.id " +
-                    "where r.phone=? " ;
+                    "where  re.address LIKE CONCAT('%', (SELECT GROUP_CONCAT(work_city) from rider r  WHERE r.phone=?), '%') and o.r_id = r.id" ;
 //                    "order by oid DESC";
             pstm = connection.prepareStatement(sql);
             pstm.setLong(1,phone);

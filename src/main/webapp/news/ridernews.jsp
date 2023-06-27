@@ -2,7 +2,6 @@
          pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%request.setCharacterEncoding("utf-8");%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <html>
 <head lang="en">
@@ -18,7 +17,7 @@
 <header class="publicHeader">
   <h1>审核</h1>
   <div class="publicHeaderR">
-    <p><span>您好！</span><span style="color: #fff21b"> ${adminSession.name}</span>  欢迎你！</p>
+    <p><span>您好！</span><span style="color: #b6afaf"> ${adminSession.name}</span>  欢迎你！</p>
     <a href="admin-out">退出</a>
   </div>
 </header>
@@ -66,7 +65,7 @@
       <th width="10%">编码</th>
       <th width="15%">联系方式</th>
       <th width="10%">姓名</th>
-      <th width="15%">卡号</th>
+      <th width="15%">身份证卡号</th>
       <th width="15%">驾驶证</th>
       <th width="15%">银行卡</th>
       <th width="10%">工作城市</th>
@@ -162,4 +161,5 @@
   </table>
 </div>
 </section>
-<%@include file="/jsp/common/foot.jsp" %>
+</body>
+</html>

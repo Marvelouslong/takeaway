@@ -1,22 +1,23 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%request.setCharacterEncoding("utf-8");%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
-<%--<!DOCTYPE html>--%>
 <html>
 <head lang="en">
     <meta charset="UTF-8">
     <title>美了么外卖送餐平台</title>
-    <link type="text/css" rel="stylesheet" href="css/style.css" />
-    <link type="text/css" rel="stylesheet" href="css/public.css" />
+    <link type="text/css" rel="stylesheet" href="${pageContext.request.contextPath }/css/style.css" />
+    <link type="text/css" rel="stylesheet" href="${pageContext.request.contextPath }/css/public.css" />
 </head>
 <body>
 <!--头部-->
 <header class="publicHeader">
-    <h1>管理员界面</h1>
+    <h1>审核</h1>
     <div class="publicHeaderR">
-        <p><span>您好管理员！</span><span style="color: #fff21b"> ${adminSession.name}</span>  欢迎你！</p>
-        <a href="out-admin">退出</a>
+        <p><span>您好！</span><span style="color: #b6afaf"> ${adminSession.name}</span>  欢迎你！</p>
+        <a href="adminpassword.jsp">修改密码</a>
+        <a href="admin-out">退出</a>
     </div>
 </header>
 
@@ -34,12 +35,13 @@
     </div>
     <input type="hidden" id="path" name="path" value="${pageContext.request.contextPath }"/>
     <input type="hidden" id="referer" name="referer" value="<%=request.getHeader("Referer")%>"/>
-
     <div class="right">
-        <img class="wColck" src="${pageContext.request.contextPath }/images/clock.jpg" alt=""/>
+        <img class="wColck" src="${pageContext.request.contextPath }/img/logo.jpg" alt=""/>
         <div class="wFont">
             <h2>${adminSession.name }</h2>
             <p>欢迎来到美了么外卖送餐平台!</p>
         </div>
     </div>
-<%@include file="/jsp/common/foot.jsp" %>
+</section>
+</body>
+</html>

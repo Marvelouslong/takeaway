@@ -1,9 +1,7 @@
 package dao.impl;
 
-import com.mysql.cj.jdbc.Blob;
 import dao.BaseDao;
 import dao.tasteDao;
-import pojo.dishes;
 import pojo.taste;
 
 import java.sql.Connection;
@@ -29,7 +27,7 @@ public class tasteDaoImpl implements tasteDao {
             while (rs.next()) {
                 Integer id = rs.getInt(1);
                 String name = rs.getString(2);
-                list.add(new taste(id,name));
+//                list.add(new taste(id,name));
             }
         } catch (SQLException throwables) {
             throwables.printStackTrace();
@@ -47,7 +45,7 @@ public class tasteDaoImpl implements tasteDao {
         try {
             pstm = connection.prepareStatement(sql);
             pstm.setString(1, taste.getName());
-            pstm.setInt(2, taste.getD_id());
+//            pstm.setInt(2, taste.getD_id());
             rs = pstm.executeUpdate();
         } catch (SQLException throwables) {
             throwables.printStackTrace();

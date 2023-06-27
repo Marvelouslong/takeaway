@@ -3,6 +3,7 @@ package dao.impl;
 
 import dao.BaseDao;
 import dao.storeDao;
+import pojo.administrators;
 import pojo.store;
 
 
@@ -74,19 +75,15 @@ public class storeDaoImpl implements storeDao {
         return storeList;
     }
     //修改状态
-    public int modify(Connection connection, store shop) throws Exception {
+    public int modify(Connection connection, store shop, administrators admin) throws Exception {
         int updateNum = 0;
         PreparedStatement pstm = null;
         if(null != connection){
-            String sql = "update store set status=? where id = ? ";
-            Object[] params = {shop.getStatus(),shop.getId()};
+            String sql = "update store set status=?,ad_id=(select id from administrators where account_number=?) where id = ? ";
+            Object[] params = {shop.getStatus(),admin.getAccount_number(),shop.getId()};
             updateNum = BaseDao.execute(connection,pstm, sql, params);
             BaseDao.closeResource(null, pstm, null);
         }
         return updateNum;
     }
 }
-//,shop_picture=?,main_category=?,auxiliary_category=?,ad_id=? ,password=?,bank_card=?,license=?,certificate_of_business=?,legal_id_card=?
-//,shop.getPassword(),shop.getBrand_authorization(),shop.getBank_card(),shop.getLicense(),shop.getCertificate_of_business(),shop.getLegal_id_card(),
-//,shop.getShop_picture(),shop.getMain_category(),shop.getAuxiliary_category(),shop.getAd_id()
-//address=?,con_telephone=?,shop_name=?,con_name=?,shop.getAddress(),shop.getCon_telephone(),shop.getShop_name(),shop.getCon_name(),

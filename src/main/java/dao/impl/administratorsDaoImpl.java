@@ -29,5 +29,15 @@ public class administratorsDaoImpl implements administratorsDao {
         }
         return admin;
     }
-
+    public int modifypassword(Connection connection,administrators admin) throws Exception {
+        int updateNum = 0;
+        PreparedStatement pstm = null;
+        if(null != connection){
+            String sql = "update administrators set password=? where account_number = ? ";
+            Object[] params = {admin.getPassword(),admin.getAccount_number()};
+            updateNum = BaseDao.execute(connection,pstm, sql,params);
+            BaseDao.closeResource(null, pstm, null);
+        }
+        return updateNum;
+    }
 }

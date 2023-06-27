@@ -13,7 +13,7 @@
     <input type="hidden" name="method" value="modifystore">
     <div>
       <label for="id" >商家编码：</label>
-      <input type="number" name="id" id="id"">
+      <input type="number" name="id" id="id">
     </div>
     <div class="form-group">
       <label class="radio-inline">
@@ -42,7 +42,7 @@
       <th width="5%">许可证</th>
       <th width="5%">证书</th>
       <th width="5%">身份证</th>
-      <th width="5%">状态</th>
+      <th width="8%">状态</th>
       <th width="5%">商家照片</th>
     </tr>
     <c:forEach var="storeList" items="${storeList}">
@@ -135,12 +135,6 @@
               <img id="bigimg2" style="border:5px solid #fff;" src="" />
             </div>
           </div>
-
-            <%--          <ul id="imglist">--%>
-            <%--            <li><img class="pimg" src="img/5(1).png" width="50px" height="50px" /></li>--%>
-
-
-            <%--          </ul>--%>
           <script>
             $(function(){
               $(".pimg2").click(function(){
@@ -323,4 +317,3 @@
   </table>
 </div>
 </section>
-<%@include file="/jsp/common/foot.jsp" %>
