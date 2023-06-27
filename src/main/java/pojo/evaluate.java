@@ -60,4 +60,9 @@ public class evaluate {
     public void setShop_evaluate(String shop_evaluate) {
         this.shop_evaluate = shop_evaluate;
     }
+    public evaluate(Integer id,String shop_evaluate){
+        this.id=id;
+        this.shop_evaluate=shop_evaluate;
+    }
+    public evaluate(){}
 }

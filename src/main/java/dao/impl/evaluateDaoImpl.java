@@ -15,7 +15,7 @@ import java.util.List;
 public class evaluateDaoImpl implements evaluateDao {
     public List<evaluate> list(Integer s_id) {
         Connection connection = BaseDao.getConnection();
-        String sql = "select o.s_id,o.id oid,o.status,o.checkout_time,u.id uid,u.name uname,u.phone uphone,e.picture epicture,e.evaluate,e.shop_evaluate  from `order` o  JOIN `user` u ON o.u_id = u.id JOIN evaluate e ON e.o_id = o.id where s_id='"+s_id+"'and o.status='已完成' order by oid DESC";
+        String sql = "select e.id,o.s_id,o.id oid,o.status,o.checkout_time,u.id uid,u.name uname,u.phone uphone,e.picture epicture,e.evaluate,e.shop_evaluate  from `order` o  JOIN `user` u ON o.u_id = u.id JOIN evaluate e ON e.o_id = o.id where s_id='"+s_id+"'and o.status='已完成' order by oid DESC";
         PreparedStatement pstm = null;
         ResultSet rs = null;
         List<evaluate> list = new ArrayList<>();
@@ -25,6 +25,7 @@ public class evaluateDaoImpl implements evaluateDao {
             while (rs.next()) {
                 evaluate _eva=new evaluate();
                 _eva.setEvaluate(rs.getString("evaluate"));
+                _eva.setId(rs.getInt("id"));
                 _eva.setShop_evaluate(rs.getString("shop_evaluate"));
                 order _order=new order();
                 _order.setId(rs.getInt("oid"));

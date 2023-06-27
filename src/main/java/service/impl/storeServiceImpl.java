@@ -3,7 +3,7 @@ package service.impl;
 import dao.BaseDao;
 import dao.impl.storeDaoImpl;
 import dao.storeDao;
-import pojo.administrators;
+import pojo.dishes;
 import pojo.store;
 import service.storeService;
 
@@ -43,13 +43,13 @@ public class storeServiceImpl implements storeService {
         }
         return storeList;
     }
-    public Boolean modify(store shop,administrators admin) {
+    public Boolean modify(store shop) {
         Boolean flag=false;
         Connection connection=null;
         try {
             connection=BaseDao.getConnection();
             connection.setAutoCommit(false);//开启JDBC事务
-            int updateNum = shopDao.modify(connection, shop,admin);//执行修改sql
+            int updateNum = shopDao.modify(connection, shop);//执行修改sql
             connection.commit();//提交事务
             if(updateNum>0){
                 flag=true;
@@ -71,4 +71,10 @@ public class storeServiceImpl implements storeService {
         }
         return flag;
     }
+    public void update(store store) {
+        Integer add = this.shopDao.update(store);
+        if(add !=1)throw new RuntimeException("更新失败");}
+    public void update1(store store) {
+        Integer add = this.shopDao.update1(store);
+        if(add !=1)throw new RuntimeException("更新失败");}
 }

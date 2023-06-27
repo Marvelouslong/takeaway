@@ -1,6 +1,7 @@
 package service;
 
 import pojo.administrators;
+import pojo.dishes;
 import pojo.store;
 
 import java.util.List;
@@ -12,4 +13,7 @@ public interface storeService {
     public List<store> getstoreList();
     //修改状态
     public Boolean modify(store shop,administrators admin) throws Exception;
+    public Boolean modify(store shop) throws Exception;
+    public void update(store store);
+    public void update1(store store);
 }

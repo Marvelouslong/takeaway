@@ -27,6 +27,7 @@ public class tasteServlet extends HttpServlet {
             case "list":
                 Integer d_id = Integer.valueOf(req.getParameter("d_id"));
                 req.setAttribute("list", this.tasteservice.list(d_id));
+                req.setAttribute("d_id", d_id);
                 req.getRequestDispatcher("/jsp/store/taste_main.jsp").forward(req, resp);
                 break;
             case "add":

@@ -7,6 +7,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@include file='where.jsp'%>
+<link href="store.css" rel="stylesheet">
 <html>
 <style>
   #content-outer {
@@ -117,28 +118,32 @@
       </div>
     </div>
     <article id="page">
-        <h2>我的信息</h2>
-      <table style=" margin: auto; text-align: center;">
-        <tr><td style="width: 400px"><img  src="<c:url value="/picturebrand_authorization?id=${shopSession.id}"/>" alt="image" style="height: 200px;width: 300px;border-radius:200px;
-    "><br>营业执照</td>
-        <td style="width: 400px"><img  src="<c:url value="/picturelicense?id=${shopSession.id}"/>" alt="image" style="height: 200px;width: 300px;border-radius:200px;
-    "><br>营业许可证</td>
-        </tr>
-        <tr>
-              <td style="width: 400px"><img  src="<c:url value="/picturecertificate_of_business?id=${shopSession.id}"/>" alt="image" style="height: 200px;width: 300px;border-radius:200px;
-    "><br style="width: 400px">授权书</td>
-                <td> <img  src="<c:url value="/pictureshop_picture?id=${shopSession.id}"/>" alt="image" style="height: 200px;width: 300px;border-radius:200px;
-   "><br>商店图片（头像）</td></tr>
-      </table>
-      <form style="float: right" action="<c:url value="/jsp/store/store_imgupdate1.jsp"/>" method="post">
-        <input type="hidden" name="id" value="${shopSession.id}">
-        <button type="submit" value="编辑">编辑基础信息（无需审核）</button>
+      <h2>我的信息</h2>
+      <form action="<c:url value="/STORE?method=update"/>" method="post"  class="smart-green" enctype="multipart/form-data"  id="upload-form">
+        <label>
+          <span>联系电话:</span>
+          <input type="text"  name="con_telephone" placeholder="请输入联系电话"/>
+        </label>
+        <label>
+          <span>密码:</span>
+          <input type="text"  name="password" placeholder="请输入新的密码"/>
+        </label>
+        <label>
+          <span>主营菜品:</span>
+          <input type="text"  name="main_category" placeholder="主营菜品"/>
+        </label>
+        <label>
+          <span>辅营菜品:</span>
+          <input type="text"  name="auxiliary_category" placeholder="辅营菜品"/>
+        </label>
+        <label>
+          <span>地址:</span>
+          <input type="text"  name="address" placeholder="地址"/>
+        </label>
+        <label>
+          <input type="submit"  id="submitBtn" class="button" value="提交"/>
+        </label>
       </form>
-      <form  style="float: right" action="<c:url value="/STORE?method=update"/>" method="post">
-        <input type="hidden" name="id" value="${shopSession.id}">
-        <button type="submit" value="编辑">编辑非基础信息（需要重新审核）</button>
-      </form>
-
     </article>
   </div>
 </div>

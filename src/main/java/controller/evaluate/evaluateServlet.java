@@ -1,4 +1,4 @@
-package controller.dishes;
+package controller.evaluate;
 
 import pojo.dishes;
 import pojo.evaluate;
@@ -35,14 +35,15 @@ public class evaluateServlet extends HttpServlet {
                 req.getRequestDispatcher("/jsp/store/store_ele.jsp").forward(req, resp);
                 break;
             case "update":
-                Integer id = Integer.valueOf(req.getParameter("id"));
-                this.evaluateservice.update(new evaluate());
-                req.getRequestDispatcher("/jsp/store/store_ele.jsp").forward(req, resp);
+                int id = Integer.parseInt(req.getParameter("id"));
+                String shop_evaluate = req.getParameter("shop_evaluate");
+                this.evaluateservice.update(new evaluate(id,shop_evaluate));
+                req.getRequestDispatcher("/EVA?method=list").forward(req, resp);
                 break;
             case "del":
-                id = Integer.valueOf(req.getParameter("id"));
+                id = Integer.parseInt(req.getParameter("id"));
                 this.evaluateservice.del(id);
-                req.getRequestDispatcher("/jsp/store/store_ele.jsp").forward(req, resp);
+                req.getRequestDispatcher("/EVA?method=list").forward(req, resp);
         }
     }
 }

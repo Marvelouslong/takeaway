@@ -42,16 +42,14 @@
 
   <button id="btn6" value="隐藏" class="add_button">添加新口味</button>
   <div class="div3" id="div3">
-    <form method="post" action="<c:url value="/TASTE?method=add"/>" class="taste_add">
+    <form method="post" action="<c:url value="/TASTE?method=add&d_id=${d_id}"/>" class="taste_add">
       <h4>添加口味信息</h4>
       <br>
       <br>
-      <br>
-      <label>
-        <span>菜品序号 :</span>
-        <input type="text" name="d_id"  placeholder="请输入菜品序号">
-      </label>
-      <br>
+<%--      <label>--%>
+<%--        <span>菜品序号 :</span>--%>
+<%--        <input type="text" name="d_id"  placeholder="请输入菜品序号">--%>
+<%--      </label>--%>
       <br>
       <label>
         <span>口&ensp;&ensp;&ensp;味 :</span>

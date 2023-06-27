@@ -1,15 +1,18 @@
 package dao.impl;
 
 
+import com.mysql.cj.jdbc.Blob;
 import dao.BaseDao;
 import dao.storeDao;
 import pojo.administrators;
+import pojo.dishes;
 import pojo.store;
 
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -45,6 +48,7 @@ public class storeDaoImpl implements storeDao {
         }
         return shop;
     }
+
     //查看商店信息
     public List<store> getstoreList(Connection connection) throws  Exception{
         String sql = "select * from store";
@@ -85,5 +89,49 @@ public class storeDaoImpl implements storeDao {
             BaseDao.closeResource(null, pstm, null);
         }
         return updateNum;
+    }
+
+    public Integer update(store store) {
+        Connection connection = BaseDao.getConnection();
+        String sql = "update store set `address` =?,`password`=?,con_telephone=?,main_category=?,auxiliary_category=? where id=?";
+        PreparedStatement pstm = null;
+        Integer rs = null;
+        try {
+            pstm = connection.prepareStatement(sql);
+            pstm.setString(1, store.getAddress());
+            pstm.setString(2, store.getPassword());
+            pstm.setLong(3, store.getCon_telephone());
+            pstm.setString(4, store.getMain_category());
+            pstm.setString(5, store.getAuxiliary_category());
+            pstm.setInt(6, store.getId());
+            rs = pstm.executeUpdate();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        } finally {
+            BaseDao.closeResource(null, pstm, null);
+        }
+        return rs;
+    }
+
+    public Integer update1(store store) {
+        Connection connection = BaseDao.getConnection();
+        String sql = "update store set `address` =?,`password`=?,con_telephone=?,main_category=?,auxiliary_category=? where id=?";
+        PreparedStatement pstm = null;
+        Integer rs = null;
+        try {
+            pstm = connection.prepareStatement(sql);
+            pstm.setString(1, store.getAddress());
+            pstm.setString(2, store.getPassword());
+            pstm.setLong(3, store.getCon_telephone());
+            pstm.setString(4, store.getMain_category());
+            pstm.setString(5, store.getAuxiliary_category());
+            pstm.setInt(6, store.getId());
+            rs = pstm.executeUpdate();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        } finally {
+            BaseDao.closeResource(null, pstm, null);
+        }
+        return rs;
     }
 }

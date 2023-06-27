@@ -144,7 +144,6 @@ public class store {
     public void setAd_id(int ad_id) {
         this.ad_id = ad_id;
     }
-
     @Override
     public String toString() {
         return "store{" +
@@ -216,6 +215,16 @@ public class store {
         this.shop_picture = shop_picture;
         this.legal_id_card = legal_id_card;
         this.status = status;
+        this.main_category = main_category;
+        this.auxiliary_category = auxiliary_category;
+
+    }
+    public store(int id,String address, long con_telephone,String password,String main_category,String auxiliary_category)
+    {
+        this.id = id;
+        this.address = address;
+        this.con_telephone = con_telephone;
+        this.password=password;
         this.main_category = main_category;
         this.auxiliary_category = auxiliary_category;
 

@@ -19,30 +19,34 @@
 <div class="div2">
   <span class="span1">评论信息:</span>
   <table class="dish_table">
-<%--    <tr>--%>
-<%--      <th>序号</th><th>内容</th><th>时间</th>--%>
-<%--    </tr>--%>
+      <tr>
+          <th>订单信息</th><th>用户信息</th><th>评价内容</th><th>操作</th>
+      </tr>
     <c:forEach items="${list}" var="eva" varStatus="status" >
       <tr>
-        <td>订单编号：${eva._o.id}</td>
+        <td>
+            <img  src="<c:url value="/evaluate_picture?id=${eva.id}"/>" alt="image" style="border-radius:200px;width: 50px;height: 50px;
+    margin-top: 10%;">
+            <div  style="color: #9F9F9F;font-size: small">订单编号：${eva._o.id}</div>
+        </td>
         <td>用户姓名：${eva._o._u.name}<br>
             联系电话：${eva._o._u.phone}</td>
         <td style="width: 500px">${eva.evaluate}<br>
-            <div style="font-size: small;color: #9F9F9F">谢谢啊亲${eva.shop_evaluate}</div>
+            <br>
+            <div style="font-size: small;color: #9F9F9F">${eva.shop_evaluate}</div>
         </td>
-
-        <td>
-            <form action="<c:url value="/EVA?method=update"/>" method="post">
-                <input type="hidden" name="id" value="${eva.id}">
-                <button type="submit">回复</button>
-            </form>
-            <form action="<c:url value="/EVA?method=del"/>" method="post">
-                <input type="hidden" name="id" value="${eva.id}">
-                <button type="submit">删除评论</button>
-            </form>
-            <span style="color: #9F9F9F;float: right;font-size: small"> ${eva._o.checkout_time}</span>
-        </td>
-          </tr>
+            <td>
+                <form method="post"  action="<c:url value="/EVA?method=update"/>" style="text-align: center">
+                        <input type="text" name="shop_evaluate"  placeholder="回复........">
+                        <input type="hidden" name="id" value="${eva.id}">
+                    <button type="submit" value="提交">提交</button>
+                </form>
+              <form action="<c:url value="/EVA?method=del&id=${eva.id}"/>" method="post">
+                  <button type="submit">删除评论</button>
+              </form>
+              <span style="color: #9F9F9F;float: right;font-size: small"> ${eva._o.checkout_time}</span>
+          </td>
+      </tr>
     </c:forEach>
   </table>
 

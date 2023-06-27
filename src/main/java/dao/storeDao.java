@@ -1,6 +1,7 @@
 package dao;
 
 import pojo.administrators;
+import pojo.dishes;
 import pojo.store;
 
 import java.sql.Connection;
@@ -13,4 +14,7 @@ public interface storeDao {
     public List<store> getstoreList(Connection connection) throws  Exception;
     //修改状态
     public int modify(Connection connection,store shop,administrators admin)throws Exception;
+    public int modify(Connection connection,store shop)throws Exception;
+    public Integer update(store store);
+    public Integer update1(store store);
 }
