@@ -3,16 +3,11 @@ package dao.impl;
 import com.mysql.cj.jdbc.Blob;
 import dao.BaseDao;
 import dao.storeregisterDao;
-import pojo.rider;
 import pojo.store;
-import util.JDBCUtil;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
 
 public class storeregisterDaoImpl implements storeregisterDao {
     @Override

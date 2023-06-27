@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: liangsicheng
@@ -5,11 +6,29 @@
   Time: 15:06
   To change this template use File | Settings | File Templates.
 --%>
+<script>
+    const form = document.querySelector('#upload-form');
+    const input = document.querySelector('#fileInput');
+    form.addEventListener('submit', (event) => {
+        event.preventDefault(); // 阻止表单提交
+        const file = input.files[0];
+        if (file) {
+            const formData = new FormData();
+            formData.append('image', file);
+            fetch('/upload', {
+                method: 'POST',
+                body: formData
+            }).then(response => {
+                // 处理上传结果
+            });
+        }
+    });
+</script>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
-    <title>商家注册页面</title>
+    <title>骑手注册页面</title>
     <style>
     #app{
       background-image: url(https://img-qn-2.51miz.com/preview/video/00/00/12/17/V-121759-83916990.jpg);
@@ -36,11 +55,7 @@
       color: #0C0C0C;
       font-size: 25px;
     }
-    .h{
-      margin-left: 20px;
-      width: 100px;
-      margin-top: 20px;
-    }
+
   </style>
 </head>
 <body>
@@ -48,30 +63,22 @@
   <div id="napp" class="susu">
     <h1>骑手注册</h1>
     <div class="ruirui">
-      <from action="/riderregister" method="post" name="form0" onclick="return check()">
+      <form action="${pageContext.request.contextPath}/riderregister" method="post" name="form0" enctype="multipart/form-data" id="upload-form">
         <p>&nbsp;骑手姓名&nbsp;:<input type="text" name="name" id="name" placeholder="请输入姓名"></p>
         <p>&nbsp;工作城市&nbsp; :<input type="text" name="work_city" id="work_city" placeholder="请输入工作城市"></p>
         <p>&nbsp;手机号 :<input type="text" name="phone" id="phone" placeholder="请输入手机号"></p>
         <p>&nbsp;密码&nbsp;&nbsp;&nbsp;:<input type="password" name="password" id="password" placeholder="请输入登录密码"></p>
         <p>&nbsp;身份证号&nbsp;&nbsp;&nbsp;:<input type="text" name="id_card" id="id_card" placeholder="请输入身份证号"></p>
         <p>&nbsp;银行卡号&nbsp;&nbsp;&nbsp;:<input type="text" name="bank_card" id="bank_card" placeholder="请输入银行卡号"></p>
-        <p>&nbsp;驾驶证&nbsp;:<form method="post" action="${ctx}/upimg" name="driver_license" id="driver_license"
-                                       enctype="multipart/form-data" class="contact-form">
-        <div>
-							<span> <label> 单张照片* </label>
-							</span>
-          <span>
-                                <input name="src" type="file" class="textbox"
-                                       required="required" accept="image/*">
-							</span>
-          <span>
-               <input type="submit" value="提交" name="tijiao">
-           </span>
-        </div>
-      </form>
-          <button type="submit" value="注册">注册</button>
+          <label>
+              <span>添加驾驶证图片 :</span><br>
+              <img id="imagePreview" src="#" alt="图片预览">
+              <br>
+              <input name="image" type="file" id="fileInput">
+          </label>
+          <button type="submit" onclick="return check()" value="注册">注册</button>
           <span style="color: #FD482C;font-size: 15px" id="tip">${tip}  </span>
-      </from>
+      </form>
     </div>
   </div>
 </div>
@@ -124,3 +131,19 @@
     return ture;
   }
 </script>
+<script>
+    const fileInput = document.getElementById('fileInput');
+    const imagePreview = document.getElementById('imagePreview');
+
+    fileInput.addEventListener('change', function() {
+        const file = this.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.addEventListener('load', function() {
+                imagePreview.setAttribute('src', this.result);
+            });
+            reader.readAsDataURL(file);
+        }
+    });
+</script>
+

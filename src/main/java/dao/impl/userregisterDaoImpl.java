@@ -8,13 +8,14 @@ import pojo.user;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class userregisterDaoImpl implements userregisterDao {
     @Override
     public Integer add(user User) {
         Connection connection = BaseDao.getConnection();
-        String sql = "insert into user(name,phone,password,signature,sex,picture) values(?,?,?,?,?,?) ";
+        String sql = "insert into user(name,phone,password,signature,sex,picture) values(id,?,?,?,?,?,?) ";
         PreparedStatement pstm = null;
         Integer rs = null;
         try {
@@ -27,7 +28,8 @@ public class userregisterDaoImpl implements userregisterDao {
             pstm.setString(4, User.getSignature());
             pstm.setString(5, User.getSex());
             pstm.setBlob(6,blob);
-            rs = pstm.executeUpdate();
+            rs=pstm.executeUpdate();
+
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         } finally {

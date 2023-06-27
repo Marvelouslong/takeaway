@@ -27,7 +27,7 @@ public class adminregisterServlet extends HttpServlet {
         long account_number= Long.parseLong(req.getParameter("account_number"));
         String password=req.getParameter("password");
         this.adminregisterservice.add(new administrators(name,account_number,password));
-        req.getRequestDispatcher("/login/loginadmin.jsp").forward(req, resp);
+        req.getRequestDispatcher("/loginadmin.jsp").forward(req, resp);
     }
 }
 

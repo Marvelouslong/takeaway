@@ -4,9 +4,12 @@ import dao.impl.riderregisterDaoImpl;
 import dao.impl.userregisterDaoImpl;
 import dao.riderregisterDao;
 import dao.userregisterDao;
+import org.junit.platform.commons.logging.LoggerFactory;
 import pojo.rider;
 import pojo.user;
 import service.userregisterService;
+
+import java.util.logging.Logger;
 
 public class userregisterServiceImpl implements userregisterService {
     private userregisterDao userregisterdao= new userregisterDaoImpl();

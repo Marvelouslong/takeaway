@@ -8,6 +8,7 @@ import service.userregisterService;
 import util.constant;
 
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -16,9 +17,14 @@ import javax.servlet.http.Part;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.math.BigDecimal;
+import java.sql.*;
+
 @WebServlet("/userregister")
+@MultipartConfig
 public class userregisterServlet extends HttpServlet {
     private userregisterService userregisterservice = new userregisterServiceImpl();
+
 
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         this.doPost(req, resp);
@@ -49,4 +55,6 @@ public class userregisterServlet extends HttpServlet {
         req.getRequestDispatcher("/loginuser.jsp").forward(req, resp);
     }
 }
+
+
 

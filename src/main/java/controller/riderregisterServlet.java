@@ -8,6 +8,7 @@ import service.riderregisterService;
 import util.constant;
 
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -21,6 +22,7 @@ import java.sql.Connection;
 import java.util.Objects;
 
 @WebServlet("/riderregister")
+@MultipartConfig
 public class riderregisterServlet extends HttpServlet {
     private riderregisterService riderregisterservice=new riderregisterServiceImpl();
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

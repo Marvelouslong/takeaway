@@ -4,12 +4,8 @@ import com.mysql.cj.jdbc.Blob;
 import dao.BaseDao;
 import dao.riderregisterDao;
 import pojo.rider;
-import util.JDBCUtil;
 
-import java.io.PrintWriter;
 import java.sql.*;
-import java.util.ArrayList;
-import java.util.List;
 
 public class riderregisterDaoImpl implements riderregisterDao {
 
