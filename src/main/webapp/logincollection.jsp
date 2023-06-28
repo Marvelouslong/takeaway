@@ -49,6 +49,6 @@
 <p><a href="storeregister.jsp" style="color: #00FFFF">未注册？商家注册</a></p>
 <p><a href="riderregister.jsp" style="color: #00FFFF">未注册？骑手注册</a></p>
 <p><a href="userregister.jsp" style="color: #00FFFF">未注册？用户注册</a></p>
-<p><a href="adminregister.jsp" style="color: #00FFFF">未注册？管理员注册</a></p>
+
 </body>
 </html>

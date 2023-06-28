@@ -21,8 +21,6 @@ public class rob_ordernewsServlet extends HttpServlet {
         long phone = ((pojo.rider) rider).getPhone();
         pojo.rider Rider = new rider();
         Rider.setPhone(phone);
-        //        Integer id = Integer.valueOf(req.getParameter("d_id"));
-//        long phone = Long.parseLong(req.getParameter("phone"));
         rob_ordernewsServiceImpl roborderService = new rob_ordernewsServiceImpl();
         List<order> rob_orderlist=null;
         rob_orderlist = roborderService.getorderlist(phone);

@@ -13,12 +13,12 @@ import java.sql.SQLException;
 
 public class userregisterDaoImpl implements userregisterDao {
     @Override
-    public Integer add(user User) {
+    public Integer add(user User) throws SQLException {
         Connection connection = BaseDao.getConnection();
         String sql = "insert into `user`(`name`,phone,`password`,signature,sex,picture) values(?,?,?,?,?,?) ";
         PreparedStatement pstm = null;
         Integer rs = null;
-        try {
+
             Blob blob = (Blob) connection.createBlob();
             blob.setBytes(1, User.picture());
             pstm = connection.prepareStatement(sql);
@@ -29,13 +29,30 @@ public class userregisterDaoImpl implements userregisterDao {
             pstm.setString(5, User.getSex());
             pstm.setBlob(6,blob);
             rs=pstm.executeUpdate();
-
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
-        } finally {
+            int count1=0;
+        try {
+            count1=this.Shopcar(connection,User);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }finally {
             BaseDao.closeResource(null,pstm, null);
+            return rs;
         }
-        return rs;
+
+
+
+    }
+    private int Shopcar (Connection connection,user user) throws Exception{
+        PreparedStatement pstm=null;
+        int updateNum=0;
+        if(connection!=null) {
+            String sql = "insert into shopcar(total_amount,total_number,u_id) values(null,null,(SELECT u.id from `user` u where u.phone=?))";
+            Object[] params = {user.getPhone()};
+            updateNum = BaseDao.execute(connection, pstm, sql, params);
+            BaseDao.closeResource(null,pstm,null);
+        }
+        return updateNum;
     }
 }
+
 

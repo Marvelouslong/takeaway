@@ -51,10 +51,11 @@ public class userregisterServlet extends HttpServlet {
         output.close();
         inputStream.close();
         byte[] picture = bytes;
-        this.userregisterservice.add(new user(name,phone,password,signature,sex,picture));
+        try {
+            this.userregisterservice.add(new user(name,phone,password,signature,sex,picture));
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
         req.getRequestDispatcher("/loginuser.jsp").forward(req, resp);
     }
 }
-
-
-

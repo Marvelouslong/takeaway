@@ -9,4 +9,5 @@ public interface modifyriderDao {
     //修改状态
     public int modifyrider(Connection connection, rider Rider, administrators admin)throws Exception;
     public int modifycontext(Connection connection, rider Rider)throws Exception;
+    public int modifydriver(Connection connection, rider Rider)throws Exception;
 }

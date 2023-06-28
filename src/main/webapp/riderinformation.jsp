@@ -161,7 +161,6 @@
   </ul>
 </div>
 <div class="welcome">修改信息</div>
-<div class="welcome">欢迎您的登录</div>
 <div class="bj_foot"> <h6>欢迎来到骑手信息界面</h6></div>
 </body>
 </html>
@@ -192,6 +191,7 @@
         <h2>驾驶证</h2>
           <div>
               <img class="pimg" src="picturedriver_license?id=${riderSession.id }" style="width:300px;height:300px;">
+            <a href="modifydriver.jsp">修改驾驶证</a>
           </div>
       </div>
     </article>

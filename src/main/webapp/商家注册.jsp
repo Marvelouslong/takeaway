@@ -102,14 +102,14 @@
             <h1>商家注册</h1>
             <div class="ruirui">
                 <from  method="get" name="form1" onSubmit="return check()">
-                    <p>&nbsp;商家名称&nbsp;:<input type="text" name="aname" placeholder="请输入商家名称"></p>
-                    <p>&nbsp;地址&nbsp;&nbsp;&nbsp; :<input type="text" name="address" placeholder="请输入商家地址"></p>
-                    <p>&nbsp;联系人姓名 :<input type="text" name="name" placeholder="请输入联系人姓名"></p>
-                    <p>&nbsp;联系人电话 :<input type="text" name="telephone" placeholder="请输入联系人电话号码"></p>
-                    <p>&nbsp;主营品类&nbsp;:<input type="text" name="zhuying" placeholder="请输入主营品类"></p>
-                    <p>&nbsp;辅营品类&nbsp;:<input type="text" name="fuying" placeholder="请输入辅营品类"></p>
-                    <p>&nbsp;密码&nbsp;&nbsp;&nbsp;:<input type="password" name="pw1" placeholder="请输入登录密码"></p>
-                    <p>&nbsp;确认密码&nbsp;&nbsp;:<input type="password" name="pw2" placeholder="请再次输入密码"></p>
+                    <p>&nbsp;商家名称&nbsp;:<input style="background-color:transparent"  type="text" name="aname" placeholder="请输入商家名称"></p>
+                    <p>&nbsp;地址&nbsp;&nbsp;&nbsp; :<input  style="background-color:transparent" type="text" name="address" placeholder="请输入商家地址"></p>
+                    <p>&nbsp;联系人姓名 :<input style="background-color:transparent" type="text" name="name" placeholder="请输入联系人姓名"></p>
+                    <p>&nbsp;联系人电话 :<input style="background-color:transparent" type="text" name="telephone" placeholder="请输入联系人电话号码"></p>
+                    <p>&nbsp;主营品类&nbsp;:<input style="background-color:transparent"  type="text" name="zhuying" placeholder="请输入主营品类"></p>
+                    <p>&nbsp;辅营品类&nbsp;:<input style="background-color:transparent" type="text" name="fuying" placeholder="请输入辅营品类"></p>
+                    <p>&nbsp;密码&nbsp;&nbsp;&nbsp;:<input style="background-color:transparent" type="password" name="pw1" placeholder="请输入登录密码"></p>
+                    <p>&nbsp;确认密码&nbsp;&nbsp;:<input style="background-color:transparent" type="password" name="pw2" placeholder="请再次输入密码"></p>
                     <p>&nbsp;营业执照&nbsp;:<form method="post" action="${ctx}/upimg" id="form1"
                           enctype="multipart/form-data" class="contact-form">
                         <div>
