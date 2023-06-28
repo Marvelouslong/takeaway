@@ -39,7 +39,7 @@ public class modifystatusServlet extends HttpServlet {
         shop.setId(id);
         shop.setStatus(status);
         Object admin = req.getSession().getAttribute(constant.ADMIN_SESSION);
-        long account_number = ((pojo.administrators) admin).getAccount_number();
+        long account_number = ((administrators) admin).getAccount_number();
         System.out.println(account_number);
         administrators Admin= new administrators();
         Admin.setAccount_number(account_number);

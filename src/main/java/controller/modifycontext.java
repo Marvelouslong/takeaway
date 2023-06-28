@@ -31,21 +31,8 @@ public class modifycontext extends HttpServlet {
         long bank_card= Long.parseLong(req.getParameter("bank_card"));
         String work_city = req.getParameter("work_city");
         String password =req.getParameter("password");
-        Part filePart = req.getPart("image"); // 通过 name 获取上传的文件
-        InputStream inputStream = filePart.getInputStream(); // 获取文件输入流
-        ByteArrayOutputStream output = new ByteArrayOutputStream();
-        byte[] buffer = new byte[4096];
-        int n = 0;
-        while (-1 != (n = inputStream.read(buffer))) {
-            output.write(buffer, 0, n);
-        }
-        byte[] bytes = output.toByteArray();
-        output.flush();
-        output.close();
-        inputStream.close();
-        byte[] picture = bytes;
         try {
-            this.modifyservice.modifycontext(new rider(id,phone,picture,bank_card,work_city,password));
+            this.modifyservice.modifycontext(new rider(id,phone,bank_card,work_city,password));
         } catch (Exception e) {
             throw new RuntimeException(e);
         }

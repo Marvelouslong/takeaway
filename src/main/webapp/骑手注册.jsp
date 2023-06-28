@@ -88,11 +88,11 @@
         <h1>骑手注册</h1>
         <div class="ruirui">
             <from  method="get" name="form1" onSubmit="return check()">
-                <p>&nbsp;骑手姓名&nbsp;:<input type="text" name="name" placeholder="请输入姓名"></p>
-                <p>&nbsp;工作城市&nbsp; :<input type="text" name="city" placeholder="请输入工作城市"></p>
-                <p>&nbsp;手机号 :<input type="text" name="telephone" placeholder="请输入手机号"></p>
-                <p>&nbsp;密码&nbsp;&nbsp;&nbsp;:<input type="password" name="pw1" placeholder="请输入登录密码"></p>
-                <p>&nbsp;确认密码&nbsp;&nbsp;:<input type="password" name="pw2" placeholder="请再次输入密码"></p>
+                <p>&nbsp;骑手姓名&nbsp;:<input style="background-color:transparent" type="text" name="name" placeholder="请输入姓名"></p>
+                <p>&nbsp;工作城市&nbsp; :<input style="background-color:transparent" type="text" name="city" placeholder="请输入工作城市"></p>
+                <p>&nbsp;手机号 :<input style="background-color:transparent" type="text" name="telephone" placeholder="请输入手机号"></p>
+                <p>&nbsp;密码&nbsp;&nbsp;&nbsp;:<input style="background-color:transparent" type="password" name="pw1" placeholder="请输入登录密码"></p>
+                <p>&nbsp;确认密码&nbsp;&nbsp;:<input style="background-color:transparent" type="password" name="pw2" placeholder="请再次输入密码"></p>
                 <p>&nbsp;驾驶证&nbsp;:<form method="post" action="${ctx}/upimg" id="form1"
                                               enctype="multipart/form-data" class="contact-form">
                 <div>

@@ -146,15 +146,17 @@ public class rider {
 //        this.id = id;
 //        this.ad_id = ad_id;
 //    }
-    public rider(int id, long phone,byte[] driver_license,long bank_card,String work_city,String password){
+    public rider(int id, long phone,long bank_card,String work_city,String password){
         this.id=id;
         this.phone = phone;
-        this.driver_license=driver_license;
         this.bank_card=bank_card;
         this.work_city=work_city;
         this.password=password;
     }
-
+    public rider(int id,byte[] driver_license){
+        this.id=id;
+        this.driver_license=driver_license;
+    }
 
 
 }

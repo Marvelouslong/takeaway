@@ -64,12 +64,12 @@
     <h1>骑手注册</h1>
     <div class="ruirui">
       <form action="${pageContext.request.contextPath}/riderregister" method="post" name="form0" enctype="multipart/form-data" id="upload-form">
-        <p>&nbsp;骑手姓名&nbsp;:<input type="text" name="name" id="name" placeholder="请输入姓名"></p>
-        <p>&nbsp;工作城市&nbsp; :<input type="text" name="work_city" id="work_city" placeholder="请输入工作城市"></p>
-        <p>&nbsp;手机号 :<input type="text" name="phone" id="phone" placeholder="请输入手机号"></p>
-        <p>&nbsp;密码&nbsp;&nbsp;&nbsp;:<input type="password" name="password" id="password" placeholder="请输入登录密码"></p>
-        <p>&nbsp;身份证号&nbsp;&nbsp;&nbsp;:<input type="text" name="id_card" id="id_card" placeholder="请输入身份证号"></p>
-        <p>&nbsp;银行卡号&nbsp;&nbsp;&nbsp;:<input type="text" name="bank_card" id="bank_card" placeholder="请输入银行卡号"></p>
+        <p>&nbsp;骑手姓名&nbsp;:<input style="background-color:transparent" type="text" name="name" id="name" placeholder="请输入姓名"></p>
+        <p>&nbsp;工作城市&nbsp; :<input style="background-color:transparent" type="text" name="work_city" id="work_city" placeholder="请输入工作城市"></p>
+        <p>&nbsp;手机号 :<input style="background-color:transparent" type="text" name="phone" id="phone" placeholder="请输入手机号"></p>
+        <p>&nbsp;密码&nbsp;&nbsp;&nbsp;:<input style="background-color:transparent" type="password" name="password" id="password" placeholder="请输入登录密码"></p>
+        <p>&nbsp;身份证号&nbsp;&nbsp;&nbsp;:<input style="background-color:transparent" type="text" name="id_card" id="id_card" placeholder="请输入身份证号"></p>
+        <p>&nbsp;银行卡号&nbsp;&nbsp;&nbsp;:<input style="background-color:transparent" type="text" name="bank_card" id="bank_card" placeholder="请输入银行卡号"></p>
           <label>
               <span>添加驾驶证图片 :</span><br>
               <img id="imagePreview" src="#" alt="图片预览">

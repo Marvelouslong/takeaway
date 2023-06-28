@@ -67,11 +67,11 @@
     <h1>用户注册</h1>
     <div class="ruirui">
       <form  action="${pageContext.request.contextPath}/userregister" method="post" name="form0"  enctype="multipart/form-data"  id="upload-form">
-        <p>&nbsp;用户名&nbsp;:<input type="text" name="name" id="name" placeholder="请输入用户名"></p>
-        <p>&nbsp;手机号&nbsp;&nbsp;&nbsp; :<input type="text" name="phone" id="phone" placeholder="请输入手机号"></p>
-        <p>&nbsp;个性签名 :<input type="text" name="signature" id="signature" placeholder="请输入个性签名"></p>
-        <p>&nbsp;性别 :<input type="text" name="sex" id="sex" placeholder="请输入性别"></p>
-        <p>&nbsp;密码&nbsp;:<input type="text" name="password" id="password" placeholder="请输入密码"></p>
+        <p>&nbsp;用户名&nbsp;:<input style="background-color:transparent" type="text" name="name" id="name" placeholder="请输入用户名"></p>
+        <p>&nbsp;手机号&nbsp;&nbsp;&nbsp; :<input style="background-color:transparent" type="text" name="phone" id="phone" placeholder="请输入手机号"></p>
+        <p>&nbsp;个性签名 :<input style="background-color:transparent" type="text" name="signature" id="signature" placeholder="请输入个性签名"></p>
+        <p>&nbsp;性别 :<input style="background-color:transparent" type="text" name="sex" id="sex" placeholder="请输入性别"></p>
+        <p>&nbsp;密码&nbsp;:<input style="background-color:transparent" type="text" name="password" id="password" placeholder="请输入密码"></p>
         <label>
           <span>添加头像图片 :</span><br>
           <img id="imagePreview" src="#" alt="图片预览">

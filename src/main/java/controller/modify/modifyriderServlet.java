@@ -40,7 +40,7 @@ public class modifyriderServlet extends HttpServlet {
         Rider.setId(id);
         Rider.setStatus(status);
         Object admin = req.getSession().getAttribute(constant.ADMIN_SESSION);
-        long account_number = ((pojo.administrators) admin).getAccount_number();
+        long account_number = ((administrators) admin).getAccount_number();
         System.out.println(account_number);
         administrators Admin= new administrators();
         Admin.setAccount_number(account_number);

@@ -51,9 +51,9 @@
     <h1>管理员注册</h1>
     <div class="ruirui">
       <form   method="post" name="form0" action="${pageContext.request.contextPath}/adminregister">
-        <p>&nbsp;管理员姓名&nbsp;:<input type="text" name="name" id="name" placeholder="请输入姓名"></p>
-        <p>&nbsp;账号&nbsp;&nbsp;&nbsp; :<input type="text" name="account_number" id="account_number" placeholder="请输入账号"></p>
-        <p>&nbsp;密码 :<input type="text" name="password" id="password" placeholder="请输入密码"></p>
+        <p>&nbsp;管理员姓名&nbsp;:<input style="background-color:transparent" type="text" name="name" id="name" placeholder="请输入姓名"></p>
+        <p>&nbsp;账号&nbsp;&nbsp;&nbsp; :<input style="background-color:transparent" type="text" name="account_number" id="account_number" placeholder="请输入账号"></p>
+        <p>&nbsp;密码 :<input style="background-color:transparent" type="text" name="password" id="password" placeholder="请输入密码"></p>
         <button type="submit" onclick="return check()" value="注册">注册</button>
         <span style="color: #FD482C;font-size: 15px" id="tip">${tip}  </span>
       </form>

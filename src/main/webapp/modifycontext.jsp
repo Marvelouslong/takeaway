@@ -72,15 +72,15 @@
   <form  action="<c:url value="/modifycontext"/>" method="post"  class="smart-green" enctype="multipart/form-data"  id="upload-form" style="text-align: center">
     <label>
       <span style="font-size: large">联系方式 :</span>
-        <input type="text"  name="phone" placeholder="请输入联系方式"/><br>
+        <input type="text"  name="phone" value="${riderSession.phone}" placeholder="请输入联系方式"/><br>
     </label>
     <label>
       <span style="font-size: large">银行卡号:</span>
-      <input type="text"  name="bank_card" placeholder="请输入银行卡号"/><br>
+      <input type="text"  name="bank_card" value="${riderSession.bank_card}" placeholder="请输入银行卡号"/><br>
     </label>
     <label>
       <span style="font-size: large">工作城市 :</span>
-      <select  name="work_city"  placeholder="请输入工作城市">
+      <select  name="work_city" value="${riderSession.work_city}" placeholder="请输入工作城市">
           <option>秦皇岛</option>
           <option>上海</option>
           <option>北京</option>
@@ -90,52 +90,13 @@
     </label>
     <label>
       <span style="font-size: large">密码 :</span>
-      <input type="password"  name="password"  placeholder="请输入密码"/><br>
-    </label>
-    <label>
-      <span style="font-size: large">驾驶证图片 :</span><br>
-      <img id="imagePreview" name="image" src="#" alt="图片预览" style="width: 100px;height: 100px"><br>
-      <br>
-      <input name="image" type="file" id="fileInput"><br>
+      <input type="password"  name="password" value="${riderSession.password}" placeholder="请输入密码"/><br>
     </label>
     <label style="font-size: large">
         <button type="submit"  class="add_button1" value="完成">完成</button>
     </label>
   </form>
 </div>
-<script>
-  const fileInput = document.getElementById('fileInput');
-  const imagePreview = document.getElementById('imagePreview');
-
-  fileInput.addEventListener('change', function() {
-    const file = this.files[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.addEventListener('load', function() {
-        imagePreview.setAttribute('src', this.result);
-      });
-      reader.readAsDataURL(file);
-    }
-  });
-</script>
-    <script>
-        const form = document.querySelector('#upload-form');
-        const input = document.querySelector('#fileInput');
-        form.addEventListener('submit', (event) => {
-            event.preventDefault(); // 阻止表单提交
-            const file = input.files[0];
-            if (file) {
-                const formData = new FormData();
-                formData.append('image', file);
-                fetch('/upload', {
-                    method: 'POST',
-                    body: formData
-                }).then(response => {
-                    // 处理上传结果
-                });
-            }
-        });
-    </script>
 </div>
 </body>
 </html>

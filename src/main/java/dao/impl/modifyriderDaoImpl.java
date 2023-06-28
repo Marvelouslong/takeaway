@@ -24,19 +24,16 @@ public class modifyriderDaoImpl implements modifyriderDao {
     }
     public int modifycontext(Connection connection, rider Rider) throws Exception {
             PreparedStatement pstm = null;
-            String sql = "update rider set driver_license=?,phone=?,bank_card=?,work_city=?,`password`=?  where id = ? ";
+            String sql = "update rider set phone=?,bank_card=?,work_city=?,`password`=?  where id = ? ";
             Integer rs = null;
         try {
             pstm = connection.prepareStatement(sql);
-            Blob blob = (Blob) connection.createBlob();
-            blob.setBytes(1,Rider.driver_license);
             pstm = connection.prepareStatement(sql);
-            pstm.setBlob(1,blob);
-            pstm.setLong(2,Rider.getPhone());
-            pstm.setLong(3,Rider.getBank_card());
-            pstm.setString(4, Rider.getWork_city());
-            pstm.setString(5,Rider.getPassword());
-            pstm.setInt(6,Rider.getId());
+            pstm.setLong(1,Rider.getPhone());
+            pstm.setLong(2,Rider.getBank_card());
+            pstm.setString(3, Rider.getWork_city());
+            pstm.setString(4,Rider.getPassword());
+            pstm.setInt(5,Rider.getId());
             rs= pstm.executeUpdate();
         } catch (SQLException throwables) {
             throwables.printStackTrace();
@@ -44,5 +41,24 @@ public class modifyriderDaoImpl implements modifyriderDao {
             BaseDao.closeResource(null, pstm, null);
         }
             return rs;
+    }
+    public int modifydriver(Connection connection, rider Rider) throws Exception {
+        PreparedStatement pstm = null;
+        String sql = "update rider set driver_license=?  where id = ? ";
+        Integer rs = null;
+        try {
+            pstm = connection.prepareStatement(sql);
+            Blob blob = (Blob) connection.createBlob();
+            blob.setBytes(1,Rider.driver_license);
+            pstm = connection.prepareStatement(sql);
+            pstm.setBlob(1,blob);
+            pstm.setInt(2,Rider.getId());
+            rs= pstm.executeUpdate();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        } finally {
+            BaseDao.closeResource(null, pstm, null);
+        }
+        return rs;
     }
 }

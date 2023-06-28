@@ -17,6 +17,7 @@
     <div class="publicHeaderR">
         <p><span>您好！</span><span style="color: #b6afaf"> ${adminSession.name}</span>  欢迎你！</p>
         <a href="adminpassword.jsp">修改密码</a>
+        <a href="adminregister.jsp">管理员注册</a>
         <a href="admin-out">退出</a>
     </div>
 </header>

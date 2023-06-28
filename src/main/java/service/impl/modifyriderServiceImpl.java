@@ -69,4 +69,32 @@ public class modifyriderServiceImpl implements modifyriderService {
         }
         return flag;
     }
+    public Boolean modifydriver(rider Rider) {
+        Boolean flag=false;
+        Connection connection=null;
+        try {
+            connection= BaseDao.getConnection();
+            connection.setAutoCommit(false);//开启JDBC事务
+            int updateNum = modifyriderdao.modifydriver(connection, Rider);//执行修改sql
+            connection.commit();//提交事务
+            if(updateNum>0){
+                flag=true;
+                System.out.println("yes");
+            }else{
+                System.out.println("no");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            //若抛出异常，则说明修改失败需要回滚
+            System.out.println("no1");
+            try {
+                connection.rollback();
+            } catch (SQLException e1) {
+                e1.printStackTrace();
+            }
+        }finally {
+            BaseDao.closeResource(connection,null,null);
+        }
+        return flag;
+    }
 }

@@ -9,12 +9,13 @@ import pojo.rider;
 import pojo.user;
 import service.userregisterService;
 
+import java.sql.SQLException;
 import java.util.logging.Logger;
 
 public class userregisterServiceImpl implements userregisterService {
     private userregisterDao userregisterdao= new userregisterDaoImpl();
     @Override
-    public void add(user User) {
+    public void add(user User) throws SQLException {
         Integer add = this.userregisterdao.add(User);
         if (add != 1) throw new RuntimeException("添加失败");
 
