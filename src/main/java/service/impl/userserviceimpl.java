@@ -160,14 +160,14 @@ public class userserviceimpl implements userservice {
     }
 
     @Override
-    public int addevaluate(int id,byte[]imgdata,String evaluate,int count1) {
+    public int addevaluate(int id,byte[]imgdata,String evaluate) {
         // TODO Auto-generated method stub
         Connection connection = null;
         int count=0;
         try {
             connection = BaseDao.getConnection();
             connection.setAutoCommit(false);//开启JDBC事务管理
-            count = Userdao.addevaluate(connection,id,imgdata,evaluate,count1);
+            count = Userdao.addevaluate(connection,id,imgdata,evaluate);
             connection.commit();
         } catch (Exception e) {
             e.printStackTrace();
@@ -216,21 +216,6 @@ public class userserviceimpl implements userservice {
     }
 
     @Override
-    public int getevaluateCount() {
-        Connection connection = null;
-        int count = 0;
-        try {
-            connection = BaseDao.getConnection();
-            count = Userdao.getevaluateCount(connection);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }finally{
-            BaseDao.closeResource(connection, null, null);
-        }
-        return count;
-    }
-
-    @Override
     public byte[] img4(int id) {
         Connection connection = null;
         byte[] picture=null;
@@ -276,14 +261,14 @@ public class userserviceimpl implements userservice {
     }
 
     @Override
-    public int savetalk(int id,byte[] bytes,String context,int count1) {
+    public int savetalk(int id,byte[] bytes,String context) {
         // TODO Auto-generated method stub
         Connection connection = null;
         int count=0;
         try {
             connection = BaseDao.getConnection();
             connection.setAutoCommit(false);//开启JDBC事务管理
-            count = Userdao.savetalk(connection,id,bytes,context,count1);
+            count = Userdao.savetalk(connection,id,bytes,context);
             connection.commit();
         } catch (Exception e) {
             e.printStackTrace();
@@ -401,35 +386,19 @@ public class userserviceimpl implements userservice {
     }
 
     @Override
-    public int addre(int count,String name,long phone,String address,int id) {
+    public int addre(String name,long phone,String address,int id) {
         Connection connection = null;
         int count1=0;
         try {
             connection = BaseDao.getConnection();
-            count+=1;
-            count1 = Userdao.addre(connection,count,name,phone,address,id);
+            count1 = Userdao.addre(connection,name,phone,address,id);
         } catch (Exception e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }finally{
             BaseDao.closeResource(connection, null, null);
         }
-        return count;
-    }
-
-    @Override
-    public int getreceiverCount() {
-        Connection connection = null;
-        int count = 0;
-        try {
-            connection = BaseDao.getConnection();
-            count = Userdao.getreceiverCount(connection);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }finally{
-            BaseDao.closeResource(connection, null, null);
-        }
-        return count;
+        return count1;
     }
 
     @Override

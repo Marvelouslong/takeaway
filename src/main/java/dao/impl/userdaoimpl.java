@@ -257,34 +257,18 @@ public class userdaoimpl implements userdao {
     }
 
     @Override
-    public int addevaluate(Connection connection, int id,byte[]imgdata,String evaluate,int count1) throws SQLException {
+    public int addevaluate(Connection connection, int id,byte[]imgdata,String evaluate) throws SQLException {
         PreparedStatement pstm = null;
-        String sql = "insert into evaluate values (?,?,?,?)";
+        String sql = "insert into evaluate(picture,evaluate,o_id) values (?,?,?)";
         int count=0;
         Blob blob = (Blob) connection.createBlob();
         blob.setBytes(1, imgdata);
         pstm = connection.prepareStatement(sql);
-        pstm.setInt(1,count1);
-        pstm.setBlob(2,blob);
-        pstm.setString(3, evaluate);
-        pstm.setInt(4,id);
+        pstm.setBlob(1,blob);
+        pstm.setString(2, evaluate);
+        pstm.setInt(3,id);
         count = pstm.executeUpdate();
         BaseDao.closeResource(null, pstm, null);
-        return count;
-    }
-
-    @Override
-    public int getevaluateCount(Connection connection) throws Exception {
-        PreparedStatement pstm=null;
-        int count=0;
-        String sql="select count(id) as count from evaluate";
-        ResultSet rs=null;
-        pstm=connection.prepareStatement(sql);
-        rs = pstm.executeQuery();
-        if(rs.next()){
-            count = rs.getInt("count");
-        }
-        BaseDao.closeResource(null, pstm, rs);
         return count;
     }
 
@@ -370,17 +354,16 @@ public class userdaoimpl implements userdao {
     }
 
     @Override
-    public int savetalk(Connection connection, int id, byte[] bytes, String context, int count1) throws SQLException {
+    public int savetalk(Connection connection, int id, byte[] bytes, String context) throws SQLException {
         PreparedStatement pstm = null;
-        String sql = "insert into talk values (?,?,?,?)";
+        String sql = "insert into talk(context,picture,u_id) values (?,?,?)";
         int count=0;
         Blob blob = (Blob) connection.createBlob();
         blob.setBytes(1, bytes);
         pstm = connection.prepareStatement(sql);
-        pstm.setInt(1,count1);
-        pstm.setString(2, context);
-        pstm.setBlob(3,blob);
-        pstm.setInt(4,id);
+        pstm.setString(1, context);
+        pstm.setBlob(2,blob);
+        pstm.setInt(3,id);
         count = pstm.executeUpdate();
         BaseDao.closeResource(null, pstm, null);
         return count;
@@ -507,32 +490,16 @@ public class userdaoimpl implements userdao {
     }
 
     @Override
-    public int getreceiverCount(Connection connection) throws Exception {
-        PreparedStatement pstm=null;
-        int count=0;
-        String sql="select count(id) as count from receiver";
-        ResultSet rs=null;
-        pstm=connection.prepareStatement(sql);
-        rs = pstm.executeQuery();
-        if(rs.next()){
-            count = rs.getInt("count");
-        }
-        BaseDao.closeResource(null, pstm, rs);
-        return count;
-    }
-
-    @Override
-    public int addre(Connection connection, int count, String name, Long phone, String address, int id) throws Exception {
+    public int addre(Connection connection, String name, Long phone, String address, int id) throws Exception {
         PreparedStatement pstm = null;
         int count1=0;
         if(connection != null){
-            String sql ="insert into receiver values (?,?,?,?,?)";
+            String sql ="insert into receiver(name,phone,address,u_id) values (?,?,?,?)";
             pstm = connection.prepareStatement(sql);
-            pstm.setInt(1,count);
-            pstm.setString(2,name);
-            pstm.setLong(3,phone);
-            pstm.setString(4,address);
-            pstm.setInt(5,id);
+            pstm.setString(1,name);
+            pstm.setLong(2,phone);
+            pstm.setString(3,address);
+            pstm.setInt(4,id);
             count1=pstm.executeUpdate();
             BaseDao.closeResource(null, pstm, null);
         }
@@ -713,7 +680,7 @@ public class userdaoimpl implements userdao {
         PreparedStatement pstm = null;
         int count=0;
         if(connection != null){
-            String sql ="insert into `order`(status,payway,notes,order_time,money,u_id,s_id,re_id) values ('未接单',?,?,NOW(),?,?,?,?)";
+            String sql ="insert into `order`(status,payway,notes,order_time,money,u_id,s_id,re_id) values ('已接单',?,?,NOW(),?,?,?,?)";
             pstm = connection.prepareStatement(sql);
             pstm.setString(1,payway);
             pstm.setString(2,notes);

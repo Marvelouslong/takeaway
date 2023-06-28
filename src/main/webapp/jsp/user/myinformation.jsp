@@ -169,7 +169,7 @@
             <td style="padding-left: 30px;padding-top: 20px"><a class="vieworder" href="Userservlet?method=showdishes&id=${order.id}">查看菜品</a></td>
             <td style="padding-left: 10px;padding-top: 20px"><a class="vieworder" href="Userservlet?method=showevaluate&id=${order.id}">添加评论</a></td>
             <td style="padding-left: 10px;padding-top: 20px"><a class="vieworder" href="Userservlet?method=query&query=${order._s.shop_name}&pageIndex=1">再来一单</a></td>
-            <td style="padding-left: 10px;padding-top: 20px"><c:if test="${order.status eq '已接单'}"><a href="Userservlet?method=changeostatus&id=${order.id}">确认收货</a></c:if></td>
+            <td style="padding-left: 10px;padding-top: 20px"><c:if test="${order.status eq '正在配送'}"><a href="Userservlet?method=changeostatus&id=${order.id}">确认收货</a></c:if></td>
             </tr>
           </c:forEach>
           <c:set var="isExecuted" value="false" />

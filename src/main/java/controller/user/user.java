@@ -347,12 +347,9 @@ public class user extends HttpServlet {
 
         userservice userservice = new userserviceimpl();
         List<evaluate> evaluatelist = null;
-        int count=0;
         int count1=0;
         String evaluate=req.getParameter("evaluate");
-        count=userservice.getevaluateCount();
-        count+=1;
-        count1 = userservice.addevaluate(id,bytes,evaluate,count);
+        count1 = userservice.addevaluate(id,bytes,evaluate);
         if(count1!=0) {
             this.showevaluate(req,resp,id);
         }
@@ -408,10 +405,7 @@ public class user extends HttpServlet {
         int count = 0;
         // 插入图片数据到数据库中
         userservice userService = new userserviceimpl();
-        int count1=0;
-        count1=userService.gettalkCount();
-        count1+=1;
-        count = userService.savetalk(id, bytes,context,count1);
+        count = userService.savetalk(id, bytes,context);
         String pageIndex="1";
         if(count!=0) {
             this.talkshow(req,resp,pageIndex);
@@ -495,11 +489,9 @@ public class user extends HttpServlet {
             String address=req.getParameter("address");
             Object attribute = req.getSession().getAttribute(Constants.USER_SESSION);
             int id = ((pojo.user) attribute).getId();
-            int count = 0;
             int count1 = 0;
-            count = userservice.getreceiverCount();
-            count1 = userservice.addre(count,name,phone,address,id);
-            if (count != 0) {
+            count1 = userservice.addre(name,phone,address,id);
+            if (count1 != 0) {
                 this.myinformation(req, resp);
             }
         }else{this.myinformation(req,resp);}
@@ -541,7 +533,11 @@ public class user extends HttpServlet {
             int count = 0;
             count = userservice.order(payway,notes,money,rid,id,sid);
             if (count != 0) {
-                this.myinformation(req, resp);
+                int count1=0;
+                count1=userservice.delshop(sid,id);
+                if(count1!=0) {
+                    this.myinformation(req, resp);
+                }
             }
         }else{this.storelist(req,resp,sid);}
     }
