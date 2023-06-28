@@ -2,17 +2,22 @@ package controller.evaluate;
 
 import pojo.dishes;
 import pojo.evaluate;
+import pojo.store;
 import pojo.taste;
 import service.evaluateService;
 import service.impl.evaluateServiceImpl;
 import service.impl.tasteServiceImpl;
+import service.impl.userserviceimpl;
 import service.tasteService;
+import service.userservice;
 import util.constant;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
 import java.io.*;
+import java.util.ArrayList;
+import java.util.List;
 
 
 @WebServlet("/EVA")
@@ -28,6 +33,16 @@ public class evaluateServlet extends HttpServlet {
         req.setCharacterEncoding("UTF-8");
         String method = req.getParameter("method");
         switch (method) {
+            case "list1":
+                String sid=req.getParameter("sid");
+                int sid1= Integer.parseInt(sid);
+                userservice userservice=new userserviceimpl();
+                List<store> storelist=null;
+                storelist=userservice.storelist(sid1);
+                req.setAttribute("list", this.evaluateservice.list(sid1));
+                req.setAttribute("storelist", storelist);
+                req.getRequestDispatcher("/jsp/user/shopeva.jsp").forward(req, resp);
+                break;
             case "list":
                 Object store = req.getSession().getAttribute(constant.STORE_SESSION);
                 Integer s_id = ((pojo.store) store).getId();

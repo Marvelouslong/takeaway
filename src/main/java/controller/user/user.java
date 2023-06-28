@@ -97,6 +97,9 @@ public class user extends HttpServlet {
         }else if (method != null && method.equals("jump2")) {
             this.jump2(req, resp);
         }
+//        else if (method != null && method.equals("jump3")) {
+//            this.jump3(req, resp);
+//        }
     }
 
     @Override
@@ -575,4 +578,24 @@ public class user extends HttpServlet {
             this.storelist(req, resp, sid);
         }
     }
+//    private void jump3(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+//        String sid=req.getParameter("sid");
+//        int sid1= Integer.parseInt(sid);
+//        userservice userservice=new userserviceimpl();
+//        List<store> storelist=null;
+//        storelist=userservice.storelist(sid1);
+//        req.setAttribute("list", this.evaluateservice.list(sid1));
+//        req.setAttribute("storelist", storelist);
+//        req.getRequestDispatcher("/jsp/user/shopeva.jsp").forward(req, resp);
+//        String id=req.getParameter("id");
+//        int sid= Integer.parseInt(id);
+//        int count=0;
+//        userservice userservice = new userserviceimpl();
+//        Object attribute = req.getSession().getAttribute(Constants.USER_SESSION);
+//        int id1 = ((pojo.user) attribute).getId();
+//        count=userservice.delshop(sid,id1);
+//        if(count!=0) {
+//            this.storelist(req, resp, sid);
+//        }
+//    }
 }

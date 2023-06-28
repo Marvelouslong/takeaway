@@ -90,7 +90,10 @@
     <p>主营类型：${store.main_category}</p>
     <p>辅营类型：${store.auxiliary_category}</p>
     <p>店铺地址：${store.address}</p>
-  </c:forEach>
+  </c:forEach><br><br>
+ <div  style="border:2px #0C0C0C"> <a href="EVA?method=list1&sid=${sid}">商家评论</a></div>
+  <br>
+  <br>
   <h4>购物车:</h4>
     <table class="table">
       <c:forEach items="${shopcarlist}" var="shopcar" varStatus="status">
@@ -104,9 +107,9 @@
                              vertical-align: top;
                              transition: all .3s;"
                     alt="img"></td>
-          <td>${shopcar._d.name}</td>
-          <td>${shopcar._d.price}</td>
-          <td>${shopcar.taste}</td>
+          <td>${shopcar._d.name}</td>&nbsp;&nbsp;
+          <td>${shopcar._d.price}</td>&nbsp;&nbsp;
+          <td>${shopcar.taste}</td>&nbsp;&nbsp;
           <td>${shopcar.number}</td>
         </tr>
       </c:forEach>
