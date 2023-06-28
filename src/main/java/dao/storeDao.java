@@ -13,8 +13,8 @@ public interface storeDao {
     //查看商家信息
     public List<store> getstoreList(Connection connection) throws  Exception;
     //修改状态
-    public int modify(Connection connection,store shop,administrators admin)throws Exception;
-    public int modify(Connection connection,store shop)throws Exception;
+    public int modifystatus(Connection connection,store shop,administrators admin)throws Exception;
+//    public int modify(Connection connection,store shop)throws Exception;
     public Integer update(store store);
     public Integer update1(store store);
 }

@@ -1,11 +1,9 @@
 package dao.impl;
 
 
-import com.mysql.cj.jdbc.Blob;
 import dao.BaseDao;
 import dao.storeDao;
 import pojo.administrators;
-import pojo.dishes;
 import pojo.store;
 
 
@@ -79,7 +77,7 @@ public class storeDaoImpl implements storeDao {
         return storeList;
     }
     //修改状态
-    public int modify(Connection connection, store shop, administrators admin) throws Exception {
+    public int modifystatus(Connection connection, store shop, administrators admin) throws Exception {
         int updateNum = 0;
         PreparedStatement pstm = null;
         if(null != connection){

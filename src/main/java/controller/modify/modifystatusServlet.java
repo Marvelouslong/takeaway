@@ -44,7 +44,7 @@ public class modifystatusServlet extends HttpServlet {
         administrators Admin= new administrators();
         Admin.setAccount_number(account_number);
         //调用service层
-        Boolean flag = shopService.modify(shop,Admin);
+        Boolean flag = shopService.modifystatus(shop,Admin);
 
         //判断是否修改成功来决定跳转到哪个页面
         if (flag) {
