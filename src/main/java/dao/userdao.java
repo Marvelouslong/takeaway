@@ -38,4 +38,5 @@ public interface userdao {
     public List<shopcar_dishes> carlist(Connection connection, int id,int id1)throws Exception;
     public int delshop(Connection connection,int sid,int id) throws Exception;
     public List<shopcar_dishes> shopcarlist(Connection connection, int id1)throws Exception;
+    public int order(Connection connection,String payway, String notes, double money, int rid, int id, int sid) throws Exception;
 }

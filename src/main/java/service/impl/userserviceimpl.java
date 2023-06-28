@@ -369,10 +369,17 @@ public class userserviceimpl implements userservice {
         int count=0;
         try {
             connection = BaseDao.getConnection();
+            connection.setAutoCommit(false);//开启JDBC事务管理
             count = Userdao.changeostatus(connection,id);
+            connection.commit();
         } catch (Exception e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
+            try {
+                connection.rollback();
+            } catch (SQLException e1) {
+                // TODO Auto-generated catch block
+                e1.printStackTrace();
+            }
         }finally{
             BaseDao.closeResource(connection, null, null);
         }
@@ -513,5 +520,28 @@ public class userserviceimpl implements userservice {
             BaseDao.closeResource(connection, null, null);
         }
         return carlist;
+    }
+
+    @Override
+    public int order(String payway, String notes, double money, int rid, int id, int sid) {
+        Connection connection = null;
+        int count=0;
+        try {
+            connection = BaseDao.getConnection();
+            connection.setAutoCommit(false);//开启JDBC事务管理
+            count = Userdao.order(connection,payway,notes,money,rid,id,sid);
+            connection.commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+            try {
+                connection.rollback();
+            } catch (SQLException e1) {
+                // TODO Auto-generated catch block
+                e1.printStackTrace();
+            }
+        }finally{
+            BaseDao.closeResource(connection, null, null);
+        }
+        return count;
     }
 }

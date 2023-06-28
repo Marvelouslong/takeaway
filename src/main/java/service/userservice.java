@@ -36,4 +36,5 @@ public interface userservice {
     public List<shopcar_dishes> carlist(int id,int id1);
     public int delshop(int sid,int id);
     public List<shopcar_dishes> shopcarlist(int id1);
+    public int order(String payway,String notes, double money,int rid,int id,int sid);
 }

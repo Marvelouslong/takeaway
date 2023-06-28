@@ -112,7 +112,7 @@
       </c:forEach>
     </table>
     <input type="hidden" name="sid" value="${sid}">
-    <a href="Userservlet?method=jump1">下单</a>
+    <a href="Userservlet?method=jump1&id=${sid}">下单</a>
     <a href="Userservlet?method=jump2&id=${sid}">清空购物车</a>
 </div>
 <div class="div2">

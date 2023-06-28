@@ -525,29 +525,46 @@ public class user extends HttpServlet {
     }
     private void order(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         userservice userservice = new userserviceimpl();
-        String mm=req.getParameter("mm");
         String sid1=req.getParameter("sid");
         int sid= Integer.parseInt(sid1);
+        String mm=req.getParameter("mm");
         if(mm.equals("下单")) {
-            String name=req.getParameter("name");
-            long phone=Long.parseLong(req.getParameter("phone"));
-            String address=req.getParameter("address");
+            String payway=req.getParameter("payway");
+            String notes=req.getParameter("notes");
+            if(notes.isEmpty()){notes=null;}
+            String money1=req.getParameter("sum");
+            double money= Double.parseDouble(money1);
+            String rid1=req.getParameter("receiver");
+            int rid= Integer.parseInt(rid1);
             Object attribute = req.getSession().getAttribute(Constants.USER_SESSION);
             int id = ((pojo.user) attribute).getId();
             int count = 0;
-            int count1 = 0;
-            int count2=0;
-            count = userservice.getreceiverCount();
-            count1 = userservice.addre(count,name,phone,address,id);
+            count = userservice.order(payway,notes,money,rid,id,sid);
             if (count != 0) {
-                count2 = userservice.addre(count,name,phone,address,id);
-                this.order(req, resp);
+                this.myinformation(req, resp);
             }
-        }else{
-            this.storelist(req,resp,sid);
-        }
+        }else{this.storelist(req,resp,sid);}
     }
     private void jump1(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        String sid1=req.getParameter("id");
+        int id= Integer.parseInt(sid1);
+        Object attribute = req.getSession().getAttribute(Constants.USER_SESSION);
+        int id1 = ((pojo.user) attribute).getId();
+        userservice userservice = new userserviceimpl();
+        List<shopcar_dishes> carlist = null;
+        carlist = userservice.carlist(id,id1);
+        List<receiver> receiverlist = null;
+        receiverlist = userservice.getreceiverlist(id1);
+        double sum = 0;
+        for (shopcar_dishes shopcar : carlist) {
+            // 省略其他代码
+            double money = shopcar.get_d().getPrice() * shopcar.getNumber();
+            sum += money;
+        }
+        req.setAttribute("receiverlist", receiverlist);
+        req.setAttribute("shopcarlist", carlist);
+        req.setAttribute("sid", id);
+        req.setAttribute("sum", sum);
         req.getRequestDispatcher("/jsp/user/order.jsp").forward(req, resp);
     }
     private void jump2(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

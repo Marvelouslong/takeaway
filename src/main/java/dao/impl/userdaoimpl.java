@@ -482,7 +482,7 @@ public class userdaoimpl implements userdao {
         PreparedStatement pstm = null;
         int count=0;
         if(connection != null){
-            String sql ="update `order` set status = '已完成' checkout_time=NOW() where id = ?";
+            String sql ="update `order` set status = '已完成',checkout_time=NOW() where id = ?";
             pstm = connection.prepareStatement(sql);
             pstm.setInt(1,id);
             count=pstm.executeUpdate();
@@ -706,6 +706,25 @@ public class userdaoimpl implements userdao {
             BaseDao.closeResource(null, pstm, rs);
         }
         return carlist;
+    }
+
+    @Override
+    public int order(Connection connection, String payway, String notes, double money, int rid, int id, int sid) throws Exception {
+        PreparedStatement pstm = null;
+        int count=0;
+        if(connection != null){
+            String sql ="insert into `order`(status,payway,notes,order_time,money,u_id,s_id,re_id) values ('未接单',?,?,NOW(),?,?,?,?)";
+            pstm = connection.prepareStatement(sql);
+            pstm.setString(1,payway);
+            pstm.setString(2,notes);
+            pstm.setDouble(3,money);
+            pstm.setInt(4,id);
+            pstm.setInt(5,sid);
+            pstm.setInt(6,rid);
+            count=pstm.executeUpdate();
+            BaseDao.closeResource(null, pstm, null);
+        }
+        return count;
     }
 }
 
