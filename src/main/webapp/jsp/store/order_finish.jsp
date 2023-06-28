@@ -10,19 +10,19 @@
 <%@include file='where.jsp'%>
 <html>
 <head>
-    <title>商家订单信息</title>
+  <title>商家订单信息</title>
   <link href="<c:url value="/jsp/store/store.css"/>" rel="stylesheet">
 </head>
 <body>
-  <div class="bj"></div>
-  <div class="div1">
-    <img  src="pictureshop_picture?id=${shopSession.id}" alt="image" style="height: 150px;width: 150px;border-radius:200px;margin-left: 65px;
+<div class="bj"></div>
+<div class="div1">
+  <img  src="pictureshop_picture?id=${shopSession.id}" alt="image" style="height: 150px;width: 150px;border-radius:200px;margin-left: 65px;
     margin-top: 10%;">
-    <p class="p1">${shopSession.shop_name}</p>
-    <p>主营类型：${shopSession.main_category}</p>
-    <p>辅营类型：${shopSession.auxiliary_category}</p>
-    <p>店铺地址：${shopSession.address}</p>
-  </div>
+  <p class="p1">${shopSession.shop_name}</p>
+  <p>主营类型：${shopSession.main_category}</p>
+  <p>辅营类型：${shopSession.auxiliary_category}</p>
+  <p>店铺地址：${shopSession.address}</p>
+</div>
 <div class="div2">
   <span class="span1">已接单订单信息:</span>
   <div class="search"> <form method="post" action="<c:url value="/DISHES?method=dishes_search"/>">
@@ -48,28 +48,27 @@
     </tr>
     </thead>
     <tbody>
-      <c:forEach items="${order_list}" var="order"  >
-    <tr>
+    <c:forEach items="${order_list}" var="order"  >
+      <tr>
         <td>${order.id}</td>
         <td>${order._u.name}</t${order.id}d>
-      <td>${order._u.phone}</td>
-      <td>${order.notes}</td>
-      <td>${order.status}</td>
-      <td>
-      <form action="<c:url value="/ORDER?method=update"/>" method="post">
-        <input type="hidden" name="id" value="${order.id}">
-        <button  type="submit">${value}</button>
-      </form>
-
-    </td>
-      <td>
-        <form action="<c:url value="/ORDER?method=list2"/>" method="post">
-          <input type="hidden" name="id" value="${order.id}">
-          <button  class="btn" type="submit" value="查看订单">查看订单详情</button>
-        </form>
-      </td>
-    </tr>
-      </c:forEach>
+        <td>${order._u.phone}</td>
+        <td>${order.notes}</td>
+        <td>${order.status}</td>
+        <td>
+          <form action="<c:url value="/EVA?method=search"/>" method="post">
+            <input type="hidden" name="id" value="${order.id}">
+            <button  class="btn" type="submit" value="查看订单">查看订单评论</button>
+          </form>
+        </td>
+        <td>
+          <form action="<c:url value="/ORDER?method=list2"/>" method="post">
+            <input type="hidden" name="id" value="${order.id}">
+            <button  class="btn" type="submit" value="查看订单">查看订单详情</button>
+          </form>
+        </td>
+      </tr>
+    </c:forEach>
     </tbody>
   </table>
 

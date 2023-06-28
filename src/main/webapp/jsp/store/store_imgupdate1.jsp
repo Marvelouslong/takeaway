@@ -119,7 +119,7 @@
     </div>
     <article id="page">
       <h2>我的信息</h2>
-      <form action="<c:url value="/STORE?method=update"/>" method="post"  class="smart-green" enctype="multipart/form-data"  id="upload-form">
+      <form action="<c:url value="/STORE1?method=update"/>" method="post"  class="smart-green">
         <label>
           <span>联系电话:</span>
           <input type="text"  name="con_telephone" placeholder="请输入联系电话"/>

@@ -78,4 +78,37 @@ public class evaluateDaoImpl implements evaluateDao {
         }
         return rs;
     }
+    public List<evaluate> search(Integer id){
+        Connection connection = BaseDao.getConnection();
+        String sql = "select e.id,o.s_id,o.id oid,o.status,o.checkout_time,u.id uid,u.name uname,u.phone uphone,e.picture epicture,e.evaluate,e.shop_evaluate  from `order` o  JOIN `user` u ON o.u_id = u.id JOIN evaluate e ON e.o_id = o.id where e.id='"+id+"'and o.status='已完成' order by oid DESC";
+        PreparedStatement pstm = null;
+        ResultSet rs = null;
+        List<evaluate> list = new ArrayList<>();
+        try {
+            pstm = connection.prepareStatement(sql);
+            rs = pstm.executeQuery();
+            while (rs.next()) {
+                evaluate _eva=new evaluate();
+                _eva.setEvaluate(rs.getString("evaluate"));
+                _eva.setId(rs.getInt("id"));
+                _eva.setShop_evaluate(rs.getString("shop_evaluate"));
+                order _order=new order();
+                _order.setId(rs.getInt("oid"));
+                _order.setStatus(rs.getString("status"));
+                _order.setCheckout_time(rs.getDate("checkout_time"));
+                user _user=new user();
+                _user.setId(rs.getInt("uid"));
+                _user.setPhone(rs.getLong("uphone"));
+                _user.setName(rs.getString("uname"));
+                _order.set_u(_user);
+                _eva.set_o(_order);
+                list.add(_eva);
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        } finally {
+            BaseDao.closeResource(null,pstm, null);
+        }
+        return list;
+    }
 }

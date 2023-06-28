@@ -7,5 +7,6 @@ public interface photoService {
     public byte[] pictureshop_picture(int id) throws Exception;
     public byte[] picturedishes_picture(int id) throws Exception;
     public byte[] picturedriver_license(int id) throws Exception;
+    public byte[] eva(int id) throws Exception;
 }
 

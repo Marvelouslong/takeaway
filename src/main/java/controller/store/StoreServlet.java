@@ -10,7 +10,7 @@ import javax.servlet.http.*;
 import java.io.*;
 
 
-@WebServlet("/STORE")
+@WebServlet("/STORE1")
 
 public class StoreServlet extends HttpServlet {
     private storeService storeService = new storeServiceImpl();
@@ -23,6 +23,10 @@ public class StoreServlet extends HttpServlet {
         req.setCharacterEncoding("UTF-8");
         String method = req.getParameter("method");
         switch (method) {
+            case "list":
+                req.getRequestDispatcher("/jsp/store/store.jsp").forward(req, resp);
+                break;
+
             case "update":
                 Object store = req.getSession().getAttribute(constant.STORE_SESSION);
                 Integer s_id = ((pojo.store) store).getId();
@@ -32,13 +36,10 @@ public class StoreServlet extends HttpServlet {
                 String main_category=req.getParameter("main_category");
                 String auxiliary_category=req.getParameter("auxiliary_category");
                 this.storeService.update(new store(s_id,address,con_telephone,password,main_category,auxiliary_category));
-                req.getRequestDispatcher("/JSP/store/store.jsp").forward(req, resp);
+                req.getRequestDispatcher("/jsp/store/store.jsp").forward(req, resp);
                 break;
             case "update1":
-                 store = req.getSession().getAttribute(constant.STORE_SESSION);
-                 s_id = ((pojo.store) store).getId();
-                this.storeService.update1(new store());
-                req.getRequestDispatcher("").forward(req, resp);
+                req.getRequestDispatcher("loginstore.jsp").forward(req, resp);
                 break;
 
         }

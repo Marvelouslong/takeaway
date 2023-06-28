@@ -156,6 +156,9 @@ p{
     top: 100px;
     position: absolute;
 }
+.show2 {
+    display: block;
+}
 .hide{
     display: none;
     height:300px;

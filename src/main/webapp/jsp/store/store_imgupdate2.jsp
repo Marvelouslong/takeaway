@@ -7,6 +7,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@include file='where.jsp'%>
+<link href="store.css" rel="stylesheet">
 <html>
 <style>
   #content-outer {
@@ -118,29 +119,107 @@
     </div>
     <article id="page">
       <h2>我的信息</h2>
-      <form action="<c:url value="/STORE?method=updata1"/>" method="post"  class="smart-green" enctype="multipart/form-data"  id="upload-form">
+      <form action="<c:url value="/STORE1?method=update1"/>" method="post"  class="smart-green">
         <label>
-          <span>联系电话:</span>
-          <input type="text"  name="category" placeholder="请输入联系电话"/>
+          <span>修改商家图片 :</span><br>
+          <img id="imagePreview1" name="shop_picture" src="#" alt="图片预览">
+          <br>
+          <input name="image" type="file" id="fileInput1">
         </label>
         <label>
-          <span>密码:</span>
-          <input type="text"  name="category" placeholder="请输入新的密码"/>
+          <span>营业许可证 :</span><br>
+          <img id="imagePreview2" name="certificate_of_business" src="#" alt="图片预览">
+          <br>
+          <input name="image" type="file" id="fileInput2">
         </label>
         <label>
-          <span>主营菜品:</span>
-          <input type="text"  name="category" placeholder="主营菜品"/>
+          <span>营业证书 :</span><br>
+          <img id="imagePreview3" name="license" src="#" alt="图片预览">
+          <br>
+          <input name="image" type="file" id="fileInput3">
         </label>
         <label>
-          <span>辅营菜品:</span>
-          <input type="text"  name="category" placeholder="请输入菜品类别，如凉菜类"/>
+          <span>授权书 :</span><br>
+          <img id="imagePreview4" name="brand_authorization" src="#" alt="图片预览">
+          <br>
+          <input name="image" type="file" id="fileInput4">
+        </label>
+          <span>法定联系人:</span>
+          <input type="con_name"  name="main_category" placeholder="法定联系人"/>
         </label>
         <label>
-          <span>地址:</span>
-          <input type="text"  name="category" placeholder="辅营菜品"/>
+          <span>联系人身份证号:</span>
+          <input type="text"  name="legal_id_card" placeholder="联系人身份证号"/>
+        </label>
+        <label>
+          <span>银行卡:</span>
+          <input type="text"  name="bank_card" placeholder="银行卡"/>
+        </label>
+        <label>
+          <input type="submit"  id="submitBtn" class="button" value="提交"/>
         </label>
       </form>
     </article>
   </div>
 </div>
 </html>
+<script>
+  const fileInput = document.getElementById('fileInput1');
+  const imagePreview = document.getElementById('imagePreview1');
+
+  fileInput.addEventListener('change', function() {
+    const file = this.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.addEventListener('load', function() {
+        imagePreview.setAttribute('src', this.result);
+      });
+      reader.readAsDataURL(file);
+    }
+  });
+</script>
+<script>
+  const fileInput = document.getElementById('fileInput2');
+  const imagePreview = document.getElementById('imagePreview2');
+
+  fileInput.addEventListener('change', function() {
+    const file = this.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.addEventListener('load', function() {
+        imagePreview.setAttribute('src', this.result);
+      });
+      reader.readAsDataURL(file);
+    }
+  });
+</script>
+<script>
+  const fileInput = document.getElementById('fileInput3');
+  const imagePreview = document.getElementById('imagePreview3');
+
+  fileInput.addEventListener('change', function() {
+    const file = this.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.addEventListener('load', function() {
+        imagePreview.setAttribute('src', this.result);
+      });
+      reader.readAsDataURL(file);
+    }
+  });
+</script>
+<script>
+  const fileInput = document.getElementById('fileInput4');
+  const imagePreview = document.getElementById('imagePreview4');
+
+  fileInput.addEventListener('change', function() {
+    const file = this.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.addEventListener('load', function() {
+        imagePreview.setAttribute('src', this.result);
+      });
+      reader.readAsDataURL(file);
+    }
+  });
+</script>

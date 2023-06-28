@@ -6,21 +6,10 @@
   To change this template use File | Settings | File Templates.
 --%>
 <script>
-    const form = document.querySelector('#upload-form');
-    const input = document.querySelector('#fileInput');
-    form.addEventListener('submit', (event) => {
-        event.preventDefault(); // 阻止表单提交
-        const file = input.files[0];
-        if (file) {
-            const formData = new FormData();
-            formData.append('image', file);
-            fetch('/upload', {
-                method: 'POST',
-                body: formData
-            }).then(response => {
-                // 处理上传结果
-            });
-        }
+    const form = document.getElementById('upload-form');
+    const submitBtn = document.getElementById('submitBtn');
+    submitBtn.addEventListener('click', () => {
+        form.submit();
     });
 </script>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -34,15 +23,17 @@
 <body>
 <div class="bj"></div>
 <div class="div1">
-    <img class="div1-img" src="${shopSession.shop_picture}" alt="店铺图片">
+    <img  src="pictureshop_picture?id=${shopSession.id}" alt="image" style="height: 150px;width: 150px;border-radius:200px;margin-left: 65px;
+    margin-top: 10%;">
     <p class="p1">${shopSession.shop_name}</p>
     <p>主营类型：${shopSession.main_category}</p>
     <p>辅营类型：${shopSession.auxiliary_category}</p>
     <p>店铺地址：${shopSession.address}</p>
 </div>
 <div class="div2">
+
     <span class="span1">添加菜品:</span>
-        <form action="<c:url value="/DISHES?method=dishes_add"/>" method="post" class="smart-green" enctype="multipart/form-data" id="upload-form">
+        <form action="<c:url value="/DISHES?method=dishes_add"/>" method="post"  class="smart-green" enctype="multipart/form-data"  id="upload-form">
             <label>
                 <span>菜名 :</span>
                 <input type="text"  name="name" placeholder="请输入菜品名称"/>
@@ -50,22 +41,14 @@
             <label>
                 <span>状态 :</span>
                 <select name="status">
-                    <option value="t1">正在售卖</option>
-                    <option value="t2">已售空</option>
-                    <option value="t3">已下架</option>
+                    <option value="正在售卖">正在售卖</option>
+                    <option value="已售空">已售空</option>
+                    <option value="已下架">已下架</option>
                 </select>
             </label>
             <label>
                 <span>菜品类别:</span>
                 <input type="text"  name="category" placeholder="请输入菜品类别，如凉菜类"/>
-            </label>
-            <label>
-                <span>菜品口味（最多五个，没有写无）:</span><br><br>
-                 <input type="text" name="name1" placeholder="请输入菜品口味"/>
-                <input type="text" name="name2"  placeholder="请输入菜品口味"/>
-                <input type="text"  name="name3" placeholder="请输入菜品口味"/>
-               <input type="text"  name="name4"  placeholder="请输入菜品口味"/>
-               <input type="text"  name="name5"  placeholder="请输入菜品口味"/>
             </label>
             <label>
                 <span>菜品描述 :</span>
@@ -77,16 +60,14 @@
             </label>
             <label>
                 <span>添加菜品图片 :</span><br>
-                <img id="imagePreview" src="#" alt="图片预览">
+                <img id="imagePreview" name="image" src="#" alt="图片预览">
                 <br>
                 <input name="image" type="file" id="fileInput">
             </label>
             <label>
-                <span> </span>
-                <input type="submit" class="button" value="提交"/>
+                <input type="submit"  id="submitBtn" class="button" value="提交"/>
             </label>
         </form>
-
 </div>
 <script>
     const fileInput = document.getElementById('fileInput');

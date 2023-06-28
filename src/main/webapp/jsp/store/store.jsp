@@ -134,7 +134,7 @@
         <input type="hidden" name="id" value="${shopSession.id}">
         <button type="submit" value="编辑">编辑基础信息（无需审核）</button>
       </form>
-      <form  style="float: right" action="<c:url value="/STORE?method=update"/>" method="post">
+      <form  style="float: right" action="<c:url value="/jsp/store/store_imgupdate2.jsp"/>" method="post">
         <input type="hidden" name="id" value="${shopSession.id}">
         <button type="submit" value="编辑">编辑非基础信息（需要重新审核）</button>
       </form>

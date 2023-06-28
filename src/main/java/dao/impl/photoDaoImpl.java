@@ -128,4 +128,23 @@ public class photoDaoImpl implements photoDao {
         return picturedriver_license;
     }
 
+    public byte[] eva(int id) {
+        // TODO Auto-generated method stub
+        String sql = "select picture from evaluate where id = ? ";
+        byte[] eva = null;
+        try{
+            conn = BaseDao.getConnection();
+            ps = conn.prepareStatement(sql);
+            ps.setInt(1, id);
+            rs = ps.executeQuery();
+            if(rs.next()){
+                eva = rs.getBytes(1);
+            }
+        }catch(Exception e){
+            e.printStackTrace();
+        }finally{
+            BaseDao.closeResource(null, ps, rs);
+        }
+        return eva;
+    }
 }

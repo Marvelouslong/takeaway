@@ -1,5 +1,7 @@
 package controller.order;
 
+import pojo.evaluate;
+import pojo.order;
 import pojo.taste;
 import service.impl.orderServiceImpl;
 import service.impl.tasteServiceImpl;
@@ -28,24 +30,30 @@ public class orderServlet extends HttpServlet {
                 Object store = req.getSession().getAttribute(constant.STORE_SESSION);
                 Integer s_id = ((pojo.store) store).getId();
                 req.setAttribute("order_list", this.orderservice.list(s_id));
+                req.setAttribute("value", "骑手已取走");
                 req.getRequestDispatcher("/jsp/store/store_order.jsp").forward(req, resp);
                 break;
             case "list3":
                 store = req.getSession().getAttribute(constant.STORE_SESSION);
                  s_id = ((pojo.store) store).getId();
                 req.setAttribute("order_list", this.orderservice.list3(s_id));
+                req.setAttribute("value", "正在配送");
                 req.getRequestDispatcher("/jsp/store/store_order.jsp").forward(req, resp);
                 break;
             case "list4":
                  store = req.getSession().getAttribute(constant.STORE_SESSION);
                  s_id = ((pojo.store) store).getId();
                 req.setAttribute("order_list", this.orderservice.list4(s_id));
-                req.getRequestDispatcher("/jsp/store/store_order.jsp").forward(req, resp);
+                req.setAttribute("value", "查看评论");
+                req.getRequestDispatcher("/jsp/store/order_finish.jsp").forward(req, resp);
                 break;
             case "update":
+                Integer id = Integer.valueOf(req.getParameter("id"));
+                this.orderservice.update(new order(id));
+                req.getRequestDispatcher("/ORDER?method=list").forward(req, resp);
                 break;
             case "list2":
-                 Integer id= Integer.valueOf(req.getParameter("id"));
+                id= Integer.valueOf(req.getParameter("id"));
                 req.setAttribute("order", this.orderservice.list1(id));
                 req.setAttribute("dish",this.orderservice.list2(id));
                 req.getRequestDispatcher("/jsp/store/order.jsp").forward(req, resp);

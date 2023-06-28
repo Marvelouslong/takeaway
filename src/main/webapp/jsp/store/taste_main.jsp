@@ -46,10 +46,6 @@
       <h4>添加口味信息</h4>
       <br>
       <br>
-<%--      <label>--%>
-<%--        <span>菜品序号 :</span>--%>
-<%--        <input type="text" name="d_id"  placeholder="请输入菜品序号">--%>
-<%--      </label>--%>
       <br>
       <label>
         <span>口&ensp;&ensp;&ensp;味 :</span>

@@ -12,4 +12,5 @@ public interface orderDao {
     public List<order> list3(Integer id);
     public List<order> list4(Integer id);
     public List<order_dishes> list2(Integer id);
+    public Integer update(order order);
 }

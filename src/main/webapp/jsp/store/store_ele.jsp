@@ -18,6 +18,14 @@
 </div>
 <div class="div2">
   <span class="span1">评论信息:</span>
+    <div class="search"> <form method="post" action="<c:url value="/DISHES?method=dishes_search"/>">
+        <input  class="search_input" type="text" style="border: 0px" placeholder="请输入订单单号" name="name">
+        <button class="search_button" type="submit" value="提交" style="border-right: 1px black">搜索</button>
+    </form></div>
+    <br>
+    <br>
+    <br>
+    <br>
   <table class="dish_table">
       <tr>
           <th>订单信息</th><th>用户信息</th><th>评价内容</th><th>操作</th>

@@ -10,4 +10,5 @@ public interface evaluateDao {
     public List<evaluate> list(Integer s_id);
     public Integer update(evaluate evaluate);
     public Integer del(Integer id);
+    public List<evaluate> search(Integer id);
 }

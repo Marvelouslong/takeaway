@@ -135,4 +135,5 @@ public order(){};
                 ", _re=" + _re +
                 '}';
     }
+    public  order(Integer id){this.id=id;}
 }

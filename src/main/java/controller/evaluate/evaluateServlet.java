@@ -44,6 +44,11 @@ public class evaluateServlet extends HttpServlet {
                 id = Integer.parseInt(req.getParameter("id"));
                 this.evaluateservice.del(id);
                 req.getRequestDispatcher("/EVA?method=list").forward(req, resp);
+            case "search":
+                id = Integer.parseInt(req.getParameter("id"));
+                req.setAttribute("list",this.evaluateservice.search(id));
+                req.getRequestDispatcher("/EVA?method=list").forward(req, resp);
+                break;
         }
     }
 }

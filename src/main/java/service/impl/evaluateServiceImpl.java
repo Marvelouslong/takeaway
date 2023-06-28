@@ -21,4 +21,7 @@ public class evaluateServiceImpl implements evaluateService {
         Integer del = this.evaluateDao.del(id);
         if(del!=1) throw  new RuntimeException("删除失败");
     }
+    public List<evaluate> search(Integer id){
+        return this.evaluateDao.search(id);
+    }
 }

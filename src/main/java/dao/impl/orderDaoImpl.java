@@ -1,5 +1,6 @@
 package dao.impl;
 
+import com.mysql.cj.jdbc.Blob;
 import dao.BaseDao;
 import dao.orderDao;
 import pojo.*;
@@ -218,4 +219,24 @@ public class orderDaoImpl implements orderDao {
         }
         return list2;
     }
+    public Integer update(order order){
+        Connection connection = BaseDao.getConnection();
+        String sql = "update `order` set `status`=? where id=?";
+        PreparedStatement pstm = null;
+        Integer rs = null;
+        try {
+            pstm = connection.prepareStatement(sql);
+            pstm.setString(1, "正在配送");
+            pstm.setInt(2, order.getId());
+            rs= pstm.executeUpdate();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        } finally {
+            BaseDao.closeResource(null,pstm, null);
+        }
+        return rs;
+    }
+
+
+
 }
