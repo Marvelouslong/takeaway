@@ -13,6 +13,7 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
+//显示骑手所有的订单
 public class newsorderDaoImpl implements newsorderDao {
     public List<order> getorderlist(Connection connection, long phone) throws Exception {
         PreparedStatement pstm = null;

@@ -26,7 +26,7 @@
         <h1 style="color: black">美了么骑手登录</h1>
     </header>
     <section class="loginCont">
-        <form  action="${pageContext.request.contextPath }/loginrider"  name="actionForm" id="actionForm"  method="post" >
+        <form  action="loginrider"  name="actionForm" id="actionForm"  method="post" >
             <div class="info">${error}</div>
             <div class="inputbox">
                 <font color="black">账&ensp;&ensp;号：</font>
