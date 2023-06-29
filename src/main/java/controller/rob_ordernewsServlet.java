@@ -13,7 +13,6 @@ import java.io.IOException;
 import java.util.List;
 import service.rob_ordernewsService;
 import util.constant;
-111
 @WebServlet("/rob_ordernews")
 public class rob_ordernewsServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)throws ServletException, IOException {
